@@ -114,5 +114,42 @@ const escuderias = Object.values(escuderiasMap).sort((a, b) => b.puntos - a.punt
 			</section>
 
 		</main>
+
+<div class="fixed bottom-6 right-6 z-50">
+    <button 
+        id="musicaBtn" 
+        class="bg-red-600 hover:bg-red-700 text-white w-14 h-14 rounded-full shadow-2xl transition-all hover:scale-110 flex items-center justify-center border-2 border-white/20"
+        title="Reproducir música de la liga"
+    >
+        <span id="iconoMusica" class="text-xl">▶️</span>
+    </button>
+</div>
+
+<audio id="musicaFondo" loop>
+    <source src="/cancion-ligaf1.mp3" type="audio/mpeg">
+    Tu navegador no soporta el audio.
+</audio>
+
+<script>
+    const btn = document.getElementById('musicaBtn');
+    const audio = document.getElementById('musicaFondo');
+    const icono = document.getElementById('iconoMusica');
+
+    btn.addEventListener('click', () => {
+        if (audio.paused) {
+            audio.play();
+            icono.innerText = '⏸️'; 
+            btn.classList.add('animate-pulse');
+        } else {
+            audio.pause();
+            icono.innerText = '▶️';
+            btn.classList.remove('animate-pulse');
+        }
+    });
+</script>
+
+
+
+
 	</body>
 </html>
