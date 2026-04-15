@@ -1,5 +1,5 @@
 ---
-import pilotos from '../Data/pilotos.json'; // Mantengo la 'D' mayúscula como te funcionó
+import pilotos from '../Data/pilotos.json';
 import '../styles/global.css';
 
 const logos = {
@@ -19,137 +19,196 @@ const escuderiasMap = pilotos.reduce((acc, piloto) => {
 const escuderias = Object.values(escuderiasMap).sort((a, b) => b.puntos - a.puntos);
 ---
 
-<html lang="es">
-	<head>
-		<meta charset="utf-8" />
-		<title>Liga F1 - Los Chocapinto</title>
-	</head>
-	<body class="bg-zinc-950 text-white font-sans">
-		
-		<nav class="fixed top-0 w-full bg-zinc-900/80 backdrop-blur-md border-b border-zinc-800 z-50">
-			<div class="max-w-4xl mx-auto px-4 py-3 flex justify-between items-center">
-				<span class="font-black italic text-red-600 tracking-tighter">F1 CHOCAPINTO</span>
-				<div class="flex gap-6 text-sm font-bold uppercase tracking-widest">
-					<a href="#inicio" class="hover:text-red-500 transition-colors">Inicio</a>
-					<a href="#pilotos" class="hover:text-red-500 transition-colors">Pilotos</a>
-					<a href="#constructores" class="hover:text-red-500 transition-colors">Constructores</a>
-				</div>
-			</div>
-		</nav>
+<html lang="es" class="scroll-smooth">
+    <head>
+        <meta charset="utf-8" />
+        <title>Liga F1 - Los Chocapinto</title>
+    </head>
+    <body class="bg-zinc-950 text-white font-sans">
+        
+        <nav class="fixed top-0 w-full bg-zinc-900/80 backdrop-blur-md border-b border-zinc-800 z-50">
+            <div class="max-w-4xl mx-auto px-6 py-5 flex justify-between items-center">
+                <div class="flex items-center gap-2">
+                    <div class="w-1 h-6 bg-red-600"></div>
+                    <span class="font-black italic text-xl tracking-tighter uppercase text-white">Chocapinto <span class="text-red-600">F1</span></span>
+                </div>
+                <div class="flex gap-8 text-[12px] font-black uppercase tracking-[0.2em]">
+                    <a href="#inicio" class="hover:text-red-500 transition-colors">Inicio</a>
+                    <a href="#pilotos" class="hover:text-red-500 transition-colors">Pilotos</a>
+                    <a href="#constructores" class="hover:text-red-500 transition-colors">Equipos</a>
+                    <a href="#puntaje" class="hover:text-red-500 transition-colors text-red-600">Puntaje</a>
+                </div>
+            </div>
+        </nav>
 
-		<main class="max-w-4xl mx-auto py-24 px-4">
-			
-			<header id="inicio" class="border-b-4 border-red-600 mb-12 pb-6 flex justify-between items-end scroll-mt-24">
-				<div>
-					<h1 class="text-6xl font-black uppercase tracking-tighter italic">Liga F1 <span class="text-red-600">Los Chocapinto</span></h1>
-					<p class="text-zinc-500 font-mono mt-2 tracking-[0.2em] text-sm font-bold">VENADO TUERTO</p>
-				</div>
-			</header>
+        <main class="max-w-4xl mx-auto py-24 px-4 pt-32">
+            
+            <header id="inicio" class="border-b-4 border-red-600 mb-12 pb-6 flex justify-between items-end scroll-mt-32">
+                <div>
+                    <h1 class="text-6xl font-black uppercase tracking-tighter italic">Liga F1 <span class="text-red-600">Los Chocapinto</span></h1>
+                    <p class="text-zinc-500 font-mono mt-2 tracking-[0.2em] text-sm font-bold uppercase">Venado Tuerto • Argentina</p>
+                </div>
+            </header>
 
-			<section id="pilotos" class="mb-16 scroll-mt-24">
-				<h2 class="text-2xl font-bold mb-6 flex items-center gap-2 uppercase tracking-tight">
-					<span class="w-2 h-8 bg-red-600 inline-block"></span> Driver Standings
-				</h2>
-				<div class="bg-zinc-900 rounded-xl overflow-hidden border border-zinc-800 shadow-2xl">
-					<table class="w-full text-left">
-						<thead class="bg-zinc-800 text-zinc-400 uppercase text-[11px] tracking-widest">
-							<tr>
-								<th class="px-6 py-4 text-center">Pos</th>
-								<th class="px-6 py-4">Piloto</th>
-								<th class="px-6 py-4 text-center">🏆 Vic</th>
-								<th class="px-6 py-4 text-right">PTS</th>
-							</tr>
-						</thead>
-						<tbody class="divide-y divide-zinc-800">
-							{pilotos.sort((a, b) => b.puntos - a.puntos).map((piloto, index) => (
-								<tr class="hover:bg-zinc-800/40 transition-all group">
-									<td class="px-6 py-6 font-black text-3xl italic text-zinc-800 group-hover:text-red-600 text-center w-24 leading-none">{index + 1}</td>
-									<td class="px-6 py-6">
-										<div class="flex items-center gap-6">
-											<img src={logos[piloto.escuderia]} alt={piloto.escuderia} class="w-12 h-12 object-contain" />
-											<div>
-												<div class="font-black text-zinc-100 text-xl uppercase tracking-tighter">{piloto.nombre}</div>
-												<div class="text-[10px] text-zinc-500 font-bold tracking-widest uppercase">{piloto.escuderia}</div>
-											</div>
-										</div>
-									</td>
-									<td class="px-6 py-6 text-center">
-										<span class={piloto.victorias > 0 ? "text-yellow-500 text-xl font-black" : "text-zinc-800 text-xl font-black"}>
-											{piloto.victorias}
-										</span>
-									</td>
-									<td class="px-6 py-6 text-right">
-										<span class="bg-zinc-950 px-5 py-2 rounded-md text-white font-mono font-black border border-zinc-700 text-xl group-hover:border-red-600">
-											{piloto.puntos}
-										</span>
-									</td>
-								</tr>
-							))}
-						</tbody>
-					</table>
-				</div>
-			</section>
+            <div class="mb-16 bg-zinc-900 rounded-3xl border border-zinc-800 p-8 shadow-2xl relative overflow-hidden group hover:border-red-600/10 transition-all">
+    <div class="relative z-10 flex flex-col lg:flex-row items-center gap-10">
+        
+        <div class="w-full lg:w-[35%] flex flex-col items-center justify-center p-4">
+            <img 
+                src="/Fotos/foto-fecha1catalunya.png" 
+                alt="Circuito Barcelona" 
+                class="w-[130%] max-w-[420px] h-auto object-contain filter brightness-110 drop-shadow-[0_0_10px_rgba(220,38,38,0.1)] transition-transform group-hover:scale-105"
+            />
+            <p class="text-[9px] text-zinc-600 font-mono mt-4 tracking-[0.4em] uppercase">Circuito • Montmeló</p>
+        </div>
 
-			<section id="constructores" class="scroll-mt-24">
-				<h2 class="text-2xl font-bold mb-6 flex items-center gap-2 uppercase tracking-tight">
-					<span class="w-2 h-8 bg-zinc-400 inline-block"></span> Constructors
-				</h2>
-				<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-					{escuderias.map((team, index) => (
-						<div 
-							class="bg-zinc-900 p-8 rounded-xl border-t-4 border border-zinc-800 flex flex-col items-center justify-center relative overflow-hidden group shadow-lg" 
-							style={`border-top-color: ${
-								team.nombre === 'Mercedes Benz' ? '#62f5d7' : 
-								team.nombre === 'Red Bull' ? '#1e40af' : 
-								'#00a3a3'
-							}`}
-						>
-							<img src={logos[team.nombre]} alt={team.nombre} class="w-20 h-20 object-contain mb-6 transition-transform group-hover:scale-110" />
-							<h3 class="text-xl font-black uppercase z-10 tracking-tighter">{team.nombre}</h3>
-							<p class="text-5xl font-mono font-black mt-2 text-white z-10">{team.puntos}</p>
-							<div class="absolute -bottom-2 -right-2 text-7xl font-black text-zinc-800 opacity-20 italic">#{index + 1}</div>
-						</div>
-					))}
-				</div>
-			</section>
+        <div class="flex-1 w-full border-t lg:border-t-0 lg:border-l border-zinc-800 pt-8 lg:pt-0 lg:pl-10">
+            <div class="flex items-center gap-3 mb-4">
+                <span class="bg-red-600 text-white text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full animate-pulse">Próximo GP</span>
+            </div>
+            
+            <h2 class="text-5xl font-black uppercase tracking-tighter italic text-white leading-none mb-4">
+                Gran Premio<br/>de <span class="text-red-600">España</span>
+            </h2>
 
-		</main>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-8">
+                <div class="bg-zinc-950 p-4 rounded-xl border border-zinc-800 border-b-2 border-b-red-600 shadow-inner">
+                    <p class="text-[10px] text-zinc-500 uppercase tracking-widest font-mono mb-1">Día y Hora (Arg)</p>
+                    <p class="text-lg font-black text-white">Viernes 17 de Abril</p>
+                    <p class="text-3xl font-mono font-black text-red-600 leading-none">23:00hs</p>
+                </div>
 
-<div class="fixed bottom-6 right-6 z-50">
-    <button 
-        id="musicaBtn" 
-        class="bg-red-600 hover:bg-red-700 text-white w-14 h-14 rounded-full shadow-2xl transition-all hover:scale-110 flex items-center justify-center border-2 border-white/20"
-        title="Reproducir música de la liga"
-    >
-        <span id="iconoMusica" class="text-xl">▶️</span>
-    </button>
+                <div class="bg-zinc-950 p-4 rounded-xl border border-zinc-800 shadow-inner">
+                    <p class="text-[10px] text-zinc-500 uppercase tracking-widest font-mono mb-2">Formato Sesión</p>
+                    <div class="text-[11px] space-y-1 font-bold">
+                        <p class="flex justify-between"><span>Práctica:</span> <span class="text-white">30m</span></p>
+                        <p class="flex justify-between"><span>Qualy:</span> <span class="text-white">18m</span></p>
+                        <p class="flex justify-between text-red-500"><span>Carrera:</span> <span>33V (50%)</span></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-[11px] text-zinc-500 font-bold uppercase tracking-widest border-t border-zinc-800 pt-4">
+                <span class="flex items-center gap-1.5"><span class="w-1 h-1 bg-red-600 rounded-full"></span>📏 4,665 KM</span>
+                <span class="flex items-center gap-1.5"><span class="w-1 h-1 bg-red-600 rounded-full"></span>🏁 16 CURVAS</span>
+                <span class="flex items-center gap-1.5"><span class="w-1 h-1 bg-red-600 rounded-full"></span>📍 CATALUNYA</span>
+            </div>
+        </div>
+    </div>
 </div>
 
-<audio id="musicaFondo" loop>
-    <source src="/cancion-ligaf1.mp3" type="audio/mpeg">
-    Tu navegador no soporta el audio.
-</audio>
+            <section id="pilotos" class="mb-20 scroll-mt-32">
+                <h2 class="text-2xl font-bold mb-6 flex items-center gap-2 uppercase tracking-tight">
+                    <span class="w-2 h-8 bg-red-600 inline-block"></span> Clasificación Pilotos
+                </h2>
+                <div class="bg-zinc-900 rounded-xl overflow-hidden border border-zinc-800 shadow-2xl">
+                    <table class="w-full text-left">
+                        <thead class="bg-zinc-800 text-zinc-400 uppercase text-[11px] tracking-widest">
+                            <tr>
+                                <th class="px-6 py-4 text-center">Pos</th>
+                                <th class="px-6 py-4">Piloto</th>
+                                <th class="px-6 py-4 text-center">🏆 Vic</th>
+                                <th class="px-6 py-4 text-right">PTS</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-zinc-800">
+                            {pilotos.sort((a, b) => b.puntos - a.puntos).map((piloto, index) => (
+                                <tr class="hover:bg-zinc-800/40 transition-all group">
+                                    <td class="px-6 py-6 font-black text-3xl italic text-zinc-800 group-hover:text-red-600 text-center w-24 leading-none">{index + 1}</td>
+                                    <td class="px-6 py-6">
+                                        <div class="flex items-center gap-6">
+                                            <img src={logos[piloto.escuderia]} alt={piloto.escuderia} class="w-12 h-12 object-contain" />
+                                            <div>
+                                                <div class="font-black text-zinc-100 text-xl uppercase tracking-tighter">{piloto.nombre}</div>
+                                                <div class="text-[10px] text-zinc-500 font-bold tracking-widest uppercase">{piloto.escuderia}</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-6 text-center text-xl font-black">
+                                        <span class={piloto.victorias > 0 ? "text-yellow-500" : "text-zinc-800"}>{piloto.victorias}</span>
+                                    </td>
+                                    <td class="px-6 py-6 text-right font-mono font-black text-xl text-red-600 italic">
+                                        {piloto.puntos}
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            </section>
 
-<script>
-    const btn = document.getElementById('musicaBtn');
-    const audio = document.getElementById('musicaFondo');
-    const icono = document.getElementById('iconoMusica');
+            <section id="constructores" class="mb-20 scroll-mt-32">
+                <h2 class="text-2xl font-bold mb-6 flex items-center gap-2 uppercase tracking-tight">
+                    <span class="w-2 h-8 bg-zinc-400 inline-block"></span> Campeonato Equipos
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    {escuderias.map((team, index) => (
+                        <div class="bg-zinc-900 p-8 rounded-xl border border-zinc-800 flex flex-col items-center justify-center relative overflow-hidden group shadow-lg">
+                            <img src={logos[team.nombre]} alt={team.nombre} class="w-20 h-20 object-contain mb-6 transition-transform group-hover:scale-110" />
+                            <h3 class="text-xl font-black uppercase z-10 tracking-tighter text-white">{team.nombre}</h3>
+                            <p class="text-5xl font-mono font-black mt-2 text-red-600 z-10 italic">{team.puntos}</p>
+                            <div class="absolute -bottom-2 -right-2 text-7xl font-black text-zinc-800 opacity-20 italic">#{index + 1}</div>
+                        </div>
+                    ))}
+                </div>
+            </section>
 
-    btn.addEventListener('click', () => {
-        if (audio.paused) {
-            audio.play();
-            icono.innerText = '⏸️'; 
-            btn.classList.add('animate-pulse');
-        } else {
-            audio.pause();
-            icono.innerText = '▶️';
-            btn.classList.remove('animate-pulse');
-        }
-    });
-</script>
+            <section id="puntaje" class="scroll-mt-32 mb-20">
+                <h2 class="text-sm font-black mb-8 uppercase tracking-[0.3em] text-zinc-400 flex items-center gap-4 text-center">
+                    <span class="flex-1 h-[1px] bg-zinc-800"></span> REGLAMENTO <span class="flex-1 h-[1px] bg-zinc-800"></span>
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-zinc-900/50 p-8 rounded-2xl border border-zinc-800">
+                        <h3 class="text-red-600 font-black uppercase italic mb-4">Puntos por Carrera</h3>
+                        <div class="grid grid-cols-2 gap-y-2 font-mono text-sm uppercase">
+                            <div class="text-zinc-500">1° Puesto:</div><div class="text-right font-black">25 PTS</div>
+                            <div class="text-zinc-500">2° Puesto:</div><div class="text-right font-black">18 PTS</div>
+                            <div class="text-zinc-500">3° Puesto:</div><div class="text-right font-black">15 PTS</div>
+                            <div class="text-zinc-500">4° Puesto:</div><div class="text-right font-black">12 PTS</div>
+                            <div class="text-zinc-500">5° Puesto:</div><div class="text-right font-black">10 PTS</div>
+                            <div class="text-zinc-500">6° Puesto:</div><div class="text-right font-black">8 PTS</div>
+                        </div>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="bg-zinc-900/50 p-6 rounded-2xl border border-zinc-800 border-l-4 border-l-red-600 font-bold uppercase text-[12px]">
+                            <p class="mb-2">Pole Position: <span class="text-white">+1 PT</span></p>
+                            <p>Vuelta Rápida (Top 6): <span class="text-white">+1 PT</span></p>
+                        </div>
+                        <div class="bg-zinc-950 p-6 rounded-2xl border border-zinc-800 italic text-zinc-500 text-sm">
+                            Si un piloto no asiste a la carrera, sumará <span class="text-white font-bold">0 puntos</span>.
+                        </div>
+                    </div>
+                </div>
+            </section>
 
+        </main>
 
+        <div class="fixed bottom-6 right-6 z-50">
+            <button id="musicaBtn" class="bg-red-600 hover:bg-red-700 text-white w-14 h-14 rounded-full shadow-2xl transition-all hover:scale-110 flex items-center justify-center border-2 border-white/20">
+                <span id="iconoMusica" class="text-xl">▶️</span>
+            </button>
+        </div>
 
+        <audio id="musicaFondo" loop>
+            <source src="/cancion-ligaf1.mp3" type="audio/mpeg">
+        </audio>
 
-	</body>
+        <script>
+            const btn = document.getElementById('musicaBtn');
+            const audio = document.getElementById('musicaFondo');
+            const icono = document.getElementById('iconoMusica');
+
+            btn.addEventListener('click', () => {
+                if (audio.paused) {
+                    audio.play();
+                    icono.innerText = '⏸️'; 
+                    btn.classList.add('animate-pulse');
+                } else {
+                    audio.pause();
+                    icono.innerText = '▶️';
+                    btn.classList.remove('animate-pulse');
+                }
+            });
+        </script>
+    </body>
 </html>
