@@ -20,7 +20,7 @@ const obtenerInfoPiloto = (nombre) => {
         <meta charset="utf-8" />
         <title>Historial - Liga F1 Chocapinto</title>
     </head>
-    <body class="bg-zinc-950 text-white font-sans">
+    <body class="bg-slate-950 text-white font-sans">
         
         <nav class="fixed top-0 w-full bg-zinc-900/80 backdrop-blur-md border-b border-zinc-800 z-50">
             <div class="max-w-5xl mx-auto px-6 py-5 flex justify-between items-center">
@@ -39,93 +39,99 @@ const obtenerInfoPiloto = (nombre) => {
 
             <div class="space-y-32">
                 {historial.map((fecha) => (
-                    <section>
-                        <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-10 gap-6">
-                            <div class="border-l-4 border-red-600 pl-6">
-                                <span class="text-zinc-500 font-mono text-xs font-bold uppercase tracking-widest">Fecha {fecha.id}</span>
-                                <h2 class="text-4xl font-black uppercase italic tracking-tight">{fecha.gp}</h2>
-                                <p class="text-zinc-400 text-sm font-bold">{fecha.circuito} • {fecha.fecha}</p>
-                            </div>
-                            
-                            <div class="flex gap-4">
-                                <div class="bg-zinc-900 border border-zinc-800 p-3 rounded-xl shadow-inner">
-                                    <p class="text-[9px] text-red-500 font-black uppercase tracking-widest mb-1">Pole Position</p>
-                                    <p class="text-sm font-bold italic uppercase leading-none">{fecha.pole}</p>
-                                </div>
-                                <div class="bg-zinc-900 border border-zinc-800 p-3 rounded-xl shadow-inner">
-                                    <p class="text-[9px] text-blue-500 font-black uppercase tracking-widest mb-1">Vuelta Rápida</p>
-                                    <p class="text-sm font-bold italic uppercase leading-none">{fecha.vueltaRapida}</p>
-                                </div>
-                            </div>
-                        </div>
+                    <section class="mb-32">
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-10 gap-6">
+        <div class="border-l-4 border-red-600 pl-6">
+            <span class="text-zinc-500 font-mono text-xs font-bold uppercase tracking-widest">Fecha {fecha.id}</span>
+            <h2 class="text-4xl font-black uppercase italic tracking-tight text-white">{fecha.gp}</h2>
+            <p class="text-zinc-400 text-sm font-bold">{fecha.circuito} • {fecha.fecha}</p>
+        </div>
+        
+        <div class="flex gap-6 border-t border-zinc-800 md:border-t-0 pt-4 md:pt-0">
+            <div class="flex gap-6 border-t border-zinc-800 md:border-t-0 pt-4 md:pt-0">
+    <div>
+        <p class="text-[9px] text-zinc-0 font-black uppercase tracking-widest mb-1">Qualy Record</p>
+        <p class="text-sm font-mono font-bold text-red-500">{fecha.tiempoPole}</p>
+    </div>
+    <div>
+        <p class="text-[9px] text-zinc-0 font-black uppercase tracking-widest mb-1">Vuelta Rápida</p>
+        <p class="text-sm font-mono font-bold text-blue-500">{fecha.tiempoVR}</p>
+    </div>
+    <div>
+        <p class="text-[9px] text-zinc-0 font-black uppercase tracking-widest mb-1">Duración Total</p>
+        <p class="text-sm font-mono font-bold text-zinc-300">{fecha.duracion}</p>
+    </div>
+</div>
+        </div>
+    </div>
 
-                        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
-                            
-                            <div class="lg:col-span-4 bg-zinc-900 rounded-3xl border border-zinc-800 p-8 flex flex-col items-center justify-between group shadow-xl relative overflow-hidden">
-                                <div class="absolute inset-0 bg-red-950/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                                
-                                <div class="relative z-10 w-full flex flex-col items-center flex-grow justify-center">
-                                    <img 
-                                        src={fecha.imagen} 
-                                        class="w-auto h-full max-h-[350px] object-contain grayscale opacity-30 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 ease-out" 
-                                        alt={`Circuito de ${fecha.gp}`} 
-                                    />
-                                </div>
-                                
-                                <div class="relative z-10 w-full text-center mt-8 border-t border-zinc-800 pt-6">
-                                    <p class="text-[10px] text-zinc-500 font-mono tracking-[0.4em] uppercase mb-1">Circuito oficial</p>
-                                    <p class="text-xl font-black text-white uppercase tracking-tight italic">{fecha.gp}</p>
-                                </div>
-                            </div>
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+        
+        <div class="lg:col-span-4 bg-zinc-900 rounded-3xl border border-zinc-800 p-8 flex flex-col items-center justify-between group shadow-xl relative overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:z-10 hover:border-red-600/30 transform-gpu">
+            <div class="absolute inset-0 bg-red-950/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            
+            <div class="relative z-10 w-full flex flex-col items-center flex-grow justify-center">
+                <img 
+                    src={fecha.imagen} 
+                    class="w-auto h-full max-h-[350px] object-contain grayscale opacity-30 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 ease-out" 
+                    alt={`Circuito de ${fecha.gp}`} 
+                />
+            </div>
+            
+            <div class="relative z-10 w-full text-center mt-8 border-t border-zinc-800 pt-6">
+                <p class="text-[10px] text-zinc-500 font-mono tracking-[0.4em] uppercase mb-1">Circuito oficial</p>
+                <p class="text-xl font-black text-white uppercase tracking-tight italic">{fecha.gp}</p>
+            </div>
+        </div>
 
-                            <div class="lg:col-span-8 bg-zinc-900 rounded-3xl border border-zinc-800 overflow-hidden shadow-2xl flex flex-col justify-between">
-                                <table class="w-full text-left">
-                                    <thead class="bg-zinc-800 text-zinc-500 uppercase text-[10px] font-black tracking-widest">
-                                        <tr>
-                                            <th class="px-6 py-5 text-center w-20">Pos</th>
-                                            <th class="px-6 py-5">Piloto / Escudería</th>
-                                            <th class="px-6 py-5 Text-center">Extra</th>
-                                            <th class="px-6 py-5 text-right w-24">Pts</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="divide-y divide-zinc-800/50">
-                                        {fecha.resultados.map((res) => {
-                                            const info = obtenerInfoPiloto(res.piloto);
-                                            return (
-                                                <tr class="hover:bg-white/[0.01] group transition-colors">
-                                                    <td class={`px-6 py-5 text-center font-black italic text-3xl transition-colors ${res.pos === 1 ? 'text-yellow-500' : 'text-zinc-800 group-hover:text-zinc-600'}`}>
-                                                        {res.pos}
-                                                    </td>
-                                                    <td class="px-6 py-5">
-                                                        <div class="flex items-center gap-4">
-                                                            <img src={logos[info.escuderia]} class="w-7 h-7 object-contain opacity-70 group-hover:opacity-100 transition-opacity" alt={info.escuderia} />
-                                                            <div>
-                                                                <p class="font-black text-white uppercase tracking-tighter text-lg leading-none mb-1">{res.piloto}</p>
-                                                                <p class="text-[9px] text-zinc-500 font-bold uppercase tracking-widest leading-none">{info.escuderia}</p>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td class="px-6 py-5 text-center">
-                                                        <div class="flex gap-2 justify-center">
-                                                            {res.piloto === fecha.pole && <span class="bg-red-600/20 text-red-500 text-[9px] px-2 py-0.5 rounded font-black border border-red-600/30">P</span>}
-                                                            {res.piloto === fecha.vueltaRapida && <span class="bg-blue-600/20 text-blue-500 text-[9px] px-2 py-0.5 rounded font-black border border-blue-600/30">VR</span>}
-                                                        </div>
-                                                    </td>
-                                                    <td class="px-6 py-5 text-right font-mono font-black text-2xl text-red-600 italic">
-                                                        {res.puntos}
-                                                    </td>
-                                                </tr>
-                                            );
-                                        })}
-                                    </tbody>
-                                </table>
-                                
-                                <div class="bg-zinc-800/30 py-3 px-6 text-center border-t border-zinc-800/50">
-                                    <p class="text-[9px] text-zinc-600 font-mono uppercase tracking-[0.3em]">Puntaje Oficial de la Fecha</p>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
+        <div class="lg:col-span-8 bg-zinc-900 rounded-3xl border border-zinc-800 overflow-hidden shadow-2xl flex flex-col justify-between transition-all duration-300 hover:scale-[1.02] hover:z-10 hover:border-red-600/30 transform-gpu">
+            <table class="w-full text-left">
+                <thead class="bg-zinc-800 text-zinc-250 uppercase text-[10px] font-black tracking-widest">
+                    <tr>
+                        <th class="px-6 py-5 text-center w-20">Pos</th>
+                        <th class="px-6 py-5">Piloto / Escudería</th>
+                        <th class="px-6 py-5 text-center">Extra</th>
+                        <th class="px-6 py-5 text-right w-24">Pts</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-zinc-800/50">
+                    {fecha.resultados.map((res) => {
+                        const info = obtenerInfoPiloto(res.piloto);
+                        return (
+                            <tr class="hover:bg-white/[0.15] group transition-colors">
+                                <td class={`px-6 py-5 text-center font-black italic text-3xl transition-colors ${res.pos === 1 ? 'text-yellow-500' : 'text-zinc-800 group-hover:text-zinc-100'}`}>
+                                    {res.pos}
+                                </td>
+                                <td class="px-6 py-5">
+                                    <div class="flex items-center gap-4">
+                                        <img src={logos[info.escuderia]} class="w-7 h-7 object-contain opacity-70 group-hover:opacity-100 transition-opacity" alt={info.escuderia} />
+                                        <div>
+                                            <p class="font-black text-white uppercase tracking-tighter text-lg leading-none mb-1">{res.piloto}</p>
+                                            <p class="text-[9px] text-zinc-500 font-bold uppercase tracking-widest leading-none">{info.escuderia}</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-5 text-center">
+                                    <div class="flex gap-2 justify-center">
+                                        {res.piloto === fecha.pole && <span class="bg-red-600/20 text-red-500 text-[9px] px-2 py-0.5 rounded font-black border border-red-600/30">P</span>}
+                                        {res.piloto === fecha.vueltaRapida && <span class="bg-blue-600/20 text-blue-500 text-[9px] px-2 py-0.5 rounded font-black border border-blue-600/30">VR</span>}
+                                    </div>
+                                </td>
+                                <td class="px-6 py-5 text-right font-mono font-black text-2xl text-zing-300 italic">
+                                    {res.puntos}
+                                </td>
+                            </tr>
+                        );
+                    })}
+                </tbody>
+            </table>
+            
+            <div class="bg-zinc-800/30 py-3 px-6 text-center border-t border-zinc-800/50">
+                <p class="text-[9px] text-zinc-600 font-mono uppercase tracking-[0.3em]">Puntaje Oficial de la Fecha</p>
+            </div>
+        </div>
+    </div>
+</section>
                 ))}
             </div>
         </main>

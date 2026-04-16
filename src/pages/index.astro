@@ -24,14 +24,14 @@ const escuderias = Object.values(escuderiasMap).sort((a, b) => b.puntos - a.punt
         <meta charset="utf-8" />
         <title>Liga F1 - Los Chocapinto</title>
     </head>
-    <body class="bg-zinc-950 text-white font-sans">
+    <body class="bg-slate-950 text-white font-sans">
         
 <nav class="fixed top-0 w-full bg-zinc-900/80 backdrop-blur-md border-b border-zinc-800 z-50">
     <div class="max-w-4xl mx-auto px-6 py-5 flex justify-between items-center">
         
         <div class="flex items-center gap-2">
             <div class="w-1 h-6 bg-red-600"></div>
-            <span class="font-black italic text-xl tracking-tighter uppercase text-white">FORMULA <span class="text-red-600">1</span></span>
+            <span class="font-black italic text-xl tracking-tighter uppercase text-white -skew-x-15">FORMULA <span class="text-red-600 -skew-x-15">1</span></span>
         </div>
 
         <div class="flex gap-8 text-[12px] font-black uppercase tracking-[0.2em]">
@@ -40,7 +40,7 @@ const escuderias = Object.values(escuderiasMap).sort((a, b) => b.puntos - a.punt
             <a href="#constructores" class="hover:text-red-500 transition-colors">Escuderías</a>
             <a href="#puntaje" class="hover:text-red-500 transition-colors">Puntaje</a>
             <a href="#Configuración" class="hover:text-red-500 transition-colors">Configuración</a>
-			<a href="/historial" class="hover:text-red-500 transition-colors">Historial</a>       
+            <a href="/historial" class="hover:text-red-500 transition-colors">Historial</a>       
 		</div>
     </div>
 </nav>
@@ -49,7 +49,7 @@ const escuderias = Object.values(escuderiasMap).sort((a, b) => b.puntos - a.punt
             
             <header id="inicio" class="border-b-4 border-red-600 mb-12 pb-6 flex justify-between items-end scroll-mt-32">
                 <div>
-                    <h1 class="text-6xl font-black uppercase tracking-tighter italic">Liga F1 2025<span class="text-red-600"> Los Chocapinto</span></h1>
+                    <h1 class="text-6xl font-black uppercase tracking-tighter -skew-x-15">Liga F1 2025<span class="text-red-600"> Los Chocapinto</span></h1>
                     <p class="text-zinc-500 font-mono mt-2 tracking-[0.2em] text-sm font-bold uppercase">Venado Tuerto • Argentina</p>
                 </div>
             </header>
@@ -103,7 +103,7 @@ const escuderias = Object.values(escuderiasMap).sort((a, b) => b.puntos - a.punt
 
             <section id="pilotos" class="mb-20 scroll-mt-32">
                 <h2 class="text-2xl font-bold mb-6 flex items-center gap-2 uppercase tracking-tight">
-                    <span class="w-2 h-8 bg-red-600 inline-block"></span> Campeonato de Pilotos
+                    <span class="w-2 h-8 bg-red-600 inline-block -skew-x-15"></span> Campeonato de Pilotos
                 </h2>
                 <div class="bg-zinc-900 rounded-xl overflow-hidden border border-zinc-800 shadow-2xl">
                     <table class="w-full text-left">
@@ -120,7 +120,7 @@ const escuderias = Object.values(escuderiasMap).sort((a, b) => b.puntos - a.punt
 
 <tbody class="divide-y divide-zinc-800">
     {pilotos.sort((a, b) => b.puntos - a.puntos).map((piloto, index) => (
-        <tr class="hover:bg-zinc-800/40 transition-all group">
+        <tr class="hover:bg-zinc-50/20 transition-all group">
             <td class="px-4 py-6 font-black text-2xl italic text-zinc-800 group-hover:text-red-600 text-center leading-none">
                 {index + 1}
             </td>
@@ -155,124 +155,128 @@ const escuderias = Object.values(escuderiasMap).sort((a, b) => b.puntos - a.punt
             </section>
 
             <section id="constructores" class="mb-20 scroll-mt-32">
-                <h2 class="text-2xl font-bold mb-6 flex items-center gap-2 uppercase tracking-tight">
-                    <span class="w-2 h-8 bg-zinc-400 inline-block"></span> Campeonato Escuderías
-                </h2>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    {escuderias.map((team, index) => (
-                        <div class="bg-zinc-900 p-8 rounded-xl border border-zinc-800 flex flex-col items-center justify-center relative overflow-hidden group shadow-lg">
-                            <img src={logos[team.nombre]} alt={team.nombre} class="w-20 h-20 object-contain mb-6 transition-transform group-hover:scale-110" />
-                            <h3 class="text-xl font-black uppercase z-10 tracking-tighter text-white">{team.nombre}</h3>
-                            <p class="text-5xl font-mono font-black mt-2 text-red-600 z-10 italic">{team.puntos}</p>
-                            <div class="absolute -bottom-2 -right-2 text-7xl font-black text-zinc-800 opacity-20 italic">#{index + 1}</div>
-                        </div>
-                    ))}
-                </div>
-            </section>
+    <h2 class="text-2xl font-bold mb-6 flex items-center gap-2 uppercase tracking-tight">
+        <span class="w-2 h-8 bg-zinc-400 inline-block -skew-x-15"></span> Campeonato Escuderías
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 p-4">
+        {escuderias.map((team, index) => (
+            /* Aplicamos el efecto de zoom, elevación y sombra sin romper la estructura original */
+            <div class="bg-zinc-900 p-8 rounded-xl border border-zinc-800 flex flex-col items-center justify-center relative overflow-hidden group shadow-lg transition-all duration-300 ease-out hover:scale-105 hover:z-50 hover:shadow-[0_20px_50px_rgba(0,0,0,0.7)] transform-gpu will-change-transform">
+                <img src={logos[team.nombre]} alt={team.nombre} class="w-20 h-20 object-contain mb-6 transition-transform group-hover:scale-150" />
+                <h3 class="text-xl font-black uppercase z-10 tracking-tighter text-white">{team.nombre}</h3>
+                <p class="text-5xl font-mono font-black mt-2 text-red-600 z-10 italic">{team.puntos}</p>
+                <div class="absolute -bottom-2 -right-2 text-7xl font-black text-zinc-800 opacity-20 italic">#{index + 1}</div>
+            </div>
+        ))}
+    </div>
+</section>
 
-            <section id="puntaje" class="scroll-mt-32 mb-20">
-                <h2 class="text-sm font-black mb-8 uppercase tracking-[0.3em] text-zinc-400 flex items-center gap-4 text-center">
-                    <span class="flex-1 h-[1px] bg-zinc-800"></span> ESQUEMA DE PUNTAJE <span class="flex-1 h-[1px] bg-zinc-800"></span>
-                </h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div class="bg-zinc-900/50 p-8 rounded-2xl border border-zinc-800">
-                        <h3 class="text-red-600 font-black uppercase italic mb-4">Puntos por Carrera</h3>
-                        <div class="grid grid-cols-2 gap-y-2 font-mono text-sm uppercase">
-                            <div class="text-zinc-500">1° Puesto:</div><div class="text-right font-black">25 PTS</div>
-                            <div class="text-zinc-500">2° Puesto:</div><div class="text-right font-black">18 PTS</div>
-                            <div class="text-zinc-500">3° Puesto:</div><div class="text-right font-black">15 PTS</div>
-                            <div class="text-zinc-500">4° Puesto:</div><div class="text-right font-black">12 PTS</div>
-                            <div class="text-zinc-500">5° Puesto:</div><div class="text-right font-black">10 PTS</div>
-                            <div class="text-zinc-500">6° Puesto:</div><div class="text-right font-black">8 PTS</div>
-                        </div>
-                    </div>
-                    <div class="space-y-4">
-                        <div class="bg-zinc-900/50 p-6 rounded-2xl border border-zinc-800 border-l-4 border-l-red-600 font-bold uppercase text-[12px]">
-                            <p class="mb-2">Pole Position: <span class="text-white">+1 PT</span></p>
-                            <p>Vuelta Rápida (Top 6, si hace DNF no cuenta): <span class="text-white">+1 PT</span></p>
-                        </div>
-                        <div class="bg-zinc-950 p-6 rounded-2xl border border-zinc-800 italic text-zinc-500 text-sm">
-                            Si un piloto no asiste a la carrera, sumará <span class="text-white font-bold">0 puntos</span>.
-                        </div>
-                    </div>
-                </div>
+     <section id="puntaje" class="scroll-mt-32 mb-20">
+    <h2 class="text-sm font-black mb-8 uppercase tracking-[0.3em] text-zinc-100 flex items-center gap-4 text-center">
+        <span class="flex-1 h-[1px] bg-zinc-800"></span> ESQUEMA DE PUNTAJE <span class="flex-1 h-[1px] bg-zinc-800"></span>
+    </h2>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start p-4">
+        
+        <div class="bg-zinc-900/50 p-8 rounded-2xl border border-zinc-800 border-l-red-600 transition-all duration-300 ease-out hover:scale-105 hover:z-50 hover:shadow-[0_20px_50px_rgba(0,0,0,0.7)] transform-gpu will-change-transform group relative">
+            <h3 class="text-red-600 font-black uppercase italic mb-4">Puntos por Carrera</h3>
+            <div class="grid grid-cols-2 gap-y-2 font-mono text-sm uppercase">
+                <div class="text-zinc-500">1° Puesto:</div><div class="text-right font-black">25 PTS</div>
+                <div class="text-zinc-500">2° Puesto:</div><div class="text-right font-black">18 PTS</div>
+                <div class="text-zinc-500">3° Puesto:</div><div class="text-right font-black">15 PTS</div>
+                <div class="text-zinc-500">4° Puesto:</div><div class="text-right font-black">12 PTS</div>
+                <div class="text-zinc-500">5° Puesto:</div><div class="text-right font-black">10 PTS</div>
+                <div class="text-zinc-500">6° Puesto:</div><div class="text-right font-black">8 PTS</div>
+            </div>
+        </div>
+
+        <div class="space-y-4">
+            <div class="bg-zinc-900/50 p-6 rounded-2xl border border-zinc-800  border-l-red-600 font-bold uppercase text-[12px] transition-all duration-300 ease-out hover:scale-105 hover:z-50 hover:shadow-[0_20px_50px_rgba(0,0,0,0.7)] transform-gpu will-change-transform group relative">
+                <p class="mb-2">Pole Position: <span class="text-white">+1 PT</span></p>
+                <p>Vuelta Rápida (Top 6, si hace DNF no cuenta): <span class="text-white">+1 PT</span></p>
+            </div>
+
+            <div class="bg-zinc-950 p-6 rounded-2xl border border-zinc-400 italic text-zinc-100 text-sm transition-all duration-300 ease-out hover:scale-105 hover:z-50 hover:shadow-[0_20px_50px_rgba(0,0,0,0.7)] transform-gpu will-change-transform group relative">
+                Si un piloto no asiste a la carrera, sumará <span class="text-red-500 font-bold">0 puntos</span>.
+            </div>
+        </div>
+    </div>
 </section>
 
 
 <section id="Configuración" class="scroll-mt-32 mb-20">
 				
-					<h2 class="text-sm font-black mb-8 uppercase tracking-[0.3em] text-zinc-400 flex items-center gap-4 text-center">
+					<h2 class="text-sm font-black mb-8 uppercase tracking-[0.3em] text-zinc-100 flex items-center gap-4 text-center">
                     <span class="flex-1 h-[1px] bg-zinc-800"></span> Configuración y Daños <span class="flex-1 h-[1px] bg-zinc-800"></span>
                 </h2>
    
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        
-        <div class="bg-zinc-900/50 p-6 rounded-2xl border border-zinc-800 group hover:border-red-600/30 transition-colors">
-            <div class="flex items-center gap-3 mb-4">
-                <div class="p-2 bg-red-600/10 rounded-lg">
-                    <span class="text-red-500">⚙️</span>
-                </div>
-                <h4 class="font-black uppercase italic text-sm tracking-tighter">Mecánica</h4>
+    <div class="bg-zinc-900/50 p-6 rounded-2xl border border-zinc-800 transition-all duration-300 ease-out hover:scale-105 hover:z-10 hover:border-2 hover:border-yellow-500/50 hover:shadow-[0_20px_50px_rgba(0,0,0,0.5)] group relative">
+        <div class="flex items-center gap-3 mb-4">
+            <div class="p-2 bg-red-600/10 rounded-lg">
+                <span class="text-red-500">⚙️</span>
             </div>
-            <ul class="space-y-3 text-sm font-medium">
-                <li class="flex justify-between border-b border-zinc-800/50 pb-2">
-                    <span class="text-zinc-500">Rendimiento:</span>
-                    <span class="text-white">Parejo</span>
-                </li>
-                <li class="flex justify-between border-b border-zinc-800/50 pb-2">
-                    <span class="text-zinc-500">Daños:</span>
-                    <span class="text-white text-right italic">Simulación</span>
-                </li>
-                <li class="flex justify-between">
-                    <span class="text-zinc-500">Parc Fermé:</span>
-                    <span class="text-white">Activado</span>
-                </li>
-            </ul>
+            <h4 class="font-black uppercase italic text-sm tracking-tighter">Mecánica</h4>
         </div>
-
-        <div class="bg-zinc-900/50 p-6 rounded-2xl border border-zinc-800 group hover:border-red-600/30 transition-colors">
-            <div class="flex items-center gap-3 mb-4">
-                <div class="p-2 bg-blue-600/10 rounded-lg">
-                    <span class="text-blue-500">🛠️</span>
-                </div>
-                <h4 class="font-black uppercase italic text-sm tracking-tighter">Asistencias</h4>
-            </div>
-            <div class="space-y-4">
-                <div>
-                    <p class="text-[10px] text-red-500 font-black uppercase tracking-widest mb-1">Prohibidas</p>
-                    <p class="text-xs text-zinc-400 leading-relaxed font-bold">Trazada Dinámica Desactivada</p>
-                </div>
-                <div>
-                    <p class="text-[10px] text-blue-500 font-black uppercase tracking-widest mb-1">Libre Elección</p>
-                    <p class="text-xs text-zinc-400 leading-relaxed">ABS, Tracción, Caja de cambios, ERS y DRS</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="bg-zinc-900/50 p-6 rounded-2xl border border-zinc-800 group hover:border-red-600/30 transition-colors">
-    <div class="flex items-center gap-3 mb-4">
-        <div class="p-2 bg-yellow-600/10 rounded-lg">
-            <span class="text-yellow-500 text-xl">🚓</span>
-        </div>
-        <h4 class="font-black uppercase italic text-sm tracking-tighter">Varios</h4>
+        <ul class="space-y-3 text-sm font-medium">
+            <li class="flex justify-between border-b border-zinc-800/50 pb-2">
+                <span class="text-zinc-500 font-bold normal-case">Rendimiento:</span>
+                <span class="text-white font-bold normal-case">Parejo</span>
+            </li>
+            <li class="flex justify-between border-b border-zinc-800/50 pb-2">
+                <span class="text-zinc-500 font-bold normal-case">Daños:</span>
+                <span class="text-white font-bold normal-case text-right">Simulación</span>
+            </li>
+            <li class="flex justify-between">
+                <span class="text-zinc-500 font-bold normal-case">Parc Fermé:</span>
+                <span class="text-white font-bold normal-case">Activado</span>
+            </li>
+        </ul>
     </div>
-    <ul class="space-y-3 text-sm font-medium">
-        <li class="flex justify-between border-b border-zinc-800/50 pb-2 text-xs">
-            <span class="text-zinc-500 font-bold normal-case">Safety car:</span>
-            <span class="text-white font-bold normal-case">Activado</span>
-        </li>
-        <li class="flex justify-between border-b border-zinc-800/50 pb-2 text-xs">
-            <span class="text-zinc-500 font-bold normal-case">Formación:</span>
-            <span class="text-white font-bold normal-case">Obligatoria</span>
-        </li>
-        <li class="flex justify-between text-xs">
-            <span class="text-zinc-500 font-bold normal-case">Cámara:</span>
-            <span class="text-white font-bold normal-case">Libre</span>
-        </li>
-    </ul>
+
+    <div class="bg-zinc-900/50 p-6 rounded-2xl border border-zinc-800 transition-all duration-300 ease-out hover:scale-105 hover:z-10 hover:border-2 hover:border-yellow-500/50 hover:shadow-[0_20px_50px_rgba(0,0,0,0.5)] group relative">
+        <div class="flex items-center gap-3 mb-4">
+            <div class="p-2 bg-blue-600/10 rounded-lg">
+                <span class="text-blue-500">🛠️</span>
+            </div>
+            <h4 class="font-black uppercase italic text-sm tracking-tighter">Asistencias</h4>
+        </div>
+        <div class="space-y-4">
+            <div>
+                <p class="text-[10px] text-red-500 font-black uppercase tracking-widest mb-1">Prohibidas</p>
+                <p class="text-sm text-zinc-400 leading-relaxed font-bold normal-case">Trazada dinámica desactivada</p>
+            </div>
+            <div>
+                <p class="text-[10px] text-blue-500 font-black uppercase tracking-widest mb-1">Libre Elección</p>
+                <p class="text-sm text-zinc-400 leading-relaxed font-bold normal-case">ABS, Tracción, Caja de cambios, ERS y DRS</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-zinc-900/50 p-6 rounded-2xl border border-zinc-800 transition-all duration-300 ease-out hover:scale-105 hover:z-10 hover:border-2 hover:border-yellow-500/50 hover:shadow-[0_20px_50px_rgba(0,0,0,0.5)] group relative">
+        <div class="flex items-center gap-3 mb-4">
+            <div class="p-2 bg-yellow-600/10 rounded-lg">
+                <span class="text-yellow-500 text-xl">🚓</span>
+            </div>
+            <h4 class="font-black uppercase italic text-sm tracking-tighter">Varios</h4>
+        </div>
+        <ul class="space-y-3 text-sm font-medium">
+            <li class="flex justify-between border-b border-zinc-800/50 pb-2">
+                <span class="text-zinc-500 font-bold normal-case">Safety car:</span>
+                <span class="text-white font-bold normal-case">Activado</span>
+            </li>
+            <li class="flex justify-between border-b border-zinc-800/50 pb-2">
+                <span class="text-zinc-500 font-bold normal-case">Formación:</span>
+                <span class="text-white font-bold normal-case">Obligatoria</span>
+            </li>
+            <li class="flex justify-between">
+                <span class="text-zinc-500 font-bold normal-case">Cámara:</span>
+                <span class="text-white font-bold normal-case">Libre</span>
+            </li>
+        </ul>
+    </div>
 </div>
-		</div>
    <div class="mt-8 flex justify-center">
     <p class="inline-flex items-center gap-2 bg-yellow-600/10 px-6 py-2 rounded-full border border-yellow-600/20 text-[11px] text-yellow-500 font-mono font-black uppercase tracking-[0.2em] animate-pulse">
         <span>⚠️</span> 
@@ -286,84 +290,178 @@ const escuderias = Object.values(escuderiasMap).sort((a, b) => b.puntos - a.punt
 
 
 			<section id="integrantes" class="mt-32 pb-20 scroll-mt-32">
-    <h2 class="text-2xl font-bold mb-10 flex items-center gap-4 uppercase tracking-tighter">
-        <span class="w-10 h-[1px] bg-zinc-800"></span>
-        Competidores botijas <span class="text-red-600">2026</span>
+    <h2 class="text-2xl font-bold mb-10 flex items-center gap-4 uppercase tracking-tighter w-full">
+    <span class="flex-1 h-[1px] bg-zinc-800"></span>
+    
+    <span class="shrink-0">
+        INTEGRANTES <span class="text-red-600">2026</span>
+    </span>
+
+    <span class="flex-1 h-[1px] bg-zinc-800"></span>
+</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {(() => {
+            // ORDEN CORREGIDO POR COLUMNAS:
+            // Col 1: Chor y Franco (Alpine)
+            // Col 2: Simon y Diego (Mercedes Benz)
+            // Col 3: Rodri y Leo (Red Bull)
+            const ordenDeseado = ["Chor", "Simon", "Rodri", "Franco", "Diego", "Leo"];
+            
+            const pilotosOrdenados = [...pilotos].sort((a, b) => {
+                return ordenDeseado.indexOf(a.nombre) - ordenDeseado.indexOf(b.nombre);
+            });
+
+            return pilotosOrdenados.map((piloto) => {
+                const fondoEscuderia = piloto.escuderia === "Mercedes Benz" ? "escuderia-mercedes.jpg" : 
+                                     piloto.escuderia === "Alpine" ? "escuderia-alpine.jpg" : 
+                                     "escuderia-redbull.jpg";
+                
+                return (
+                    <div class="bg-zinc-900/60 border border-zinc-800 rounded-2xl p-6 transition-all duration-300 ease-out hover:scale-110 hover:z-50 hover:border-red-600/50 hover:shadow-[0_20px_50px_rgba(0,0,0,0.5)] group relative overflow-hidden cursor-default transform-gpu will-change-transform">
+                        
+                        <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+                            <img 
+                                src={`/Fotos/${fondoEscuderia}`} 
+                                alt="" 
+                                class="w-full h-full object-cover opacity-[0.07] group-hover:opacity-[0.35] transition-opacity duration-500 grayscale group-hover:grayscale-0"
+                            />
+                        </div>
+
+                        <div class="relative z-10">
+                            <div class="absolute -top-1 -right-1 text-[9px] font-black uppercase tracking-widest text-zinc-600 group-hover:text-red-500 transition-colors">
+                                {piloto.nombre === "Chor" || piloto.nombre === "Simon" || piloto.nombre === "Rodri" ? "Piloto 1" : "Piloto 2"}
+                            </div>
+
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 flex-shrink-0 bg-zinc-950 rounded-xl border border-zinc-800 p-2 flex items-center justify-center shadow-lg">
+                                    <img src={logos[piloto.escuderia]} alt={piloto.escuderia} class="w-full h-full object-contain opacity-80 group-hover:opacity-100 transition-opacity" />
+                                </div>
+
+                                <div class="flex-1">
+                                    <h3 class="text-xl font-black uppercase italic tracking-tighter text-white leading-none mb-1 group-hover:text-red-100 transition-colors">
+                                        {piloto.nombre}
+                                    </h3>
+                                    <p class="text-[10px] text-zinc-500 font-bold uppercase tracking-widest mb-4 italic">
+                                        {piloto.escuderia}
+                                    </p>
+
+                                    <div class="flex items-center gap-2 mb-4 bg-zinc-950/80 w-fit px-3 py-1.5 rounded-lg border border-zinc-800 shadow-inner">
+                                        <span class="flex items-center justify-center">
+                                            {piloto.nombre === "Chor" ? (
+                                                <svg class="w-4 h-4 text-zinc-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                    <circle cx="12" cy="12" r="10" /><line x1="12" y1="2" x2="12" y2="12" /><line x1="12" y1="12" x2="4" y2="18" /><line x1="12" y1="12" x2="20" y2="18" /><circle cx="12" cy="12" r="2" fill="currentColor" />
+                                                </svg>
+                                            ) : piloto.nombre === "Franco" ? (
+                                                <span class="text-sm">⌨️</span>
+                                            ) : (
+                                                <span class="text-sm">🎮</span>
+                                            )}
+                                        </span>
+                                        <span class="text-[10px] font-mono text-zinc-300 uppercase font-bold">
+                                            {piloto.nombre === "Chor" ? "Volante" : 
+                                             piloto.nombre === "Franco" ? "Teclado" : "Joystick"}
+                                        </span>
+                                    </div>
+
+                                    <a 
+                                        href={
+                                            piloto.nombre === "Chor" ? "https://www.instagram.com/jorgegiovagnoli/" :
+                                            piloto.nombre === "Diego" ? "https://www.instagram.com/diiego.z_21" :
+                                            piloto.nombre === "Simon" ? "https://www.instagram.com/pablosimon23/" :
+                                            piloto.nombre === "Franco" ? "https://www.instagram.com/francobellisonzi/" :
+                                            piloto.nombre === "Rodri" ? "https://www.instagram.com/roodribarros/" :
+                                            "https://www.instagram.com/leo.tapparello/"
+                                        } 
+                                        target="_blank" 
+                                        class="inline-flex items-center gap-2 text-zinc-500 hover:text-pink-500 transition-colors text-[11px] font-bold"
+                                    >
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                                        <span>Ver perfil</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                );
+            });
+        })()}
+    </div>
+</section>
+
+
+
+
+
+
+<section id="autos" class="mt-15 pb-20 scroll-mt-15">
+    <h2 class="text-2xl font-bold mb-10 flex items-center gap-4 uppercase tracking-tighter w-full">
+        <span class="flex-1 h-[1px] bg-zinc-800"></span>
+        <span class="shrink-0">
+            Monoplazas <span class="text-red-600">2025</span>
+        </span>
         <span class="flex-1 h-[1px] bg-zinc-800"></span>
     </h2>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {pilotos.map((piloto) => (
-            <div class="bg-zinc-900/40 border border-zinc-800 rounded-2xl p-6 hover:border-red-600/40 transition-all group relative overflow-hidden">
-                <div class="absolute top-4 right-4 text-[9px] font-black uppercase tracking-widest text-zinc-600 group-hover:text-red-500 transition-colors">
-                    {piloto.nombre === "Chor" || piloto.nombre === "Simon" || piloto.nombre === "Rodri" ? "Piloto 1" : "Piloto 2"}
-                </div>
-
-                <div class="flex items-start gap-4">
-                    <div class="w-12 h-12 flex-shrink-0 bg-zinc-950 rounded-xl border border-zinc-800 p-2 flex items-center justify-center">
-                        <img src={logos[piloto.escuderia]} alt={piloto.escuderia} class="w-full h-full object-contain opacity-80 group-hover:opacity-100 transition-opacity" />
-                    </div>
-
-                    <div class="flex-1">
-                        <h3 class="text-xl font-black uppercase italic tracking-tighter text-white leading-none mb-1">
-                            {piloto.nombre}
-                        </h3>
-                        <p class="text-[10px] text-zinc-500 font-bold uppercase tracking-widest mb-4 italic">
-                            {piloto.escuderia}
-                        </p>
-
-                       <div class="flex items-center gap-2 mb-4 bg-zinc-950/50 w-fit px-3 py-1.5 rounded-lg border border-zinc-800">
-    <span class="w-4 h-4 text-zinc-100 flex items-center justify-center">
-        {piloto.nombre === "Chor" ? (
-            /* SVG Estilo iOS Steering Wheel */
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="10"/>
-                <path d="M12 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"/>
-                <path d="m12 15-2 3.5"/>
-                <path d="m12 15 2 3.5"/>
-                <path d="M9 12.3 4 12"/>
-                <path d="M15 12.3 20 12"/>
-            </svg>
-        ) : piloto.nombre === "Franco" ? (
-            <span class="text-sm">⌨️</span>
-        ) : (
-            <span class="text-sm">🎮</span>
-        )}
-    </span>
-    <span class="text-[10px] font-mono text-zinc-300 uppercase font-bold">
-        {piloto.nombre === "Chor" ? "Volante" : 
-         piloto.nombre === "Franco" ? "Teclado" : "Joystick"}
-    </span>
-</div>
-
-                        <a 
-                            href={
-                                piloto.nombre === "Chor" ? "https://www.instagram.com/jorgegiovagnoli/" :
-                                piloto.nombre === "Franco" ? "https://www.instagram.com/francobellisonzi/" :
-                                piloto.nombre === "Simon" ? "https://www.instagram.com/pablosimon23/" :
-                                piloto.nombre === "Diego" ? "https://www.instagram.com/diiego.z_21" :
-                                piloto.nombre === "Rodri" ? "https://www.instagram.com/roodribarros/" :
-                                "https://www.instagram.com/leo.tapparello/"
-                            } 
-                            target="_blank" 
-                            class="inline-flex items-center gap-2 text-zinc-500 hover:text-pink-500 transition-colors text-[11px] font-bold"
-                        >
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-                            <span>Ver perfil</span>
-                        </a>
-                    </div>
-                </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 p-4">
+        
+        <div class="group relative overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900/40 transition-all duration-500 hover:border-pink-500/50 hover:scale-105 hover:z-10 transform-gpu will-change-transform">
+            <div class="p-6">
+                <h3 class="text-lg font-black uppercase italic tracking-tighter text-white group-hover:text-blue-500 transition-colors">Alpine A525</h3>
+                <p class="text-[10px] text-zinc-500 font-bold uppercase tracking-widest">BWT Alpine F1 Team</p>
             </div>
-        ))}
+            <div class="aspect-video overflow-hidden">
+                <img 
+                    src="/Fotos/coche-alpine.jpg" 
+                    alt="Alpine 2025" 
+                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 group-hover:rotate-1"
+                />
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent opacity-60"></div>
+        </div>
+
+        <div class="group relative overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900/40 transition-all duration-500 hover:border-zinc-400/50 hover:scale-105 hover:z-10 transform-gpu will-change-transform">
+            <div class="p-6">
+                <h3 class="text-lg font-black uppercase italic tracking-tighter text-white group-hover:text-zinc-300 transition-colors">Mercedes W16</h3>
+                <p class="text-[10px] text-zinc-500 font-bold uppercase tracking-widest">Mercedes-AMG Petronas</p>
+            </div>
+            <div class="aspect-video overflow-hidden">
+                <img 
+                    src="/Fotos/coche-mercedes.jpg" 
+                    alt="Mercedes 2025" 
+                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 group-hover:rotate-1"
+                />
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent opacity-60"></div>
+        </div>
+
+        <div class="group relative overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900/40 transition-all duration-500 hover:border-red-600/50 hover:scale-105 hover:z-10 transform-gpu will-change-transform">
+            <div class="p-6">
+                <h3 class="text-lg font-black uppercase italic tracking-tighter text-white group-hover:text-red-600 transition-colors">Red Bull RB21</h3>
+                <p class="text-[10px] text-zinc-500 font-bold uppercase tracking-widest">Oracle Red Bull Racing</p>
+            </div>
+            <div class="aspect-video overflow-hidden">
+                <img 
+                    src="/Fotos/coche-redbull.jpg" 
+                    alt="Red Bull 2025" 
+                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 group-hover:rotate-1"
+                />
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent opacity-60"></div>
+        </div>
+
     </div>
-	<div class="w-full flex justify-center mt-10 mb-10">
-    <p class="inline-flex items-center gap-2 px-6 py-2 border border-red-600/20 text-[11px] text-red-500 font-mono font-black uppercase tracking-[0.2em] animate-pulse">
+</section>
+
+
+
+
+
+<div class="w-full flex justify-center mt-01 mb-01">
+    <p class="inline-flex items-center gap-2 px-6 py-2 border border-red-600/20 text-[11px] text-red-500 font-mono font-black uppercase tracking-[0.2em] rounded-full animate-pulse">
         Noooo, por el fondo plano noooo...
     </p>
 </div>
-</section>
-	
-
 
 
 
