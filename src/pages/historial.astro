@@ -3,7 +3,7 @@
 import '../styles/global.css';
 import pilotos from '../Data/pilotos.json';
 import historial from '../Data/historial.json';
-
+import { ClientRouter } from 'astro:transitions';
 const logos = {
   "Mercedes Benz": "/Fotos/logo-mercedes.png",
   "Alpine": "/Fotos/logo-alpine.png",
@@ -20,11 +20,14 @@ const obtenerInfoPiloto = (nombre) => {
         <meta charset="utf-8" />
         <title>Historial - Liga F1 Chocapinto</title>
     </head>
+    <head>
+    <ClientRouter />
+</head>
     <body class="bg-slate-950 text-white font-sans">
         
         <nav class="fixed top-0 w-full bg-zinc-900/80 backdrop-blur-md border-b border-zinc-800 z-50">
-            <div class="max-w-5xl mx-auto px-6 py-5 flex justify-between items-center">
-                <a href="/" class="font-black italic text-xl tracking-tighter uppercase text-white">
+            <div class="max-w-5xl mx-auto px-22 py-5 flex justify-between items-center">
+                <a href="/" class="font-black italic text-xl tracking-tighter uppercase text-white -skew-x-15">
                     FORMULA <span class="text-red-600">1</span>
                 </a>
                 <a href="/" class="text-[10px] font-black uppercase tracking-widest hover:text-red-500 transition-colors">← Volver al Inicio</a>
@@ -32,10 +35,25 @@ const obtenerInfoPiloto = (nombre) => {
         </nav>
 
         <main class="max-w-5xl mx-auto py-24 px-4 pt-32">
-            <header class="border-b-4 border-red-600 mb-16 pb-6">
-                <h1 class="text-5xl font-black uppercase italic tracking-tighter">Archivo de <span class="text-red-600">Carreras</span></h1>
-                <p class="text-zinc-500 font-mono text-xs mt-2 font-bold uppercase tracking-[0.3em]">Resultados por Fecha</p>
-            </header>
+            <header class="relative overflow-hidden border-b-4 border-red-600 mb-12 pb-11 pt-20">
+    <div class="absolute inset-0 z-0 pointer-events-none">
+        <img 
+            src="/Fotos/fondo-f1.png" 
+            alt="" 
+            class="w-full h-full object-cover opacity-60" 
+        />
+        <div class="absolute inset-0 bg-gradient-to-r from-zinc-950/50 to-zinc-950"></div>
+    </div>
+
+    <div class="relative z-10 px-2">
+        <h1 class="text-5xl font-black uppercase italic tracking-tighter text-white -skew-x-12">
+            Archivo de <span class="text-red-600 -skew-x-12">Carreras</span>
+        </h1>
+        <p class="text-zinc-400 font-mono text-xs mt-2 font-bold uppercase tracking-[0.3em]">
+            Resultados por Fecha
+        </p>
+    </div>
+</header>
 
             <div class="space-y-32">
                 {historial.map((fecha) => (
