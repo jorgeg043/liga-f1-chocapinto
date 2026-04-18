@@ -17,11 +17,9 @@ const obtenerInfoPiloto = (nombre) => {
 
 <html lang="es">
     <head>
-        <meta charset="utf-8" />
-        <title>Historial - Liga F1 Chocapinto</title>
-    </head>
-    <head>
-    <ClientRouter />
+       <meta charset="utf-8" />
+    <title>Historial - Liga F1 Chocapinto</title>
+    <ClientRouter /> </head>
 </head>
     <body class="bg-slate-950 text-white font-sans">
         
@@ -112,8 +110,9 @@ const obtenerInfoPiloto = (nombre) => {
                         <th class="px-6 py-5 text-right w-24">Pts</th>
                     </tr>
                 </thead>
+                
                 <tbody class="divide-y divide-zinc-800/50">
-                    {fecha.resultados.map((res) => {
+                    { [...fecha.resultados].sort((a, b) => a.pos - b.pos).map((res) => {
                         const info = obtenerInfoPiloto(res.piloto);
                         return (
                             <tr class="hover:bg-white/[0.15] group transition-colors">
@@ -149,7 +148,27 @@ const obtenerInfoPiloto = (nombre) => {
             </div>
         </div>
     </div>
+
 </section>
+
+<section class="mt-20 pt-10 border-t border-zinc-800">
+   <h2 class="text-2xl font-black uppercase italic mb-6">Galería de <span class="text-red-600">Resultados</span></h2>
+    
+    <div class="relative group">
+        <div id="slider-resultados" class="flex overflow-x-auto snap-x snap-mandatory gap-4 no-scrollbar scroll-smooth">
+            
+            <div class="min-w-full md:min-w-[80%] snap-center">
+                <img 
+                    src="/Fotos/resultados-fecha1.jpg" 
+                    class="w-full h-auto aspect-[16/9] object-cover rounded-xl border border-zinc-800 shadow-xl" 
+                    alt="Resultados Fecha 1" 
+                />
+            </div>           
+        </div>
+    </div>
+</section>
+
+
                 ))}
             </div>
         </main>
