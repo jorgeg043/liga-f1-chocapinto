@@ -4,5 +4,7 @@
   { "id": 3, "nombre": "Diego", "escuderia": "Mercedes Benz", "puntos": 18, "victorias": 0, "poles": 0, "vueltasRapidas": 0 },
   { "id": 4, "nombre": "Simon", "escuderia": "Mercedes Benz", "puntos": 10, "victorias": 0, "poles": 0, "vueltasRapidas": 0 },
   { "id": 5, "nombre": "Rodri", "escuderia": "Red Bull", "puntos": 16, "victorias": 0, "poles": 0, "vueltasRapidas": 1 },
-  { "id": 6, "nombre": "Leo", "escuderia": "Red Bull", "puntos": 12, "victorias": 0, "poles": 0, "vueltasRapidas": 0 }
+  { "id": 6, "nombre": "Leo", "escuderia": "Red Bull", "puntos": 12, "victorias": 0, "poles": 0, "vueltasRapidas": 0 },
+  { "id": 6, "nombre": "Rambo", "escuderia": "Ferrari", "puntos": 0, "victorias": 0, "poles": 0, "vueltasRapidas": 0 }
+
 ]
