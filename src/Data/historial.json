@@ -18,7 +18,7 @@
       { "pos": 3, "piloto": "Rodri", "puntos": 16, "nota": "" },
       { "pos": 4, "piloto": "Leo", "puntos": 12, "nota": "" },
       { "pos": 7, "piloto": "Rambo", "puntos": 0, "nota": "" },
-      { "pos": 7, "piloto": "IA-Leclerc", "puntos": 0, "nota": "" }
+      { "pos": 8, "piloto": "IA-Leclerc", "puntos": 0, "nota": "" }
     ]
   }
 ]
