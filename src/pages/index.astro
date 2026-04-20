@@ -325,8 +325,8 @@ const escuderias = Object.values(escuderiasMap).sort((a, b) => b.puntos - a.punt
             // Col 1: Chor y Franco (Alpine)
             // Col 2: Simon y Diego (Mercedes Benz)
             // Col 3: Rodri y Leo (Red Bull)
-            // Col 4: Rambo (Ferrari)
-            const ordenDeseado = ["Chor", "Simon", "Rodri", "Franco", "Diego", "Leo", "Rambo"];
+            // Col 4: Rambo y IA-Leclerc (Ferrari)
+            const ordenDeseado = ["Chor", "Simon", "Rodri", "Franco", "Diego", "Leo", "Rambo", "IA-Leclerc"];
             
             const pilotosOrdenados = [...pilotos].sort((a, b) => {
                 return ordenDeseado.indexOf(a.nombre) - ordenDeseado.indexOf(b.nombre);
@@ -351,7 +351,7 @@ const escuderias = Object.values(escuderiasMap).sort((a, b) => b.puntos - a.punt
 
                         <div class="relative z-10">
                             <div class="absolute -top-1 -right-1 text-[9px] font-black uppercase tracking-widest text-zinc-600 group-hover:text-red-500 transition-colors">
-                                {piloto.nombre === "Chor" || piloto.nombre === "Simon" || piloto.nombre === "Rodri" ? "Piloto 1" : "Piloto 2"}
+                                {piloto.nombre === "Chor" || piloto.nombre === "Simon" || piloto.nombre === "Rodri" || piloto.nombre === "IA-Leclerc" ? "Piloto 1" : "Piloto 2"}
                             </div>
 
                             <div class="flex items-start gap-4">
@@ -367,25 +367,29 @@ const escuderias = Object.values(escuderiasMap).sort((a, b) => b.puntos - a.punt
                                         {piloto.escuderia}
                                     </p>
 
-                                    <div class="flex items-center gap-2 mb-4 bg-zinc-950/80 w-fit px-3 py-1.5 rounded-lg border border-zinc-800 shadow-inner">
-                                        <span class="flex items-center justify-center">
-                                            {(piloto.nombre === "Chor" || piloto.nombre === "Rambo") ? (
-                                                <svg class="w-4 h-4 text-zinc-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                                    <circle cx="12" cy="12" r="10" /><line x1="12" y1="2" x2="12" y2="12" /><line x1="12" y1="12" x2="4" y2="18" /><line x1="12" y1="12" x2="20" y2="18" /><circle cx="12" cy="12" r="2" fill="currentColor" />
-                                                </svg>
-                                            ) 
-                                            
-                                            : piloto.nombre === "Franco" ? (
-                                                <span class="text-sm">⌨️</span>
-                                            ) : (
-                                                <span class="text-sm">🎮</span>
-                                            )}
-                                        </span>
-                                        <span class="text-[10px] font-mono text-zinc-300 uppercase font-bold">
-                                            {piloto.nombre === "Chor" ? "Volante" : piloto.nombre === "Rambo" ? "Volante" :
-                                             piloto.nombre === "Franco" ? "Teclado" : "Joystick"}
-                                        </span>
-                                    </div>
+                                   <div class="flex items-center gap-2 mb-4 bg-zinc-950/80 w-fit px-3 py-1.5 rounded-lg border border-zinc-800 shadow-inner">
+    <span class="flex items-center justify-center">
+        {piloto.nombre === "IA-Leclerc" ? (
+            <svg class="w-4 h-4 text-zinc-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="11" width="18" height="10" rx="2" /><circle cx="12" cy="5" r="2" /><path d="M12 7v4" /><line x1="8" y1="16" x2="8" y2="16.01" /><line x1="16" y1="16" x2="16" y2="16.01" />
+            </svg>
+        ) : (piloto.nombre === "Chor" || piloto.nombre === "Rambo") ? (
+            <svg class="w-4 h-4 text-zinc-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10" /><line x1="12" y1="2" x2="12" y2="12" /><line x1="12" y1="12" x2="4" y2="18" /><line x1="12" y1="12" x2="20" y2="18" /><circle cx="12" cy="12" r="2" fill="currentColor" />
+            </svg>
+        ) : piloto.nombre === "Franco" ? (
+            <span class="text-sm">⌨️</span>
+        ) : (
+            <span class="text-sm">🎮</span>
+        )}
+    </span>
+    
+    <span class="text-[10px] font-mono text-zinc-300 uppercase font-bold">
+        {piloto.nombre === "IA-Leclerc" ? "IA Virtual" :
+         (piloto.nombre === "Chor" || piloto.nombre === "Rambo") ? "Volante" :
+         piloto.nombre === "Franco" ? "Teclado" : "Joystick"}
+    </span>
+</div>
 
                                     <a 
                                         href={
@@ -395,6 +399,7 @@ const escuderias = Object.values(escuderiasMap).sort((a, b) => b.puntos - a.punt
                                             piloto.nombre === "Franco" ? "https://www.instagram.com/francobellisonzi/" :
                                             piloto.nombre === "Rodri" ? "https://www.instagram.com/roodribarros/" :
                                             piloto.nombre === "Rambo" ? "https://www.instagram.com/damifarias95/" :
+                                            piloto.nombre === "IA-Leclerc" ? "https://www.instagram.com/" :
                                             "https://www.instagram.com/leo.tapparello/"
                                         } 
                                         target="_blank" 
