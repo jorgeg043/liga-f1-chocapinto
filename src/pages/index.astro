@@ -175,16 +175,16 @@ const escuderias = Object.values(escuderiasMap).sort((a, b) => b.puntos - a.punt
 
             <section id="constructores" class="mb-20 scroll-mt-32">
     <h2 class="text-2xl font-bold mb-6 flex items-center gap-2 uppercase tracking-tight">
-        <span class="w-2 h-8 bg-zinc-400 inline-block -skew-x-15"></span> Campeonato Escuderías
+        <span class="w-2 h-8 bg-zinc-100 inline-block -skew-x-15"></span> Campeonato Escuderías
     </h2>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 p-4">
         {escuderias.map((team, index) => (
             /* Aplicamos el efecto de zoom, elevación y sombra sin romper la estructura original */
-            <div class="bg-zinc-900 p-8 rounded-xl border border-zinc-800 flex flex-col items-center justify-center relative overflow-hidden group shadow-lg transition-all duration-300 ease-out hover:scale-105 hover:z-50 hover:shadow-[0_20px_50px_rgba(0,0,0,0.7)] transform-gpu will-change-transform">
+            <div class="bg-zinc-900 p-8 rounded-xl border border-zinc-600 flex flex-col items-center justify-center relative overflow-hidden group shadow-lg transition-all duration-300 ease-out hover:scale-105 hover:z-50 hover:shadow-[0_20px_50px_rgba(0,0,0,0.7)] transform-gpu will-change-transform">
                 <img src={logos[team.nombre]} alt={team.nombre} class="w-20 h-20 object-contain mb-6 transition-transform group-hover:scale-150" />
-                <h3 class="text-xl font-black uppercase z-10 tracking-tighter text-white">{team.nombre}</h3>
-                <p class="text-5xl font-mono font-black mt-2 text-red-600 z-10 italic">{team.puntos}</p>
-                <div class="absolute -bottom-2 -right-2 text-7xl font-black text-zinc-800 opacity-20 italic">#{index + 1}</div>
+                <h3 class="text-xl font-black uppercase z-10 tracking-tighter text-zinc-400">{team.nombre}</h3>
+                <p class="text-5xl font-mono font-black mt-2 text-red-600 z-10 italic animate-pulse">{team.puntos}</p>
+                <div class="absolute -bottom-2 -right-2 text-7xl font-black text-zinc-800 italic">#{index + 1}</div>
             </div>
         ))}
     </div>
@@ -347,7 +347,7 @@ const escuderias = Object.values(escuderiasMap).sort((a, b) => b.puntos - a.punt
                             <img 
                                 src={`/Fotos/${fondoEscuderia}`} 
                                 alt="" 
-                                class="w-full h-full object-cover opacity-[0.07] group-hover:opacity-[0.35] transition-opacity duration-500 grayscale group-hover:grayscale-0"
+                                class="w-full h-full object-cover opacity-[0.07] group-hover:opacity-[0.35] transition-opacity duration-500 grayscale group-hover:grayscale-10"
                             />
                         </div>
 
