@@ -216,18 +216,39 @@ const escuderias = Object.values(escuderiasMap).sort((a, b) => b.puntos - a.punt
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start p-4">
         
         <div class="bg-zinc-900/50 p-8 rounded-2xl border border-zinc-800 border-l-red-600 transition-all duration-300 ease-out hover:scale-105 hover:z-50 hover:shadow-[0_20px_50px_rgba(0,0,0,0.7)] transform-gpu will-change-transform group relative">
-            <h3 class="text-red-600 font-black uppercase italic mb-4">Puntos por Carrera</h3>
-            <div class="grid grid-cols-2 gap-y-2 font-mono text-sm uppercase">
-                <div class="text-zinc-500">1° Puesto:</div><div class="text-right font-black">25 PTS</div>
-                <div class="text-zinc-500">2° Puesto:</div><div class="text-right font-black">18 PTS</div>
-                <div class="text-zinc-500">3° Puesto:</div><div class="text-right font-black">15 PTS</div>
-                <div class="text-zinc-500">4° Puesto:</div><div class="text-right font-black">12 PTS</div>
-                <div class="text-zinc-500">5° Puesto:</div><div class="text-right font-black">10 PTS</div>
-                <div class="text-zinc-500">6° Puesto:</div><div class="text-right font-black">8 PTS</div>
-                <div class="text-zinc-500">7° Puesto:</div><div class="text-right font-black">4 PTS</div>
-                <div class="text-zinc-500">8° Puesto:</div><div class="text-right font-black">2 PTS</div>
+    <h3 class="text-red-600 font-black uppercase italic mb-6">Puntos por Carrera</h3>
+    
+    <div class="grid grid-cols-2 gap-x-8">
+        
+        <div>
+            <h4 class="text-[13px] text-zinc-200 font-bold uppercase tracking-widest mb-3 border-b border-zinc-800 pb-1">Gran Premio</h4>
+            <div class="grid grid-cols-2 gap-y-2 font-mono  uppercase">
+                <div class="text-zinc-500">1°:</div><div class="text-right font-black text-white">25</div>
+                <div class="text-zinc-500">2°:</div><div class="text-right font-black text-white">18</div>
+                <div class="text-zinc-500">3°:</div><div class="text-right font-black text-white">15</div>
+                <div class="text-zinc-500">4°:</div><div class="text-right font-black text-white">12</div>
+                <div class="text-zinc-500">5°:</div><div class="text-right font-black text-white">10</div>
+                <div class="text-zinc-500">6°:</div><div class="text-right font-black text-white">8</div>
+                <div class="text-zinc-500">7°:</div><div class="text-right font-black text-white">4</div>
+                <div class="text-zinc-500">8°:</div><div class="text-right font-black text-white">2</div>
             </div>
         </div>
+
+        <div>
+            <h4 class="text-red-600/80 text-[13px] font-bold uppercase tracking-widest mb-3 border-b border-zinc-800 pb-1">Sprint</h4>
+            <div class="grid grid-cols-2 gap-y-2 font-mono uppercase">
+                <div class="text-zinc-500">1°:</div><div class="text-right font-black text-white">6</div>
+                <div class="text-zinc-500">2°:</div><div class="text-right font-black text-white">5</div>
+                <div class="text-zinc-500">3°:</div><div class="text-right font-black text-white">4</div>
+                <div class="text-zinc-500">4°:</div><div class="text-right font-black text-white">3</div>
+                <div class="text-zinc-500">5°:</div><div class="text-right font-black text-white">2</div>
+                <div class="text-zinc-500">6°:</div><div class="text-right font-black text-white">1</div>
+                <div class="text-transparent">7°:</div><div></div>
+                <div class="text-transparent">8°:</div><div></div>
+            </div>
+        </div>
+    </div>
+</div>
 
         <div class="space-y-4">
             <div class="bg-zinc-900/50 p-6 rounded-2xl border border-zinc-800  border-l-red-600 font-bold uppercase text-[12px] transition-all duration-300 ease-out hover:scale-105 hover:z-50 hover:shadow-[0_20px_50px_rgba(0,0,0,0.7)] transform-gpu will-change-transform group relative">
