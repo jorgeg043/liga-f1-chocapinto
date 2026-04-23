@@ -50,8 +50,10 @@ const escuderias = Object.values(escuderiasMap).sort((a, b) => b.puntos - a.punt
 </nav>
 
         <main class="max-w-5xl mx-auto py-24 px-4 pt-32">
-            
+           
+    
            <header id="inicio" class="relative overflow-hidden border-b-4 border-red-600 mb-12 pb-6 flex justify-between items-end scroll-mt-32 min-h-[200px]">
+      
     
     <div class="absolute inset-0 z-0 pointer-events-none">
         <img 
@@ -145,13 +147,29 @@ const escuderias = Object.values(escuderiasMap).sort((a, b) => b.puntos - a.punt
             </td>
             <td class="px-6 py-6">
                 <div class="flex items-center gap-4">
-                    <img src={logos[piloto.escuderia]} alt={piloto.escuderia} class="w-10 h-10 object-contain" />
+                    <img src={logos[piloto.escuderia]} alt={piloto.escuderia} class="w-15 h-15 object-contain" />
+                    
+                    {/* FOTO DEL PILOTO */}
+                    <img 
+    src={`/Fotos/perfil-${piloto.nombre.toLowerCase()}.jpg`} 
+    alt={piloto.nombre} 
+    class="w-20 h-20 rounded-full object-cover border-4 border-zinc-700 
+           transition-all duration-300 ease-in-out bg-zinc-800 shadow-lg
+           /* Efecto en PC */
+           md:hover:scale-125 md:hover:z-50 md:hover:border-red-600 
+           /* Efecto en Celular al tocar */
+           active:scale-125 active:z-50 active:border-red-600
+           cursor-pointer touch-manipulation"
+/>
+
                     <div>
                         <div class="font-black text-zinc-100 text-lg uppercase tracking-tighter leading-none">{piloto.nombre}</div>
                         <div class="text-[9px] text-zinc-500 font-bold tracking-widest uppercase mt-1">{piloto.escuderia}</div>
                     </div>
                 </div>
+                
             </td>
+            
             <td class="px-4 py-6 text-center font-bold text-zinc-400">
                 {piloto.victorias > 0 ? <span class="text-yellow-500">{piloto.victorias}</span> : "0"}
             </td>
