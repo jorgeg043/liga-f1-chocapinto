@@ -28,26 +28,98 @@ const escuderias = Object.values(escuderiasMap).sort((a, b) => b.puntos - a.punt
     </head>
     
     <body class="bg-slate-950 text-white font-sans">
-        
-<nav class="fixed top-0 w-full bg-zinc-900/80 backdrop-blur-md border-b border-zinc-800 z-50">
+      
+       <nav class="fixed top-0 w-full bg-zinc-900/80 backdrop-blur-md border-b border-zinc-800 z-50">
     <div class="max-w-5xl mx-auto px-6 py-5 flex justify-between items-center">
         
         <div class="flex items-center gap-2">
-            
             <span class="font-black italic text-xl tracking-tighter uppercase text-white -skew-x-15">FORMULA <span class="text-red-600 -skew-x-15">1</span></span>
         </div>
 
-        <div class="flex gap-8 text-[12px] font-black uppercase tracking-[0.2em]">
+        <div class="flex gap-4 md:gap-8 text-[10px] md:text-[12px] font-black uppercase tracking-[0.1em] md:tracking-[0.2em]">
             <a href="#inicio" class="hover:text-red-500 transition-colors">Inicio</a>
             <a href="#pilotos" class="hover:text-red-500 transition-colors">Pilotos</a>
             <a href="#constructores" class="hover:text-red-500 transition-colors">Escuderías</a>
             <a href="#puntaje" class="hover:text-red-500 transition-colors">Puntaje</a>
-            <a href="#Configuración" class="hover:text-red-500 transition-colors">Configuración</a>
-            <a href="#Calendario" class="hover:text-red-500 transition-colors">Calendario</a>
-            <a href="/historial" class="hover:text-red-500 transition-colors">Historial</a>       
-		</div>
+            <a href="#Configuración" class="hover:text-red-500 transition-colors hidden sm:block">Configuración</a>
+            <a href="#Calendario" class="hover:text-red-500 transition-colors hidden sm:block">Calendario</a>
+
+            <div class="relative group" id="dropdown-historial">
+                <button 
+                    id="btn-historial"
+                    type="button"
+                    class="flex items-center gap-1 hover:text-red-500 transition-colors uppercase font-black outline-none"
+                >
+                    Historial
+                    <svg class="w-3 h-3 transition-transform" id="flecha-historial" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </button>
+
+                <div 
+                    id="menu-historial"
+                    class="absolute right-0 mt-2 w-48 bg-zinc-900 border border-zinc-800 rounded-xl shadow-2xl 
+                           opacity-0 invisible md:group-hover:opacity-100 md:group-hover:visible 
+                           transition-all duration-300 translate-y-2 md:group-hover:translate-y-0 z-50 overflow-hidden"
+                >
+                    <div class="py-2">
+                        <a href="/historial" class="block px-6 py-3 text-zinc-400 hover:text-white hover:bg-zinc-800 transition-colors border-b border-zinc-800/50">
+                            Carreras <span class="text-[9px] text-zinc-600 block lowercase font-mono italic">Domingos</span>
+                        </a>
+                        <a href="/sprint" class="block px-6 py-3 text-zinc-400 hover:text-red-500 hover:bg-zinc-800 transition-colors">
+                            Sprint <span class="text-[9px] text-red-900 block lowercase font-mono italic">Viernes</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </nav>
+
+<style>
+    .show-dropdown {
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: translateY(0) !important;
+    }
+    .rotate-arrow {
+        transform: rotate(180deg) !important;
+    }
+</style>
+
+<script>
+    const setupMenu = () => {
+        const btn = document.getElementById('btn-historial');
+        const menu = document.getElementById('menu-historial');
+        const flecha = document.getElementById('flecha-historial');
+
+        if (!btn || !menu || !flecha) return;
+
+        // Click para móviles
+        btn.addEventListener('click', (e) => {
+            if (window.innerWidth < 1024) {
+                e.stopPropagation();
+                menu.classList.toggle('show-dropdown');
+                flecha.classList.toggle('rotate-arrow');
+            }
+        });
+
+        // Cerrar al tocar fuera
+        document.addEventListener('click', (e) => {
+            if (!btn.contains(e.target as Node)) {
+                menu.classList.remove('show-dropdown');
+                flecha.classList.remove('rotate-arrow');
+            }
+        });
+    };
+
+    // Esto es CLAVE para que funcione al navegar entre páginas
+    document.addEventListener('astro:page-load', setupMenu);
+    // Ejecutar también en la carga inicial
+    setupMenu();
+</script>
+
+
 
         <main class="max-w-5xl mx-auto py-24 px-4 pt-32">
            
@@ -75,7 +147,8 @@ const escuderias = Object.values(escuderiasMap).sort((a, b) => b.puntos - a.punt
 
 </header>
 
-            <div class="mb-16 bg-zinc-900 rounded-3xl border  border-zinc-800 p-8 shadow-2xl relative overflow-hidden group hover:border-red-600/10 transition-all">
+
+            <div class="mb-16 bg-zinc-900 rounded-3xl border  border-zinc-800 p-8 shadow-2xl relative overflow-hidden group hover:border-red-600/10 transition-all animate-pulse">
     <div class="relative z-10 flex flex-col lg:flex-row items-center gap-10 ">
         
         <div class="w-full lg:w-[35%] flex flex-col items-center justify-center p-4 ">
@@ -272,7 +345,7 @@ const escuderias = Object.values(escuderiasMap).sort((a, b) => b.puntos - a.punt
    
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-    <div class="bg-zinc-900/50 p-6 rounded-2xl border border-zinc-800 transition-all duration-300 ease-out hover:scale-105 hover:z-10 hover:border-2 hover:border-yellow-500/50 hover:shadow-[0_20px_50px_rgba(0,0,0,0.5)] group relative">
+    <div class="bg-zinc-900/50 p-6 rounded-2xl border border-yellow-700 transition-all duration-300 ease-out hover:scale-105 hover:z-10 hover:border-2 hover:border-yellow-500/50 hover:shadow-[0_20px_50px_rgba(0,0,0,0.5)] group relative">
         <div class="flex items-center gap-3 mb-4">
             <div class="p-2 bg-red-600/10 rounded-lg">
                 <span class="text-red-500">⚙️</span>
@@ -295,7 +368,7 @@ const escuderias = Object.values(escuderiasMap).sort((a, b) => b.puntos - a.punt
         </ul>
     </div>
 
-    <div class="bg-zinc-900/50 p-6 rounded-2xl border border-zinc-800 transition-all duration-300 ease-out hover:scale-105 hover:z-10 hover:border-2 hover:border-yellow-500/50 hover:shadow-[0_20px_50px_rgba(0,0,0,0.5)] group relative">
+    <div class="bg-zinc-900/50 p-6 rounded-2xl border border-yellow-700 transition-all duration-300 ease-out hover:scale-105 hover:z-10 hover:border-2 hover:border-yellow-500/50 hover:shadow-[0_20px_50px_rgba(0,0,0,0.5)] group relative">
         <div class="flex items-center gap-3 mb-4">
             <div class="p-2 bg-blue-600/10 rounded-lg">
                 <span class="text-blue-500">🛠️</span>
@@ -304,17 +377,18 @@ const escuderias = Object.values(escuderiasMap).sort((a, b) => b.puntos - a.punt
         </div>
         <div class="space-y-4">
             <div>
-                <p class="text-[10px] text-red-500 font-black uppercase tracking-widest mb-1">Prohibidas</p>
-                <p class="text-sm text-zinc-400 leading-relaxed font-bold normal-case">Trazada dinámica desactivada</p>
+                <p class="text-sm text-red-500 font-black uppercase tracking-widest mb-1">Prohibidas</p>
+                <p class="text-sm text-zinc-100 leading-relaxed font-bold normal-case">Trazada dinámica desactivada</p>
             </div>
             <div>
-                <p class="text-[10px] text-blue-500 font-black uppercase tracking-widest mb-1">Libre Elección</p>
-                <p class="text-sm text-zinc-400 leading-relaxed font-bold normal-case">ABS, Tracción, Caja de cambios, ERS y DRS</p>
+                <p class="text-sm text-blue-500 font-black uppercase tracking-widest mb-1">Libre Elección (Joystick/Teclado)</p>
+                <p class="text-sm text-zinc-100 leading-relaxed font-bold normal-case">ABS, Tracción, Caja de cambios, ERS y DRS</p>
+                <p class="text-sm text-blue-500 leading-relaxed font-bold normal-case">Con volante todo desactivado, caja manual</p>
             </div>
         </div>
     </div>
 
-    <div class="bg-zinc-900/50 p-6 rounded-2xl border border-zinc-800 transition-all duration-300 ease-out hover:scale-105 hover:z-10 hover:border-2 hover:border-yellow-500/50 hover:shadow-[0_20px_50px_rgba(0,0,0,0.5)] group relative">
+    <div class="bg-zinc-900/50 p-6 rounded-2xl border border-yellow-700 transition-all duration-300 ease-out hover:scale-105 hover:z-10 hover:border-2 hover:border-yellow-500/50 hover:shadow-[0_20px_50px_rgba(0,0,0,0.5)] group relative">
         <div class="flex items-center gap-3 mb-4">
             <div class="p-2 bg-yellow-600/10 rounded-lg">
                 <span class="text-yellow-500 text-xl">🚓</span>
@@ -332,7 +406,7 @@ const escuderias = Object.values(escuderiasMap).sort((a, b) => b.puntos - a.punt
             </li>
             <li class="flex justify-between">
                 <span class="text-zinc-500 font-bold normal-case">Cámara:</span>
-                <span class="text-white font-bold normal-case">Libre</span>
+                <span class="text-white font-bold normal-case">Libre / Cockpit (Con Volante)</span>
             </li>
         </ul>
     </div>
@@ -386,12 +460,12 @@ const escuderias = Object.values(escuderiasMap).sort((a, b) => b.puntos - a.punt
                             <img 
                                 src={`/Fotos/${fondoEscuderia}`} 
                                 alt="" 
-                                class="w-full h-full object-cover opacity-[0.07] group-hover:opacity-[0.35] transition-opacity duration-500 grayscale group-hover:grayscale-10"
+                                class="w-full h-full object-cover opacity-[0.27] group-hover:opacity-[0.65] transition-opacity duration-500"
                             />
                         </div>
 
                         <div class="relative z-10">
-                            <div class="absolute -top-1 -right-1 text-[9px] font-black uppercase tracking-widest text-zinc-600 group-hover:text-red-500 transition-colors">
+                            <div class="absolute -top-1 -right-1 text-[9px] font-black uppercase tracking-widest text-zinc-300 group-hover:text-red-100 transition-colors">
                                 {piloto.nombre === "Chor" || piloto.nombre === "Simon" || piloto.nombre === "Rodri" || piloto.nombre === "IA-Leclerc" ? "Piloto 1" : "Piloto 2"}
                             </div>
 
@@ -440,7 +514,7 @@ const escuderias = Object.values(escuderiasMap).sort((a, b) => b.puntos - a.punt
                                             piloto.nombre === "Franco" ? "https://www.instagram.com/francobellisonzi/" :
                                             piloto.nombre === "Rodri" ? "https://www.instagram.com/roodribarros/" :
                                             piloto.nombre === "Rambo" ? "https://www.instagram.com/damifarias95/" :
-                                            piloto.nombre === "IA-Leclerc" ? "https://www.instagram.com/" :
+                                            piloto.nombre === "IA-Leclerc" ? "https://www.instagram.com/charles_leclerc/" :
                                             "https://www.instagram.com/leo.tapparello/"
                                         } 
                                         target="_blank" 
@@ -570,9 +644,6 @@ const escuderias = Object.values(escuderiasMap).sort((a, b) => b.puntos - a.punt
                 
             </div>
         </div>
-
-
-
 
 
 
@@ -794,7 +865,6 @@ const escuderias = Object.values(escuderiasMap).sort((a, b) => b.puntos - a.punt
 
 
 
-
 <div class="w-full flex justify-center mt-01 mb-01">
     <p class="inline-flex items-center gap-2 px-6 py-2 border border-red-600/20 text-[11px] text-red-500 font-mono font-black uppercase tracking-[0.2em] rounded-full animate-pulse">
         Noooo, por el fondo plano noooo...
@@ -806,7 +876,7 @@ const escuderias = Object.values(escuderiasMap).sort((a, b) => b.puntos - a.punt
         </main>
 
         <div class="fixed bottom-6 right-6 z-50">
-            <button id="musicaBtn" class="bg-red-600 hover:bg-red-700 text-white w-14 h-14 rounded-full shadow-2xl transition-all hover:scale-110 flex items-center justify-center border-2 border-white/20">
+            <button id="musicaBtn" class="bg-blue-100 hover:bg-red-700 text-white w-14 h-14 rounded-full shadow-2xl transition-all hover:scale-110 flex items-center justify-center border-2 border-yellow-500 animate-pulse">
                 <span id="iconoMusica" class="text-xl">▶️</span>
             </button>
         </div>

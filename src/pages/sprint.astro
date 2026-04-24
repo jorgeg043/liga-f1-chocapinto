@@ -1,0 +1,102 @@
+---
+import '../styles/global.css';
+import pilotos from '../Data/pilotos.json';
+import sprintData from '../Data/sprint.json';
+import { ClientRouter } from 'astro:transitions';
+
+const obtenerInfoPiloto = (nombre) => {
+    return pilotos.find(p => p.nombre === nombre) || { escuderia: "S/D" };
+};
+---
+
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <title>Historial Sprint - Liga Chocapinto</title>
+    <ClientRouter />
+</head>
+<body class="bg-slate-950 text-white font-sans">
+
+    <nav class="fixed top-0 w-full bg-zinc-900/80 backdrop-blur-md border-b border-zinc-800 z-50">
+        <div class="max-w-5xl mx-auto px-6 py-5 flex justify-between items-center">
+            <a href="/" class="font-black italic text-xl tracking-tighter uppercase text-white -skew-x-15">
+                FORMULA <span class="text-red-600 italic">CHOCAPINTO</span>
+            </a>
+            <div class="flex gap-8 font-black uppercase italic text-xs tracking-widest text-zinc-400">
+                <a href="/" class="hover:text-white transition-colors">Inicio</a>
+                <a href="/historial" class="hover:text-white transition-colors">Carreras</a>
+                <a href="/sprint" class="text-red-600 underline underline-offset-8 decoration-2">Sprint</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-4xl mx-auto pt-32 pb-20 px-4">
+        
+        <header class="mb-16">
+            <h1 class="text-5xl font-black uppercase italic tracking-tighter text-white">
+                Campeonato <span class="text-red-600">Sprint</span>
+            </h1>
+            <p class="text-zinc-500 font-mono text-xs uppercase tracking-[0.4em] mt-2">Historial de sesiones cortas de viernes</p>
+        </header>
+
+        {sprintData.map((fecha) => (
+            <div class="mb-20">
+                <div class="flex items-center gap-4 mb-6">
+                    <div class="h-10 w-1.5 bg-red-600 rounded-full"></div>
+                    <div>
+                        <h2 class="text-2xl font-black uppercase italic text-white tracking-tight">{fecha.fecha}</h2>
+                        <p class="text-zinc-500 font-mono text-[10px] uppercase tracking-widest">{fecha.circuito}</p>
+                    </div>
+                </div>
+
+                <div class="bg-zinc-900/40 rounded-3xl border border-zinc-800 overflow-hidden backdrop-blur-md">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-zinc-800/30 text-[10px] font-mono text-zinc-500 uppercase tracking-[0.2em] border-b border-zinc-800">
+                                <th class="px-8 py-4">Pos</th>
+                                <th class="px-8 py-4">Piloto</th>
+                                <th class="px-8 py-4 text-right">Puntos</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-zinc-800/50">
+                            {fecha.resultados.map((res) => (
+                                <tr class="group hover:bg-red-600/5 transition-all">
+                                    <td class="px-8 py-6">
+                                        <span class="text-3xl font-black italic text-zinc-800 group-hover:text-red-600/50 transition-colors duration-300">
+                                            {res.pos}
+                                        </span>
+                                    </td>
+                                    <td class="px-8 py-6">
+                                        <div class="flex items-center gap-4">
+                                            <img 
+                                                src={`/Fotos/perfil-${res.piloto.toLowerCase()}.jpg`} 
+                                                class="w-12 h-12 rounded-full object-cover border-2 border-zinc-800 group-hover:border-red-600 transition-all duration-300 group-hover:scale-110"
+                                                alt={res.piloto}
+                                            />
+                                            <div>
+                                                <div class="font-black text-zinc-200 text-lg uppercase tracking-tight group-hover:text-white">
+                                                    {res.piloto}
+                                                </div>
+                                                <div class="text-[9px] text-zinc-500 font-bold uppercase tracking-widest">
+                                                    {obtenerInfoPiloto(res.piloto).escuderia}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-8 py-6 text-right">
+                                        <span class="font-mono font-black text-2xl text-red-500 drop-shadow-[0_0_5px_rgba(220,38,38,0.3)]">
+                                            +{res.puntos}
+                                        </span>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        ))}
+
+    </main>
+
+</body>
+</html>
