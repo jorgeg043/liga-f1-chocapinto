@@ -20,24 +20,44 @@ const obtenerInfoPiloto = (nombre) => {
     <nav class="fixed top-0 w-full bg-zinc-900/80 backdrop-blur-md border-b border-zinc-800 z-50">
         <div class="max-w-5xl mx-auto px-6 py-5 flex justify-between items-center">
             <a href="/" class="font-black italic text-xl tracking-tighter uppercase text-white -skew-x-15">
-                FORMULA <span class="text-red-600 italic">CHOCAPINTO</span>
+                FORMULA <span class="text-red-600 italic">1</span>
             </a>
-            <div class="flex gap-8 font-black uppercase italic text-xs tracking-widest text-zinc-400">
+            <div class="flex gap-8 font-black uppercase  text-xs tracking-widest text-zinc-100">
                 <a href="/" class="hover:text-white transition-colors">Inicio</a>
                 <a href="/historial" class="hover:text-white transition-colors">Carreras</a>
                 <a href="/sprint" class="text-red-600 underline underline-offset-8 decoration-2">Sprint</a>
             </div>
         </div>
     </nav>
-
+ 
     <main class="max-w-4xl mx-auto pt-32 pb-20 px-4">
+       
+      <header class="mb-16 relative py-20 overflow-hidden border-b-4 border-red-950"> 
+    <img 
+        src="/Fotos/fondo-f1.png" 
+        class="absolute inset-0 w-full h-full object-cover opacity-20 z-0 pointer-events-none" 
+        alt="Fondo Sprint"
+    />
+
+    <div class="relative z-10 text-center">
+        <h1 class="text-5xl font-black uppercase italic tracking-tighter text-white -skew-x-15">
+            Historial de <span class="text-red-600 -skew-x-15">Sprint</span>
+        </h1>
+        <p class="text-zinc-300 font-mono text-xs uppercase tracking-[0.4em] mt-2">
+            Resultados por fecha
+        </p>
+    </div>
+</header>
+
+<div class="flex flex-col items-center justify-center py-20 bg-zinc-800 rounded-3xl border border-zinc-100/50 shadow-2xl overflow-hidden">
+    <div class="relative">
+        <h2 id="typing-text" class="text-4xl md:text-6xl font-black uppercase italic tracking-tighter text-white font-mono">
+            <span class="text-red-600">"Próximamente...</span> 01/05/2026"
+        </h2>
         
-        <header class="mb-16">
-            <h1 class="text-5xl font-black uppercase italic tracking-tighter text-white">
-                Campeonato <span class="text-red-600">Sprint</span>
-            </h1>
-            <p class="text-zinc-500 font-mono text-xs uppercase tracking-[0.4em] mt-2">Historial de sesiones cortas de viernes</p>
-        </header>
+    </div>
+</div>
+{/*     C O M P L E T A R L U E G O DE Q U E T E R M I N E LA S P R I N T
 
         {sprintData.map((fecha) => (
             <div class="mb-20">
@@ -95,8 +115,33 @@ const obtenerInfoPiloto = (nombre) => {
                 </div>
             </div>
         ))}
-
+*/}
     </main>
+<style>
+    #typing-text {
+        display: inline-block;
+        white-space: nowrap;
+        overflow: hidden;
+        /* Animación: escribir (4s), pausa, borrar, pausa */
+        animation: typing 5s steps(30) infinite;
+        width: 0;
+        border-right: 3px solid transparent; /* Actúa como el cursor */
+    }
 
+    @keyframes typing {
+        0% { width: 0; }
+        30%, 70% { width: 100%; } /* Se queda escrito del 30% al 70% del tiempo */
+        90%, 100% { width: 0; }    /* Se borra al final */
+    }
+
+    .animate-cursor {
+        animation: blink 0.8s step-end infinite;
+    }
+
+    @keyframes blink {
+        from, to { opacity: 1; }
+        50% { opacity: 0; }
+    }
+</style>
 </body>
 </html>

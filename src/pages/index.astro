@@ -63,11 +63,11 @@ const escuderias = Object.values(escuderiasMap).sort((a, b) => b.puntos - a.punt
                            transition-all duration-300 translate-y-2 md:group-hover:translate-y-0 z-50 overflow-hidden"
                 >
                     <div class="py-2">
-                        <a href="/historial" class="block px-6 py-3 text-zinc-400 hover:text-white hover:bg-zinc-800 transition-colors border-b border-zinc-800/50">
-                            Carreras <span class="text-[9px] text-zinc-600 block lowercase font-mono italic">Domingos</span>
+                        <a href="/historial" class="block px-6 py-3 text-zinc-200 hover:text-white hover:bg-zinc-800 transition-colors border-b border-zinc-800/50">
+                            Carreras 
                         </a>
-                        <a href="/sprint" class="block px-6 py-3 text-zinc-400 hover:text-red-500 hover:bg-zinc-800 transition-colors">
-                            Sprint <span class="text-[9px] text-red-900 block lowercase font-mono italic">Viernes</span>
+                        <a href="/sprint" class="block px-6 py-3 text-zinc-200 hover:text-red-500 hover:bg-zinc-800 transition-colors">
+                            Sprint 
                         </a>
                     </div>
                 </div>
@@ -85,38 +85,81 @@ const escuderias = Object.values(escuderiasMap).sort((a, b) => b.puntos - a.punt
     .rotate-arrow {
         transform: rotate(180deg) !important;
     }
+@keyframes latido {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1); /* Se agranda un 10% */
+  }
+}
+
+.animate-latido {
+  animation: latido 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes latido-pro {
+  0%, 100% {
+    transform: scale(1);
+    filter: grayscale(10%) opacity(50%) blur(1px);
+    /* Sombra tenue cuando está "apagado" */
+    filter: drop-shadow(0 0 0px rgba(0,0,0,0));
+  }
+  50% {
+    transform: scale(1.25); /* Se agranda un 15% */
+    filter: grayscale(0%) opacity(100%) blur(0px);
+    /* Brillo rojo estilo F1 cuando se agranda */
+    filter: drop-shadow(0 0 15px rgba(220, 38, 38, 0.6));
+  }
+}
+
+.animate-latido-color {
+  animation: latido-pro 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+
 </style>
 
 <script>
-    const setupMenu = () => {
+    // Usamos 'astro:page-load' para que el script se reactive tras cada navegación
+    document.addEventListener('astro:page-load', () => {
         const btn = document.getElementById('btn-historial');
         const menu = document.getElementById('menu-historial');
         const flecha = document.getElementById('flecha-historial');
 
         if (!btn || !menu || !flecha) return;
 
-        // Click para móviles
+        // Función para cerrar el menú
+        const cerrarMenu = () => {
+            menu.classList.remove('show-dropdown');
+            flecha.classList.remove('rotate-arrow');
+        };
+
+        // Escuchamos el click directamente en el botón
         btn.addEventListener('click', (e) => {
+            // Solo aplicamos la lógica manual si es pantalla táctil/chica
             if (window.innerWidth < 1024) {
+                e.preventDefault();
                 e.stopPropagation();
                 menu.classList.toggle('show-dropdown');
                 flecha.classList.toggle('rotate-arrow');
             }
         });
 
-        // Cerrar al tocar fuera
+        // Cerrar si se hace click en cualquier otra parte de la pantalla
         document.addEventListener('click', (e) => {
-            if (!btn.contains(e.target as Node)) {
-                menu.classList.remove('show-dropdown');
-                flecha.classList.remove('rotate-arrow');
+            if (!btn.contains(e.target as Node) && !menu.contains(e.target as Node)) {
+                cerrarMenu();
             }
         });
-    };
 
-    // Esto es CLAVE para que funcione al navegar entre páginas
-    document.addEventListener('astro:page-load', setupMenu);
-    // Ejecutar también en la carga inicial
-    setupMenu();
+        // Cerrar si se presiona una opción del menú (opcional)
+        menu.addEventListener('click', () => {
+            if (window.innerWidth < 1024) {
+                cerrarMenu();
+            }
+        });
+    });
 </script>
 
 
@@ -124,49 +167,43 @@ const escuderias = Object.values(escuderiasMap).sort((a, b) => b.puntos - a.punt
         <main class="max-w-5xl mx-auto py-24 px-4 pt-32">
            
     
-           <header id="inicio" class="relative overflow-hidden border-b-4 border-red-600 mb-12 pb-6 flex justify-between items-end scroll-mt-32 min-h-[200px]">
-      
-    
-    <div class="absolute inset-0 z-0 pointer-events-none">
-        <img 
-            src="/Fotos/fondo-f1.png" 
-            alt="" 
-            class="w-full h-full object-cover opacity-20 " 
-        />
-        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-zinc-950"></div>
-    </div>
+         <header id="inicio" class="mb-16 relative py-20 overflow-hidden border-b-4 border-red-950"> 
+    <img 
+        src="/Fotos/fondo-f1.png" 
+        class="absolute inset-0 w-full h-full object-cover opacity-20 z-0 pointer-events-none" 
+        alt="Fondo Sprint"
+    />
 
-    <div class="relative z-10" px-2>
-        <h1 class="text-6xl font-black uppercase tracking-tighter -skew-x-12 animate-pulse">
-            Liga 2025<span class="text-red-600"> Los Chocapinto</span>
+    <div class="relative z-10 text-center">
+        <h1 class="text-5xl font-black uppercase italic tracking-tighter text-white -skew-x-15">
+            LIGA 2025 <span class="text-red-600 -skew-x-15"> LOS CHOCAPINTO</span>
         </h1>
-        <p class="text-zinc-500 font-mono mt-2 tracking-[0.2em] text-sm font-bold uppercase">
-            Venado Tuerto • Argentina
+        <p class="text-zinc-300 font-mono text-xs uppercase tracking-[0.4em] mt-2">
+            Venado Tuerto - Santa Fe - Argentina
         </p>
     </div>
-
 </header>
 
 
-            <div class="mb-16 bg-zinc-900 rounded-3xl border  border-zinc-800 p-8 shadow-2xl relative overflow-hidden group hover:border-red-600/10 transition-all animate-pulse">
+            <div class="mb-16 bg-zinc-900 rounded-3xl border  border-zinc-800 p-8 shadow-2xl relative overflow-hidden group hover:border-red-600/10 transition-all ">
     <div class="relative z-10 flex flex-col lg:flex-row items-center gap-10 ">
         
         <div class="w-full lg:w-[35%] flex flex-col items-center justify-center p-4 ">
             <img 
                 src="/Fotos/foto-fecha2hungararing.png" 
                 alt="Circuito Barcelona" 
-                class="w-[130%] max-w-[420px] h-auto object-contain filter  transition-transform group-hover:scale-115"
+                class="w-[130%] max-w-[420px] h-auto object-contain filter  transition-transform animate-latido-color"
             />
-            <p class="text-[9px] text-zinc-600 font-mono mt-4 tracking-[0.4em] uppercase group-hover:scale-135">Circuito • Red Bull Ring</p>
+            <p class="text-[9px] text-zinc-600 font-mono mt-4 tracking-[0.4em] uppercase animate-latido-color">Circuito • Red Bull Ring</p>
         </div>
 
         <div class="flex-1 w-full border-t lg:border-t-0 lg:border-l border-zinc-800 pt-8 lg:pt-0 lg:pl-10">
             <div class="flex items-center gap-3 mb-4">
-                <span class="bg-red-600 text-white text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full animate-pulse">Próximo GP</span>
+                <span class="bg-red-600 text-white text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full animate-latido-color">Próximo GP</span>
             </div>
             
             <h2 class="text-5xl font-black uppercase tracking-tighter italic text-white leading-none mb-4">
-                Gran Premio<br/>de <span class="text-red-600 animate-pulse">Austria</span>
+                Gran Premio<br/>de <span class="text-red-600 ">Austria</span>
             </h2>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-8">
@@ -181,7 +218,7 @@ const escuderias = Object.values(escuderiasMap).sort((a, b) => b.puntos - a.punt
                     <div class="text-[11px] space-y-1 font-bold">
                         <p class="flex justify-between"><span>Práctica:</span> <span class="text-white">30m</span></p>
                         <p class="flex justify-between"><span>Qualy:</span> <span class="text-white">18m</span></p>
-                        <p class="flex justify-between text-red-500"><span>Carrera:</span> <span>35V (50%)</span></p>
+                        <p class="flex justify-between text-red-500"><span>Carrera:</span> <span>36V (50%)</span></p>
                     </div>
                 </div>
             </div>
@@ -194,6 +231,11 @@ const escuderias = Object.values(escuderiasMap).sort((a, b) => b.puntos - a.punt
         </div>
     </div>
 </div>
+
+
+
+
+
 
             <section id="pilotos" class="mb-20 scroll-mt-32">
                 <h2 class="text-2xl font-bold mb-6 flex items-center gap-2 uppercase tracking-tight">
@@ -232,7 +274,7 @@ const escuderias = Object.values(escuderiasMap).sort((a, b) => b.puntos - a.punt
            md:hover:scale-125 md:hover:z-50 md:hover:border-red-600 
            /* Efecto en Celular al tocar */
            active:scale-125 active:z-50 active:border-red-600
-           cursor-pointer touch-manipulation"
+           cursor-pointer touch-manipulation animate-latido"
 />
 
                     <div>
@@ -383,7 +425,7 @@ const escuderias = Object.values(escuderiasMap).sort((a, b) => b.puntos - a.punt
             <div>
                 <p class="text-sm text-blue-500 font-black uppercase tracking-widest mb-1">Libre Elección (Joystick/Teclado)</p>
                 <p class="text-sm text-zinc-100 leading-relaxed font-bold normal-case">ABS, Tracción, Caja de cambios, ERS y DRS</p>
-                <p class="text-sm text-blue-500 leading-relaxed font-bold normal-case">Con volante todo desactivado, caja manual</p>
+                <p class="text-sm text-zinc-100 leading-relaxed font-bold normal-case">Con volante todo desactivado, caja manual</p>
             </div>
         </div>
     </div>
@@ -651,7 +693,7 @@ const escuderias = Object.values(escuderiasMap).sort((a, b) => b.puntos - a.punt
         <div class="space-y-4">
             <h3 class="text-red-600 font-black uppercase text-sm border-b border-zinc-800 pb-2 italic text-center">Mayo 2026</h3>
             <div class="space-y-3">
-                <div class="relative overflow-hidden bg-zinc-950 border border-zinc-10 p-4 rounded-xl group h-24 flex flex-col justify-center animate-pulse">
+                <div class="relative overflow-hidden bg-zinc-950 border border-zinc-10 p-4 rounded-xl group h-24 flex flex-col justify-center animate-latido animate-pulse">
                     <img src="/Fotos/qatar.jpg" class="absolute inset-0 w-full h-full object-cover opacity-20 group-hover:opacity-50 transition-opacity duration-500" alt="Qatar" />
                     <div class="relative z-10">
                         <p class="text-[9px] text-zinc-300 font-mono">VIERNES 01</p>
@@ -697,7 +739,7 @@ const escuderias = Object.values(escuderiasMap).sort((a, b) => b.puntos - a.punt
         <div class="space-y-4">
             <h3 class="text-red-600 font-black uppercase text-sm border-b border-zinc-800 pb-2 italic text-center">Junio 2026</h3>
             <div class="space-y-3">
-                <div class="relative overflow-hidden bg-zinc-950 border border-zinc-10 p-4 rounded-xl group h-24 flex flex-col justify-center animate-pulse">
+                <div class="relative overflow-hidden bg-zinc-950 border border-zinc-10 p-4 rounded-xl group h-24 flex flex-col justify-center animate-pulse animate-latido">
                     <img src="/Fotos/brasil.jpg" class="absolute inset-0 w-full h-full object-cover opacity-20 group-hover:opacity-40 transition-opacity duration-500" alt="Brasil" />
                     <div class="relative z-10">
                         <p class="text-[9px] text-zinc-300 font-mono">VIERNES 05</p>
@@ -721,7 +763,7 @@ const escuderias = Object.values(escuderiasMap).sort((a, b) => b.puntos - a.punt
                         <p class="text-zinc-400 text-[10px]">Gilles Villeneuve</p>
                     </div>
                 </div>
-                <div class="relative overflow-hidden bg-zinc-950 border border-zinc-10 p-4 rounded-xl group h-24 flex flex-col justify-center animate-pulse">
+                <div class="relative overflow-hidden bg-zinc-950 border border-zinc-10 p-4 rounded-xl group h-24 flex flex-col justify-center animate-pulse animate-latido">
                     <img src="/Fotos/china.jpg" class="absolute inset-0 w-full h-full opacity-20 group-hover:opacity-40 transition-opacity duration-500" alt="China" />
                     <div class="relative z-10">
                         <p class="text-[9px] text-zinc-300 font-mono">VIERNES 26</p>
@@ -751,7 +793,7 @@ const escuderias = Object.values(escuderiasMap).sort((a, b) => b.puntos - a.punt
                         <p class="text-zinc-400 text-[10px]">Mónaco</p>
                     </div>
                 </div>
-                <div class="relative overflow-hidden bg-zinc-950 border border-zinc-10 p-4 rounded-xl group h-24 flex flex-col justify-center animate-pulse">
+                <div class="relative overflow-hidden bg-zinc-950 border border-zinc-10 p-4 rounded-xl group h-24 flex flex-col justify-center animate-pulse animate-latido">
                     <img src="/Fotos/eeuu.jpg" class="absolute inset-0 w-full h-full object-cover opacity-20 group-hover:opacity-40 transition-opacity duration-500" alt="Miami" />
                     <div class="relative z-10">
                         <p class="text-[9px] text-zinc-300 font-mono">VIERNES 17</p>
@@ -781,7 +823,7 @@ const escuderias = Object.values(escuderiasMap).sort((a, b) => b.puntos - a.punt
         <div class="space-y-4">
             <h3 class="text-red-600 font-black uppercase text-sm border-b border-zinc-800 pb-2 italic text-center">Agosto 2026</h3>
             <div class="space-y-3">
-                <div class="relative overflow-hidden bg-zinc-950 border border-zinc-10 p-4 rounded-xl group h-24 flex flex-col justify-center animate-pulse">
+                <div class="relative overflow-hidden bg-zinc-950 border border-zinc-10 p-4 rounded-xl group h-24 flex flex-col justify-center animate-pulse animate-latido">
                     <img src="/Fotos/eeuu.jpg" class="absolute inset-0 w-full h-full opacity-20 group-hover:opacity-40 transition-opacity duration-500" alt="Australia" />
                     <div class="relative z-10">
                         <p class="text-[9px] text-zinc-300 font-mono">VIERNES 07</p>
@@ -827,7 +869,7 @@ const escuderias = Object.values(escuderiasMap).sort((a, b) => b.puntos - a.punt
                         <p class="text-zinc-400 text-[10px]">Circuito de Silverstone</p>
                     </div>
                 </div>
-                <div class="relative overflow-hidden bg-zinc-950 border border-zinc-10 p-4 rounded-xl group h-24 flex flex-col justify-center animate-pulse">
+                <div class="relative overflow-hidden bg-zinc-950 border border-zinc-10 p-4 rounded-xl group h-24 flex flex-col justify-center animate-pulse animate-latido">
                     <img src="/Fotos/belgica.jpg" class="absolute inset-0 w-full h-full object-cover opacity-20 group-hover:opacity-40 transition-opacity duration-500" alt="Bélgica" />
                     <div class="relative z-10">
                         <p class="text-[9px] text-zinc-300 font-mono">VIERNES 11</p>

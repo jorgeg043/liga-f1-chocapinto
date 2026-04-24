@@ -25,31 +25,29 @@ const obtenerInfoPiloto = (nombre) => {
     <body class="bg-slate-950 text-white font-sans">
         
         <nav class="fixed top-0 w-full bg-zinc-900/80 backdrop-blur-md border-b border-zinc-800 z-50">
-            <div class="max-w-5xl mx-auto px-22 py-5 flex justify-between items-center">
+            <div class="max-w-5xl mx-auto px-6 py-5 flex justify-between items-center">
                 <a href="/" class="font-black italic text-xl tracking-tighter uppercase text-white -skew-x-15">
                     FORMULA <span class="text-red-600">1</span>
                 </a>
-                <a href="/" class="text-[10px] font-black uppercase tracking-widest hover:text-red-500 transition-colors">← Volver al Inicio</a>
+                <a href="/sprint" class="text-zinc-100 font-black text-x ">SRINT</a>
+                <a href="/" class="text-xs font-black uppercase tracking-widest hover:text-red-500 transition-colors">← Volver al Inicio</a>
             </div>
         </nav>
 
         <main class="max-w-5xl mx-auto py-24 px-4 pt-32">
-            <header class="relative overflow-hidden border-b-4 border-red-600 mb-12 pb-11 pt-20">
-    <div class="absolute inset-0 z-0 pointer-events-none">
-        <img 
-            src="/Fotos/fondo-f1.png" 
-            alt="" 
-            class="w-full h-full object-cover opacity-60" 
-        />
-        <div class="absolute inset-0 bg-gradient-to-r from-zinc-950/50 to-zinc-950"></div>
-    </div>
+            <header class="mb-16 relative py-20 overflow-hidden border-b-4 border-red-950"> 
+    <img 
+        src="/Fotos/fondo-f1.png" 
+        class="absolute inset-0 w-full h-full object-cover opacity-20 z-0 pointer-events-none" 
+        alt="Fondo Sprint"
+    />
 
-    <div class="relative z-10 px-2">
-        <h1 class="text-5xl font-black uppercase italic tracking-tighter text-white -skew-x-12">
-            Archivo de <span class="text-red-600 -skew-x-12">Carreras</span>
+    <div class="relative z-10 text-center">
+        <h1 class="text-5xl font-black uppercase italic tracking-tighter text-white -skew-x-15">
+            Historial de <span class="text-red-600 -skew-x-15">Carreras</span>
         </h1>
-        <p class="text-zinc-400 font-mono text-xs mt-2 font-bold uppercase tracking-[0.3em]">
-            Resultados por Fecha
+        <p class="text-zinc-300 font-mono text-xs uppercase tracking-[0.4em] mt-2">
+            Resultados por fecha
         </p>
     </div>
 </header>
