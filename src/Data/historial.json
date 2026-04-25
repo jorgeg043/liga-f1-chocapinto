@@ -12,11 +12,33 @@
     "duracion": "46m 53s",
     "resultados": [
       { "pos": 1, "piloto": "Chor", "puntos": 26, "nota": "" },
-      { "pos": 6, "piloto": "Franco", "puntos": 0, "nota": "VR" },
-      { "pos": 5, "piloto": "Simon", "puntos": 10, "nota": "" },
       { "pos": 2, "piloto": "Diego", "puntos": 18, "nota": "" },
-      { "pos": 3, "piloto": "Rodri", "puntos": 16, "nota": "" },
+      { "pos": 3, "piloto": "Rodri", "puntos": 16, "nota": "VR" },
       { "pos": 4, "piloto": "Leo", "puntos": 12, "nota": "" },
+      { "pos": 5, "piloto": "Simon", "puntos": 10, "nota": "" },
+      { "pos": 6, "piloto": "Franco", "puntos": 0, "nota": "" },
+      { "pos": 7, "piloto": "Rambo", "puntos": 0, "nota": "" },
+      { "pos": 8, "piloto": "IA-Leclerc", "puntos": 0, "nota": "" }
+    ]
+  },
+  {
+    "id": 2,
+    "gp": "Austria",
+    "circuito": "Red Bull Ring - Spielberg",
+    "fecha": "24 ABR 2026",
+    "imagen": "/Fotos/foto-fecha2hungararing.png",
+    "pole": "Chor",
+    "tiempoPole": "1:06.811",
+    "vueltaRapida": "Chor",
+    "tiempoVR": "1:09.156",
+    "duracion": "49m 32s",
+    "resultados": [
+      { "pos": 1, "piloto": "Chor", "puntos": 27, "nota": "VR" },
+      { "pos": 5, "piloto": "Diego", "puntos": 10, "nota": "" },
+      { "pos": 4, "piloto": "Rodri", "puntos": 12, "nota": "" },
+      { "pos": 8, "piloto": "Leo", "puntos": 0, "nota": "" },
+      { "pos": 2, "piloto": "Simon", "puntos": 18, "nota": "" },
+      { "pos": 3, "piloto": "Franco", "puntos": 15, "nota": "" },
       { "pos": 7, "piloto": "Rambo", "puntos": 0, "nota": "" },
       { "pos": 8, "piloto": "IA-Leclerc", "puntos": 0, "nota": "" }
     ]
