@@ -18,7 +18,7 @@
       { "pos": 5, "piloto": "Simon", "puntos": 10, "nota": "" },
       { "pos": 6, "piloto": "Franco", "puntos": 0, "nota": "" },
       { "pos": 7, "piloto": "Rambo", "puntos": 0, "nota": "" },
-      { "pos": 8, "piloto": "IA-Leclerc", "puntos": 0, "nota": "" }
+      { "pos": 8, "piloto": "Adrian", "puntos": 0, "nota": "" }
     ]
   },
   {
@@ -40,7 +40,7 @@
       { "pos": 2, "piloto": "Simon", "puntos": 18, "nota": "" },
       { "pos": 3, "piloto": "Franco", "puntos": 15, "nota": "" },
       { "pos": 7, "piloto": "Rambo", "puntos": 0, "nota": "" },
-      { "pos": 8, "piloto": "IA-Leclerc", "puntos": 0, "nota": "" }
+      { "pos": 8, "piloto": "Adrian", "puntos": 0, "nota": "" }
     ]
   }
 ]
