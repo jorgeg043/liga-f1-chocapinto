@@ -1,15 +1,19 @@
 [
   {
-    "fecha": "Fecha 1",
-    "circuito": "Interlagos, Brasil",
+    "id": 1,
+    "gp": "Qatar",
+    "circuito": "Lusail International Circuit",
+    "imagen": "/Fotos/foto-fecha3lusail.png",
+    "fecha": "01 MAY 2026",
+    "pole": "Chor", 
+    "vueltaRapida": "1:27:122",
     "resultados": [
-      { "pos": 1, "piloto": "", "puntos": 6 },
-      { "pos": 2, "piloto": "", "puntos": 5 },
-      { "pos": 3, "piloto": "", "puntos": 4 },
-      { "pos": 4, "piloto": "", "puntos": 3 },
-      { "pos": 5, "piloto": "", "puntos": 2 },
-      { "pos": 6, "piloto": "", "puntos": 1 }
+      { "pos": 1, "piloto": "Rodri", "puntos": 6, "nota": "" },
+      { "pos": 2, "piloto": "Adrian", "puntos": 5, "nota": "" },
+      { "pos": 3, "piloto": "Rambo", "puntos": 4, "nota": "" },
+      { "pos": 4, "piloto": "Chor", "puntos": 3, "nota": "VR" },
+      { "pos": 5, "piloto": "Diego", "puntos": 2, "nota": "" },
+      { "pos": 6, "piloto": "Leo", "puntos": 1, "nota": "" }
     ]
   }
-  
 ]

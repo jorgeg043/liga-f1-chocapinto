@@ -17,6 +17,52 @@ const obtenerInfoPiloto = (nombre) => {
 };
 ---
 
+<style>
+    .show-dropdown {
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: translateY(0) !important;
+    }
+    .rotate-arrow {
+        transform: rotate(180deg) !important;
+    }
+@keyframes latido {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.25); /* Se agranda un 10% */
+  }
+}
+
+.animate-latido {
+  animation: latido 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes latido-pro {
+  0%, 100% {
+    transform: scale(1);
+    filter: grayscale(10%) opacity(50%) blur(1px);
+    /* Sombra tenue cuando está "apagado" */
+    filter: drop-shadow(0 0 0px rgba(0,0,0,0));
+  }
+  50% {
+    transform: scale(1.25); /* Se agranda un 15% */
+    filter: grayscale(0%) opacity(100%) blur(0px);
+    /* Brillo rojo estilo F1 cuando se agranda */
+    filter: drop-shadow(0 0 15px rgba(220, 38, 38, 0.6));
+  }
+}
+
+.animate-latido-color {
+  animation: latido-pro 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+
+</style>
+
+
+
 <html lang="es">
     <head>
        <meta charset="utf-8" />
@@ -80,7 +126,7 @@ const obtenerInfoPiloto = (nombre) => {
                 {/* Columna de Imagen y Stats */}
                 <div class="space-y-6">
                     <div class="relative group overflow-hidden rounded-2xl border border-zinc-800">
-                        <img src={carrera.imagen} alt={carrera.gp} class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110" />
+                        <img src={carrera.imagen} alt={carrera.gp} class="w-full h-54 object-cover transition-transform duration-500 group-hover:scale-70" />
                         <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
                     </div>
                     
@@ -128,6 +174,11 @@ const obtenerInfoPiloto = (nombre) => {
                 </td>
                 <td class="px-6 py-5">
                     <div class="flex items-center gap-4">
+                        <img 
+                                src={`/Fotos/perfil-${res.piloto.toLowerCase()}.jpg`} 
+                                class="w-16 h-16 rounded-full object-cover border-2 border-zinc-800 group-hover:border-red-600 transition-all duration-300 group-hover:scale-110 animate-latido"
+                                alt={res.piloto}
+                            />
                         <img src={logos[info.escuderia]} class="w-8 opacity-50" />
                         <div>
                             <p class="font-black uppercase italic text-lg">{res.piloto}</p>
@@ -169,7 +220,27 @@ const obtenerInfoPiloto = (nombre) => {
 <h2 class="text-2xl font-black uppercase italic mb-6 text-center">
     Galería de <span class="text-red-600">Resultados</span>
 </h2>
-        <section class="mt-20 pt-10 border-t border-zinc-800 px-4">
+
+
+<section class="mt-20 pt-10 border-t border-zinc-800 px-4">
+   <h2 class="text-2xl font-black uppercase italic mb-6">Fecha<span class="text-red-600">3</span></h2>
+    
+    <div class="relative group w-full max-w-[90%] mx-auto"> 
+        <div id="slider-resultados" class="flex overflow-x-auto snap-x snap-mandatory no-scrollbar scroll-smooth rounded-xl bg-zinc-900/50">
+            
+            <div class="min-w-full snap-center flex justify-center items-center">
+                <img 
+                    src="/Fotos/resultados-fecha3.jpg" 
+                    class="w-full h-auto max-h-[80vh] object-contain rounded-xl border border-zinc-800 shadow-2xl" 
+                    alt="Resultados Fecha 1" 
+                />
+             </div>           
+            
+        </div>
+    </div>
+</section>
+
+<section class="mt-20 pt-10 border-t border-zinc-800 px-4">
    <h2 class="text-2xl font-black uppercase italic mb-6">Fecha<span class="text-red-600">2</span></h2>
     
     <div class="relative group w-full max-w-[90%] mx-auto"> 

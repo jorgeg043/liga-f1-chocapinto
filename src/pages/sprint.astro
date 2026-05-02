@@ -2,12 +2,67 @@
 import '../styles/global.css';
 import pilotos from '../Data/pilotos.json';
 import sprintData from '../Data/sprint.json';
+import sprint from '../Data/sprint.json';
 import { ClientRouter } from 'astro:transitions';
 
 const obtenerInfoPiloto = (nombre) => {
     return pilotos.find(p => p.nombre === nombre) || { escuderia: "S/D" };
 };
+
+const logos = {
+  "Mercedes Benz": "/Fotos/logo-mercedes.png",
+  "Alpine": "/Fotos/logo-alpine.png",
+  "Red Bull": "/Fotos/logo-redbull.png",
+  "Ferrari": "/Fotos/logo-ferrari.png"
+};
 ---
+
+
+<style>
+    .show-dropdown {
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: translateY(0) !important;
+    }
+    .rotate-arrow {
+        transform: rotate(180deg) !important;
+    }
+@keyframes latido {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.25); /* Se agranda un 10% */
+  }
+}
+
+.animate-latido {
+  animation: latido 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes latido-pro {
+  0%, 100% {
+    transform: scale(1);
+    filter: grayscale(10%) opacity(50%) blur(1px);
+    /* Sombra tenue cuando está "apagado" */
+    filter: drop-shadow(0 0 0px rgba(0,0,0,0));
+  }
+  50% {
+    transform: scale(1.25); /* Se agranda un 15% */
+    filter: grayscale(0%) opacity(100%) blur(0px);
+    /* Brillo rojo estilo F1 cuando se agranda */
+    filter: drop-shadow(0 0 15px rgba(220, 38, 38, 0.6));
+  }
+}
+
+.animate-latido-color {
+  animation: latido-pro 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+
+</style>
+
+
 
 <html lang="es">
 <head>
@@ -49,74 +104,127 @@ const obtenerInfoPiloto = (nombre) => {
     </div>
 </header>
 
-<div class="flex flex-col items-center justify-center py-20 bg-zinc-800 rounded-3xl border border-zinc-100/50 shadow-2xl overflow-hidden">
-    <div class="relative">
-        <h2 id="typing-text" class="text-4xl md:text-6xl font-black uppercase italic tracking-tighter text-white font-mono">
-            <span class="text-red-600">"Próximamente...</span> 01/05/2026"
-        </h2>
-        
-    </div>
-</div>
-{/*     C O M P L E T A R L U E G O DE Q U E T E R M I N E LA S P R I N T
+
+
 
         {sprintData.map((fecha) => (
             <div class="mb-20">
-                <div class="flex items-center gap-4 mb-6">
-                    <div class="h-10 w-1.5 bg-red-600 rounded-full"></div>
-                    <div>
-                        <h2 class="text-2xl font-black uppercase italic text-white tracking-tight">{fecha.fecha}</h2>
-                        <p class="text-zinc-500 font-mono text-[10px] uppercase tracking-widest">{fecha.circuito}</p>
-                    </div>
-                </div>
-
+               <div class="flex flex-col md:flex-row justify-between items-end border-b border-zinc-800 pb-6 mb-8 gap-4">
+    <div>
+        <div class="flex items-center gap-3 mb-2">
+            {/* Usamos el ID del sprint si lo tenés, o un texto genérico */}
+            <span class="bg-red-600 text-[10px] font-black px-2 py-0.5 rounded uppercase italic">
+                SPRINT {fecha.id || '01'}
+            </span>
+            <span class="text-zinc-500 font-mono text-[10px] uppercase tracking-widest">
+                {fecha.fecha}
+            </span>
+        </div>
+        <h2 class="text-5xl font-black uppercase italic tracking-tighter text-white">
+            {fecha.gp} 
+            <span class="text-zinc-500 text-2xl block md:inline md:ml-2 not-italic font-light">
+                {fecha.circuito}
+            </span>
+        </h2>
+    </div>
+    
+    <div class="text-right">
+        {/* En Sprints podrías poner la fecha o dejarlo vacío si no hay duración */}
+        <p class="text-[9px] font-mono text-zinc-500 uppercase tracking-widest mb-1">Sesión Oficial</p>
+        <p class="font-black italic text-xl text-white uppercase">Sprint Race</p>
+    </div>
+    
+</div>
                 <div class="bg-zinc-900/40 rounded-3xl border border-zinc-800 overflow-hidden backdrop-blur-md">
                     <table class="w-full text-left border-collapse">
-                        <thead>
-                            <tr class="bg-zinc-800/30 text-[10px] font-mono text-zinc-500 uppercase tracking-[0.2em] border-b border-zinc-800">
-                                <th class="px-8 py-4">Pos</th>
-                                <th class="px-8 py-4">Piloto</th>
-                                <th class="px-8 py-4 text-right">Puntos</th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-zinc-800/50">
-                            {fecha.resultados.map((res) => (
-                                <tr class="group hover:bg-red-600/5 transition-all">
-                                    <td class="px-8 py-6">
-                                        <span class="text-3xl font-black italic text-zinc-800 group-hover:text-red-600/50 transition-colors duration-300">
-                                            {res.pos}
-                                        </span>
-                                    </td>
-                                    <td class="px-8 py-6">
-                                        <div class="flex items-center gap-4">
-                                            <img 
-                                                src={`/Fotos/perfil-${res.piloto.toLowerCase()}.jpg`} 
-                                                class="w-12 h-12 rounded-full object-cover border-2 border-zinc-800 group-hover:border-red-600 transition-all duration-300 group-hover:scale-110"
-                                                alt={res.piloto}
-                                            />
-                                            <div>
-                                                <div class="font-black text-zinc-200 text-lg uppercase tracking-tight group-hover:text-white">
-                                                    {res.piloto}
-                                                </div>
-                                                <div class="text-[9px] text-zinc-500 font-bold uppercase tracking-widest">
-                                                    {obtenerInfoPiloto(res.piloto).escuderia}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="px-8 py-6 text-right">
-                                        <span class="font-mono font-black text-2xl text-red-500 drop-shadow-[0_0_5px_rgba(220,38,38,0.3)]">
-                                            +{res.puntos}
-                                        </span>
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
+                        <thead class="bg-zinc-800 text-zinc-400 uppercase text-[10px] font-black tracking-widest">
+    <tr>
+        <th class="px-6 py-5 text-center w-24">Pos</th> <!-- Ancho fijo para posición -->
+        <th class="px-6 py-5">Piloto / Escudería</th>
+        <th class="px-6 py-5 text-center w-32">Info</th> <!-- Ancho fijo para P/VR -->
+        <th class="px-6 py-5 text-right w-24">Pts</th> <!-- Ancho fijo para puntos -->
+    </tr>
+</thead>
+
+<tbody class="divide-y divide-zinc-800/50">
+    {sprint.map((fecha) => (
+        fecha.resultados.sort((a, b) => a.pos - b.pos).map((res) => {
+            const info = obtenerInfoPiloto(res.piloto);
+            return (
+                <tr class="hover:bg-zinc-800/20 transition-colors group">
+                    <td class="px-6 py-5 font-black italic text-2xl text-zinc-500 group-hover:text-red-500 w-24 text-center">
+                        {res.pos}
+                    </td>
+
+                    <td class="px-6 py-5">
+                        <div class="flex items-center gap-4">
+                            {/* 1. Foto de perfil redonda del piloto */}
+                            <img 
+                                src={`/Fotos/perfil-${res.piloto.toLowerCase()}.jpg`} 
+                                class="w-16 h-16 rounded-full object-cover border-2 border-zinc-800 group-hover:border-red-600 transition-all duration-300 group-hover:scale-110 animate-latido"
+                                alt={res.piloto}
+                            />
+                            
+                            {/* 2. Contenedor de Logo y Nombres */}
+                            <div class="flex items-center gap-4">
+                                <img src={logos[info.escuderia]} class="w-16 opacity-50 group-hover:opacity-100 transition-opacity" alt={info.escuderia} />
+                                <div>
+                                    <p class="font-black uppercase italic text-lg leading-none mb-1 group-hover:text-white transition-colors">{res.piloto}</p>
+                                    <p class="text-[10px] text-zinc-500 font-mono uppercase leading-none">{info.escuderia}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+
+                    <td class="px-6 py-5 text-center w-32">
+                        <div class="flex gap-2 justify-center">
+                            {res.piloto === fecha.pole && (
+                                <span class="bg-red-600/20 text-red-500 text-[9px] px-2 py-0.5 rounded font-black border border-red-600/30">P</span>
+                            )}
+                            {res.nota === "VR" && (
+                                <span class="bg-blue-600/20 text-blue-500 text-[9px] px-2 py-0.5 rounded font-black border border-blue-600/30">VR</span>
+                            )}
+                        </div>
+                    </td>
+
+                    <td class="px-6 py-5 text-right font-mono font-black text-2xl italic text-zinc-300 w-24">
+                        {res.puntos}
+                    </td>
+                </tr>
+            );
+        })
+    ))}
+</tbody>
                     </table>
                 </div>
             </div>
         ))}
-*/}
+
     </main>
+<h2 class="text-2xl font-black uppercase italic mb-6 text-center">
+    Galería de <span class="text-red-600">Resultados</span>
+</h2>
+
+<section class="mt-20 pt-10 border-t border-zinc-800 px-4">
+   <h2 class="text-2xl font-black uppercase italic mb-6">Fecha<span class="text-red-600">1</span></h2>
+    
+    <div class="relative group w-full max-w-[90%] mx-auto"> 
+        <div id="slider-resultados" class="flex overflow-x-auto snap-x snap-mandatory no-scrollbar scroll-smooth rounded-xl bg-zinc-900/50">
+            
+            <div class="min-w-full snap-center flex justify-center items-center">
+                <img 
+                    src="/Fotos/resultados-sprint-f1.jpg" 
+                    class="w-full h-auto max-h-[80vh] object-contain rounded-xl border border-zinc-800 shadow-2xl" 
+                    alt="Resultados Fecha 1" 
+                />
+             </div>           
+            
+        </div>
+    </div>
+</section>
+
+
+
 <style>
     #typing-text {
         display: inline-block;

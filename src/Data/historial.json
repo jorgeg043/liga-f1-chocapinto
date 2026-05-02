@@ -42,5 +42,27 @@
       { "pos": 7, "piloto": "Rambo", "puntos": 0, "nota": "" },
       { "pos": 8, "piloto": "Adrian", "puntos": 0, "nota": "" }
     ]
+  },
+  {
+    "id": 3,
+    "gp": "Qatar",
+    "circuito": "Lusail International Circuit",
+    "fecha": "01 MAY 2026",
+    "imagen": "/Fotos/foto-fecha3lusail.png",
+    "pole": "Chor",
+    "tiempoPole": "1:23.975",
+    "vueltaRapida": "Chor",
+    "tiempoVR": "1:27.055",
+    "duracion": "43m 58s",
+    "resultados": [
+      { "pos": 1, "piloto": "Chor", "puntos": 27, "nota": "VR" },
+      { "pos": 8, "piloto": "Diego", "puntos": 0, "nota": "" },
+      { "pos": 3, "piloto": "Rodri", "puntos": 15, "nota": "" },
+      { "pos": 7, "piloto": "Leo", "puntos": 6, "nota": "" },
+      { "pos": 4, "piloto": "Simon", "puntos": 12, "nota": "" },
+      { "pos": 2, "piloto": "Franco", "puntos": 18, "nota": "" },
+      { "pos": 5, "piloto": "Rambo", "puntos": 10, "nota": "" },
+      { "pos": 6, "piloto": "Adrian", "puntos": 8, "nota": "" }
+    ]
   }
 ]
