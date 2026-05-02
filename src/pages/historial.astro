@@ -122,13 +122,18 @@ const obtenerInfoPiloto = (nombre) => {
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
                 {/* Columna de Imagen y Stats */}
                 <div class="space-y-6">
                     <div class="relative group overflow-hidden rounded-2xl border border-zinc-800">
-                        <img src={carrera.imagen} alt={carrera.gp} class="w-full h-54 object-cover transition-transform duration-500 group-hover:scale-70" />
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
-                    </div>
+    <img 
+        src={carrera.imagen} 
+        alt={carrera.gp} 
+        {/* aspect-video (16:9) en cel asegura que no se estire raro, y lg:h-54 mantiene tu tamaño de PC */}
+        class="w-full aspect-video lg:aspect-none lg:h-54 object-cover transition-transform duration-500 group-hover:scale-110" 
+    />
+    <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+</div>
                     
                     <div class="bg-zinc-900/50 p-6 rounded-2xl border border-zinc-800 space-y-4">
                         <div class="flex justify-between items-center">
