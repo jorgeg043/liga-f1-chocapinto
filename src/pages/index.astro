@@ -7,6 +7,7 @@ const logos = {
   "Alpine": "/Fotos/logo-alpine.png",
   "Red Bull": "/Fotos/logo-redbull.png",
   "Ferrari": "/Fotos/logo-ferrari.png",
+  "Williams": "/Fotos/logo-williams.png",
 };
 
 const escuderiasMap = pilotos.reduce((acc, piloto) => {
@@ -485,7 +486,7 @@ const escuderias = Object.values(escuderiasMap).sort((a, b) => b.puntos - a.punt
             // Col 2: Simon y Diego (Mercedes Benz)
             // Col 3: Rodri y Leo (Red Bull)
             // Col 4: Rambo y Adrian (Ferrari)
-            const ordenDeseado = ["Chor", "Simon", "Rodri", "Franco", "Diego", "Leo", "Rambo", "Adrian"];
+            const ordenDeseado = ["Chor", "Franco", "Simon", "Diego", "Rodri", "Leo", "Rambo", "Adrian", "Seba", "IA-Williams"];
             
             const pilotosOrdenados = [...pilotos].sort((a, b) => {
                 return ordenDeseado.indexOf(a.nombre) - ordenDeseado.indexOf(b.nombre);
@@ -495,6 +496,7 @@ const escuderias = Object.values(escuderiasMap).sort((a, b) => b.puntos - a.punt
                 const fondoEscuderia = piloto.escuderia === "Mercedes Benz" ? "escuderia-mercedes.jpg" : 
                                      piloto.escuderia === "Alpine" ? "escuderia-alpine.jpg" : 
                                      piloto.escuderia === "Ferrari" ? "escuderia-ferrari.jpg" :
+                                     piloto.escuderia === "Williams" ? "escuderia-williams.jpg" :
                                      "escuderia-redbull.jpg";
                 
                 return (
@@ -528,22 +530,28 @@ const escuderias = Object.values(escuderiasMap).sort((a, b) => b.puntos - a.punt
 
                                    <div class="flex items-center gap-2 mb-4 bg-zinc-950/80 w-fit px-3 py-1.5 rounded-lg border border-zinc-800 shadow-inner">
     <span class="flex items-center justify-center">
-        {(piloto.nombre === "Chor" || piloto.nombre === "Rambo") ? (
-            <svg class="w-4 h-4 text-zinc-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="10" /><line x1="12" y1="2" x2="12" y2="12" /><line x1="12" y1="12" x2="4" y2="18" /><line x1="12" y1="12" x2="20" y2="18" /><circle cx="12" cy="12" r="2" fill="currentColor" />
-            </svg>
-        ) : piloto.nombre === "Franco" ? (
-            <span class="text-sm">⌨️</span>
-        ) : (
-            <span class="text-sm">🎮</span>
-        )}
-    </span>
+    {/* Volante para los que usan simulador */}
+    {(piloto.nombre === "Chor" || piloto.nombre === "Rambo") ? (
+        <svg class="w-4 h-4 text-zinc-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10" /><line x1="12" y1="2" x2="12" y2="12" /><line x1="12" y1="12" x2="4" y2="18" /><line x1="12" y1="12" x2="20" y2="18" /><circle cx="12" cy="12" r="2" fill="currentColor" />
+        </svg>
+    ) : piloto.nombre === "IA-Williams" ? (
+        /* Icono de Robot para la IA */
+        <span class="text-sm">🤖</span>
+    ) : piloto.nombre === "Franco" ? (
+        <span class="text-sm">⌨️</span>
+    ) : (
+        /* Joystick para el resto */
+        <span class="text-sm">🎮</span>
+    )}
+</span>
     
     <span class="text-[10px] font-mono text-zinc-300 uppercase font-bold">
-        {piloto.nombre === "Adrian" ? "Joystick" :
-         (piloto.nombre === "Chor" || piloto.nombre === "Rambo") ? "Volante" :
-         piloto.nombre === "Franco" ? "Teclado" : "Joystick"}
-    </span>
+    {piloto.nombre === "Adrian" ? "Joystick" :
+     (piloto.nombre === "Chor" || piloto.nombre === "Rambo") ? "Volante" :
+     piloto.nombre === "IA-Williams" ? "IA" : 
+     piloto.nombre === "Franco" ? "Teclado" : "Joystick"}
+</span>
 </div>
 
                                     <a 
@@ -648,6 +656,22 @@ const escuderias = Object.values(escuderiasMap).sort((a, b) => b.puntos - a.punt
             </div>
             <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent opacity-60"></div>
         </div>
+
+        <div class="group relative overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900/40 transition-all duration-500 hover:border-blue-600/50 hover:scale-105 hover:z-10 transform-gpu will-change-transform">
+            <div class="p-6">
+                <h3 class="text-lg font-black uppercase italic tracking-tighter text-white group-hover:text-blue-600 transition-colors">Williams FW-47</h3>
+                <p class="text-[10px] text-zinc-500 font-bold uppercase tracking-widest">Escudería Atlassian Williams Racing</p>
+            </div>
+            <div class="aspect-video overflow-hidden">
+                <img 
+                    src="/Fotos/coche-williams.jpg" 
+                    alt="Williams 2025" 
+                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 group-hover:rotate-1 animate-latido"
+                />
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent opacity-60"></div>
+        </div>
+
     </div>
 </section>
 

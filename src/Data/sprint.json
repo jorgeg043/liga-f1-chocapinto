@@ -13,7 +13,9 @@
       { "pos": 3, "piloto": "Rambo", "puntos": 4, "nota": "" },
       { "pos": 4, "piloto": "Chor", "puntos": 3, "nota": "VR" },
       { "pos": 5, "piloto": "Diego", "puntos": 2, "nota": "" },
-      { "pos": 6, "piloto": "Leo", "puntos": 1, "nota": "" }
+      { "pos": 6, "piloto": "Leo", "puntos": 1, "nota": "" },
+      { "pos": 7, "piloto": "Simon", "puntos": 0, "nota": "" },
+      { "pos": 8, "piloto": "Franco", "puntos": 0, "nota": "" }
     ]
   }
 ]

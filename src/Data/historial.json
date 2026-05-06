@@ -16,9 +16,8 @@
       { "pos": 3, "piloto": "Rodri", "puntos": 16, "nota": "VR" },
       { "pos": 4, "piloto": "Leo", "puntos": 12, "nota": "" },
       { "pos": 5, "piloto": "Simon", "puntos": 10, "nota": "" },
-      { "pos": 6, "piloto": "Franco", "puntos": 0, "nota": "" },
-      { "pos": 7, "piloto": "Rambo", "puntos": 0, "nota": "" },
-      { "pos": 8, "piloto": "Adrian", "puntos": 0, "nota": "" }
+      { "pos": 6, "piloto": "Franco", "puntos": 0, "nota": "" }
+      
     ]
   },
   {
