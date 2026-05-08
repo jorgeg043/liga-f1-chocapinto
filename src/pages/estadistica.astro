@@ -1,0 +1,304 @@
+---
+import '../styles/global.css';
+import Layout from '../layouts/Layout.astro';
+import historial from '../Data/historial.json';
+import sprint from '../Data/sprint.json';
+
+// --- LÓGICA DE CONSOLIDACIÓN ---
+const statsPilotos = {};
+
+function procesarSesion(dataArray) {
+  (dataArray || []).forEach((sesion) => {
+    // Función de seguridad: Solo acepta nombres, no tiempos (ej: 1:24.555)
+    const esNombreValido = (n) => n && typeof n === 'string' && !n.includes(':') && !/^\d/.test(n);
+
+    const registrarPiloto = (nombre) => {
+      if (esNombreValido(nombre)) {
+        if (!statsPilotos[nombre]) {
+          statsPilotos[nombre] = { nombre, puntos: 0, victorias: 0, podios: 0, poles: 0, vRapidas: 0 };
+        }
+        return true;
+      }
+      return false;
+    };
+
+    // 1. Procesar Pole
+    if (registrarPiloto(sesion.pole)) {
+      statsPilotos[sesion.pole].poles += 1;
+    }
+
+    // 2. Procesar Vuelta Rápida
+    const vr = sesion.pilotoVueltaRapida || sesion.vueltaRapida;
+    if (registrarPiloto(vr)) {
+      statsPilotos[vr].vRapidas += 1;
+    }
+
+    // 3. Procesar Resultados
+    if (sesion.resultados) {
+      sesion.resultados.forEach((res) => {
+        if (registrarPiloto(res.piloto)) {
+          statsPilotos[res.piloto].puntos += (res.puntos || 0);
+          if (res.pos === 1) statsPilotos[res.piloto].victorias += 1;
+          if (res.pos <= 3) statsPilotos[res.piloto].podios += 1;
+        }
+      });
+    }
+  });
+}
+
+procesarSesion(historial);
+procesarSesion(sprint);
+
+const ranking = Object.values(statsPilotos).sort((a, b) => b.puntos - a.puntos);
+const maxPuntos = ranking.length > 0 ? ranking[0].puntos : 1;
+---
+
+<Layout title="Data Center | Estadísticas">
+  <div class="f1-stats-page">
+    <main class="f1-content">
+      <nav class="f1-nav-top">
+        <a href="/" class="f1-back-btn">
+          <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+          VOLVER AL INICIO
+        </a>
+      </nav>
+      <header class="f1-header">
+        <h1>CENTRO DE <span>ESTADÍSTICAS</span></h1>
+        <p>Telemetry & Performance Analysis 2026</p>
+      </header>
+
+      <section class="f1-main-list">
+        {ranking.map((piloto, index) => {
+          const diff = index > 0 ? ranking[index - 1].puntos - piloto.puntos : 0;
+          const percentage = (piloto.puntos / maxPuntos) * 100;
+          return (
+            <div class="f1-row">
+              <div class="f1-info">
+                <div class="f1-pilot">
+                  <span class="f1-pos">#{index + 1}</span>
+                  <div class="f1-name-group">
+                    <h2 class="f1-name">{piloto.nombre}</h2>
+                    <div class="f1-badges">
+                       <span>{piloto.victorias}V</span>
+                       <span>{piloto.podios}P</span>
+                       {piloto.vRapidas > 0 && <span class="badge-vr">{piloto.vRapidas}VR</span>}
+                    </div>
+                  </div>
+                </div>
+                <div class="f1-stats-box">
+                  {index > 0 && <span class="f1-diff">-{diff}</span>}
+                  <span class="f1-pts-val">{piloto.puntos}</span>
+                  <span class="f1-pts-label">PTS</span>
+                </div>
+              </div>
+              
+              <div class="f1-progress-track">
+                <div class="f1-progress-fill f1-telemetry-bar" data-p={percentage} style="width: 0%">
+                  <div class="f1-bar-glow"></div>
+                  <div class="f1-shimmer"></div>
+                </div>
+                {index > 0 && <span class="f1-leader-gap">+{ranking[0].puntos - piloto.puntos}</span>}
+              </div>
+            </div>
+          )
+        })}
+      </section>
+
+      <div class="f1-dashboard">
+        <div class="f1-dash-card p-border">
+          <h3><span class="dot p-dot"></span> POLES</h3>
+          <div class="f1-mini-list">
+            {ranking.map(p => (
+              <div class="f1-mini-stat">
+                <div class="f1-mini-label"><span>{p.nombre}</span><span class="f1-mini-val">{p.poles}</span></div>
+                <div class="f1-mini-track">
+                  <div class="f1-mini-fill purple-bg" style={`width: ${(p.poles / Math.max(...ranking.map(x => x.poles), 1)) * 100}%`}></div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div class="f1-dash-card r-border">
+          <h3><span class="dot r-dot"></span> VICTORIAS</h3>
+          <div class="f1-mini-list">
+            {ranking.map(p => (
+              <div class="f1-mini-stat">
+                <div class="f1-mini-label"><span>{p.nombre}</span><span class="f1-mini-val">{p.victorias}</span></div>
+                <div class="f1-mini-track">
+                  <div class="f1-mini-fill red-bg" style={`width: ${(p.victorias / Math.max(...ranking.map(x => x.victorias), 1)) * 100}%`}></div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div class="f1-dash-card y-border">
+          <h3><span class="dot y-dot"></span> PODIOS</h3>
+          <div class="f1-mini-list">
+            {ranking.map(p => (
+              <div class="f1-mini-stat">
+                <div class="f1-mini-label"><span>{p.nombre}</span><span class="f1-mini-val">{p.podios}</span></div>
+                <div class="f1-mini-track">
+                  <div class="f1-mini-fill yellow-bg" style={`width: ${(p.podios / Math.max(...ranking.map(x => x.podios), 1)) * 100}%`}></div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div class="f1-dash-card g-border">
+          <h3><span class="dot g-dot"></span> V. RÁPIDAS</h3>
+          <div class="f1-mini-list">
+            {ranking.map(p => (
+              <div class="f1-mini-stat">
+                <div class="f1-mini-label"><span>{p.nombre}</span><span class="f1-mini-val">{p.vRapidas}</span></div>
+                <div class="f1-mini-track">
+                  <div class="f1-mini-fill green-bg" style={`width: ${(p.vRapidas / Math.max(...ranking.map(x => x.vRapidas), 1)) * 100}%`}></div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</Layout>
+
+<script>
+  function animate() {
+    const bars = document.querySelectorAll('.f1-telemetry-bar');
+    setTimeout(() => {
+      bars.forEach(bar => {
+        const val = bar.getAttribute('data-p');
+        (bar as HTMLElement).style.width = val + '%';
+      });
+    }, 150);
+  }
+  animate();
+  document.addEventListener('astro:after-swap', animate);
+</script>
+
+<style is:global>
+    /* BOTÓN VOLVER ESTILO F1 */
+  .f1-nav-top { 
+    width: 100%; 
+    margin-bottom: 25px; 
+    display: flex;
+  }
+
+  .f1-back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #52525b; /* Color gris oscuro inicial */
+    text-decoration: none;
+    font-size: 0.7rem;
+    font-weight: 950;
+    font-style: italic;
+    letter-spacing: 1.5px;
+    padding: 6px 12px;
+    border: 1px solid #1f1f23;
+    border-radius: 4px;
+    background: transparent;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-transform: uppercase;
+  }
+
+  .f1-back-btn:hover {
+    color: #ffffff;
+    border-color: #e11d48;
+    background: rgba(225, 29, 72, 0.1);
+    transform: translateX(-4px); /* Efecto sutil de retroceso */
+    box-shadow: -5px 0 15px rgba(225, 29, 72, 0.2);
+  }
+
+  .f1-back-btn svg {
+    transition: transform 0.3s ease;
+  }
+
+  .f1-back-btn:hover svg {
+    color: #e11d48;
+    transform: scale(1.1);
+  }
+  /* 1. CONFIGURACIÓN BASE */
+  :global(body) { 
+    background-color: #09090b !important; 
+    color: white !important; 
+    margin: 0; 
+    overflow-x: hidden; 
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  .f1-stats-page { width: 100%; display: flex; justify-content: center; background: #09090b; }
+  .f1-content { width: 100%; max-width: 1000px; padding: 40px 20px; box-sizing: border-box; }
+
+  /* 2. HEADER */
+  .f1-header h1 { font-size: clamp(1.8rem, 6vw, 3rem); font-weight: 900; font-style: italic; color: white !important; margin: 0; line-height: 1; }
+  .f1-header h1 span { color: #e11d48 !important; }
+  .f1-header p { color: #52525b; font-family: monospace; letter-spacing: 2px; font-size: 0.7rem; margin-top: 5px; }
+
+  /* 3. LISTADO COMPACTO */
+  .f1-main-list { display: flex; flex-direction: column; gap: 12px; margin-top: 20px; }
+  .f1-row { width: 100%; border-bottom: 1px solid #1f1f2333; padding-bottom: 8px; }
+  .f1-info { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+
+  .f1-pilot { display: flex; align-items: center; gap: 12px; }
+  .f1-pos { font-size: 1.1rem; font-weight: 900; color: #27272a; font-style: italic; min-width: 35px; }
+  .f1-name { font-size: 1.1rem; font-weight: 800; color: white !important; text-transform: uppercase; margin: 0; font-style: italic; line-height: 1; }
+  
+  .f1-badges { display: flex; gap: 4px; margin-top: 3px; }
+  .f1-badges span { font-size: 8px; color: #71717a; border: 1px solid #27272a; padding: 1px 5px; border-radius: 3px; background: #111113; font-weight: bold; }
+  .badge-vr { color: #22c55e !important; border-color: #064e3b !important; }
+  
+  .f1-pts-val { font-size: 1.4rem; font-weight: 950; color: #e11d48 !important; font-style: italic; line-height: 1; }
+  .f1-pts-label { font-size: 8px; color: #52525b; font-weight: bold; }
+
+  /* BARRAS PRINCIPALES */
+  .f1-progress-track { height: 18px; background: #111113; border: 1px solid #1f1f23; border-radius: 4px; position: relative; overflow: hidden; display: flex; align-items: center; padding: 0 3px; }
+  .f1-progress-fill { height: 65%; border-radius: 2px; transition: width 2s cubic-bezier(0.1, 1, 0.3, 1); background: linear-gradient(90deg, #7f1d1d 0%, #dc2626 85%, #ffffff 100%) !important; box-shadow: 0 0 10px rgba(220, 38, 38, 0.3); position: relative; }
+  .f1-bar-glow { position: absolute; right: 0; top: 0; width: 10px; height: 100%; background: white; filter: blur(4px); opacity: 0.5; }
+  .f1-leader-gap { position: absolute; right: 8px; font-size: 8px; font-family: monospace; color: #3f3f46; font-weight: bold; }
+
+  /* 4. DASHBOARD */
+  .f1-dashboard { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; margin-top: 50px; padding-top: 30px; border-top: 1px solid #18181b; }
+  .f1-dash-card { background: #111113 !important; border: 1px solid #1f1f23 !important; padding: 20px !important; border-radius: 12px !important; overflow-y: auto; max-height: 300px; }
+  .f1-dash-card h3 { font-size: 0.75rem; color: #71717a !important; margin: 0 0 15px 0; display: flex; align-items: center; gap: 8px; font-style: italic; text-transform: uppercase; }
+  
+  .p-border { border-top: 3px solid #a855f7 !important; }
+  .r-border { border-top: 3px solid #e11d48 !important; }
+  .y-border { border-top: 3px solid #eab308 !important; }
+  .g-border { border-top: 3px solid #22c55e !important; }
+
+  .dot { width: 6px; height: 6px; border-radius: 50%; }
+  .p-dot { background: #a855f7; }
+  .r-dot { background: #e11d48; }
+  .y-dot { background: #eab308; }
+  .g-dot { background: #22c55e; box-shadow: 0 0 6px #22c55e; }
+
+  .f1-mini-stat { margin-bottom: 10px; }
+  .f1-mini-label { display: flex; justify-content: space-between; font-size: 0.7rem; color: #d4d4d8; margin-bottom: 3px; font-weight: bold; }
+  .f1-mini-track { height: 4px; background: #18181b; border-radius: 4px; overflow: hidden; }
+  .f1-mini-fill { height: 100%; border-radius: 4px; transition: width 1.5s ease; }
+  
+  .purple-bg { background: #a855f7; }
+  .red-bg { background: #e11d48; }
+  .yellow-bg { background: #eab308; }
+  .green-bg { background: #22c55e; }
+
+  .f1-shimmer { position: absolute; inset: 0; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent); animation: sh 3s infinite; }
+  @keyframes sh { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+.f1-dash-card { 
+    background: #111113 !important; 
+    border: 1px solid #1f1f23 !important; 
+    padding: 20px !important; 
+    border-radius: 12px !important; 
+    
+    /* MODIFICACIÓN: Quitar el scroll y expandir */
+    max-height: none !important; 
+    overflow-y: visible !important; 
+  }
+</style>
