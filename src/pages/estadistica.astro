@@ -66,8 +66,8 @@ const maxPuntos = ranking.length > 0 ? ranking[0].puntos : 1;
         </a>
       </nav>
       <header class="f1-header">
-        <h1>CENTRO DE <span>ESTADÍSTICAS</span></h1>
-        <p>Telemetry & Performance Analysis 2026</p>
+        <h1>ESTADÍSTICA <span> PILOTOS</span></h1>
+        <p>Telemtría & Performance Analisis 2026</p>
       </header>
 
       <section class="f1-main-list">
@@ -226,20 +226,20 @@ const maxPuntos = ranking.length > 0 ? ranking[0].puntos : 1;
   }
   /* 1. CONFIGURACIÓN BASE */
   :global(body) { 
-    background-color: #09090b !important; 
+    background-color: #16163a !important; 
     color: white !important; 
     margin: 0; 
     overflow-x: hidden; 
     font-family: 'Inter', system-ui, sans-serif;
   }
 
-  .f1-stats-page { width: 100%; display: flex; justify-content: center; background: #09090b; }
+  .f1-stats-page { width: 100%; display: flex; justify-content: center; background: #090620; }
   .f1-content { width: 100%; max-width: 1000px; padding: 40px 20px; box-sizing: border-box; }
 
   /* 2. HEADER */
   .f1-header h1 { font-size: clamp(1.8rem, 6vw, 3rem); font-weight: 900; font-style: italic; color: white !important; margin: 0; line-height: 1; }
   .f1-header h1 span { color: #e11d48 !important; }
-  .f1-header p { color: #52525b; font-family: monospace; letter-spacing: 2px; font-size: 0.7rem; margin-top: 5px; }
+  .f1-header p { color: #a1a1aa; font-family: monospace; letter-spacing: 2px; font-size: 0.8rem; margin-top: 5px; }
 
   /* 3. LISTADO COMPACTO */
   .f1-main-list { display: flex; flex-direction: column; gap: 12px; margin-top: 20px; }
@@ -255,13 +255,13 @@ const maxPuntos = ranking.length > 0 ? ranking[0].puntos : 1;
   .badge-vr { color: #22c55e !important; border-color: #064e3b !important; }
   
   .f1-pts-val { font-size: 1.4rem; font-weight: 950; color: #e11d48 !important; font-style: italic; line-height: 1; }
-  .f1-pts-label { font-size: 8px; color: #52525b; font-weight: bold; }
+  .f1-pts-label { font-size: 8px; color: #efeff3; font-weight: bold; }
 
   /* BARRAS PRINCIPALES */
   .f1-progress-track { height: 18px; background: #111113; border: 1px solid #1f1f23; border-radius: 4px; position: relative; overflow: hidden; display: flex; align-items: center; padding: 0 3px; }
-  .f1-progress-fill { height: 65%; border-radius: 2px; transition: width 2s cubic-bezier(0.1, 1, 0.3, 1); background: linear-gradient(90deg, #7f1d1d 0%, #dc2626 85%, #ffffff 100%) !important; box-shadow: 0 0 10px rgba(220, 38, 38, 0.3); position: relative; }
+  .f1-progress-fill { height: 65%; border-radius: 2px; transition: width 2s cubic-bezier(0.1, 1, 0.3, 1); background: linear-gradient(90deg, #7f1d1d 0%, #dc2626 85%, #f8f8f8 100%) !important; box-shadow: 0 0 10px rgba(220, 38, 38, 0.3); position: relative; }
   .f1-bar-glow { position: absolute; right: 0; top: 0; width: 10px; height: 100%; background: white; filter: blur(4px); opacity: 0.5; }
-  .f1-leader-gap { position: absolute; right: 8px; font-size: 8px; font-family: monospace; color: #3f3f46; font-weight: bold; }
+  .f1-leader-gap { position: absolute; right: 8px; font-size: 8px; font-family: monospace; color: #f9f9ff; font-weight: bold; }
 
   /* 4. DASHBOARD */
   .f1-dashboard { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; margin-top: 50px; padding-top: 30px; border-top: 1px solid #18181b; }

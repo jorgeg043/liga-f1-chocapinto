@@ -27,34 +27,79 @@ const escuderias = Object.values(escuderiasMap).sort((a, b) => b.puntos - a.punt
         <title>Liga F1 - Los Chocapinto</title>
         <ClientRouter />
     </head>
+    <script>
+  const btnHistorial = document.getElementById('btn-historial');
+  const menuHistorial = document.getElementById('menu-historial');
+  const flecha = document.getElementById('flecha-historial');
+
+  btnHistorial.addEventListener('click', (e) => {
+    // Evitamos que el click se propague si es necesario
+    e.stopPropagation();
     
+    // Toggle de clases para mostrar/ocultar
+    const isOpen = menuHistorial.classList.contains('opacity-100');
+    
+    if (isOpen) {
+      menuHistorial.classList.remove('opacity-100', 'visible', 'translate-y-0');
+      menuHistorial.classList.add('opacity-0', 'invisible', 'translate-y-2');
+      flecha.style.transform = 'rotate(0deg)';
+    } else {
+      menuHistorial.classList.remove('opacity-0', 'invisible', 'translate-y-2');
+      menuHistorial.classList.add('opacity-100', 'visible', 'translate-y-0');
+      flecha.style.transform = 'rotate(180deg)';
+    }
+  });
+
+  // Cerrar el menú si hacés click afuera (muy importante para mobile)
+  document.addEventListener('click', () => {
+    menuHistorial.classList.remove('opacity-100', 'visible', 'translate-y-0');
+    menuHistorial.classList.add('opacity-0', 'invisible', 'translate-y-2');
+    flecha.style.transform = 'rotate(0deg)';
+  });
+</script>
     <body class="bg-slate-950 text-white font-sans">
       
 
 <div id="splash-screen" class="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-black transition-opacity duration-1000">
-    <div class="text-center overflow-hidden">
+    <div class="relative p-10 md:p-16">
         
-        <div class="flex items-center justify-center text-8xl md:text-9xl font-black italic tracking-tighter mb-4 relative">
-            
-            <span id="splash-f" class="relative inline-block text-white translate-x-[-100%] opacity-0 transition-all duration-700 ease-out">
-                F 1
-                <div class="absolute inset-0 bg-white/20 blur-2xl rounded-full scale-150 opacity-0 group-show-glow"></div>
-            </span>
+        <div id="line-t" class="absolute top-0 left-0 h-[2px] bg-red-600 shadow-[0_0_15px_#dc2626] opacity-0"></div>
+        <div id="line-r" class="absolute top-0 right-0 w-[2px] bg-red-600 shadow-[0_0_15px_#dc2626] opacity-0"></div>
+        <div id="line-b" class="absolute bottom-0 right-0 h-[2px] bg-red-600 shadow-[0_0_15px_#dc2626] opacity-0"></div>
+        <div id="line-l" class="absolute bottom-0 left-0 w-[2px] bg-red-600 shadow-[0_0_15px_#dc2626] opacity-0"></div>
 
-            <span id="splash-1" class="relative inline-block text-red-600 translate-x-[100%] opacity-0 transition-all duration-700 ease-out">
-                2025
-                <div class="absolute inset-0 bg-red-600/40 blur-3xl rounded-full scale-150 animate-pulse"></div>
-            </span>
-        </div>
+        <div class="text-center overflow-hidden">
+            <div class="flex items-center justify-center text-8xl md:text-9xl font-black italic tracking-tighter mb-4 relative">
+                <span id="splash-f" class="relative inline-block text-white translate-x-[-100%] opacity-0 transition-all duration-700 ease-out">
+                    F 1
+                </span>
+                <span id="splash-1" class="relative inline-block text-red-600 translate-x-[100%] opacity-0 transition-all duration-700 ease-out">
+                    2025
+                </span>
+            </div>
 
-        <div class="overflow-hidden">
-            <p id="splash-liga" class="text-zinc-500 font-mono text-sm md:text-lg uppercase tracking-[0.4em] opacity-0 translate-y-[20px] transition-all duration-1000">
-                BIENVENIDOS - Liga Los Chocapinto
-            </p>
+            <div class="overflow-hidden">
+                <p id="splash-liga" class="text-zinc-500 font-mono text-sm md:text-lg uppercase tracking-[0.4em] opacity-0 translate-y-[20px] transition-all duration-1000">
+                    BIENVENIDOS - Liga Los Chocapinto
+                </p>
+            </div>
         </div>
     </div>
 </div>
+<style is:global>
+    .draw-line-h { animation: drawH 0.2s forwards linear; }
+    .draw-line-v { animation: drawV 0.4s forwards linear; }
 
+    @keyframes drawH {
+        from { width: 0; opacity: 1; }
+        to { width: 100%; opacity: 1; }
+    }
+
+    @keyframes drawV {
+        from { height: 0; opacity: 1; }
+        to { height: 100%; opacity: 1; }
+    }
+</style>
 <style>
     /* Efecto de destello extra al impactar en el centro */
     .f1-glow {
@@ -65,7 +110,50 @@ const escuderias = Object.values(escuderiasMap).sort((a, b) => b.puntos - a.punt
         overflow: hidden;
     }
 </style>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        const splash = document.getElementById('splash-screen');
+        const f1Text = [document.getElementById('splash-f'), document.getElementById('splash-1')];
+        const ligaText = document.getElementById('splash-liga');
+        const lines = [
+            document.getElementById('line-t'),
+            document.getElementById('line-r'),
+            document.getElementById('line-b'),
+            document.getElementById('line-l')
+        ];
 
+        // 1. Aparece el F1 2025 (Casi instantáneo)
+        setTimeout(() => {
+            f1Text.forEach(el => {
+                el.style.transform = 'translateX(0)';
+                el.style.opacity = '1';
+            });
+        }, 100);
+
+        // 2. Aparece el texto de la Liga
+        setTimeout(() => {
+            ligaText.style.transform = 'translateY(0)';
+            ligaText.style.opacity = '1';
+        }, 400);
+
+        // 3. Dibujado de líneas (Efecto ráfaga)
+        setTimeout(() => {
+            lines[0].classList.add('draw-line-h'); // Arriba
+            setTimeout(() => lines[1].classList.add('draw-line-v'), 150); // Derecha
+            setTimeout(() => lines[2].classList.add('draw-line-h'), 300); // Abajo
+            setTimeout(() => lines[3].classList.add('draw-line-v'), 450); // Izquierda
+        }, 800);
+
+        // 4. Desvanecer Splash y pasar a la web
+        // Ajustamos este tiempo para que se vea el cuadro un momento (aprox 2.5 segundos total)
+        setTimeout(() => {
+            splash.style.opacity = '0';
+            setTimeout(() => {
+                splash.style.display = 'none';
+            }, 1000); // Tiempo que tarda en hacerse transparente
+        }, 2500); 
+    });
+</script>
 <script>
     const runSplashScreen = () => {
         const splash = document.getElementById('splash-screen');
@@ -131,50 +219,54 @@ const escuderias = Object.values(escuderiasMap).sort((a, b) => b.puntos - a.punt
 
 
 
-       <nav class="fixed top-0 w-full bg-zinc-900/80 backdrop-blur-md border-b border-zinc-800 z-50">
-    <div class="max-w-5xl mx-auto px-6 py-5 flex justify-between items-center">
+      <nav class="fixed top-0 w-full bg-zinc-900/80 backdrop-blur-md border-b border-zinc-800 z-50">
+    <div class="max-w-6xl mx-auto px-6 py-4 md:py-5 flex flex-col md:flex-row justify-between items-center gap-3 md:gap-0">
         
         <div class="flex items-center gap-2">
-            <span class="font-black italic text-xl tracking-tighter uppercase text-white -skew-x-15">FORMULA <span class="text-red-600 -skew-x-15">1</span></span>
+            <span class="font-black italic text-lg md:text-xl tracking-tighter uppercase text-white -skew-x-15">
+                FORMULA <span class="text-red-600">1</span>
+            </span>
         </div>
 
-        <div class="flex gap-4 md:gap-8 text-[10px] md:text-[12px] font-black uppercase tracking-[0.1em] md:tracking-[0.2em]">
+        <div class="flex flex-wrap justify-center md:justify-end gap-x-4 md:gap-8 gap-y-2 text-[10px] md:text-[12px] font-black uppercase tracking-[0.1em] md:tracking-[0.2em]">
+            
             <a href="#inicio" class="hover:text-red-500 transition-colors">Inicio</a>
             <a href="#pilotos" class="hover:text-red-500 transition-colors">Pilotos</a>
             <a href="#constructores" class="hover:text-red-500 transition-colors">Escuderías</a>
             <a href="#puntaje" class="hover:text-red-500 transition-colors">Puntaje</a>
-            <a href="estadistica" class="hover:text-red-500 transition-colors">Estadistica</a>
+            
+            
             <a href="#Configuración" class="hover:text-red-500 transition-colors hidden sm:block">Configuración</a>
             <a href="#Calendario" class="hover:text-red-500 transition-colors hidden sm:block">Calendario</a>
-
+<a href="estadistica" class="hover:text-red-500 transition-colors">Estadistica</a>
             <div class="relative group" id="dropdown-historial">
-                <button 
-                    id="btn-historial"
-                    type="button"
-                    class="flex items-center gap-1 hover:text-red-500 transition-colors uppercase font-black outline-none"
-                >
-                    Historial
-                    <svg class="w-3 h-3 transition-transform" id="flecha-historial" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
-                    </svg>
-                </button>
+    <button 
+        id="btn-historial"
+        type="button"
+        class="flex items-center gap-1 hover:text-red-500 transition-colors uppercase font-black outline-none"
+    >
+        Historial
+        <svg class="w-3 h-3 transition-transform" id="flecha-historial" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
+        </svg>
+    </button>
 
-                <div 
-                    id="menu-historial"
-                    class="absolute right-0 mt-2 w-48 bg-zinc-900 border border-zinc-800 rounded-xl shadow-2xl 
-                           opacity-0 invisible md:group-hover:opacity-100 md:group-hover:visible 
-                           transition-all duration-300 translate-y-2 md:group-hover:translate-y-0 z-50 overflow-hidden"
-                >
-                    <div class="py-2">
-                        <a href="/historial" class="block px-6 py-3 text-zinc-200 hover:text-white hover:bg-zinc-800 transition-colors border-b border-zinc-800/50">
-                            Carreras 
-                        </a>
-                        <a href="/sprint" class="block px-6 py-3 text-zinc-200 hover:text-red-500 hover:bg-zinc-800 transition-colors">
-                            Sprint 
-                        </a>
-                    </div>
-                </div>
-            </div>
+    <div 
+        id="menu-historial"
+        class="dropdown-content absolute right-0 mt-2 w-48 bg-zinc-900 border border-zinc-800 rounded-xl shadow-2xl 
+               opacity-0 invisible md:group-hover:opacity-100 md:group-hover:visible 
+               transition-all duration-300 translate-y-2 md:group-hover:translate-y-0 z-50 overflow-hidden"
+    >
+        <div class="py-2">
+            <a href="/historial" class="block px-6 py-3 text-zinc-200 hover:text-white hover:bg-zinc-800 transition-colors border-b border-zinc-800/50">
+                Carreras 
+            </a>
+            <a href="/sprint" class="block px-6 py-3 text-zinc-200 hover:text-red-500 hover:bg-zinc-800 transition-colors">
+                Sprint 
+            </a>
+        </div>
+    </div>
+</div>
         </div>
     </div>
 </nav>
@@ -1082,7 +1174,7 @@ const escuderias = Object.values(escuderiasMap).sort((a, b) => b.puntos - a.punt
 
 
         </main>
-
+<audio id="musica-fondo" src="/cancion-ligaf1.mp3" loop preload="auto"></audio>
         <div class="fixed bottom-6 right-6 z-50">
             <button id="musicaBtn" class="bg-blue-100 hover:bg-red-700 text-white w-14 h-14 rounded-full shadow-2xl transition-all hover:scale-110 flex items-center justify-center border-2 border-yellow-500 animate-pulse">
                 <span id="iconoMusica" class="text-xl">▶️</span>
