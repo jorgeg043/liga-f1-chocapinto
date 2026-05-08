@@ -30,6 +30,107 @@ const escuderias = Object.values(escuderiasMap).sort((a, b) => b.puntos - a.punt
     
     <body class="bg-slate-950 text-white font-sans">
       
+
+<div id="splash-screen" class="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-black transition-opacity duration-1000">
+    <div class="text-center overflow-hidden">
+        
+        <div class="flex items-center justify-center text-8xl md:text-9xl font-black italic tracking-tighter mb-4 relative">
+            
+            <span id="splash-f" class="relative inline-block text-white translate-x-[-100%] opacity-0 transition-all duration-700 ease-out">
+                F 1
+                <div class="absolute inset-0 bg-white/20 blur-2xl rounded-full scale-150 opacity-0 group-show-glow"></div>
+            </span>
+
+            <span id="splash-1" class="relative inline-block text-red-600 translate-x-[100%] opacity-0 transition-all duration-700 ease-out">
+                2025
+                <div class="absolute inset-0 bg-red-600/40 blur-3xl rounded-full scale-150 animate-pulse"></div>
+            </span>
+        </div>
+
+        <div class="overflow-hidden">
+            <p id="splash-liga" class="text-zinc-500 font-mono text-sm md:text-lg uppercase tracking-[0.4em] opacity-0 translate-y-[20px] transition-all duration-1000">
+                BIENVENIDOS - Liga Los Chocapinto
+            </p>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Efecto de destello extra al impactar en el centro */
+    .f1-glow {
+        text-shadow: 0 0 20px rgba(255, 255, 255, 0.4), 0 0 40px rgba(220, 38, 38, 0.6);
+    }
+    
+    body.overflow-hidden {
+        overflow: hidden;
+    }
+</style>
+
+<script>
+    const runSplashScreen = () => {
+        const splash = document.getElementById('splash-screen');
+        const f = document.getElementById('splash-f');
+        const n1 = document.getElementById('splash-1');
+        const liga = document.getElementById('splash-liga');
+
+        if (!splash) return;
+
+        // VERIFICACIÓN: ¿Ya vimos el telón en esta sesión?
+        if (sessionStorage.getItem('splash-visto')) {
+            splash.style.display = 'none';
+            document.body.classList.remove('overflow-hidden');
+            return;
+        }
+
+        // Si es la primera vez, ejecutamos la animación
+        splash.style.display = 'flex';
+        document.body.classList.add('overflow-hidden');
+
+        setTimeout(() => {
+            f?.classList.remove('translate-x-[-100%]', 'opacity-0');
+            f?.classList.add('translate-x-0', 'opacity-100');
+            n1?.classList.remove('translate-x-[100%]', 'opacity-0');
+            n1?.classList.add('translate-x-0', 'opacity-100');
+            
+            setTimeout(() => {
+                f?.classList.add('f1-glow');
+                n1?.classList.add('f1-glow');
+            }, 600);
+        }, 500);
+
+        setTimeout(() => {
+            liga?.classList.remove('opacity-0', 'translate-y-[20px]');
+            liga?.classList.add('opacity-100', 'translate-y-0');
+        }, 1400);
+
+        setTimeout(() => {
+            splash.classList.add('opacity-0');
+            document.body.classList.remove('overflow-hidden');
+            
+            setTimeout(() => { 
+                splash.style.display = 'none';
+                // GUARDAMOS EN MEMORIA que ya se vio
+                sessionStorage.setItem('splash-visto', 'true');
+            }, 1000);
+        }, 3000);
+    };
+
+    // Escuchamos el evento de carga de Astro
+    document.addEventListener('astro:page-load', () => {
+        // Solo intentamos ejecutarlo si estamos en el Home
+        if (window.location.pathname === '/' || window.location.pathname === '/index.html') {
+            runSplashScreen();
+        } else {
+            // En cualquier otra página, nos aseguramos de que esté oculto
+            const splash = document.getElementById('splash-screen');
+            if (splash) splash.style.display = 'none';
+        }
+    });
+</script>
+
+
+
+
        <nav class="fixed top-0 w-full bg-zinc-900/80 backdrop-blur-md border-b border-zinc-800 z-50">
     <div class="max-w-5xl mx-auto px-6 py-5 flex justify-between items-center">
         
