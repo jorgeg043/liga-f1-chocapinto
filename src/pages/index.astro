@@ -843,137 +843,252 @@ const escuderias = Object.values(escuderiasMap).sort((a, b) => b.puntos - a.punt
         <span class="flex-1 h-[1px] bg-zinc-800"></span>
     </h2>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 p-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 p-4">
         
-        <div class="group relative overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900/40 transition-all duration-500 hover:border-pink-500/50 hover:scale-105 hover:z-10 transform-gpu will-change-transform">
-            <div class="p-6">
-                <h3 class="text-lg font-black uppercase italic tracking-tighter text-white group-hover:text-blue-500 transition-colors">Alpine A525</h3>
-                <p class="text-[10px] text-zinc-500 font-bold uppercase tracking-widest">BWT Alpine F1 Team</p>
+        <div class="group relative overflow-hidden rounded-xl border border-zinc-800 bg-zinc-950 transition-all duration-500 hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(0,147,204,0.2)] transform-gpu">
+            <div class="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-blue-600 animate-pulse opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-20"></div>
+            <div class="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-pink-500 animate-pulse opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-20 "></div>
+            <div class="p-5 flex justify-between items-start relative z-20">
+                <div>
+                    <h3 class="text-xl font-black uppercase italic tracking-tighter text-white group-hover:text-blue-400 transition-colors duration-300">
+                        Alpine <span class="text-blue-500">A525</span>
+                    </h3>
+                    <p class="text-[9px] text-zinc-500 font-bold uppercase tracking-[0.3em] leading-none mt-1">BWT Alpine F1 Team</p>
+                </div>
+                <span class="flex items-center gap-1.5 px-2 py-1 rounded-md bg-blue-500/10 border border-blue-500/20 text-[8px] font-black text-blue-500 tracking-tighter">
+                    <span class="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse"></span>
+                    ACTIVE FEED
+                </span>
             </div>
-            <div class="aspect-video overflow-hidden">
-                <video 
-    src="/Fotos/coche-alpine.mp4" 
-    title="Alpine 2025 Video" 
-    autoplay 
-    muted 
-    loop 
-    playsinline 
-    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 group-hover:rotate-1 animate-latido"
->
-    Tu navegador no soporta el formato de video HTML5.
-</video>
+            <div class="relative aspect-video overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-b from-transparent via-blue-500/5 to-transparent h-1/2 w-full -translate-y-full group-hover:animate-[scan_2s_linear_infinite] z-10 pointer-events-none"></div>
+                <video src="/Fotos/coche-alpine.mp4" autoplay muted loop playsinline class="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-110 group-hover:rotate-1">
+                    Tu navegador no soporta el formato de video.
+                </video>
+                <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent opacity-80"></div>
             </div>
-            <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent opacity-60"></div>
+            <div class="px-5 py-3 border-t border-zinc-900 flex justify-between items-center bg-zinc-900/50">
+                <div class="flex gap-4">
+                    <div class="flex flex-col">
+                        <span class="text-[7px] text-zinc-500 font-bold uppercase">Engine</span>
+                        <span class="text-[10px] text-white font-black italic">RENAULT E-TECH</span>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="text-[7px] text-zinc-500 font-bold uppercase">Status</span>
+                        <span class="text-[10px] text-pink-500 font-black italic">OPTIMIZED</span>
+                    </div>
+                </div>
+                <svg class="w-4 h-4 text-zinc-700 group-hover:text-blue-500 transition-colors" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M21 16.5C21 16.88 20.79 17.21 20.47 17.38L12.57 21.82C12.41 21.94 12.21 22 12 22C11.79 22 11.59 21.94 11.43 21.82L3.53 17.38C3.21 17.21 3 16.88 3 16.5V7.5C3 7.12 3.21 6.79 3.53 6.62L11.43 2.18C11.59 2.06 11.79 2 12 2C12.21 2 12.41 2.06 12.57 2.18L20.47 6.62C20.79 6.79 21 7.12 21 7.5V16.5Z" />
+                </svg>
+            </div>
         </div>
 
-        <div class="group relative overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900/40 transition-all duration-500 hover:border-zinc-400/50 hover:scale-105 hover:z-10 transform-gpu will-change-transform">
-            <div class="p-6">
-                <h3 class="text-lg font-black uppercase italic tracking-tighter text-white group-hover:text-green-300 transition-colors">Mercedes W16</h3>
-                <p class="text-[10px] text-zinc-500 font-bold uppercase tracking-widest">Mercedes-AMG Petronas</p>
+        <div class="group relative overflow-hidden rounded-xl border border-zinc-800 bg-zinc-950 transition-all duration-500 hover:border-yellow-600/50 hover:shadow-[0_0_30px_rgba(202,138,4,0.2)] transform-gpu">
+            <div class="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-red-600 animate-pulse opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-20"></div>
+            <div class="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-yellow-600 animate-pulse opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-20"></div>
+            <div class="p-5 flex justify-between items-start relative z-20">
+                <div>
+                    <h3 class="text-xl font-black uppercase italic tracking-tighter text-white group-hover:text-yellow-600 transition-colors duration-300">
+                        Red Bull <span class="text-yellow-600">RB21</span>
+                    </h3>
+                    <p class="text-[9px] text-zinc-500 font-bold uppercase tracking-[0.3em] leading-none mt-1">Oracle Red Bull Racing</p>
+                </div>
+                <span class="flex items-center gap-1.5 px-2 py-1 rounded-md bg-yellow-600/10 border border-yellow-600/20 text-[8px] font-black text-yellow-600 tracking-tighter">
+                    <span class="w-1.5 h-1.5 rounded-full bg-yellow-600 animate-pulse"></span>
+                    ACTIVE FEED
+                </span>
             </div>
-            <div class="aspect-video overflow-hidden">
-                <video 
-    src="/Fotos/coche-mercedes.mp4" 
-    title="Mercedes 2025 Video" 
-    autoplay 
-    muted 
-    loop 
-    playsinline 
-    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 group-hover:rotate-1 "
->
-    Tu navegador no soporta el formato de video HTML5.
-</video>
+            <div class="relative aspect-video overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-b from-transparent via-yellow-600/5 to-transparent h-1/2 w-full -translate-y-full group-hover:animate-[scan_2s_linear_infinite] z-10 pointer-events-none"></div>
+                <video src="/Fotos/coche-redbull.mp4" autoplay muted loop playsinline class="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-110 group-hover:rotate-1">
+                    Tu navegador no soporta el formato de video HTML5.
+                </video>
+                <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent opacity-80"></div>
             </div>
-            <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent "></div>
+            <div class="px-5 py-3 border-t border-zinc-900 flex justify-between items-center bg-zinc-900/50">
+                <div class="flex gap-4">
+                    <div class="flex flex-col">
+                        <span class="text-[7px] text-zinc-500 font-bold uppercase">Engine</span>
+                        <span class="text-[10px] text-white font-black italic">HONDA RBPT</span>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="text-[7px] text-zinc-500 font-bold uppercase">Status</span>
+                        <span class="text-[10px] text-yellow-600 font-black italic">DOMINANT</span>
+                    </div>
+                </div>
+                <svg class="w-4 h-4 text-zinc-700 group-hover:text-red-600 transition-colors" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M19.14 7.64L16.22 4.72C15.3 3.8 14.02 3 12.72 3H11.28C9.98 3 8.7 3.8 7.78 4.72L4.86 7.64C3.8 8.7 3 9.98 3 11.28V12.72C3 14.02 3.8 15.3 4.86 16.22L7.78 19.14C8.7 20.06 9.98 20.86 11.28 20.86H12.72C14.02 20.86 15.3 20.06 16.22 19.14L19.14 16.22C20.06 15.3 20.86 14.02 20.86 12.72V11.28C20.86 9.98 20.06 8.7 19.14 7.64Z"/>
+                </svg>
+            </div>
         </div>
 
-        <div class="group relative overflow-hidden rounded-4xl border border-zinc-800 bg-zinc-900/40 transition-all duration-500 hover:border-yellow-600/50  hover:z-10 transform-gpu ">
-            <div class="p-6">
-                <h3 class="text-lg font-black uppercase italic tracking-tighter text-white group-hover:text-yellow-600 transition-colors">Red Bull RB21</h3>
-                <p class="text-[10px] text-zinc-500 font-bold uppercase tracking-widest">Oracle Red Bull Racing</p>
+        <div class="group relative overflow-hidden rounded-xl border border-zinc-800 bg-zinc-950 transition-all duration-500 hover:border-red-600/50 hover:shadow-[0_0_30px_rgba(239,26,45,0.2)] transform-gpu">
+            <div class="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-red-600 animate-pulse opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-20"></div>
+            <div class="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-white animate-pulse  opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-20"></div>
+            <div class="p-5 flex justify-between items-start relative z-20">
+                <div>
+                    <h3 class="text-xl font-black uppercase italic tracking-tighter text-white group-hover:text-red-500 transition-colors duration-300">
+                        Ferrari <span class="text-red-600">SF-25</span>
+                    </h3>
+                    <p class="text-[9px] text-zinc-500 font-bold uppercase tracking-[0.3em] leading-none mt-1">Scudería Ferrari HP</p>
+                </div>
+                <span class="flex items-center gap-1.5 px-2 py-1 rounded-md bg-red-600/10 border border-red-600/20 text-[8px] font-black text-red-500 tracking-tighter">
+                    <span class="w-1.5 h-1.5 rounded-full bg-red-600 animate-pulse"></span>
+                    ACTIVE FEED
+                </span>
             </div>
-            <div class="aspect-video overflow-hidden">
-                <video 
-    src="/Fotos/coche-redbull.mp4" 
-    title="Red Bull 2025 Video" 
-    autoplay 
-    muted 
-    loop 
-    playsinline 
-    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 group-hover:rotate-1 "
->
-    Tu navegador no soporta el formato de video HTML5.
-</video>
+            <div class="relative aspect-video overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-b from-transparent via-red-600/5 to-transparent h-1/2 w-full -translate-y-full group-hover:animate-[scan_2s_linear_infinite] z-10 pointer-events-none"></div>
+                <video src="/Fotos/coche-ferrari.mp4" autoplay muted loop playsinline class="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-110 group-hover:rotate-1">
+                    Tu navegador no soporta el formato de video HTML5.
+                </video>
+                <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent opacity-80"></div>
             </div>
-            <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent opacity-60"></div>
+            <div class="px-5 py-3 border-t border-zinc-900 flex justify-between items-center bg-zinc-900/50">
+                <div class="flex gap-4">
+                    <div class="flex flex-col">
+                        <span class="text-[7px] text-zinc-500 font-bold uppercase">Power Unit</span>
+                        <span class="text-[10px] text-white font-black italic">FERRARI 066/12</span>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="text-[7px] text-zinc-500 font-bold uppercase">Status</span>
+                        <span class="text-[10px] text-red-500 font-black italic">LEGENDARY</span>
+                    </div>
+                </div>
+                <svg class="w-4 h-4 text-zinc-700 group-hover:text-yellow-500 transition-colors" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2L4.5 20.29L5.21 21L12 18L18.79 21L19.5 20.29L12 2Z" />
+                </svg>
+            </div>
         </div>
 
-        <div class="group relative overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900/40 transition-all duration-500 hover:border-red-600/50 hover:scale-105 hover:z-10 transform-gpu will-change-transform">
-            <div class="p-6">
-                <h3 class="text-lg font-black uppercase italic tracking-tighter text-white group-hover:text-red-600 transition-colors">Ferrari SF-25</h3>
-                <p class="text-[10px] text-zinc-500 font-bold uppercase tracking-widest">Scudería Ferrari HP</p>
+        <div class="group relative overflow-hidden rounded-xl border border-zinc-800 bg-zinc-950 transition-all duration-500 hover:border-cyan-500/50 hover:shadow-[0_0_30px_rgba(6,182,212,0.2)] transform-gpu">
+            <div class="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-cyan-500 animate-pulse  opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-20"></div>
+            <div class="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-zinc-400 animate-pulse opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-20"></div>
+            
+            <div class="p-5 flex justify-between items-start relative z-20">
+                <div>
+                    <h3 class="text-xl font-black uppercase italic tracking-tighter text-white group-hover:text-cyan-400 transition-colors duration-300">
+                        Mercedes <span class="text-cyan-500">W16</span>
+                    </h3>
+                    <p class="text-[9px] text-zinc-500 font-bold uppercase tracking-[0.3em] leading-none mt-1">Mercedes-AMG PETRONAS F1</p>
+                </div>
+                <span class="flex items-center gap-1.5 px-2 py-1 rounded-md bg-cyan-500/10 border border-cyan-500/20 text-[8px] font-black text-cyan-500 tracking-tighter">
+                    <span class="w-1.5 h-1.5 rounded-full bg-cyan-500 animate-pulse"></span>
+                    ACTIVE FEED
+                </span>
             </div>
-            <div class="aspect-video overflow-hidden">
-                 <video 
-    src="/Fotos/coche-ferrari.mp4" 
-    title="Ferrari 2025 Video" 
-    autoplay 
-    muted 
-    loop 
-    playsinline 
-    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 group-hover:rotate-1 animate-latido"
->
-    Tu navegador no soporta el formato de video HTML5.
-</video>
+            <div class="relative aspect-video overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-500/5 to-transparent h-1/2 w-full -translate-y-full group-hover:animate-[scan_2s_linear_infinite] z-10 pointer-events-none"></div>
+                <video src="/Fotos/coche-mercedes.mp4" autoplay muted loop playsinline class="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-110 group-hover:rotate-1">
+                    Tu navegador no soporta el formato de video.
+                </video>
+                <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent opacity-80"></div>
             </div>
-            <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent opacity-60"></div>
+            <div class="px-5 py-3 border-t border-zinc-900 flex justify-between items-center bg-zinc-900/50">
+                <div class="flex gap-4">
+                    <div class="flex flex-col">
+                        <span class="text-[7px] text-zinc-500 font-bold uppercase">Power Unit</span>
+                        <span class="text-[10px] text-white font-black italic">MERCEDES-AMG</span>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="text-[7px] text-zinc-500 font-bold uppercase">Status</span>
+                        <span class="text-[10px] text-cyan-500 font-black italic">ELITE</span>
+                    </div>
+                </div>
+                <svg class="w-4 h-4 text-zinc-700 group-hover:text-cyan-500 transition-colors" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12,2L14.39,8.26L21,9.27L16.24,13.91L17.36,20.5L12,17.38L6.64,20.5L7.76,13.91L3,9.27L9.61,8.26L12,2Z" />
+                </svg>
+            </div>
         </div>
 
-        <div class="group relative overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900/40 transition-all duration-500 hover:border-blue-600/50 hover:scale-105 hover:z-10 transform-gpu will-change-transform">
-            <div class="p-6">
-                <h3 class="text-lg font-black uppercase italic tracking-tighter text-white group-hover:text-blue-600 transition-colors">Williams FW-47</h3>
-                <p class="text-[10px] text-zinc-500 font-bold uppercase tracking-widest">Escudería Atlassian Williams Racing</p>
+        <div class="group relative overflow-hidden rounded-xl border border-zinc-800 bg-zinc-950 transition-all duration-500 hover:border-blue-400/50 hover:shadow-[0_0_30px_rgba(37,99,235,0.2)] transform-gpu">
+            <div class="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-blue-700 animate-pulse opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-20"></div>
+            <div class="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-sky-400 animate-pulse opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-20"></div>
+            <div class="p-5 flex justify-between items-start relative z-20">
+                <div>
+                    <h3 class="text-xl font-black uppercase italic tracking-tighter text-white group-hover:text-sky-400 transition-colors duration-300">
+                        Williams <span class="text-blue-600">FW-47</span>
+                    </h3>
+                    <p class="text-[9px] text-zinc-500 font-bold uppercase tracking-[0.3em] leading-none mt-1">Atlassian Williams Racing</p>
+                </div>
+                <span class="flex items-center gap-1.5 px-2 py-1 rounded-md bg-blue-500/10 border border-blue-500/20 text-[8px] font-black text-blue-400 tracking-tighter">
+                    <span class="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse"></span>
+                    ACTIVE FEED
+                </span>
             </div>
-            <div class="aspect-video overflow-hidden">
-                <video 
-    src="/Fotos/coche-williams.mp4" 
-    title="Williams 2025 Video" 
-    autoplay 
-    muted 
-    loop 
-    playsinline 
-    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 group-hover:rotate-1 animate-latido"
->
-    Tu navegador no soporta el formato de video HTML5.
-</video>
+            <div class="relative aspect-video overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-b from-transparent via-blue-400/5 to-transparent h-1/2 w-full -translate-y-full group-hover:animate-[scan_2s_linear_infinite] z-10 pointer-events-none"></div>
+                <video src="/Fotos/coche-williams.mp4" autoplay muted loop playsinline class="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-110 group-hover:rotate-1">
+                    Tu navegador no soporta el formato de video HTML5.
+                </video>
+                <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent opacity-80"></div>
             </div>
-            <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent opacity-60"></div>
+            <div class="px-5 py-3 border-t border-zinc-900 flex justify-between items-center bg-zinc-900/50">
+                <div class="flex gap-4">
+                    <div class="flex flex-col">
+                        <span class="text-[7px] text-zinc-500 font-bold uppercase">Power Unit</span>
+                        <span class="text-[10px] text-white font-black italic">MERCEDES-AMG</span>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="text-[7px] text-zinc-500 font-bold uppercase">Status</span>
+                        <span class="text-[10px] text-sky-400 font-black italic">EVOLVING</span>
+                    </div>
+                </div>
+                <svg class="w-4 h-4 text-zinc-700 group-hover:text-blue-500 transition-colors" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M13,2L3,14H10V22L20,10H13V2Z" />
+                </svg>
+            </div>
         </div>
 
-        <div class="group relative overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900/40 transition-all duration-500 hover:border-blue-600/50 hover:scale-105 hover:z-10 transform-gpu will-change-transform">
-            <div class="p-6">
-                <h3 class="text-lg font-black uppercase italic tracking-tighter text-white group-hover:text-blue-600 transition-colors">Haas VF-25</h3>
-                <p class="text-[10px] text-zinc-500 font-bold uppercase tracking-widest">Escudería Haas Ferrari F1</p>
+        <div class="group relative overflow-hidden rounded-xl border border-zinc-800 bg-zinc-950 transition-all duration-500 hover:border-red-600/50 hover:shadow-[0_0_30px_rgba(225,29,72,0.15)] transform-gpu">
+            <div class="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-red-600 animate-pulse opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-20"></div>
+            <div class="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-zinc-400 animate-pulse opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-20"></div>
+            <div class="p-5 flex justify-between items-start relative z-20">
+                <div>
+                    <h3 class="text-xl font-black uppercase italic tracking-tighter text-white group-hover:text-red-500 transition-colors duration-300">
+                        Haas <span class="text-red-600">VF-25</span>
+                    </h3>
+                    <p class="text-[9px] text-zinc-500 font-bold uppercase tracking-[0.3em] leading-none mt-1">MoneyGram Haas F1 Team</p>
+                </div>
+                <span class="flex items-center gap-1.5 px-2 py-1 rounded-md bg-red-600/10 border border-red-600/20 text-[8px] font-black text-red-500 tracking-tighter">
+                    <span class="w-1.5 h-1.5 rounded-full bg-red-600 animate-pulse"></span>
+                    ACTIVE FEED
+                </span>
             </div>
-            <div class="aspect-video overflow-hidden">
-                 <video 
-    src="/Fotos/coche-haas.mp4" 
-    title="Haas 2025 Video" 
-    autoplay 
-    muted 
-    loop 
-    playsinline 
-    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 group-hover:rotate-1 animate-latido"
->
-    Tu navegador no soporta el formato de video HTML5.
-</video>
+            <div class="relative aspect-video overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-b from-transparent via-zinc-400/5 to-transparent h-1/2 w-full -translate-y-full group-hover:animate-[scan_2s_linear_infinite] z-10 pointer-events-none"></div>
+                <video src="/Fotos/coche-haas.mp4" autoplay muted loop playsinline class="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-110 group-hover:rotate-1">
+                    Tu navegador no soporta el formato de video HTML5.
+                </video>
+                <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent opacity-80"></div>
             </div>
-            <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent opacity-60"></div>
+            <div class="px-5 py-3 border-t border-zinc-900 flex justify-between items-center bg-zinc-900/50">
+                <div class="flex gap-4">
+                    <div class="flex flex-col">
+                        <span class="text-[7px] text-zinc-500 font-bold uppercase">Power Unit</span>
+                        <span class="text-[10px] text-white font-black italic">FERRARI 066/12</span>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="text-[7px] text-zinc-500 font-bold uppercase">Status</span>
+                        <span class="text-[10px] text-zinc-300 font-black italic">CHALLENGER</span>
+                    </div>
+                </div>
+                <svg class="w-4 h-4 text-zinc-700 group-hover:text-red-600 transition-colors" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12,2L4.5,20.29L5.21,21L12,18L18.79,21L19.5,20.29L12,2Z" />
+                </svg>
+            </div>
         </div>
 
     </div>
 </section>
-
+<style>
+    /* Animación de escaneo para el video */
+    @keyframes scan {
+        0% { transform: translateY(-100%); }
+        100% { transform: translateY(200%); }
+    }
+</style>
 <section id="Calendario" class="mt-20 py-10 border-t border-zinc-800 px-4 scroll-mt-15">
     <div class="mb-10 text-center md:text-left">
         <h2 class="text-3xl font-black uppercase italic tracking-tighter text-white">
