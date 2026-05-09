@@ -1,13 +1,15 @@
 [
   { "id": 1, "nombre": "Chor", "escuderia": "Alpine", "puntos": 110, "victorias": 4, "poles": 4, "vueltasRapidas": 3 },
   { "id": 2, "nombre": "Franco", "escuderia": "Alpine", "puntos": 51, "victorias": 0, "poles": 0, "vueltasRapidas": 0 },
-  { "id": 3, "nombre": "Diego", "escuderia": "Mercedes Benz", "puntos": 38, "victorias": 0, "poles": 0, "vueltasRapidas": 0 },
-  { "id": 4, "nombre": "Simon", "escuderia": "Mercedes Benz", "puntos": 52, "victorias": 0, "poles": 0, "vueltasRapidas": 0 },
-  { "id": 5, "nombre": "Rodri", "escuderia": "Red Bull", "puntos": 59, "victorias": 0, "poles": 0, "vueltasRapidas": 1 },
+  { "id": 3, "nombre": "Diego", "escuderia": "Mercedes Benz", "puntos": 40, "victorias": 0, "poles": 0, "vueltasRapidas": 0 },
+  { "id": 4, "nombre": "Simon", "escuderia": "Mercedes Benz", "puntos": 40, "victorias": 0, "poles": 0, "vueltasRapidas": 0 },
+  { "id": 5, "nombre": "Rodri", "escuderia": "Red Bull", "puntos": 61, "victorias": 0, "poles": 0, "vueltasRapidas": 1 },
   { "id": 6, "nombre": "Leo", "escuderia": "Red Bull", "puntos": 19, "victorias": 0, "poles": 0, "vueltasRapidas": 0 },
   { "id": 7, "nombre": "Rambo", "escuderia": "Ferrari", "puntos": 29, "victorias": 0, "poles": 0, "vueltasRapidas": 0 },
   { "id": 8, "nombre": "Adrian", "escuderia": "Ferrari", "puntos": 13, "victorias": 0, "poles": 0, "vueltasRapidas": 0 },
   { "id": 9, "nombre": "Seba", "escuderia": "Williams", "puntos": 0, "victorias": 0, "poles": 0, "vueltasRapidas": 0 },
-  { "id": 10, "nombre": "IA-Williams", "escuderia": "Williams", "puntos": 0, "victorias": 0, "poles": 0, "vueltasRapidas": 0 }
+  { "id": 10, "nombre": "IA-Williams", "escuderia": "Williams", "puntos": 0, "victorias": 0, "poles": 0, "vueltasRapidas": 0 },
+  { "id": 11, "nombre": "Fede", "escuderia": "Haas", "puntos": 0, "victorias": 0, "poles": 0, "vueltasRapidas": 0 },
+  { "id": 12, "nombre": "IA-Haas", "escuderia": "Haas", "puntos": 0, "victorias": 0, "poles": 0, "vueltasRapidas": 0 }
 
 ]

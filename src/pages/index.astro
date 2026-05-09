@@ -8,6 +8,7 @@ const logos = {
   "Red Bull": "/Fotos/logo-redbull.png",
   "Ferrari": "/Fotos/logo-ferrari.png",
   "Williams": "/Fotos/logo-williams.png",
+  "Haas": "/Fotos/logo-haas.png",
 };
 
 const escuderiasMap = pilotos.reduce((acc, piloto) => {
@@ -428,25 +429,31 @@ const escuderias = Object.values(escuderiasMap).sort((a, b) => b.puntos - a.punt
         </div>
     </div>
 </div>
+
+
+{/* USAR PARA CUANDO HAYA OTRA PRÓXIMA ESCUDERIA PARA INFORMAR
+
+
 <div class="relative group ... mb-6"> 
    <h2 class="text-2xl font-bold mb-6 flex items-center gap-2 uppercase tracking-tight">
                     <span class="w-2 h-8 bg-red-600 inline-block -skew-x-15"></span> NOVEDADES
                 </h2>
    </div>
 
+
 <div class="relative group overflow-hidden rounded-3xl border border-red-600/30 bg-zinc-900/50 p-1">
     <div class="relative overflow-hidden rounded-2xl h-64 md:h-80">
-        {/* Imagen de fondo de McLaren */}
+        
         <img 
             src="/Fotos/haas-coming-soon.jpg" 
             alt="McLaren Formula 1 Team" 
             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
         />
         
-        {/* Overlay con degradado naranja McLaren */}
+        {/* Overlay con degradado naranja McLaren 
         <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
         
-        {/* Contenido del Anuncio */}
+        {/* Contenido del Anuncio 
         <div class="absolute bottom-0 left-0 p-8 w-full">
             <div class="flex items-center gap-3 mb-3">
                 <span class="bg-red-600 text-white text-bold font-black px-3 py-1 rounded-full uppercase tracking-tighter animate-pulse">
@@ -465,13 +472,13 @@ const escuderias = Object.values(escuderiasMap).sort((a, b) => b.puntos - a.punt
         </div>
     </div>
 
-    {/* Efecto de brillo perimetral naranja */}
+    {/* Efecto de brillo perimetral naranja 
     <div class="absolute -inset-0.5 bg-red-500/20 blur opacity-0 group-hover:opacity-100 transition duration-500"></div>
 </div>
 
 <div class="relative group ... mb-16"> 
    </div>
-
+*/}
 
 
             <section id="pilotos" class="mb-20 scroll-mt-32">
@@ -722,7 +729,7 @@ const escuderias = Object.values(escuderiasMap).sort((a, b) => b.puntos - a.punt
             // Col 2: Simon y Diego (Mercedes Benz)
             // Col 3: Rodri y Leo (Red Bull)
             // Col 4: Rambo y Adrian (Ferrari)
-            const ordenDeseado = ["Chor", "Franco", "Simon", "Diego", "Rodri", "Leo", "Rambo", "Adrian", "Seba", "IA-Williams"];
+            const ordenDeseado = ["Chor", "Franco", "Simon", "Diego", "Rodri", "Leo", "Rambo", "Adrian", "Seba", "IA-Williams", "Fede", "IA-Haas"];
             
             const pilotosOrdenados = [...pilotos].sort((a, b) => {
                 return ordenDeseado.indexOf(a.nombre) - ordenDeseado.indexOf(b.nombre);
@@ -730,9 +737,10 @@ const escuderias = Object.values(escuderiasMap).sort((a, b) => b.puntos - a.punt
 
             return pilotosOrdenados.map((piloto) => {
                 const fondoEscuderia = piloto.escuderia === "Mercedes Benz" ? "escuderia-mercedes.jpg" : 
-                                     piloto.escuderia === "Alpine" ? "escuderia-alpine.jpg" : 
+                                     piloto.escuderia === "Alpine" ? "escuderia-alpine.jpg" :
                                      piloto.escuderia === "Ferrari" ? "escuderia-ferrari.jpg" :
                                      piloto.escuderia === "Williams" ? "escuderia-williams.jpg" :
+                                     piloto.escuderia === "Haas" ? "escuderia-haas.jpg" :
                                      "escuderia-redbull.jpg";
                 
                 return (
@@ -748,7 +756,7 @@ const escuderias = Object.values(escuderiasMap).sort((a, b) => b.puntos - a.punt
 
                         <div class="relative z-10">
                             <div class="absolute -top-1 -right-1 text-[9px] font-black uppercase tracking-widest text-zinc-300 group-hover:text-red-100 transition-colors">
-                                {piloto.nombre === "Chor" || piloto.nombre === "Simon" || piloto.nombre === "Rodri" || piloto.nombre === "Adrian" ? "Piloto 1" : "Piloto 2"}
+                                {piloto.nombre === "Chor" || piloto.nombre === "Simon" || piloto.nombre === "Rodri" || piloto.nombre === "Adrian" || piloto.nombre === "Seba" || piloto.nombre === "Fede"? "Piloto 1" : "Piloto 2"}
                             </div>
 
                             <div class="flex items-start gap-4">
@@ -767,11 +775,11 @@ const escuderias = Object.values(escuderiasMap).sort((a, b) => b.puntos - a.punt
                                    <div class="flex items-center gap-2 mb-4 bg-zinc-950/80 w-fit px-3 py-1.5 rounded-lg border border-zinc-800 shadow-inner">
     <span class="flex items-center justify-center">
     {/* Volante para los que usan simulador */}
-    {(piloto.nombre === "Chor" || piloto.nombre === "Rambo") ? (
+    {(piloto.nombre === "Chor" || piloto.nombre === "Rambo" || piloto.nombre === "Fede") ? (
         <svg class="w-4 h-4 text-zinc-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="10" /><line x1="12" y1="2" x2="12" y2="12" /><line x1="12" y1="12" x2="4" y2="18" /><line x1="12" y1="12" x2="20" y2="18" /><circle cx="12" cy="12" r="2" fill="currentColor" />
         </svg>
-    ) : piloto.nombre === "IA-Williams" ? (
+    ) : piloto.nombre === "IA-Williams" || piloto.nombre === "IA-Haas"? (
         /* Icono de Robot para la IA */
         <span class="text-sm">🤖</span>
     ) : piloto.nombre === "Franco" ? (
@@ -784,8 +792,8 @@ const escuderias = Object.values(escuderiasMap).sort((a, b) => b.puntos - a.punt
     
     <span class="text-[10px] font-mono text-zinc-300 uppercase font-bold">
     {piloto.nombre === "Adrian" ? "Joystick" :
-     (piloto.nombre === "Chor" || piloto.nombre === "Rambo") ? "Volante" :
-     piloto.nombre === "IA-Williams" ? "IA" : 
+     (piloto.nombre === "Chor" || piloto.nombre === "Rambo" || piloto.nombre === "Fede") ? "Volante" :
+     piloto.nombre === "IA-Williams" || piloto.nombre === "IA-Haas"? "IA" : 
      piloto.nombre === "Franco" ? "Teclado" : "Joystick"}
 </span>
 </div>
@@ -799,6 +807,10 @@ const escuderias = Object.values(escuderiasMap).sort((a, b) => b.puntos - a.punt
                                             piloto.nombre === "Rodri" ? "https://www.instagram.com/roodribarros/" :
                                             piloto.nombre === "Rambo" ? "https://www.instagram.com/damifarias95/" :
                                             piloto.nombre === "Adrian" ? "https://www.instagram.com/adriian.correa/" :
+                                            piloto.nombre === "Seba" ? "https://www.instagram.com/sebastianforneris_/" :
+                                            piloto.nombre === "IA-Williams" ? "https://www.instagram.com/carlossainz55/" :
+                                            piloto.nombre === "Fede" ? "https://www.instagram.com/fede.villalba/" :
+                                            piloto.nombre === "IA-Haas" ? "https://www.instagram.com/olliebearman/" :
                                             "https://www.instagram.com/leo.tapparello/"
                                         } 
                                         target="_blank" 
@@ -839,11 +851,17 @@ const escuderias = Object.values(escuderiasMap).sort((a, b) => b.puntos - a.punt
                 <p class="text-[10px] text-zinc-500 font-bold uppercase tracking-widest">BWT Alpine F1 Team</p>
             </div>
             <div class="aspect-video overflow-hidden">
-                <img 
-                    src="/Fotos/coche-alpine.jpg" 
-                    alt="Alpine 2025" 
-                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 group-hover:rotate-1 animate-latido"
-                />
+                <video 
+    src="/Fotos/coche-alpine.mp4" 
+    title="Alpine 2025 Video" 
+    autoplay 
+    muted 
+    loop 
+    playsinline 
+    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 group-hover:rotate-1 animate-latido"
+>
+    Tu navegador no soporta el formato de video HTML5.
+</video>
             </div>
             <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent opacity-60"></div>
         </div>
@@ -854,26 +872,38 @@ const escuderias = Object.values(escuderiasMap).sort((a, b) => b.puntos - a.punt
                 <p class="text-[10px] text-zinc-500 font-bold uppercase tracking-widest">Mercedes-AMG Petronas</p>
             </div>
             <div class="aspect-video overflow-hidden">
-                <img 
-                    src="/Fotos/coche-mercedes.jpg" 
-                    alt="Mercedes 2025" 
-                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 group-hover:rotate-1 animate-latido"
-                />
+                <video 
+    src="/Fotos/coche-mercedes.mp4" 
+    title="Mercedes 2025 Video" 
+    autoplay 
+    muted 
+    loop 
+    playsinline 
+    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 group-hover:rotate-1 "
+>
+    Tu navegador no soporta el formato de video HTML5.
+</video>
             </div>
-            <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent opacity-60"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent "></div>
         </div>
 
-        <div class="group relative overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900/40 transition-all duration-500 hover:border-yellow-600/50 hover:scale-105 hover:z-10 transform-gpu will-change-transform">
+        <div class="group relative overflow-hidden rounded-4xl border border-zinc-800 bg-zinc-900/40 transition-all duration-500 hover:border-yellow-600/50  hover:z-10 transform-gpu ">
             <div class="p-6">
                 <h3 class="text-lg font-black uppercase italic tracking-tighter text-white group-hover:text-yellow-600 transition-colors">Red Bull RB21</h3>
                 <p class="text-[10px] text-zinc-500 font-bold uppercase tracking-widest">Oracle Red Bull Racing</p>
             </div>
             <div class="aspect-video overflow-hidden">
-                <img 
-                    src="/Fotos/coche-redbull.jpg" 
-                    alt="Red Bull 2025" 
-                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 group-hover:rotate-1 animate-latido"
-                />
+                <video 
+    src="/Fotos/coche-redbull.mp4" 
+    title="Red Bull 2025 Video" 
+    autoplay 
+    muted 
+    loop 
+    playsinline 
+    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 group-hover:rotate-1 "
+>
+    Tu navegador no soporta el formato de video HTML5.
+</video>
             </div>
             <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent opacity-60"></div>
         </div>
@@ -884,11 +914,17 @@ const escuderias = Object.values(escuderiasMap).sort((a, b) => b.puntos - a.punt
                 <p class="text-[10px] text-zinc-500 font-bold uppercase tracking-widest">Scudería Ferrari HP</p>
             </div>
             <div class="aspect-video overflow-hidden">
-                <img 
-                    src="/Fotos/coche-ferrari.jpg" 
-                    alt="Red Bull 2025" 
-                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 group-hover:rotate-1 animate-latido"
-                />
+                 <video 
+    src="/Fotos/coche-ferrari.mp4" 
+    title="Ferrari 2025 Video" 
+    autoplay 
+    muted 
+    loop 
+    playsinline 
+    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 group-hover:rotate-1 animate-latido"
+>
+    Tu navegador no soporta el formato de video HTML5.
+</video>
             </div>
             <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent opacity-60"></div>
         </div>
@@ -899,11 +935,38 @@ const escuderias = Object.values(escuderiasMap).sort((a, b) => b.puntos - a.punt
                 <p class="text-[10px] text-zinc-500 font-bold uppercase tracking-widest">Escudería Atlassian Williams Racing</p>
             </div>
             <div class="aspect-video overflow-hidden">
-                <img 
-                    src="/Fotos/coche-williams.jpg" 
-                    alt="Williams 2025" 
-                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 group-hover:rotate-1 animate-latido"
-                />
+                <video 
+    src="/Fotos/coche-williams.mp4" 
+    title="Williams 2025 Video" 
+    autoplay 
+    muted 
+    loop 
+    playsinline 
+    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 group-hover:rotate-1 animate-latido"
+>
+    Tu navegador no soporta el formato de video HTML5.
+</video>
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent opacity-60"></div>
+        </div>
+
+        <div class="group relative overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900/40 transition-all duration-500 hover:border-blue-600/50 hover:scale-105 hover:z-10 transform-gpu will-change-transform">
+            <div class="p-6">
+                <h3 class="text-lg font-black uppercase italic tracking-tighter text-white group-hover:text-blue-600 transition-colors">Haas VF-25</h3>
+                <p class="text-[10px] text-zinc-500 font-bold uppercase tracking-widest">Escudería Haas Ferrari F1</p>
+            </div>
+            <div class="aspect-video overflow-hidden">
+                 <video 
+    src="/Fotos/coche-haas.mp4" 
+    title="Haas 2025 Video" 
+    autoplay 
+    muted 
+    loop 
+    playsinline 
+    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 group-hover:rotate-1 animate-latido"
+>
+    Tu navegador no soporta el formato de video HTML5.
+</video>
             </div>
             <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent opacity-60"></div>
         </div>

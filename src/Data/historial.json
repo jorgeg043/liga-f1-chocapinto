@@ -77,15 +77,15 @@
     "duracion": "43m 42s",
     "resultados": [
       { "pos": 1, "piloto": "Chor", "puntos": 27, "nota": "VR" },
-      { "pos": 6, "piloto": "Diego", "puntos": 8, "nota": "" },
-      { "pos": 5, "piloto": "Rodri", "puntos": 10, "nota": "" },
-      { "pos": 7, "piloto": "Leo", "puntos": 0, "nota": "" },
-      { "pos": 4, "piloto": "Simon", "puntos": 12, "nota": "" },
+      { "pos": 5, "piloto": "Diego", "puntos": 10, "nota": "" },
+      { "pos": 4, "piloto": "Rodri", "puntos": 12, "nota": "" },
+      { "pos": 9, "piloto": "Leo", "puntos": 0, "nota": "" },
+      { "pos": 10, "piloto": "Simon", "puntos": 0, "nota": "" },
       { "pos": 2, "piloto": "Franco", "puntos": 18, "nota": "" },
       { "pos": 3, "piloto": "Rambo", "puntos": 15, "nota": "" },
-      { "pos": 10, "piloto": "Adrian", "puntos": 0, "nota": "" },
-      { "pos": 8, "piloto": "IA-Williams", "puntos": 0, "nota": "" },
-      { "pos": 9, "piloto": "Seba", "puntos": 0, "nota": "" }
+      { "pos": 8, "piloto": "Adrian", "puntos": 0, "nota": "" },
+      { "pos": 6, "piloto": "IA-Williams", "puntos": 0, "nota": "" },
+      { "pos": 7, "piloto": "Seba", "puntos": 0, "nota": "" }
     ]
   }
 ]
