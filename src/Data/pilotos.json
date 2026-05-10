@@ -10,6 +10,6 @@
   { "id": 9, "nombre": "Seba", "escuderia": "Williams", "puntos": 0, "victorias": 0, "poles": 0, "vueltasRapidas": 0 },
   { "id": 10, "nombre": "IA-Williams", "escuderia": "Williams", "puntos": 0, "victorias": 0, "poles": 0, "vueltasRapidas": 0 },
   { "id": 11, "nombre": "Fede", "escuderia": "Haas", "puntos": 0, "victorias": 0, "poles": 0, "vueltasRapidas": 0 },
-  { "id": 12, "nombre": "IA-Haas", "escuderia": "Haas", "puntos": 0, "victorias": 0, "poles": 0, "vueltasRapidas": 0 }
+  { "id": 12, "nombre": "Valen", "escuderia": "Haas", "puntos": 0, "victorias": 0, "poles": 0, "vueltasRapidas": 0 }
 
 ]

@@ -482,143 +482,314 @@ const escuderias = Object.values(escuderiasMap).sort((a, b) => b.puntos - a.punt
 
 
             <section id="pilotos" class="mb-20 scroll-mt-32">
-                <h2 class="text-2xl font-bold mb-6 flex items-center gap-2 uppercase tracking-tight">
-                    <span class="w-2 h-8 bg-red-600 inline-block -skew-x-15"></span> Campeonato de Pilotos
-                </h2>
-                <div class="bg-zinc-900 rounded-xl overflow-hidden border border-zinc-800 shadow-2xl">
-                    <table class="w-full text-left">
-                        <thead class="bg-zinc-800 text-zinc-400 uppercase text-[10px] tracking-widest">
-    <tr>
-        <th class="px-4 py-4 text-center">Pos</th>
-        <th class="px-6 py-4">Piloto</th>
-        <th class="px-4 py-4 text-center text-yellow-500">🏆</th>
-        <th class="px-4 py-4 text-center text-red-500">Pole</th>
-        <th class="px-4 py-4 text-center text-blue-500">VR</th>
-        <th class="px-6 py-4 text-right">PTS</th>
-    </tr>
-</thead>
+    <div class="reveal-on-scroll">
+        <h2 class="text-sm font-black mb-12 uppercase tracking-[0.4em] text-white flex items-center gap-4">
+            <span class="flex-1 h-[1px] bg-zinc-800"></span> 
+            <span class="text-white italic">CAMPEONATO</span> PILOTOS
+            <span class="flex-1 h-[1px] bg-zinc-800"></span>
+        </h2>
+    </div>
 
-<tbody class="divide-y divide-zinc-800">
-    {pilotos.sort((a, b) => b.puntos - a.puntos).map((piloto, index) => (
-        <tr class="hover:bg-zinc-50/20 transition-all group">
-            <td class="px-4 py-6 font-black text-2xl italic text-zinc-800 group-hover:text-red-600 text-center leading-none">
-                {index + 1}
-            </td>
-            <td class="px-6 py-6">
-                <div class="flex items-center gap-4">
-                    <img src={logos[piloto.escuderia]} alt={piloto.escuderia} class="w-15 h-15 object-contain" />
-                    
-                    {/* FOTO DEL PILOTO */}
-                    <img 
-    src={`/Fotos/perfil-${piloto.nombre.toLowerCase()}.jpg`} 
-    alt={piloto.nombre} 
-    class="w-20 h-20 rounded-full object-cover border-4 border-zinc-700 
-           transition-all duration-300 ease-in-out bg-zinc-800 shadow-lg
-           /* Efecto en PC */
-           md:hover:scale-125 md:hover:z-50 md:hover:border-red-600 
-           /* Efecto en Celular al tocar */
-           active:scale-125 active:z-50 active:border-red-600
-           cursor-pointer touch-manipulation animate-latido"
-/>
+    <div class="bg-zinc-950/50 backdrop-blur-md rounded-xl overflow-hidden border border-zinc-900 shadow-2xl">
+        <div class="overflow-x-auto no-scrollbar">
+            <table class="w-full text-left border-collapse">
+                <thead class="bg-zinc-900/80 border-b border-zinc-800">
+                    <tr class="text-[10px] font-black uppercase tracking-[0.2em] text-zinc-500">
+                        <th class="px-6 py-5 text-center w-20">Posición</th>
+                        <th class="px-6 py-5">Info Piloto</th>
+                        <th class="px-4 py-5 text-center text-yellow-600">Victorias</th>
+                        <th class="px-4 py-5 text-center text-red-600">Poles</th>
+                        <th class="px-4 py-5 text-center text-blue-500">Vuelta Rápida</th>
+                        <th class="px-8 py-5 text-right text-white">Total Pts</th>
+                    </tr>
+                </thead>
 
-                    <div>
-                        <div class="font-black text-zinc-100 text-lg uppercase tracking-tighter leading-none">{piloto.nombre}</div>
-                        <div class="text-[9px] text-zinc-500 font-bold tracking-widest uppercase mt-1">{piloto.escuderia}</div>
-                    </div>
-                </div>
-                
-            </td>
-            
-            <td class="px-4 py-6 text-center font-bold text-zinc-400">
-                {piloto.victorias > 0 ? <span class="text-yellow-500">{piloto.victorias}</span> : "0"}
-            </td>
-            <td class="px-4 py-6 text-center font-bold text-zinc-400">
-                {piloto.poles > 0 ? <span class="text-red-500">{piloto.poles}</span> : "0"}
-            </td>
-            <td class="px-4 py-6 text-center font-bold text-zinc-400">
-                {piloto.vueltasRapidas > 0 ? <span class="text-blue-500">{piloto.vueltasRapidas}</span> : "0"}
-            </td>
-            <td class="px-6 py-6 text-right">
-                <span class="font-mono font-black text-xl text-white italic">
-                    {piloto.puntos}
-                </span>
-            </td>
-        </tr>
-    ))}
-</tbody>
-                    </table>
-                </div>
-            </section>
+                <tbody class="divide-y divide-zinc-900">
+                    {pilotos.sort((a, b) => b.puntos - a.puntos).map((piloto, index) => (
+                        <tr 
+                            class="reveal-item group hover:bg-white/[0.02] transition-all duration-500 relative"
+                            style={`transition-delay: ${index * 80}ms;`}
+                        >
+                            <td class="px-6 py-6 text-center relative">
+                                <span class="text-3xl font-mono font-black italic text-zinc-800 group-hover:text-red-600 transition-colors duration-500 leading-none">
+                                    {index + 1 < 10 ? `0${index + 1}` : index + 1}
+                                </span>
+                            </td>
+
+                            <td class="px-6 py-6">
+                                <div class="flex items-center gap-5">
+                                    {/* Contenedor de Foto con Status Ring */}
+                                    <div class="relative flex-shrink-0">
+                                        <img 
+                                            src={`/Fotos/perfil-${piloto.nombre.toLowerCase()}.jpg`} 
+                                            alt={piloto.nombre} 
+                                            class="w-16 h-16 rounded-full object-cover border-2 border-zinc-800 group-hover:border-red-600 transition-all duration-500 shadow-2xl animate-latido z-10 relative"
+                                        />
+                                        <div class="absolute inset-0 rounded-full bg-red-600/20 blur-md opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                                    </div>
+
+                                    <div class="flex flex-col">
+                                        <div class="flex items-center gap-3">
+                                            <img src={logos[piloto.escuderia]} alt={piloto.escuderia} class="w-10 h-10 object-contain opacity-50 group-hover:opacity-100 transition-opacity" />
+                                            <h3 class="font-black text-white text-lg uppercase tracking-tighter italic leading-none">
+                                                {piloto.nombre}
+                                            </h3>
+                                        </div>
+                                        <span class="text-[9px] text-zinc-600 font-black uppercase tracking-[0.2em] mt-1 group-hover:text-zinc-400 transition-colors">
+                                            {piloto.escuderia}
+                                        </span>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td class="px-4 py-6 text-center">
+                                <div class="inline-flex flex-col items-center">
+                                    <span class={`font-mono font-black text-lg ${piloto.victorias > 0 ? 'text-yellow-500' : 'text-zinc-800'}`}>
+                                        {piloto.victorias}
+                                    </span>
+                                    <span class="text-[7px] text-zinc-600 font-bold uppercase tracking-tighter">Victories</span>
+                                </div>
+                            </td>
+
+                            <td class="px-4 py-6 text-center">
+                                <div class="inline-flex flex-col items-center">
+                                    <span class={`font-mono font-black text-lg ${piloto.poles > 0 ? 'text-red-600' : 'text-zinc-800'}`}>
+                                        {piloto.poles}
+                                    </span>
+                                    <span class="text-[7px] text-zinc-600 font-bold uppercase tracking-tighter">Poles</span>
+                                </div>
+                            </td>
+
+                            <td class="px-4 py-6 text-center">
+                                <div class="inline-flex flex-col items-center">
+                                    <span class={`font-mono font-black text-lg ${piloto.vueltasRapidas > 0 ? 'text-blue-500' : 'text-zinc-800'}`}>
+                                        {piloto.vueltasRapidas}
+                                    </span>
+                                    <span class="text-[7px] text-zinc-600 font-bold uppercase tracking-tighter">Fastest</span>
+                                </div>
+                            </td>
+
+                            <td class="px-8 py-6 text-right">
+                                <div class="relative inline-block">
+                                    <span class="text-3xl font-mono font-black text-white italic tracking-tighter group-hover:text-red-500 transition-all duration-300">
+                                        {piloto.puntos}
+                                    </span>
+                                    <span class="absolute -top-1 -right-4 text-[8px] font-black text-zinc-600 italic">PTS</span>
+                                </div>
+                            </td>
+
+                            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.02] to-transparent w-full h-full -translate-x-full group-hover:animate-[scan_3s_linear_infinite] pointer-events-none"></div>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
 
 
 
             <section id="constructores" class="mb-20 scroll-mt-32">
-    <h2 class="text-2xl font-bold mb-6 flex items-center gap-2 uppercase tracking-tight">
-        <span class="w-2 h-8 bg-zinc-100 inline-block -skew-x-15"></span> Campeonato Escuderías
-    </h2>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 p-4">
+    <div class="reveal-on-scroll">
+        <h2 class="text-sm font-black mb-12 uppercase tracking-[0.4em] text-white flex items-center gap-4">
+            <span class="flex-1 h-[1px] bg-zinc-800"></span> 
+            <span class="text-white italic">CAMPEONATO</span> CONSTRUCTORES
+            <span class="flex-1 h-[1px] bg-zinc-800"></span>
+        </h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 p-4">
         {escuderias.map((team, index) => (
-            /* Aplicamos el efecto de zoom, elevación y sombra sin romper la estructura original */
-            <div class="bg-zinc-900 p-8 rounded-xl border border-zinc-600 flex flex-col items-center justify-center relative overflow-hidden group shadow-lg transition-all duration-300 ease-out hover:scale-105 hover:z-50 hover:shadow-[0_20px_50px_rgba(0,0,0,0.7)] transform-gpu will-change-transform">
-                <img src={logos[team.nombre]} alt={team.nombre} class="w-20 h-20 object-contain mb-6 transition-transform group-hover:scale-150" />
-                <h3 class="text-xl font-black uppercase z-10 tracking-tighter text-zinc-400">{team.nombre}</h3>
-                <p class="text-5xl font-mono font-black mt-2 text-red-600 z-10 italic animate-pulse">{team.puntos}</p>
-                <div class="absolute -bottom-2 -right-2 text-7xl font-black text-zinc-800 italic">#{index + 1}</div>
+            <div 
+                class="reveal-item group relative bg-zinc-950 p-8 rounded-xl border border-zinc-900 flex flex-col items-center justify-center overflow-hidden transition-all duration-500 hover:border-red-600/40 hover:shadow-[0_0_40px_rgba(220,38,38,0.1)] transform-gpu will-change-transform"
+                style={`transition-delay: ${index * 150}ms;`} 
+            >
+                <div class="absolute top-0 left-0 w-6 h-6 border-t-2 border-l-2 border-red-600 animate-pulse opacity-0 group-hover:opacity-100 transition-all duration-500 z-20"></div>
+                <div class="absolute bottom-0 right-0 w-6 h-6 border-b-2 border-r-2 border-white opacity-0 animate-pulse group-hover:opacity-100 transition-all duration-500 z-20"></div>
+
+                <div class="absolute top-4 right-4 flex flex-col items-end opacity-40 group-hover:opacity-100 transition-opacity">
+                    <span class="text-[8px] font-black text-zinc-200 uppercase tracking-tighter">Posición</span>
+                    <span class="text-xl font-mono font-black text-white italic">P{index + 1}</span>
+                </div>
+
+                <div class="relative z-10 mb-6 transition-transform duration-500 group-hover:scale-110">
+                    <img 
+                        src={logos[team.nombre]} 
+                        alt={team.nombre} 
+                        class="w-24 h-24 object-contain filter drop-shadow-[0_0_10px_rgba(255,255,255,0.1)] group-hover:drop-shadow-[0_0_20px_rgba(255,255,255,0.2)] animate-latido" 
+                    />
+                </div>
+
+                <div class="text-center z-10">
+                    <h3 class="text-sm font-black uppercase tracking-[0.2em] text-zinc-500 group-hover:text-white transition-colors duration-300">
+                        {team.nombre}
+                    </h3>
+                    
+                    <div class="relative inline-block mt-2">
+                        <p class="text-6xl font-mono font-black text-white italic tracking-tighter transition-all duration-500 group-hover:text-red-600 group-hover:drop-shadow-[0_0_15px_rgba(220,38,38,0.5)]">
+                            {team.puntos}
+                        </p>
+                        <span class="absolute -top-1 -right-6 text-[10px] font-black text-zinc-600 uppercase italic">PTS</span>
+                    </div>
+                </div>
+
+                <div class="absolute -bottom-6 -left-4 text-9xl font-black text-zinc-900/50 italic pointer-events-none group-hover:text-red-600/5 transition-colors duration-700">
+                    0{index + 1}
+                </div>
+                
+                <div class="absolute inset-0 bg-gradient-to-b from-transparent via-white/5 to-transparent h-1/2 w-full -translate-y-full group-hover:animate-[scan_3s_linear_infinite] pointer-events-none opacity-20"></div>
             </div>
         ))}
     </div>
 </section>
 
-     <section id="puntaje" class="scroll-mt-32 mb-20">
-    <h2 class="text-sm font-black mb-8 uppercase tracking-[0.3em] text-zinc-100 flex items-center gap-4 text-center">
-        <span class="flex-1 h-[1px] bg-zinc-800"></span> ESQUEMA DE PUNTAJE <span class="flex-1 h-[1px] bg-zinc-800"></span>
-    </h2>
+    <section id="puntaje" class="scroll-mt-32 mb-20">
+    <div class="reveal-on-scroll">
+        <h2 class="text-sm font-black mb-12 uppercase tracking-[0.4em] text-zinc-100 flex items-center gap-4">
+            <span class="flex-1 h-[1px] bg-zinc-800"></span> 
+            <span class="text-white italic text-center">PUNTAJE</span> OFICIAL
+            <span class="flex-1 h-[1px] bg-zinc-800"></span>
+        </h2>
+    </div>
     
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start p-4">
         
-        <div class="bg-zinc-900/50 p-8 rounded-2xl border border-zinc-800 border-l-red-600 transition-all duration-300 ease-out hover:scale-105 hover:z-50 hover:shadow-[0_20px_50px_rgba(0,0,0,0.7)] transform-gpu will-change-transform group relative">
-    <h3 class="text-red-600 font-black uppercase italic mb-6">Puntos por Carrera</h3>
-    
-    <div class="grid grid-cols-2 gap-x-8">
-        
-        <div>
-            <h4 class="text-[13px] text-zinc-200 font-bold uppercase tracking-widest mb-3 border-b border-zinc-800 pb-1">Gran Premio</h4>
-            <div class="grid grid-cols-2 gap-y-2 font-mono  uppercase">
-                <div class="text-zinc-500">1°:</div><div class="text-right font-black text-white">25</div>
-                <div class="text-zinc-500">2°:</div><div class="text-right font-black text-white">18</div>
-                <div class="text-zinc-500">3°:</div><div class="text-right font-black text-white">15</div>
-                <div class="text-zinc-500">4°:</div><div class="text-right font-black text-white">12</div>
-                <div class="text-zinc-500">5°:</div><div class="text-right font-black text-white">10</div>
-                <div class="text-zinc-500">6°:</div><div class="text-right font-black text-white">8</div>
-                <div class="text-zinc-500">7°:</div><div class="text-right font-black text-white">4</div>
-                <div class="text-zinc-500">8°:</div><div class="text-right font-black text-white">2</div>
+        <div class="group relative bg-zinc-950 p-8 rounded-xl border border-zinc-900 transition-all duration-500 hover:border-red-600/40 hover:shadow-[0_0_50px_rgba(220,38,38,0.1)] reveal-item">
+            <div class="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-red-600 opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
+            <div class="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-red-600 opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
+
+            <div class="flex items-center gap-3 mb-8">
+                <svg class="w-5 h-5 text-red-600 animate-pulse" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+                <h3 class="text-red-600 font-black uppercase italic tracking-wider">DISTRIBUCION DE PUNTOS</h3>
+            </div>
+            
+            <div class="grid grid-cols-2 gap-x-12">
+                <div class="space-y-1">
+                    <h4 class="text-[11px] text-zinc-500 font-black uppercase tracking-[0.2em] mb-4 flex items-center gap-2">
+                        <span class="w-2 h-2 bg-white rounded-full"></span> Gran Premio
+                    </h4>
+                    <div class="space-y-1 font-mono">
+                        <div class="flex justify-between p-1 hover:bg-white/5 rounded transition-colors group/row">
+                            <span class="text-zinc-500 group-hover/row:text-white transition-colors">1st</span>
+                            <span class="text-white font-black group-hover/row:text-red-500">25</span>
+                        </div>
+                        <div class="flex justify-between p-1 hover:bg-white/5 rounded transition-colors group/row">
+                            <span class="text-zinc-500 group-hover/row:text-white">2nd</span>
+                            <span class="text-white font-black">18</span>
+                        </div>
+                        <div class="flex justify-between p-1 hover:bg-white/5 rounded transition-colors group/row">
+                            <span class="text-zinc-500 group-hover/row:text-white">3rd</span>
+                            <span class="text-white font-black">15</span>
+                        </div>
+                        <div class="flex justify-between p-1 hover:bg-white/5 rounded transition-colors group/row">
+                            <span class="text-zinc-500 group-hover/row:text-white">4rd</span>
+                            <span class="text-white font-black">12</span>
+                        </div>
+                        <div class="flex justify-between p-1 hover:bg-white/5 rounded transition-colors group/row">
+                            <span class="text-zinc-500 group-hover/row:text-white">5rd</span>
+                            <span class="text-white font-black">10</span>
+                        </div>
+                        <div class="flex justify-between p-1 hover:bg-white/5 rounded transition-colors group/row">
+                            <span class="text-zinc-500 group-hover/row:text-white">6rd</span>
+                            <span class="text-white font-black">8</span>
+                        </div>
+                        <div class="flex justify-between p-1 hover:bg-white/5 rounded transition-colors group/row">
+                            <span class="text-zinc-500 group-hover/row:text-white">7rd</span>
+                            <span class="text-white font-black">6</span>
+                        </div>
+                        <div class="flex justify-between p-1 hover:bg-white/5 rounded transition-colors group/row">
+                            <span class="text-zinc-500 group-hover/row:text-white">8rd</span>
+                            <span class="text-white font-black">4</span>
+                        </div>
+                        <div class="flex justify-between p-1 hover:bg-white/5 rounded transition-colors group/row">
+                            <span class="text-zinc-500 group-hover/row:text-white">9rd</span>
+                            <span class="text-white font-black">2</span>
+                        </div>
+                        <div class="flex justify-between p-1 hover:bg-white/5 rounded transition-colors group/row">
+                            <span class="text-zinc-500 group-hover/row:text-white">10rd</span>
+                            <span class="text-white font-black">1</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-1">
+                    <h4 class="text-[11px] text-red-600/80 font-black uppercase tracking-[0.2em] mb-4 flex items-center gap-2">
+                        <span class="w-2 h-2 bg-red-600 rounded-full animate-pulse"></span> Sprint
+                    </h4>
+                    <div class="space-y-1 font-mono">
+                        <div class="flex justify-between p-1 hover:bg-red-600/10 rounded transition-colors group/row">
+                            <span class="text-zinc-500 group-hover/row:text-red-500 transition-colors">1st</span>
+                            <span class="text-white font-black">8</span>
+                        </div>
+                        <div class="flex justify-between p-1 hover:bg-red-600/10 rounded transition-colors group/row">
+                            <span class="text-zinc-500 group-hover/row:text-red-500">2nd</span>
+                            <span class="text-white font-black">7</span>
+                        </div>
+                        <div class="flex justify-between p-1 hover:bg-red-600/10 rounded transition-colors group/row">
+                            <span class="text-zinc-500 group-hover/row:text-red-500">3rd</span>
+                            <span class="text-white font-black">6</span>
+                        </div>
+                        <div class="flex justify-between p-1 hover:bg-red-600/10 rounded transition-colors group/row">
+                            <span class="text-zinc-500 group-hover/row:text-red-500">4rd</span>
+                            <span class="text-white font-black">5</span>
+                        </div>
+                        <div class="flex justify-between p-1 hover:bg-red-600/10 rounded transition-colors group/row">
+                            <span class="text-zinc-500 group-hover/row:text-red-500">5rd</span>
+                            <span class="text-white font-black">4</span>
+                        </div>
+                        <div class="flex justify-between p-1 hover:bg-red-600/10 rounded transition-colors group/row">
+                            <span class="text-zinc-500 group-hover/row:text-red-500">6rd</span>
+                            <span class="text-white font-black">3</span>
+                        </div>
+                        <div class="flex justify-between p-1 hover:bg-red-600/10 rounded transition-colors group/row">
+                            <span class="text-zinc-500 group-hover/row:text-red-500">7rd</span>
+                            <span class="text-white font-black">2</span>
+                        </div>
+                        <div class="flex justify-between p-1 hover:bg-red-600/10 rounded transition-colors group/row">
+                            <span class="text-zinc-500 group-hover/row:text-red-500">8rd</span>
+                            <span class="text-white font-black">1</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div>
-            <h4 class="text-red-600/80 text-[13px] font-bold uppercase tracking-widest mb-3 border-b border-zinc-800 pb-1">Sprint</h4>
-            <div class="grid grid-cols-2 gap-y-2 font-mono uppercase">
-                <div class="text-zinc-500">1°:</div><div class="text-right font-black text-white">6</div>
-                <div class="text-zinc-500">2°:</div><div class="text-right font-black text-white">5</div>
-                <div class="text-zinc-500">3°:</div><div class="text-right font-black text-white">4</div>
-                <div class="text-zinc-500">4°:</div><div class="text-right font-black text-white">3</div>
-                <div class="text-zinc-500">5°:</div><div class="text-right font-black text-white">2</div>
-                <div class="text-zinc-500">6°:</div><div class="text-right font-black text-white">1</div>
-                <div class="text-transparent">7°:</div><div></div>
-                <div class="text-transparent">8°:</div><div></div>
+        <div class="space-y-6">
+            <div class="bg-zinc-950 p-8 rounded-xl border border-zinc-900 border-l-red-600 transition-all duration-500 hover:shadow-[0_0_30px_rgba(220,38,38,0.1)] reveal-item delay-100 group">
+                <div class="flex items-center gap-4 mb-6">
+                    <div class="p-2 bg-red-600/10 rounded border border-red-600/20">
+                        <svg class="w-4 h-4 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                    </div>
+                    <h3 class="text-white font-black uppercase italic text-sm tracking-widest">PUNTOS EXTRAS</h3>
+                </div>
+                
+                <div class="space-y-4">
+                    <div class="flex justify-between items-center bg-zinc-900/40 p-3 rounded border border-zinc-800/50 hover:border-red-600/30 transition-colors">
+                        <span class="text-[11px] text-white font-bold uppercase tracking-tighter">Pole Position</span>
+                        <span class="bg-red-600 text-white text-[10px] px-3 py-1 rounded font-black shadow-[0_0_15px_rgba(220,38,38,0.4)]">+1 PT</span>
+                    </div>
+                    <div class="flex justify-between items-center bg-zinc-900/40 p-3 rounded border border-zinc-800/50 hover:border-red-600/30 transition-colors">
+                        <div class="flex flex-col">
+                            <span class="text-[11px] text-white font-bold uppercase tracking-tighter">VUELTA RAPIDA</span>
+                            <span class="text-[8px] text-yellow-600 font-black">SOLO SI TERMINA LA CARRERA, SI ES DNF NO CUENTA</span>
+                        </div>
+                        <span class="bg-red-600 text-white text-[10px] px-3 py-1 rounded font-black shadow-[0_0_15px_rgba(220,38,38,0.4)]">+1 PT</span>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-</div>
 
-        <div class="space-y-4">
-            <div class="bg-zinc-900/50 p-6 rounded-2xl border border-zinc-800  border-l-red-600 font-bold uppercase text-[12px] transition-all duration-300 ease-out hover:scale-105 hover:z-50 hover:shadow-[0_20px_50px_rgba(0,0,0,0.7)] transform-gpu will-change-transform group relative">
-                <p class="mb-2">Pole Position: <span class="text-white">+1 PT</span></p>
-                <p>Vuelta Rápida (Top 8, si hace DNF no cuenta): <span class="text-white">+1 PT</span></p>
-            </div>
-
-            <div class="bg-zinc-950 p-6 rounded-2xl border border-zinc-400 italic text-zinc-100 text-sm transition-all duration-300 ease-out hover:scale-105 hover:z-50 hover:shadow-[0_20px_50px_rgba(0,0,0,0.7)] transform-gpu will-change-transform group relative">
-                Si un piloto no asiste a la carrera, sumará <span class="text-red-500 font-bold">0 puntos</span>.
+            <div class="relative overflow-hidden bg-zinc-950 p-8 rounded-xl border border-zinc-900 reveal-item delay-200 group hover:border-zinc-700 transition-all duration-500">
+                <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:100%_4px] pointer-events-none"></div>
+                
+                <div class="flex items-start gap-4">
+                    <span class="text-red-700 text-2xl font-black italic select-none  transition-opacity animate-latido-color">DNF</span>
+                    <div>
+                        <h4 class="text-white font-black uppercase italic text-xs tracking-[0.2em] mb-2">Protocolo sin suma de puntos</h4>
+                        <p class="text-zinc-500 text-[11px] leading-relaxed font-medium">
+                            Pilotos no asistentes o con estado <span class="text-red-500 font-black">DNF</span> serán clasificados con <span class="text-white font-black underline decoration-red-600">0 PUNTOS</span> en la sesión actual.
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -626,89 +797,154 @@ const escuderias = Object.values(escuderiasMap).sort((a, b) => b.puntos - a.punt
 
 
 <section id="Configuración" class="scroll-mt-32 mb-20">
-				
-					<h2 class="text-sm font-black mb-8 uppercase tracking-[0.3em] text-zinc-100 flex items-center gap-4 text-center">
-                    <span class="flex-1 h-[1px] bg-zinc-800"></span> Configuración y Daños <span class="flex-1 h-[1px] bg-zinc-800"></span>
-                </h2>
-   
-
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-    <div class="bg-zinc-900/50 p-6 rounded-2xl border border-yellow-700 transition-all duration-300 ease-out hover:scale-105 hover:z-10 hover:border-2 hover:border-yellow-500/50 hover:shadow-[0_20px_50px_rgba(0,0,0,0.5)] group relative">
-        <div class="flex items-center gap-3 mb-4">
-            <div class="p-2 bg-red-600/10 rounded-lg">
-                <span class="text-red-500">⚙️</span>
-            </div>
-            <h4 class="font-black uppercase italic text-sm tracking-tighter">Mecánica</h4>
-        </div>
-        <ul class="space-y-3 text-sm font-medium">
-            <li class="flex justify-between border-b border-zinc-800/50 pb-2">
-                <span class="text-zinc-500 font-bold normal-case">Rendimiento:</span>
-                <span class="text-white font-bold normal-case">Parejo</span>
-            </li>
-            <li class="flex justify-between border-b border-zinc-800/50 pb-2">
-                <span class="text-zinc-500 font-bold normal-case">Daños:</span>
-                <span class="text-white font-bold normal-case text-right">Simulación</span>
-            </li>
-            <li class="flex justify-between">
-                <span class="text-zinc-500 font-bold normal-case">Parc Fermé:</span>
-                <span class="text-white font-bold normal-case">Activado</span>
-            </li>
-        </ul>
+    <div class="reveal-on-scroll">
+        <h2 class="text-sm font-black mb-12 uppercase tracking-[0.4em] text-zinc-400 flex items-center gap-4">
+            <span class="flex-1 h-[1px] bg-zinc-800"></span> 
+            <span class="text-white italic">ENGINEERING</span> CONFIG & DAMAGE
+            <span class="flex-1 h-[1px] bg-zinc-800"></span>
+        </h2>
     </div>
 
-    <div class="bg-zinc-900/50 p-6 rounded-2xl border border-yellow-700 transition-all duration-300 ease-out hover:scale-105 hover:z-10 hover:border-2 hover:border-yellow-500/50 hover:shadow-[0_20px_50px_rgba(0,0,0,0.5)] group relative">
-        <div class="flex items-center gap-3 mb-4">
-            <div class="p-2 bg-blue-600/10 rounded-lg">
-                <span class="text-blue-500">🛠️</span>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <div class="group relative bg-zinc-950 p-8 rounded-xl border border-zinc-900 transition-all duration-500 hover:border-yellow-600/50 hover:shadow-[0_0_40px_rgba(202,138,4,0.1)] reveal-item">
+            <div class="absolute top-0 left-0 w-6 h-6 border-t-2 border-l-2 border-yellow-600 animate-pulse opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
+            <div class="absolute bottom-0 right-0 w-6 h-6 border-b-2 border-r-2 border-yellow-600 animate-pulse opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
+
+            <div class="flex items-center gap-4 mb-8">
+                <div class="p-3 bg-yellow-600/10 rounded-lg border border-yellow-600/20">
+                    <svg class="w-5 h-5 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37a1.724 1.724 0 002.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                </div>
+                <h4 class="font-black uppercase italic text-base tracking-tighter text-white">Sistemas Mecánicos</h4>
             </div>
-            <h4 class="font-black uppercase italic text-sm tracking-tighter">Asistencias</h4>
+
+            <ul class="space-y-4">
+                <li class="flex justify-between items-center group/item">
+                    <span class="text-zinc-500 text-[11px] font-black uppercase tracking-widest group-hover/item:text-yellow-600 transition-colors">Rendimiento</span>
+                    <span class="text-white font-mono text-sm">PAREJO [EQ]</span>
+                </li>
+                <li class="flex justify-between items-center group/item border-t border-zinc-900 pt-4">
+                    <span class="text-zinc-500 text-[11px] font-black uppercase tracking-widest group-hover/item:text-red-500 transition-colors">Daños</span>
+                    <span class="text-red-500 font-mono text-sm font-bold">SIMULACIÓN</span>
+                </li>
+                <li class="flex justify-between items-center group/item border-t border-zinc-900 pt-4">
+                    <span class="text-zinc-500 text-[11px] font-black uppercase tracking-widest group-hover/item:text-yellow-600 transition-colors">Parc Fermé</span>
+                    <span class="text-white font-mono text-sm">ON</span>
+                </li>
+                <li class="flex justify-between items-center group/item border-t border-zinc-900 pt-4">
+                    <span class="text-zinc-500 text-[11px] font-black uppercase tracking-widest group-hover/item:text-yellow-600 transition-colors">Severidad</span>
+                    <span class="text-white font-mono text-sm uppercase">Estricto</span>
+                </li>
+            </ul>
         </div>
-        <div class="space-y-4">
-            <div>
-                <p class="text-sm text-red-500 font-black uppercase tracking-widest mb-1">Prohibidas</p>
-                <p class="text-sm text-zinc-100 leading-relaxed font-bold normal-case">Trazada dinámica desactivada</p>
+
+        <div class="group relative bg-zinc-950 p-8 rounded-xl border border-zinc-900 transition-all duration-500 hover:border-blue-500/50 hover:shadow-[0_0_40px_rgba(59,130,246,0.1)] reveal-item delay-100">
+            <div class="absolute top-0 left-0 w-6 h-6 border-t-2 border-l-2 border-blue-600 animate-pulse opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
+            <div class="absolute bottom-0 right-0 w-6 h-6 border-b-2 border-r-2 border-blue-600 animate-pulse opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
+
+            <div class="flex items-center gap-4 mb-8">
+                <div class="p-3 bg-blue-600/10 rounded-lg border border-blue-600/20">
+                    <svg class="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                </div>
+                <h4 class="font-black uppercase italic text-base tracking-tighter text-white">Protocolo de Asistencias</h4>
             </div>
-            <div>
-                <p class="text-sm text-blue-500 font-black uppercase tracking-widest mb-1">Libre Elección (Joystick/Teclado)</p>
-                <p class="text-sm text-zinc-100 leading-relaxed font-bold normal-case">ABS, Tracción, Caja de cambios, ERS y DRS</p>
-                <p class="text-sm text-zinc-100 leading-relaxed font-bold normal-case">Con volante todo desactivado, caja manual</p>
+
+            <div class="space-y-6">
+                <div class="relative pl-4 border-l-2 border-red-600/50">
+                    <p class="text-[10px] text-red-500 font-black uppercase tracking-widest mb-1">Bloqueo Total</p>
+                    <p class="text-xs text-zinc-100 font-bold uppercase italic">Trazada dinámica OFF</p>
+                </div>
+                <div class="relative pl-4 border-l-2 border-blue-500/50">
+                    <p class="text-[10px] text-blue-500 font-black uppercase tracking-widest mb-1">Joystick / Teclado</p>
+                    <p class="text-xs text-zinc-300 leading-relaxed font-bold uppercase italic">ABS, TRACCIÓN, ERS/DRS PERMITIDOS</p>
+                </div>
+                <div class="relative pl-4 border-l-2 border-zinc-700">
+                    <p class="text-[10px] text-zinc-500 font-black uppercase tracking-widest mb-1">Modo SimRacing (Volante)</p>
+                    <p class="text-xs text-zinc-100 font-bold uppercase italic">FULL MANUAL / NO ASSISTS</p>
+                </div>
             </div>
+        </div>
+
+        <div class="group relative bg-zinc-950 p-8 rounded-xl border border-zinc-900 transition-all duration-500 hover:border-zinc-500/50 hover:shadow-[0_0_40px_rgba(255,255,255,0.05)] reveal-item delay-200">
+            <div class="absolute top-0 left-0 w-6 h-6 border-t-2 border-l-2 border-white/20 animate-pulse opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
+            <div class="absolute bottom-0 right-0 w-6 h-6 border-b-2 border-r-2 border-white/20 animate-pulse opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
+
+            <div class="flex items-center gap-4 mb-8">
+                <div class="p-3 bg-zinc-100/10 rounded-lg border border-zinc-100/20">
+                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                </div>
+                <h4 class="font-black uppercase italic text-base tracking-tighter text-white">Datos de Competición</h4>
+            </div>
+
+            <ul class="space-y-4">
+                <li class="flex justify-between items-center group/item">
+                    <span class="text-zinc-500 text-[11px] font-black uppercase tracking-widest group-hover/item:text-white transition-colors">Safety Car</span>
+                    <span class="text-white font-mono text-sm">STANDARD</span>
+                </li>
+                <li class="flex justify-between items-center group/item border-t border-zinc-900 pt-4">
+                    <span class="text-zinc-500 text-[11px] font-black uppercase tracking-widest group-hover/item:text-white transition-colors">Vuelta Formación</span>
+                    <span class="text-white font-mono text-sm font-bold uppercase">Manual</span>
+                </li>
+                <li class="flex justify-between items-center group/item border-t border-zinc-900 pt-4">
+                    <span class="text-zinc-500 text-[11px] font-black uppercase tracking-widest group-hover/item:text-white transition-colors">Cámara</span>
+                    <span class="text-white font-mono text-sm uppercase">Cockpit (Los que uegan con volante) / Libre</span>
+                </li>
+            </ul>
         </div>
     </div>
 
-    <div class="bg-zinc-900/50 p-6 rounded-2xl border border-yellow-700 transition-all duration-300 ease-out hover:scale-105 hover:z-10 hover:border-2 hover:border-yellow-500/50 hover:shadow-[0_20px_50px_rgba(0,0,0,0.5)] group relative">
-        <div class="flex items-center gap-3 mb-4">
-            <div class="p-2 bg-yellow-600/10 rounded-lg">
-                <span class="text-yellow-500 text-xl">🚓</span>
-            </div>
-            <h4 class="font-black uppercase italic text-sm tracking-tighter">Varios</h4>
+    <div class="mt-12 flex justify-center reveal-on-scroll">
+        <div class="relative overflow-hidden group">
+            <div class="absolute inset-0 bg-yellow-600/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 ease-in-out"></div>
+            <p class="inline-flex items-center gap-3 bg-zinc-950 px-8 py-3 rounded-md border-l-4 border-yellow-600 animate-pulse text-[10px] md:text-[12px] text-zinc-300 font-black uppercase tracking-[0.2em] relative z-10 shadow-2xl">
+                <span class="text-yellow-600 animate-pulse text-lg">⚠</span> 
+                ADVERTENCIA DE DIRECCIÓN DE CARRERA: DAÑOS SIMULACIÓN ACTIVADOS. EVITEN CONTACTO CON ALAS Y FONDOS.
+            </p>
         </div>
-        <ul class="space-y-3 text-sm font-medium">
-            <li class="flex justify-between border-b border-zinc-800/50 pb-2">
-                <span class="text-zinc-500 font-bold normal-case">Safety car:</span>
-                <span class="text-white font-bold normal-case">Activado</span>
-            </li>
-            <li class="flex justify-between border-b border-zinc-800/50 pb-2">
-                <span class="text-zinc-500 font-bold normal-case">Formación:</span>
-                <span class="text-white font-bold normal-case">Obligatoria</span>
-            </li>
-            <li class="flex justify-between">
-                <span class="text-zinc-500 font-bold normal-case">Cámara:</span>
-                <span class="text-white font-bold normal-case">Libre / Cockpit (Con Volante)</span>
-            </li>
-        </ul>
     </div>
-</div>
-   <div class="mt-8 flex justify-center">
-    <p class="inline-flex items-center gap-2 bg-yellow-600/10 px-6 py-2 rounded-full border border-yellow-600/20 text-[11px] text-yellow-500 font-mono font-black uppercase tracking-[0.2em] animate-pulse">
-        <span>⚠️</span> 
-        Cuidado extremo con el ala y el fondo plano. Daños en modo simulación. No sean bots.
-		
-    </p>
-</div>
-
-
 </section>
+
+<style>
+    /* Efecto de aparición al scrollear */
+    .reveal-on-scroll {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .reveal-on-scroll.active {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .reveal-item {
+        opacity: 0;
+        transform: scale(0.95);
+        transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .reveal-item.active {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    /* Delays para efecto cascada */
+    .delay-100 { transition-delay: 100ms; }
+    .delay-200 { transition-delay: 200ms; }
+</style>
+
+<script>
+    // Script para activar las animaciones al scrollear
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.reveal-on-scroll, .reveal-item').forEach(el => observer.observe(el));
+</script>
 
 
 			<section id="integrantes" class="mt-32 pb-20 scroll-mt-32">
@@ -729,7 +965,7 @@ const escuderias = Object.values(escuderiasMap).sort((a, b) => b.puntos - a.punt
             // Col 2: Simon y Diego (Mercedes Benz)
             // Col 3: Rodri y Leo (Red Bull)
             // Col 4: Rambo y Adrian (Ferrari)
-            const ordenDeseado = ["Chor", "Franco", "Simon", "Diego", "Rodri", "Leo", "Rambo", "Adrian", "Seba", "IA-Williams", "Fede", "IA-Haas"];
+            const ordenDeseado = ["Chor", "Franco", "Simon", "Diego", "Rodri", "Leo", "Rambo", "Adrian", "Seba", "IA-Williams", "Fede", "Valen"];
             
             const pilotosOrdenados = [...pilotos].sort((a, b) => {
                 return ordenDeseado.indexOf(a.nombre) - ordenDeseado.indexOf(b.nombre);
@@ -775,11 +1011,11 @@ const escuderias = Object.values(escuderiasMap).sort((a, b) => b.puntos - a.punt
                                    <div class="flex items-center gap-2 mb-4 bg-zinc-950/80 w-fit px-3 py-1.5 rounded-lg border border-zinc-800 shadow-inner">
     <span class="flex items-center justify-center">
     {/* Volante para los que usan simulador */}
-    {(piloto.nombre === "Chor" || piloto.nombre === "Rambo" || piloto.nombre === "Fede") ? (
+    {(piloto.nombre === "Chor" || piloto.nombre === "Rambo" || piloto.nombre === "Fede" || piloto.nombre === "Valen") ? (
         <svg class="w-4 h-4 text-zinc-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="10" /><line x1="12" y1="2" x2="12" y2="12" /><line x1="12" y1="12" x2="4" y2="18" /><line x1="12" y1="12" x2="20" y2="18" /><circle cx="12" cy="12" r="2" fill="currentColor" />
         </svg>
-    ) : piloto.nombre === "IA-Williams" || piloto.nombre === "IA-Haas"? (
+    ) : piloto.nombre === "IA-Williams" ? (
         /* Icono de Robot para la IA */
         <span class="text-sm">🤖</span>
     ) : piloto.nombre === "Franco" ? (
@@ -792,8 +1028,8 @@ const escuderias = Object.values(escuderiasMap).sort((a, b) => b.puntos - a.punt
     
     <span class="text-[10px] font-mono text-zinc-300 uppercase font-bold">
     {piloto.nombre === "Adrian" ? "Joystick" :
-     (piloto.nombre === "Chor" || piloto.nombre === "Rambo" || piloto.nombre === "Fede") ? "Volante" :
-     piloto.nombre === "IA-Williams" || piloto.nombre === "IA-Haas"? "IA" : 
+     (piloto.nombre === "Chor" || piloto.nombre === "Rambo" || piloto.nombre === "Fede" || piloto.nombre === "Valen") ? "Volante" :
+     piloto.nombre === "IA-Williams" ? "IA" : 
      piloto.nombre === "Franco" ? "Teclado" : "Joystick"}
 </span>
 </div>
@@ -810,7 +1046,7 @@ const escuderias = Object.values(escuderiasMap).sort((a, b) => b.puntos - a.punt
                                             piloto.nombre === "Seba" ? "https://www.instagram.com/sebastianforneris_/" :
                                             piloto.nombre === "IA-Williams" ? "https://www.instagram.com/carlossainz55/" :
                                             piloto.nombre === "Fede" ? "https://www.instagram.com/fede.villalba/" :
-                                            piloto.nombre === "IA-Haas" ? "https://www.instagram.com/olliebearman/" :
+                                            piloto.nombre === "Valen" ? "https://www.instagram.com/valentinorover/" :
                                             "https://www.instagram.com/leo.tapparello/"
                                         } 
                                         target="_blank" 
