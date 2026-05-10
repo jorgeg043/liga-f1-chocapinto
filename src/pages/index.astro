@@ -948,30 +948,23 @@ const escuderias = Object.values(escuderiasMap).sort((a, b) => b.puntos - a.punt
 
 
 			<section id="integrantes" class="mt-32 pb-20 scroll-mt-32">
-    <h2 class="text-2xl font-bold mb-10 flex items-center gap-4 uppercase tracking-tighter w-full">
-    <span class="flex-1 h-[1px] bg-zinc-800"></span>
-    
-    <span class="shrink-0">
-        INTEGRANTES <span class="text-red-600">2026</span>
-    </span>
-
-    <span class="flex-1 h-[1px] bg-zinc-800"></span>
-</h2>
+    <div class="reveal-on-scroll">
+        <h2 class="text-sm font-black mb-12 uppercase tracking-[0.4em] text-white flex items-center gap-4">
+            <span class="flex-1 h-[1px] bg-zinc-800"></span> 
+            <span class="text-white italic text-center">INTEGRANTES</span> 2026 SEASON
+            <span class="flex-1 h-[1px] bg-zinc-800"></span>
+        </h2>
+    </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {(() => {
-            // ORDEN CORREGIDO POR COLUMNAS:
-            // Col 1: Chor y Franco (Alpine)
-            // Col 2: Simon y Diego (Mercedes Benz)
-            // Col 3: Rodri y Leo (Red Bull)
-            // Col 4: Rambo y Adrian (Ferrari)
             const ordenDeseado = ["Chor", "Franco", "Simon", "Diego", "Rodri", "Leo", "Rambo", "Adrian", "Seba", "IA-Williams", "Fede", "Valen"];
             
             const pilotosOrdenados = [...pilotos].sort((a, b) => {
                 return ordenDeseado.indexOf(a.nombre) - ordenDeseado.indexOf(b.nombre);
             });
 
-            return pilotosOrdenados.map((piloto) => {
+            return pilotosOrdenados.map((piloto, index) => {
                 const fondoEscuderia = piloto.escuderia === "Mercedes Benz" ? "escuderia-mercedes.jpg" : 
                                      piloto.escuderia === "Alpine" ? "escuderia-alpine.jpg" :
                                      piloto.escuderia === "Ferrari" ? "escuderia-ferrari.jpg" :
@@ -980,84 +973,94 @@ const escuderias = Object.values(escuderiasMap).sort((a, b) => b.puntos - a.punt
                                      "escuderia-redbull.jpg";
                 
                 return (
-                    <div class="bg-zinc-900/60 border border-zinc-800 rounded-2xl p-6 transition-all duration-300 ease-out hover:scale-110 hover:z-50 hover:border-red-600/50 hover:shadow-[0_20px_50px_rgba(0,0,0,0.5)] group relative overflow-hidden cursor-default transform-gpu will-change-transform">
-                        
-                        <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+                    <div 
+                        class="reveal-item group relative bg-zinc-950 p-6 rounded-xl border border-zinc-900 overflow-hidden transition-all duration-500 hover:border-red-600/50  transform-gpu will-change-transform"
+                        style={`transition-delay: ${index * 100}ms;`}
+                    >
+                        <div class="absolute inset-0 z-0 pointer-events-none">
                             <img 
                                 src={`/Fotos/${fondoEscuderia}`} 
                                 alt="" 
-                                class="w-full h-full object-cover opacity-[0.27] group-hover:opacity-[0.65] transition-opacity duration-500"
+                                class="w-full h-full object-cover opacity-40 "
                             />
+                            <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/60 to-transparent"></div>
                         </div>
 
+                        <div class="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-zinc-800 group-hover:border-red-600 animate-pulse transition-colors duration-500 z-20"></div>
+                        <div class="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-zinc-800 group-hover:border-white animate-pulse transition-colors duration-500 z-20"></div>
+
                         <div class="relative z-10">
-                            <div class="absolute -top-1 -right-1 text-[9px] font-black uppercase tracking-widest text-zinc-300 group-hover:text-red-100 transition-colors">
-                                {piloto.nombre === "Chor" || piloto.nombre === "Simon" || piloto.nombre === "Rodri" || piloto.nombre === "Adrian" || piloto.nombre === "Seba" || piloto.nombre === "Fede"? "Piloto 1" : "Piloto 2"}
+                            <div class="absolute -top-1 -right-1 flex flex-col items-end">
+                                <span class="text-[7px] font-black uppercase tracking-[0.2em] text-zinc-500 mb-1">Status</span>
+                                <span class="bg-zinc-900 border border-zinc-800 px-2 py-0.5 rounded text-[9px] font-black uppercase italic text-zinc-300 group-hover:text-red-500 group-hover:border-red-600/30 transition-all">
+                                    {["Chor", "Simon", "Rodri", "Adrian", "Seba", "Fede"].includes(piloto.nombre) ? "Lead Driver" : "Wingman"}
+                                </span>
                             </div>
 
-                            <div class="flex items-start gap-4">
-                                <div class="w-12 h-12 flex-shrink-0 bg-zinc-950 rounded-xl border border-zinc-800 p-2 flex items-center justify-center shadow-lg">
-                                    <img src={logos[piloto.escuderia]} alt={piloto.escuderia} class="w-full h-full object-contain opacity-80 group-hover:opacity-100 transition-opacity" />
+                            <div class="flex items-center gap-5">
+                                <div class="w-14 h-14 flex-shrink-0 bg-black/40 backdrop-blur-md rounded-lg border border-zinc-800 p-2.5 flex items-center justify-center shadow-2xl group-hover:border-zinc-600 transition-colors">
+                                    <img src={logos[piloto.escuderia]} alt={piloto.escuderia} class="w-full h-full object-contain filter grayscale group-hover:grayscale-0 transition-all duration-500" />
                                 </div>
 
                                 <div class="flex-1">
-                                    <h3 class="text-xl font-black uppercase italic tracking-tighter text-white leading-none mb-1 group-hover:text-red-100 transition-colors">
+                                    <h3 class="text-2xl font-black uppercase italic tracking-tighter text-white leading-none mb-1 group-hover:text-red-500 transition-colors duration-300">
                                         {piloto.nombre}
                                     </h3>
-                                    <p class="text-[10px] text-zinc-500 font-bold uppercase tracking-widest mb-4 italic">
+                                    <p class="text-[9px] text-zinc-500 font-black uppercase tracking-[0.2em] italic">
                                         {piloto.escuderia}
                                     </p>
-
-                                   <div class="flex items-center gap-2 mb-4 bg-zinc-950/80 w-fit px-3 py-1.5 rounded-lg border border-zinc-800 shadow-inner">
-    <span class="flex items-center justify-center">
-    {/* Volante para los que usan simulador */}
-    {(piloto.nombre === "Chor" || piloto.nombre === "Rambo" || piloto.nombre === "Fede" || piloto.nombre === "Valen") ? (
-        <svg class="w-4 h-4 text-zinc-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="10" /><line x1="12" y1="2" x2="12" y2="12" /><line x1="12" y1="12" x2="4" y2="18" /><line x1="12" y1="12" x2="20" y2="18" /><circle cx="12" cy="12" r="2" fill="currentColor" />
-        </svg>
-    ) : piloto.nombre === "IA-Williams" ? (
-        /* Icono de Robot para la IA */
-        <span class="text-sm">🤖</span>
-    ) : piloto.nombre === "Franco" ? (
-        <span class="text-sm">⌨️</span>
-    ) : (
-        /* Joystick para el resto */
-        <span class="text-sm">🎮</span>
-    )}
-</span>
-    
-    <span class="text-[10px] font-mono text-zinc-300 uppercase font-bold">
-    {piloto.nombre === "Adrian" ? "Joystick" :
-     (piloto.nombre === "Chor" || piloto.nombre === "Rambo" || piloto.nombre === "Fede" || piloto.nombre === "Valen") ? "Volante" :
-     piloto.nombre === "IA-Williams" ? "IA" : 
-     piloto.nombre === "Franco" ? "Teclado" : "Joystick"}
-</span>
-</div>
-
-                                    <a 
-                                        href={
-                                            piloto.nombre === "Chor" ? "https://www.instagram.com/jorgegiovagnoli/" :
-                                            piloto.nombre === "Diego" ? "https://www.instagram.com/diiego.z_21" :
-                                            piloto.nombre === "Simon" ? "https://www.instagram.com/pablosimon23/" :
-                                            piloto.nombre === "Franco" ? "https://www.instagram.com/francobellisonzi/" :
-                                            piloto.nombre === "Rodri" ? "https://www.instagram.com/roodribarros/" :
-                                            piloto.nombre === "Rambo" ? "https://www.instagram.com/damifarias95/" :
-                                            piloto.nombre === "Adrian" ? "https://www.instagram.com/adriian.correa/" :
-                                            piloto.nombre === "Seba" ? "https://www.instagram.com/sebastianforneris_/" :
-                                            piloto.nombre === "IA-Williams" ? "https://www.instagram.com/carlossainz55/" :
-                                            piloto.nombre === "Fede" ? "https://www.instagram.com/fede.villalba/" :
-                                            piloto.nombre === "Valen" ? "https://www.instagram.com/valentinorover/" :
-                                            "https://www.instagram.com/leo.tapparello/"
-                                        } 
-                                        target="_blank" 
-                                        class="inline-flex items-center gap-2 text-zinc-500 hover:text-pink-500 transition-colors text-[11px] font-bold"
-                                    >
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-                                        <span>Ver perfil</span>
-                                    </a>
                                 </div>
                             </div>
+
+                            <div class="mt-6 flex items-center justify-between bg-zinc-900/40 backdrop-blur-md p-3 rounded-lg border border-zinc-800/50 shadow-inner group-hover:border-zinc-700 transition-colors">
+                                <div class="flex items-center gap-3">
+                                    <span class="p-1.5 bg-zinc-950 rounded border border-zinc-800 group-hover:text-white transition-colors">
+                                        {["Chor", "Rambo", "Fede", "Valen"].includes(piloto.nombre) ? (
+                                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="2" x2="12" y2="12"/><line x1="12" y1="12" x2="4" y2="18"/><line x1="12" y1="12" x2="20" y2="18"/><circle cx="12" cy="12" r="2" fill="currentColor"/></svg>
+                                        ) : piloto.nombre === "IA-Williams" ? (
+                                            <span class="text-xs">🤖</span>
+                                        ) : piloto.nombre === "Franco" ? (
+                                            <span class="text-xs">⌨️</span>
+                                        ) : (
+                                            <span class="text-xs">🎮</span>
+                                        )}
+                                    </span>
+                                    <div class="flex flex-col">
+                                        <span class="text-[7px] text-zinc-500 font-black uppercase tracking-widest">Input Device</span>
+                                        <span class="text-[10px] font-mono text-zinc-300 uppercase font-black">
+                                            {piloto.nombre === "Adrian" ? "Joystick" :
+                                             (["Chor", "Rambo", "Fede", "Valen"].includes(piloto.nombre)) ? "Volante" :
+                                             piloto.nombre === "IA-Williams" ? "Sistemas IA" : 
+                                             piloto.nombre === "Franco" ? "Teclado" : "Joystick"}
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <a 
+                                    href={
+                                        piloto.nombre === "Chor" ? "https://www.instagram.com/jorgegiovagnoli/" :
+                                        piloto.nombre === "Diego" ? "https://www.instagram.com/diiego.z_21" :
+                                        piloto.nombre === "Simon" ? "https://www.instagram.com/pablosimon23/" :
+                                        piloto.nombre === "Franco" ? "https://www.instagram.com/francobellisonzi/" :
+                                        piloto.nombre === "Rodri" ? "https://www.instagram.com/roodribarros/" :
+                                        piloto.nombre === "Rambo" ? "https://www.instagram.com/damifarias95/" :
+                                        piloto.nombre === "Adrian" ? "https://www.instagram.com/adriian.correa/" :
+                                        piloto.nombre === "Seba" ? "https://www.instagram.com/sebastianforneris_/" :
+                                        piloto.nombre === "IA-Williams" ? "https://www.instagram.com/carlossainz55/" :
+                                        piloto.nombre === "Fede" ? "https://www.instagram.com/fede.villalba/" :
+                                        piloto.nombre === "Valen" ? "https://www.instagram.com/valentinorover/" :
+                                        "https://www.instagram.com/leo.tapparello/"
+                                    } 
+                                    target="_blank" 
+                                    class="p-2 hover:bg-pink-600/20 hover:text-pink-500 rounded-full transition-all duration-300 text-zinc-500"
+                                    title="Open Social Feed"
+                                >
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                                </a>
+                            </div>
                         </div>
+
+                        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-white/[0.02] to-transparent h-[200%] w-full -translate-y-full group-hover:animate-[scan_4s_linear_infinite] pointer-events-none"></div>
                     </div>
                 );
             });
