@@ -654,53 +654,90 @@ const proximaCarrera = calendario
 
 
 {/* USAR PARA CUANDO HAYA OTRA PRÓXIMA ESCUDERIA PARA INFORMAR
+*/}
 
-
-<div class="relative group ... mb-6"> 
-   <h2 class="text-2xl font-bold mb-6 flex items-center gap-2 uppercase tracking-tight">
-                    <span class="w-2 h-8 bg-red-600 inline-block -skew-x-15"></span> NOVEDADES
-                </h2>
-   </div>
-
-
-<div class="relative group overflow-hidden rounded-3xl border border-red-600/30 bg-zinc-900/50 p-1">
-    <div class="relative overflow-hidden rounded-2xl h-64 md:h-80">
-        
-        <img 
-            src="/Fotos/haas-coming-soon.jpg" 
-            alt="McLaren Formula 1 Team" 
-            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
-        />
-        
-        {/* Overlay con degradado naranja McLaren 
-        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
-        
-        {/* Contenido del Anuncio 
-        <div class="absolute bottom-0 left-0 p-8 w-full">
-            <div class="flex items-center gap-3 mb-3">
-                <span class="bg-red-600 text-white text-bold font-black px-3 py-1 rounded-full uppercase tracking-tighter animate-pulse">
-                    Próxima Incorporación FECHA 5
-                </span>
-                
-            </div>
-            
-            <h2 class="text-4xl md:text-6xl font-black uppercase italic tracking-tighter text-white">
-                Haas Ferrari <span class="text-red-500">F1 </span>
-            </h2>
-            
-            <p class="text-zinc-400 mt-2 font-light max-w-md italic">
-                Se suma a Los Chocapinto. Preparate para el Haas Ferrari en la parrilla.
-            </p>
-        </div>
+<section class="max-w-7xl mx-auto px-4 py-16 space-y-12">
+    
+    <div class="relative group inline-block"> 
+        <h2 class="text-3xl md:text-5xl font-black italic tracking-tighter flex items-center gap-4 text-white uppercase">
+            <span class="flex">
+                <span class="w-2.5 h-10 bg-red-600 -skew-x-[20deg]"></span>
+                <span class="w-2.5 h-10 bg-white/10 -skew-x-[20deg] -ml-1.5 transition-colors group-hover:bg-red-500/30"></span>
+            </span>
+            Novedades <span class="text-red-600 not-italic">_</span> Fecha 5
+        </h2>
+        <div class="h-[1px] w-full bg-gradient-to-r from-red-600/50 via-zinc-800 to-transparent mt-3"></div>
     </div>
 
-    {/* Efecto de brillo perimetral naranja 
-    <div class="absolute -inset-0.5 bg-red-500/20 blur opacity-0 group-hover:opacity-100 transition duration-500"></div>
-</div>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        
+        <div class="group relative overflow-hidden rounded-[2rem] border border-white/5 bg-zinc-950 aspect-video lg:aspect-square xl:aspect-video transition-all duration-500 hover:border-red-600/40">
+            <video 
+                src="/Fotos/vpresentacion-haas.mp4" 
+                autoplay muted loop playsinline
+                class="absolute inset-0 w-full h-full object-cover opacity-60 transition-transform duration-1000 group-hover:scale-105"
+            ></video>
 
-<div class="relative group ... mb-16"> 
-   </div>
-*/}
+            <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent"></div>
+            <div class="absolute inset-0 bg-zinc-950/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+            <div class="absolute inset-0 p-8 flex flex-col justify-between">
+                <div class="flex justify-between items-start">
+                    <span class="bg-red-600 text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-[0.2em] animate-pulse">
+                        New Entry
+                    </span>
+                    <i class="fa-solid fa-gauge-high text-red-600/50 text-2xl"></i>
+                </div>
+
+                <div class="space-y-2">
+                    <h3 class="text-4xl md:text-6xl font-[1000] uppercase italic tracking-tighter text-white">
+                        Haas <span class="text-red-600">Ferrari</span>
+                    </h3>
+                    <div class="backdrop-blur-md bg-black/40 border border-white/10 p-4 rounded-xl transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 animate-pulse">
+                        <p class="text-zinc-300 text-sm italic font-light">
+                            <span class="text-red-500 font-bold">Los Chocapinto</span> dan la bienvenida a la potencia italiana. Chasis optimizado para la Fecha 5.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="group relative overflow-hidden rounded-[2rem] border border-white/5 bg-zinc-950 aspect-video lg:aspect-square xl:aspect-video transition-all duration-500 hover:border-blue-500/40">
+            <video 
+                src="/Fotos/vpresentacion-rbvcc.mp4" 
+                autoplay muted loop playsinline
+                class="absolute inset-0 w-full h-full object-cover opacity-60 transition-transform duration-1000 group-hover:scale-105"
+            ></video>
+
+            <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent"></div>
+            <div class="absolute inset-0 bg-zinc-950/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+            <div class="absolute inset-0 p-8 flex flex-col justify-between">
+                <div class="flex justify-between items-start">
+                    <span class="bg-blue-600 text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-[0.2em] animate-pulse">
+                        new entry
+                    </span>
+                    <i class="fa-solid fa-bolt text-blue-600/50 text-2xl"></i>
+                </div>
+
+                <div class="space-y-2">
+                    <h3 class="text-4xl md:text-6xl font-[1000] uppercase italic tracking-tighter text-white">
+                        Racing <span class="text-blue-500">Bulls</span>
+                    </h3>
+                    <div class="backdrop-blur-md bg-black/40 border border-white/10 p-4 rounded-xl transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 animate-pulse">
+                        <p class="text-zinc-300 text-sm italic font-light">
+                            Agilidad radical en pista. Racing Bulls F1 se suma a la parrilla de <span class="text-blue-400 font-bold">Los Chocapinto</span>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    
+</section>
+
 
 
             <section id="pilotos" class="mb-20 scroll-mt-32">
@@ -1290,7 +1327,103 @@ const proximaCarrera = calendario
     </div>
 </section>
 
+<section id="pilotos" class="py-24 bg-[#020c1b]/40 border-t border-zinc-900 overflow-hidden relative">
+    <div class="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDQwIDQwIj48ZyBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMSI+PHBhdGggZD0iTTAgMGg0MHY0MEgwVjB6bTIwIDIwaDIwdjIwSDIWMjB6TTAgMjBoMjB2MjBIMFYyMHoyMCAwaDIwdjIwSDIwVjB6Ii8+PC9nPjwvZz48L3N2Zz4=')]"></div>
 
+    <div class="max-w-7xl mx-auto px-6 relative z-10">
+        <div class="mb-16 reveal-on-scroll">
+            <div class="flex items-center gap-3 mb-4">
+                <span class="w-8 h-[1px] bg-red-600"></span>
+                <span class="text-red-500 font-mono text-[10px] uppercase tracking-[0.5em]">Live Feed // Prototype Analysis</span>
+            </div>
+            <h2 class="text-4xl md:text-6xl font-black uppercase italic text-white tracking-tighter leading-none">
+                LOS <span class="text-red-600 drop-shadow-[0_0_15px_rgba(220,38,38,0.4)]">PROTAGONISTAS</span>
+            </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            <div class="group relative bg-[#020c1b]/80 rounded-xl border border-zinc-800 overflow-hidden hover:border-blue-500/50 transition-all duration-500 shadow-2xl">
+                <div class="absolute top-2 left-2 w-4 h-4 border-t border-l border-zinc-700 z-20 group-hover:border-blue-500"></div>
+                <div class="absolute bottom-2 right-2 w-4 h-4 border-b border-r border-zinc-700 z-20 group-hover:border-blue-500"></div>
+                <div class="relative aspect-video">
+                    <video src="/Videos/coche-alpine.mp4" autoplay muted loop playsinline class="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-700"></video>
+                    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-blue-600/[0.05] to-transparent h-[200%] w-full -translate-y-full group-hover:animate-[scan_4s_linear_infinite] pointer-events-none"></div>
+                </div>
+                <div class="p-5 border-t border-zinc-900 bg-zinc-950/80 flex justify-between items-center">
+                    <div><p class="text-[9px] font-mono text-zinc-600 uppercase tracking-widest">Active_Session</p><p class="text-white font-black italic uppercase text-lg group-hover:text-blue-400 transition-colors">BWT Alpine F1</p></div>
+                    <span class="text-blue-500 font-mono text-[9px] animate-pulse">● SIGNAL_OK</span>
+                </div>
+            </div>
+
+            <div class="group relative bg-[#020c1b]/80 rounded-xl border border-zinc-800 overflow-hidden hover:border-red-600/50 transition-all duration-500 shadow-2xl">
+                <div class="absolute top-2 left-2 w-4 h-4 border-t border-l border-zinc-700 z-20 group-hover:border-red-500"></div>
+                <div class="absolute bottom-2 right-2 w-4 h-4 border-b border-r border-zinc-700 z-20 group-hover:border-red-500"></div>
+                <div class="relative aspect-video">
+                    <video src="/Videos/coche-redbull.mp4" autoplay muted loop playsinline class="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-700"></video>
+                    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-red-600/[0.05] to-transparent h-[200%] w-full -translate-y-full group-hover:animate-[scan_4s_linear_infinite] pointer-events-none"></div>
+                </div>
+                <div class="p-5 border-t border-zinc-900 bg-zinc-950/80 flex justify-between items-center">
+                    <div><p class="text-[9px] font-mono text-zinc-600 uppercase tracking-widest">Active_Session</p><p class="text-white font-black italic uppercase text-lg group-hover:text-red-500 transition-colors">Oracle Red Bull</p></div>
+                    <span class="text-red-500 font-mono text-[9px] animate-pulse">● SIGNAL_OK</span>
+                </div>
+            </div>
+
+            <div class="group relative bg-[#020c1b]/80 rounded-xl border border-zinc-800 overflow-hidden hover:border-red-600/50 transition-all duration-500 shadow-2xl">
+                <div class="absolute top-2 left-2 w-4 h-4 border-t border-l border-zinc-700 z-20 group-hover:border-red-600"></div>
+                <div class="absolute bottom-2 right-2 w-4 h-4 border-b border-r border-zinc-700 z-20 group-hover:border-red-600"></div>
+                <div class="relative aspect-video">
+                    <video src="/Videos/coche-ferrari.mp4" autoplay muted loop playsinline class="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-700"></video>
+                    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-red-600/[0.05] to-transparent h-[200%] w-full -translate-y-full group-hover:animate-[scan_4s_linear_infinite] pointer-events-none"></div>
+                </div>
+                <div class="p-5 border-t border-zinc-900 bg-zinc-950/80 flex justify-between items-center">
+                    <div><p class="text-[9px] font-mono text-zinc-600 uppercase tracking-widest">Active_Session</p><p class="text-white font-black italic uppercase text-lg group-hover:text-red-500 transition-colors">Scuderia Ferrari</p></div>
+                    <span class="text-red-500 font-mono text-[9px] animate-pulse">● SIGNAL_OK</span>
+                </div>
+            </div>
+
+            <div class="group relative bg-[#020c1b]/80 rounded-xl border border-zinc-800 overflow-hidden hover:border-cyan-400/50 transition-all duration-500 shadow-2xl">
+                <div class="absolute top-2 left-2 w-4 h-4 border-t border-l border-zinc-700 z-20 group-hover:border-cyan-400"></div>
+                <div class="absolute bottom-2 right-2 w-4 h-4 border-b border-r border-zinc-700 z-20 group-hover:border-cyan-400"></div>
+                <div class="relative aspect-video">
+                    <video src="/Videos/coche-mercedes.mp4" autoplay muted loop playsinline class="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-700"></video>
+                    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-400/[0.05] to-transparent h-[200%] w-full -translate-y-full group-hover:animate-[scan_4s_linear_infinite] pointer-events-none"></div>
+                </div>
+                <div class="p-5 border-t border-zinc-900 bg-zinc-950/80 flex justify-between items-center">
+                    <div><p class="text-[9px] font-mono text-zinc-600 uppercase tracking-widest">Active_Session</p><p class="text-white font-black italic uppercase text-lg group-hover:text-cyan-400 transition-colors">Mercedes AMG</p></div>
+                    <span class="text-cyan-400 font-mono text-[9px] animate-pulse">● SIGNAL_OK</span>
+                </div>
+            </div>
+
+            <div class="group relative bg-[#020c1b]/80 rounded-xl border border-zinc-800 overflow-hidden hover:border-zinc-200/50 transition-all duration-500 shadow-2xl">
+                <div class="absolute top-2 left-2 w-4 h-4 border-t border-l border-zinc-700 z-20 group-hover:border-red-600"></div>
+                <div class="absolute bottom-2 right-2 w-4 h-4 border-b border-r border-zinc-700 z-20 group-hover:border-red-600"></div>
+                <div class="relative aspect-video">
+                    <video src="/Videos/coche-haas.mp4" autoplay muted loop playsinline class="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-700"></video>
+                    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-zinc-400/[0.05] to-transparent h-[200%] w-full -translate-y-full group-hover:animate-[scan_4s_linear_infinite] pointer-events-none"></div>
+                </div>
+                <div class="p-5 border-t border-zinc-900 bg-zinc-950/80 flex justify-between items-center">
+                    <div><p class="text-[9px] font-mono text-zinc-600 uppercase tracking-widest">Active_Session</p><p class="text-white font-black italic uppercase text-lg group-hover:text-zinc-300 transition-colors">Haas F1 Team</p></div>
+                    <span class="text-red-500 font-mono text-[9px] animate-pulse">● SIGNAL_OK</span>
+                </div>
+            </div>
+
+            <div class="group relative bg-[#020c1b]/80 rounded-xl border border-zinc-800 overflow-hidden hover:border-blue-400/50 transition-all duration-500 shadow-2xl">
+                <div class="absolute top-2 left-2 w-4 h-4 border-t border-l border-zinc-700 z-20 group-hover:border-blue-400"></div>
+                <div class="absolute bottom-2 right-2 w-4 h-4 border-b border-r border-zinc-700 z-20 group-hover:border-blue-400"></div>
+                <div class="relative aspect-video">
+                    <video src="/Videos/coche-williams.mp4" autoplay muted loop playsinline class="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-700"></video>
+                    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-blue-400/[0.05] to-transparent h-[200%] w-full -translate-y-full group-hover:animate-[scan_4s_linear_infinite] pointer-events-none"></div>
+                </div>
+                <div class="p-5 border-t border-zinc-900 bg-zinc-950/80 flex justify-between items-center">
+                    <div><p class="text-[9px] font-mono text-zinc-600 uppercase tracking-widest">Active_Session</p><p class="text-white font-black italic uppercase text-lg group-hover:text-blue-300 transition-colors">Williams Racing</p></div>
+                    <span class="text-blue-400 font-mono text-[9px] animate-pulse">● SIGNAL_OK</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
 
 
 
