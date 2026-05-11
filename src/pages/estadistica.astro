@@ -4,12 +4,11 @@ import Layout from '../layouts/Layout.astro';
 import historial from '../Data/historial.json';
 import sprint from '../Data/sprint.json';
 
-// --- LÓGICA DE CONSOLIDACIÓN ---
+// --- LÓGICA DE CONSOLIDACIÓN (Mantengo tu código igual) ---
 const statsPilotos = {};
 
 function procesarSesion(dataArray) {
   (dataArray || []).forEach((sesion) => {
-    // Función de seguridad: Solo acepta nombres, no tiempos (ej: 1:24.555)
     const esNombreValido = (n) => n && typeof n === 'string' && !n.includes(':') && !/^\d/.test(n);
 
     const registrarPiloto = (nombre) => {
@@ -22,18 +21,10 @@ function procesarSesion(dataArray) {
       return false;
     };
 
-    // 1. Procesar Pole
-    if (registrarPiloto(sesion.pole)) {
-      statsPilotos[sesion.pole].poles += 1;
-    }
-
-    // 2. Procesar Vuelta Rápida
+    if (registrarPiloto(sesion.pole)) statsPilotos[sesion.pole].poles += 1;
     const vr = sesion.pilotoVueltaRapida || sesion.vueltaRapida;
-    if (registrarPiloto(vr)) {
-      statsPilotos[vr].vRapidas += 1;
-    }
+    if (registrarPiloto(vr)) statsPilotos[vr].vRapidas += 1;
 
-    // 3. Procesar Resultados
     if (sesion.resultados) {
       sesion.resultados.forEach((res) => {
         if (registrarPiloto(res.piloto)) {
@@ -52,253 +43,305 @@ procesarSesion(sprint);
 const ranking = Object.values(statsPilotos).sort((a, b) => b.puntos - a.puntos);
 const maxPuntos = ranking.length > 0 ? ranking[0].puntos : 1;
 ---
+<body class="bg-slate-950 text-white font-sans">
 
-<Layout title="Data Center | Estadísticas">
-  <div class="f1-stats-page">
-    <main class="f1-content">
-      <nav class="f1-nav-top">
-        <a href="/" class="f1-back-btn">
-          <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="19" y1="12" x2="5" y2="12"></line>
-            <polyline points="12 19 5 12 12 5"></polyline>
-          </svg>
-          VOLVER AL INICIO
+<nav class="bg-slate-950 fixed top-0 w-full bg-[#020c1b]/95 backdrop-blur-xl border-b border-white/5 z-[100]">
+    <div class="bg-slate-950 max-w-7xl mx-auto px-6 py-4 flex justify-between items-center relative">
+        
+        <a href="/" class="bg-slate-950 flex items-center gap-3 group cursor-pointer">
+            <div class="flex flex-col items-start leading-none">
+                <span class="font-black italic text-xl tracking-tighter uppercase text-white -skew-x-12">
+                    FORMULA <span class="text-red-600">1</span>
+                </span>
+                <span class="text-[7px] font-mono text-zinc-500 uppercase tracking-[0.4em] ml-1">Statistics Center</span>
+            </div>
         </a>
-      </nav>
-      <header class="f1-header">
-        <h1>ESTADÍSTICA <span> PILOTOS</span></h1>
-        <p>Telemtría & Performance Analisis 2026</p>
-      </header>
 
-      <section class="f1-main-list">
+        <div class="hidden md:flex items-center gap-6 text-[11px] font-black uppercase tracking-[0.2em]">
+            <a href="/" class="text-zinc-400 hover:text-white transition-all flex items-center gap-2 group/link">
+                <span class="w-1 h-1 bg-zinc-800 group-hover:bg-red-600 rounded-full transition-colors"></span>
+                Inicio
+            </a>
+            <a href="/historial" class="text-zinc-400 hover:text-white transition-all flex items-center gap-2 group/link">
+                <span class="w-1 h-1 bg-zinc-800 group-hover:bg-red-600 rounded-full transition-colors"></span>
+                Historial Carreras
+            </a>
+            <a href="/sprint" class="text-zinc-400 hover:text-white transition-all flex items-center gap-2 group/link">
+                <span class="w-1 h-1 bg-zinc-800 group-hover:bg-red-600 rounded-full transition-colors"></span>
+                Sprint
+            </a>
+            
+            <div class="bg-red-600/10 border border-red-600/30 px-4 py-2 rounded-md">
+                <span class="text-red-500 font-black italic">Stats Mode Active</span>
+            </div>
+        </div>
+
+        <button id="mobile-menu-btn" class="md:hidden flex flex-col gap-1.5 items-end group outline-none">
+            <span class="w-8 h-[2px] bg-white group-hover:bg-red-600 transition-all origin-right" id="line1"></span>
+            <span class="w-5 h-[2px] bg-red-600 group-hover:bg-white transition-all" id="line2"></span>
+            <span class="w-8 h-[2px] bg-white group-hover:bg-red-600 transition-all origin-right" id="line3"></span>
+        </button>
+    </div>
+
+    <div id="mobile-menu-content" class="bg-slate-950 fixed inset-0 top-[72px] bg-[#020c1b] z-[90] flex flex-col p-8 transition-all duration-500 translate-x-full md:hidden">
+        <div class="flex flex-col gap-8">
+            <span class="text-[9px] font-mono text-zinc-600 tracking-[0.5em] uppercase border-b border-zinc-900 pb-2">Analytics System</span>
+            
+            <a href="/" class="mobile-link text-4xl font-black italic uppercase text-white tracking-tighter">Inicio</a>
+            <a href="/historial" class="mobile-link text-4xl font-black italic uppercase text-white tracking-tighter">Historial</a>
+            <a href="/sprint" class="mobile-link text-4xl font-black italic uppercase text-white tracking-tighter">Sprint</a>
+            
+            <div class="bg-slate-950 mt-4 p-4 border-l-2 border-red-600 bg-red-600/5">
+                <span class="text-[10px] font-mono text-red-500 uppercase tracking-widest block mb-1">Current Task:</span>
+                <span class="text-xl font-black text-white italic uppercase">Global Statistics</span>
+            </div>
+        </div>
+        <div class="mt-auto opacity-10">
+            <span class="text-[60px] font-black italic text-white leading-none tracking-tighter">ANALYTICS</span>
+        </div>
+    </div>
+</nav>
+
+<script data-astro-rerun>
+    document.addEventListener('astro:page-load', () => {
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu-content');
+        const lines = [document.getElementById('line1'), document.getElementById('line2'), document.getElementById('line3')];
+
+        if (!btn || !menu) return;
+
+        const toggleMenu = () => {
+            const isOpen = menu.classList.contains('translate-x-0');
+            if (isOpen) {
+                menu.classList.remove('translate-x-0');
+                menu.classList.add('translate-x-full');
+                lines[0].style.transform = 'rotate(0) translateY(0)';
+                lines[1].style.opacity = '1';
+                lines[2].style.transform = 'rotate(0) translateY(0)';
+            } else {
+                menu.classList.remove('translate-x-full');
+                menu.classList.add('translate-x-0');
+                lines[0].style.transform = 'rotate(-45deg) translate(-5px, 5px)';
+                lines[1].style.opacity = '0';
+                lines[2].style.transform = 'rotate(45deg) translate(-5px, -5px)';
+            }
+        };
+
+        btn.addEventListener('click', toggleMenu);
+
+        // Cerramos el menú si se hace click en un link (evita que quede abierto al volver)
+        const links = document.querySelectorAll('.mobile-link');
+        links.forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.remove('translate-x-0');
+                menu.classList.add('translate-x-full');
+            });
+        });
+    });
+</script>
+
+  <main class="bg-slate-950 max-w-5xl mx-auto pt-32 pb-20 px-4">
+    <header id="inicio" class="bg-slate-950 mb-16 relative py-20 overflow-hidden "> 
+    <img 
+        src="/Fotos/fondo-f1.png" 
+        class="bg-slate-950 absolute inset-0 w-full h-full object-cover opacity-20 z-0 pointer-events-none" 
+        alt="Fondo Sprint"
+        
+    />
+<div class="absolute inset-0 z-[1] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-zinc-900/0 via-black/80 to-black pointer-events-none"></div>
+
+    <div class="absolute inset-0 z-[2] opacity-[0.03] pointer-events-none bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDQwIDQwIj48ZyBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMSI+PHBhdGggZD0iTTAgMGg0MHY0MEgwVjB6bTIwIDIwaDIwdjIwSDIWMjB6TTAgMjBoMjB2MjBIMFYyMHoyMCAwaDIwdjIwSDIwVjB6Ii8+PC9nPjwvZz48L3N2Zz4=')] bg-center"></div>
+
+    <div class="absolute top-10 left-10 w-16 h-16 border-t-2 border-l-2 border-zinc-800 pointer-events-none opacity-40"></div>
+    <div class="absolute top-10 right-10 w-16 h-16 border-t-2 border-r-2 border-zinc-800 pointer-events-none opacity-40"></div>
+    <div class="relative z-10 text-center">
+        <h1 class="text-5xl md:text-6xl lg:text-7xl font-black uppercase italic tracking-tighter text-white -skew-x-15 leading-tight">
+            ESTADISTICAS 
+            <span class="block md:inline text-red-600 -skew-x-15 drop-shadow-[0_0_20px_rgba(220,38,38,0.6)]">
+                PILOTOS
+            </span>
+        </h1>
+        <div class="mt-8 mb-4 flex justify-center items-center gap-4 reveal-on-scroll">
+            <span class="flex-1 h-[1px] bg-gradient-to-r from-transparent via-zinc-800 to-transparent max-w-[200px]"></span>
+            
+                
+                
+            </div>
+            <span class="flex-1 h-[1px] bg-gradient-to-r from-transparent via-zinc-800 to-transparent max-w-[200px]"></span>
+        </div>
+    </div>
+    <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-red-950 via-red-600 to-red-950 opacity-80 shadow-[0_0_20px_rgba(220,38,38,0.5)]"></div>
+</header>
+
+    <section class="bg-slate-950 max-w-5xl mx-auto px-6 mb-20">
+      <div class="flex flex-col gap-8">
         {ranking.map((piloto, index) => {
-          const diff = index > 0 ? ranking[index - 1].puntos - piloto.puntos : 0;
           const percentage = (piloto.puntos / maxPuntos) * 100;
           return (
-            <div class="f1-row">
-              <div class="f1-info">
-                <div class="f1-pilot">
-                  <span class="f1-pos">#{index + 1}</span>
-                  <div class="f1-name-group">
-                    <h2 class="f1-name">{piloto.nombre}</h2>
-                    <div class="f1-badges">
-                       <span>{piloto.victorias}V</span>
-                       <span>{piloto.podios}P</span>
-                       {piloto.vRapidas > 0 && <span class="badge-vr">{piloto.vRapidas}VR</span>}
+            <div class="reveal-item group">
+              <div class="flex justify-between items-end mb-2">
+                <div class="flex items-center gap-4">
+                  <span class="text-2xl font-black italic text-zinc-800 group-hover:text-red-600 transition-colors">#{index + 1}</span>
+                  <div>
+                    <h2 class="text-xl font-black uppercase italic text-white leading-none">{piloto.nombre}</h2>
+                    <div class="flex gap-2 mt-2">
+                        <span class="text-[9px] font-bold bg-zinc-900 border border-zinc-800 px-2 py-0.5 rounded text-zinc-400">{piloto.victorias}V</span>
+                        <span class="text-[9px] font-bold bg-zinc-900 border border-zinc-800 px-2 py-0.5 rounded text-zinc-400">{piloto.podios}P</span>
+                        {piloto.vRapidas > 0 && <span class="text-[9px] font-bold bg-green-600/10 border border-green-600/20 px-2 py-0.5 rounded text-green-500">{piloto.vRapidas}VR</span>}
                     </div>
                   </div>
                 </div>
-                <div class="f1-stats-box">
-                  {index > 0 && <span class="f1-diff">-{diff}</span>}
-                  <span class="f1-pts-val">{piloto.puntos}</span>
-                  <span class="f1-pts-label">PTS</span>
+                <div class="text-right">
+                  <span class="text-3xl font-mono font-black text-red-600 italic leading-none">{piloto.puntos}</span>
+                  <span class="text-[10px] font-black text-zinc-500 block uppercase">Puntos</span>
                 </div>
               </div>
               
-              <div class="f1-progress-track">
-                <div class="f1-progress-fill f1-telemetry-bar" data-p={percentage} style="width: 0%">
-                  <div class="f1-bar-glow"></div>
-                  <div class="f1-shimmer"></div>
-                </div>
-                {index > 0 && <span class="f1-leader-gap">+{ranking[0].puntos - piloto.puntos}</span>}
+              <div class="h-5 bg-zinc-950 rounded-full border border-zinc-900 overflow-hidden relative shadow-inner">
+  <div 
+      class="f1-telemetry-bar h-full bg-gradient-to-r from-red-950 via-red-600 to-red-500 relative transition-all duration-1000 ease-out" 
+      data-p={percentage} 
+      style="width: 0%; transition: width 1.5s cubic-bezier(0.22, 1, 0.36, 1);"
+  >
+    <div class="absolute right-0 top-0 h-full w-1 bg-white shadow-[0_0_15px_4px_rgba(220,38,38,0.8),0_0_20px_2px_rgba(255,255,255,0.6)] z-10"></div>
+
+    <div class="absolute inset-0 bg-gradient-to-b from-white/20 to-transparent opacity-50"></div>
+    
+    <div class="absolute inset-0 bg-white/5 animate-pulse"></div>
+  </div>
+</div>
               </div>
             </div>
           )
         })}
-      </section>
-
-      <div class="f1-dashboard">
-        <div class="f1-dash-card p-border">
-          <h3><span class="dot p-dot"></span> POLES</h3>
-          <div class="f1-mini-list">
-            {ranking.map(p => (
-              <div class="f1-mini-stat">
-                <div class="f1-mini-label"><span>{p.nombre}</span><span class="f1-mini-val">{p.poles}</span></div>
-                <div class="f1-mini-track">
-                  <div class="f1-mini-fill purple-bg" style={`width: ${(p.poles / Math.max(...ranking.map(x => x.poles), 1)) * 100}%`}></div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div class="f1-dash-card r-border">
-          <h3><span class="dot r-dot"></span> VICTORIAS</h3>
-          <div class="f1-mini-list">
-            {ranking.map(p => (
-              <div class="f1-mini-stat">
-                <div class="f1-mini-label"><span>{p.nombre}</span><span class="f1-mini-val">{p.victorias}</span></div>
-                <div class="f1-mini-track">
-                  <div class="f1-mini-fill red-bg" style={`width: ${(p.victorias / Math.max(...ranking.map(x => x.victorias), 1)) * 100}%`}></div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div class="f1-dash-card y-border">
-          <h3><span class="dot y-dot"></span> PODIOS</h3>
-          <div class="f1-mini-list">
-            {ranking.map(p => (
-              <div class="f1-mini-stat">
-                <div class="f1-mini-label"><span>{p.nombre}</span><span class="f1-mini-val">{p.podios}</span></div>
-                <div class="f1-mini-track">
-                  <div class="f1-mini-fill yellow-bg" style={`width: ${(p.podios / Math.max(...ranking.map(x => x.podios), 1)) * 100}%`}></div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div class="f1-dash-card g-border">
-          <h3><span class="dot g-dot"></span> V. RÁPIDAS</h3>
-          <div class="f1-mini-list">
-            {ranking.map(p => (
-              <div class="f1-mini-stat">
-                <div class="f1-mini-label"><span>{p.nombre}</span><span class="f1-mini-val">{p.vRapidas}</span></div>
-                <div class="f1-mini-track">
-                  <div class="f1-mini-fill green-bg" style={`width: ${(p.vRapidas / Math.max(...ranking.map(x => x.vRapidas), 1)) * 100}%`}></div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
       </div>
-    </main>
-  </div>
+    </section>
+<script data-astro-rerun>
+    // Función centralizada de animación
+    function animarBarras() {
+        // Buscamos todas las barras
+        const bars = document.querySelectorAll('.f1-telemetry-bar');
+        
+        // Pequeño delay para que la transición de página termine y se vea el efecto "filling"
+        setTimeout(() => {
+            bars.forEach(bar => {
+                const targetWidth = bar.getAttribute('data-p');
+                if (targetWidth) {
+                    bar.style.width = targetWidth + '%';
+                }
+            });
+        }, 100); // 100ms es suficiente para que el DOM esté listo
+    }
+
+    // Se dispara en la carga inicial
+    animarBarras();
+
+    // Se dispara cada vez que Astro cambia de página (View Transitions)
+    document.addEventListener('astro:page-load', animarBarras);
+</script>
+    <section class="bg-slate-950 max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 pb-20">
+        <div class=" border-t-4 border-purple-600 p-6 rounded-xl border border-zinc-900">
+            <h3 class="text-xs font-black uppercase text-zinc-500 mb-6 italic tracking-widest italic flex items-center gap-2">
+                <span class="w-2 h-2 bg-purple-600 rounded-full"></span> Poles
+            </h3>
+            {ranking.filter(p => p.poles > 0).map(p => (
+                <div class="bg-slate-950 mb-4">
+                    <div class="flex justify-between text-[11px] font-bold uppercase mb-1">
+                        <span class="text-zinc-300">{p.nombre}</span>
+                        <span class="text-white">{p.poles}</span>
+                    </div>
+                    <div class="h-1 bg-zinc-900 rounded-full overflow-hidden">
+                        <div class="h-full bg-purple-600" style={`width: ${(p.poles / Math.max(...ranking.map(x => x.poles), 1)) * 100}%`}></div>
+                    </div>
+                </div>
+            ))}
+        </div>
+
+        <div class="bg-slate-950 border-t-4 border-red-600 p-6 rounded-xl border border-zinc-900">
+            <h3 class="text-xs font-black uppercase text-zinc-500 mb-6 italic tracking-widest flex items-center gap-2">
+                <span class="w-2 h-2 bg-red-600 rounded-full"></span> Victorias
+            </h3>
+            {ranking.filter(p => p.victorias > 0).map(p => (
+                <div class="mb-4">
+                    <div class="flex justify-between text-[11px] font-bold uppercase mb-1">
+                        <span class="text-zinc-300">{p.nombre}</span>
+                        <span class="text-white">{p.victorias}</span>
+                    </div>
+                    <div class="h-1 bg-zinc-900 rounded-full overflow-hidden">
+                        <div class="h-full bg-red-600" style={`width: ${(p.victorias / Math.max(...ranking.map(x => x.victorias), 1)) * 100}%`}></div>
+                    </div>
+                </div>
+            ))}
+        </div>
+
+        <div class="bg-slate-950 border-t-4 border-yellow-500 p-6 rounded-xl border border-zinc-900">
+            <h3 class="text-xs font-black uppercase text-zinc-500 mb-6 italic tracking-widest flex items-center gap-2">
+                <span class="w-2 h-2 bg-yellow-500 rounded-full"></span> Podios
+            </h3>
+            {ranking.filter(p => p.podios > 0).map(p => (
+                <div class="mb-4">
+                    <div class="flex justify-between text-[11px] font-bold uppercase mb-1">
+                        <span class="text-zinc-300">{p.nombre}</span>
+                        <span class="text-white">{p.podios}</span>
+                    </div>
+                    <div class="h-1 bg-zinc-900 rounded-full overflow-hidden">
+                        <div class="h-full bg-yellow-500" style={`width: ${(p.podios / Math.max(...ranking.map(x => x.podios), 1)) * 100}%`}></div>
+                    </div>
+                </div>
+            ))}
+        </div>
+
+        <div class=" border-t-4 border-green-500 p-6 rounded-xl border border-zinc-900">
+            <h3 class="text-xs font-black uppercase text-zinc-500 mb-6 italic tracking-widest flex items-center gap-2">
+                <span class="w-2 h-2 bg-green-500 rounded-full"></span> V. Rapidas
+            </h3>
+            {ranking.filter(p => p.vRapidas > 0).map(p => (
+                <div class="mb-4">
+                    <div class="flex justify-between text-[11px] font-bold uppercase mb-1">
+                        <span class="text-zinc-300">{p.nombre}</span>
+                        <span class="text-white">{p.vRapidas}</span>
+                    </div>
+                    <div class="h-1 bg-zinc-900 rounded-full overflow-hidden">
+                        <div class="h-full bg-green-500" style={`width: ${(p.vRapidas / Math.max(...ranking.map(x => x.vRapidas), 1)) * 100}%`}></div>
+                    </div>
+                </div>
+            ))}
+        </div>
+    </section>
+  </main>
 </Layout>
 
-<script>
-  function animate() {
-    const bars = document.querySelectorAll('.f1-telemetry-bar');
-    setTimeout(() => {
-      bars.forEach(bar => {
-        const val = bar.getAttribute('data-p');
-        (bar as HTMLElement).style.width = val + '%';
-      });
-    }, 150);
-  }
-  animate();
-  document.addEventListener('astro:after-swap', animate);
+<script data-astro-rerun>
+    document.addEventListener('astro:page-load', () => {
+        // Animación de barras
+        const bars = document.querySelectorAll('.f1-telemetry-bar');
+        setTimeout(() => {
+            bars.forEach(bar => {
+                const val = bar.getAttribute('data-p');
+                bar.style.width = val + '%';
+            });
+        }, 300);
+
+        // Menú Móvil
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu-content');
+        if (btn && menu) {
+            btn.addEventListener('click', () => {
+                const isOpen = menu.classList.contains('translate-x-0');
+                menu.classList.toggle('translate-x-0', !isOpen);
+                menu.classList.toggle('translate-x-full', isOpen);
+            });
+        }
+    });
 </script>
-
-<style is:global>
-    /* BOTÓN VOLVER ESTILO F1 */
-  .f1-nav-top { 
-    width: 100%; 
-    margin-bottom: 25px; 
-    display: flex;
-  }
-
-  .f1-back-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    color: #52525b; /* Color gris oscuro inicial */
-    text-decoration: none;
-    font-size: 0.7rem;
-    font-weight: 950;
-    font-style: italic;
-    letter-spacing: 1.5px;
-    padding: 6px 12px;
-    border: 1px solid #1f1f23;
-    border-radius: 4px;
-    background: transparent;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    text-transform: uppercase;
-  }
-
-  .f1-back-btn:hover {
-    color: #ffffff;
-    border-color: #e11d48;
-    background: rgba(225, 29, 72, 0.1);
-    transform: translateX(-4px); /* Efecto sutil de retroceso */
-    box-shadow: -5px 0 15px rgba(225, 29, 72, 0.2);
-  }
-
-  .f1-back-btn svg {
-    transition: transform 0.3s ease;
-  }
-
-  .f1-back-btn:hover svg {
-    color: #e11d48;
-    transform: scale(1.1);
-  }
-  /* 1. CONFIGURACIÓN BASE */
-  :global(body) { 
-    background-color: #16163a !important; 
-    color: white !important; 
-    margin: 0; 
-    overflow-x: hidden; 
-    font-family: 'Inter', system-ui, sans-serif;
-  }
-
-  .f1-stats-page { width: 100%; display: flex; justify-content: center; background: #090620; }
-  .f1-content { width: 100%; max-width: 1000px; padding: 40px 20px; box-sizing: border-box; }
-
-  /* 2. HEADER */
-  .f1-header h1 { font-size: clamp(1.8rem, 6vw, 3rem); font-weight: 900; font-style: italic; color: white !important; margin: 0; line-height: 1; }
-  .f1-header h1 span { color: #e11d48 !important; }
-  .f1-header p { color: #a1a1aa; font-family: monospace; letter-spacing: 2px; font-size: 0.8rem; margin-top: 5px; }
-
-  /* 3. LISTADO COMPACTO */
-  .f1-main-list { display: flex; flex-direction: column; gap: 12px; margin-top: 20px; }
-  .f1-row { width: 100%; border-bottom: 1px solid #1f1f2333; padding-bottom: 8px; }
-  .f1-info { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
-
-  .f1-pilot { display: flex; align-items: center; gap: 12px; }
-  .f1-pos { font-size: 1.1rem; font-weight: 900; color: #27272a; font-style: italic; min-width: 35px; }
-  .f1-name { font-size: 1.1rem; font-weight: 800; color: white !important; text-transform: uppercase; margin: 0; font-style: italic; line-height: 1; }
-  
-  .f1-badges { display: flex; gap: 4px; margin-top: 3px; }
-  .f1-badges span { font-size: 8px; color: #71717a; border: 1px solid #27272a; padding: 1px 5px; border-radius: 3px; background: #111113; font-weight: bold; }
-  .badge-vr { color: #22c55e !important; border-color: #064e3b !important; }
-  
-  .f1-pts-val { font-size: 1.4rem; font-weight: 950; color: #e11d48 !important; font-style: italic; line-height: 1; }
-  .f1-pts-label { font-size: 8px; color: #efeff3; font-weight: bold; }
-
-  /* BARRAS PRINCIPALES */
-  .f1-progress-track { height: 18px; background: #111113; border: 1px solid #1f1f23; border-radius: 4px; position: relative; overflow: hidden; display: flex; align-items: center; padding: 0 3px; }
-  .f1-progress-fill { height: 65%; border-radius: 2px; transition: width 2s cubic-bezier(0.1, 1, 0.3, 1); background: linear-gradient(90deg, #7f1d1d 0%, #dc2626 85%, #f8f8f8 100%) !important; box-shadow: 0 0 10px rgba(220, 38, 38, 0.3); position: relative; }
-  .f1-bar-glow { position: absolute; right: 0; top: 0; width: 10px; height: 100%; background: white; filter: blur(4px); opacity: 0.5; }
-  .f1-leader-gap { position: absolute; right: 8px; font-size: 8px; font-family: monospace; color: #f9f9ff; font-weight: bold; }
-
-  /* 4. DASHBOARD */
-  .f1-dashboard { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; margin-top: 50px; padding-top: 30px; border-top: 1px solid #18181b; }
-  .f1-dash-card { background: #111113 !important; border: 1px solid #1f1f23 !important; padding: 20px !important; border-radius: 12px !important; overflow-y: auto; max-height: 300px; }
-  .f1-dash-card h3 { font-size: 0.75rem; color: #71717a !important; margin: 0 0 15px 0; display: flex; align-items: center; gap: 8px; font-style: italic; text-transform: uppercase; }
-  
-  .p-border { border-top: 3px solid #a855f7 !important; }
-  .r-border { border-top: 3px solid #e11d48 !important; }
-  .y-border { border-top: 3px solid #eab308 !important; }
-  .g-border { border-top: 3px solid #22c55e !important; }
-
-  .dot { width: 6px; height: 6px; border-radius: 50%; }
-  .p-dot { background: #a855f7; }
-  .r-dot { background: #e11d48; }
-  .y-dot { background: #eab308; }
-  .g-dot { background: #22c55e; box-shadow: 0 0 6px #22c55e; }
-
-  .f1-mini-stat { margin-bottom: 10px; }
-  .f1-mini-label { display: flex; justify-content: space-between; font-size: 0.7rem; color: #d4d4d8; margin-bottom: 3px; font-weight: bold; }
-  .f1-mini-track { height: 4px; background: #18181b; border-radius: 4px; overflow: hidden; }
-  .f1-mini-fill { height: 100%; border-radius: 4px; transition: width 1.5s ease; }
-  
-  .purple-bg { background: #a855f7; }
-  .red-bg { background: #e11d48; }
-  .yellow-bg { background: #eab308; }
-  .green-bg { background: #22c55e; }
-
-  .f1-shimmer { position: absolute; inset: 0; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent); animation: sh 3s infinite; }
-  @keyframes sh { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
-.f1-dash-card { 
-    background: #111113 !important; 
-    border: 1px solid #1f1f23 !important; 
-    padding: 20px !important; 
-    border-radius: 12px !important; 
+<style>
+    /* Animación extra para el brillo de las barras */
+    @keyframes shimmer {
+        100% { transform: translateX(100%); }
+    }
     
-    /* MODIFICACIÓN: Quitar el scroll y expandir */
-    max-height: none !important; 
-    overflow-y: visible !important; 
-  }
+    /* Aseguramos que el contenedor de la página tenga el fondo correcto */
+    
 </style>
+
+</body>
