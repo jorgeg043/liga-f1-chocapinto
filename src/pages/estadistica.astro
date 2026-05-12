@@ -173,49 +173,115 @@ const maxPuntos = ranking.length > 0 ? ranking[0].puntos : 1;
     <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-red-950 via-red-600 to-red-950 opacity-80 shadow-[0_0_20px_rgba(220,38,38,0.5)]"></div>
 </header>
 
-    <section class="bg-slate-950 max-w-5xl mx-auto px-6 mb-20">
-      <div class="flex flex-col gap-8">
-        {ranking.map((piloto, index) => {
-          const percentage = (piloto.puntos / maxPuntos) * 100;
-          return (
-            <div class="reveal-item group">
-              <div class="flex justify-between items-end mb-2">
-                <div class="flex items-center gap-4">
-                  <span class="text-2xl font-black italic text-zinc-800 group-hover:text-red-600 transition-colors">#{index + 1}</span>
-                  <div>
-                    <h2 class="text-xl font-black uppercase italic text-white leading-none">{piloto.nombre}</h2>
-                    <div class="flex gap-2 mt-2">
-                        <span class="text-[9px] font-bold bg-zinc-900 border border-zinc-800 px-2 py-0.5 rounded text-zinc-400">{piloto.victorias}V</span>
-                        <span class="text-[9px] font-bold bg-zinc-900 border border-zinc-800 px-2 py-0.5 rounded text-zinc-400">{piloto.podios}P</span>
-                        {piloto.vRapidas > 0 && <span class="text-[9px] font-bold bg-green-600/10 border border-green-600/20 px-2 py-0.5 rounded text-green-500">{piloto.vRapidas}VR</span>}
-                    </div>
-                  </div>
-                </div>
-                <div class="text-right">
-                  <span class="text-3xl font-mono font-black text-red-600 italic leading-none">{piloto.puntos}</span>
-                  <span class="text-[10px] font-black text-zinc-500 block uppercase">Puntos</span>
-                </div>
-              </div>
-              
-              <div class="h-5 bg-zinc-950 rounded-full border border-zinc-900 overflow-hidden relative shadow-inner">
-  <div 
-      class="f1-telemetry-bar h-full bg-gradient-to-r from-red-950 via-red-600 to-red-500 relative transition-all duration-1000 ease-out" 
-      data-p={percentage} 
-      style="width: 0%; transition: width 1.5s cubic-bezier(0.22, 1, 0.36, 1);"
-  >
-    <div class="absolute right-0 top-0 h-full w-1 bg-white shadow-[0_0_15px_4px_rgba(220,38,38,0.8),0_0_20px_2px_rgba(255,255,255,0.6)] z-10"></div>
+    <section class="max-w-6xl mx-auto px-6 mb-24 relative">
+    <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none"></div>
 
-    <div class="absolute inset-0 bg-gradient-to-b from-white/20 to-transparent opacity-50"></div>
-    
-    <div class="absolute inset-0 bg-white/5 animate-pulse"></div>
-  </div>
-</div>
-              </div>
-            </div>
-          )
+    <div class="flex flex-col gap-6 relative z-10">
+        {ranking.map((piloto, index) => {
+            const percentage = (piloto.puntos / maxPuntos) * 100;
+            const isTop3 = index < 3;
+            
+            
+            
+            return (
+                <div class="reveal-item group relative bg-zinc-900/40 backdrop-blur-xl border border-zinc-800/50 rounded-xl p-6 transition-all duration-500 hover:border-red-600/40 hover:bg-zinc-900/60 shadow-xl">
+                    
+                    {/* Indicador Lateral Pro */}
+                    <div class={`absolute left-0 top-0 h-full w-1.5 rounded-l-xl transition-all duration-500 ${isTop3 ? 'bg-red-800 shadow-[4px_0_15px_rgba(220,38,38,0.4)]' : 'bg-zinc-700'}`}></div>
+                    
+                    
+
+                    <div class="flex flex-col gap-5">
+                        
+                        {/* HEADER PRINCIPAL */}
+                        <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                            
+                            <div class="flex items-center gap-8 w-full md:w-auto">
+                                {/* Posición Gigante */}
+                                <div class="relative min-w-[60px]">
+                                    <span class={`text-5xl font-black italic italic leading-none transition-all duration-500 ${isTop3 ? 'text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.3)]' : 'text-zinc-700'}`}>
+                                        {String(index + 1).padStart(2, '0')}
+                                    </span>
+                                    <span class="absolute -top-4 left-0 text-[10px] font-mono font-bold text-red-500 uppercase tracking-widest">Rank_Pos</span>
+                                </div>
+
+                                <div>
+                                    <div class="flex flex-wrap items-center gap-4 mb-2">
+                                        <h2 class="text-3xl md:text-4xl font-black uppercase italic text-white tracking-tighter leading-none group-hover:text-red-500 transition-colors">
+                                            {piloto.nombre}
+                                        </h2>
+                                        <span class="flex items-center gap-2 text-[10px] font-mono font-bold text-green-400 bg-green-400/10 px-3 py-1 rounded-full border border-green-400/20 animate-pulse">
+                                            <span class="w-1.5 h-1.5 bg-green-500 rounded-full"></span> LIVE_DATA
+                                        </span>
+                                    </div>
+                                    
+                                    {/* Stats en "Cajas de Datos" */}
+                                    <div class="flex gap-3">
+                                        <div class="bg-amber-300 border border-yellow-600 px-3 py-1.5 rounded-md">
+                                            <p class="text-[9px] font-mono text-black drop-shadow uppercase tracking-widest">Wins</p>
+                                            <p class="text-lg font-black text-black leading-none">{piloto.victorias}</p>
+                                        </div>
+                                        <div class="bg-zinc-300 border border-zinc-800 px-3 py-1.5 rounded-md">
+                                            <p class="text-[9px] font-mono text-black uppercase tracking-widest">Podiums</p>
+                                            <p class="text-lg font-black text-black leading-none">{piloto.podios}</p>
+                                        </div>
+                                        {piloto.vRapidas > 0 && (
+                                            <div class="bg-purple-600/10 border border-purple-500/30 px-3 py-1.5 rounded-md">
+                                                <p class="text-[9px] font-mono text-purple-400 uppercase tracking-widest">V.R.</p>
+                                                <p class="text-lg font-black text-purple-400 leading-none">{piloto.vRapidas}</p>
+                                            </div>
+                                        )}
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Puntos - El foco principal */}
+                            <div class="flex flex-col items-center md:items-end bg-red-600/5 border border-red-600/20 p-4 rounded-xl min-w-[140px] animate-pulse ">
+                                <span class="text-[10px] font-mono font-bold text-zinc-400 uppercase tracking-widest mb-1">Season_Points</span>
+                                <div class="flex items-baseline gap-2">
+                                    <span class="text-6xl font-mono font-black text-white italic drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">
+                                        {piloto.puntos}
+                                    </span>
+                                    <span class="text-red-600 font-black italic text-xl uppercase">Pts</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* BARRA DE PROGRESO "GAUGE" TIPO F1 */}
+                        <div class="relative">
+                            <div class="flex justify-between items-end mb-2">
+                                <span class="text-[10px] font-mono font-bold text-zinc-400 uppercase tracking-[0.3em]">Telemetry_Output</span>
+                                <span class="text-xs font-mono font-black text-white bg-zinc-800 px-2 py-0.5 rounded">EFF: {percentage.toFixed(1)}%</span>
+                            </div>
+
+                            <div class="h-6 bg-zinc-950 rounded-lg border border-zinc-800 overflow-hidden relative shadow-inner">
+                                {/* Marcas de escala */}
+                                <div class="absolute inset-0 flex justify-between px-4 pointer-events-none z-20">
+                                    {[...Array(20)].map(() => (
+                                        <div class="w-[1px] h-full bg-white/5"></div>
+                                    ))}
+                                </div>
+
+                                <div 
+                                    class="f1-telemetry-bar h-full bg-gradient-to-r from-red-800 via-red-600 to-red-400 relative transition-all duration-1000 ease-out" 
+                                    data-p={percentage} 
+                                    style="width: 0%;"
+                                >
+                                    {/* Cabezal de lectura brillante */}
+                                    <div class="absolute right-0 top-0 h-full w-2 bg-white shadow-[0_0_20px_4px_rgba(255,255,255,0.6)] z-30"></div>
+                                    
+                                    {/* Efecto de barrido de luz */}
+                                    <div class="absolute inset-0 bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent)] w-1/2 animate-[scan_3s_linear_infinite]"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
         })}
-      </div>
-    </section>
+    </div>
+</section>
+
 <script data-astro-rerun>
     // Función centralizada de animación
     function animarBarras() {
@@ -239,75 +305,105 @@ const maxPuntos = ranking.length > 0 ? ranking[0].puntos : 1;
     // Se dispara cada vez que Astro cambia de página (View Transitions)
     document.addEventListener('astro:page-load', animarBarras);
 </script>
-    <section class="bg-slate-950 max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 pb-20">
-        <div class=" border-t-4 border-purple-600 p-6 rounded-xl border border-zinc-900">
-            <h3 class="text-xs font-black uppercase text-zinc-500 mb-6 italic tracking-widest italic flex items-center gap-2">
-                <span class="w-2 h-2 bg-purple-600 rounded-full"></span> Poles
-            </h3>
-            {ranking.filter(p => p.poles > 0).map(p => (
-                <div class="bg-slate-950 mb-4">
-                    <div class="flex justify-between text-[11px] font-bold uppercase mb-1">
-                        <span class="text-zinc-300">{p.nombre}</span>
-                        <span class="text-white">{p.poles}</span>
-                    </div>
-                    <div class="h-1 bg-zinc-900 rounded-full overflow-hidden">
-                        <div class="h-full bg-purple-600" style={`width: ${(p.poles / Math.max(...ranking.map(x => x.poles), 1)) * 100}%`}></div>
-                    </div>
-                </div>
-            ))}
-        </div>
+    <section class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 pb-24 relative">
+    
+    <div class="group bg-zinc-900/30 backdrop-blur-md p-6 rounded-xl border border-zinc-800/50 relative overflow-hidden transition-all hover:border-purple-500/30">
+        <div class="absolute top-0 left-0 w-full h-[2px] bg-purple-600 shadow-[0_0_15px_rgba(147,51,234,0.5)]"></div>
+        
+        <h3 class="text-[10px] font-black uppercase text-zinc-400 mb-8 tracking-[0.3em] flex items-center justify-between italic">
+            <span>Poles Position</span>
+            <span class="text-purple-500 font-mono">STAT_01</span>
+        </h3>
 
-        <div class="bg-slate-950 border-t-4 border-red-600 p-6 rounded-xl border border-zinc-900">
-            <h3 class="text-xs font-black uppercase text-zinc-500 mb-6 italic tracking-widest flex items-center gap-2">
-                <span class="w-2 h-2 bg-red-600 rounded-full"></span> Victorias
-            </h3>
-            {ranking.filter(p => p.victorias > 0).map(p => (
-                <div class="mb-4">
-                    <div class="flex justify-between text-[11px] font-bold uppercase mb-1">
-                        <span class="text-zinc-300">{p.nombre}</span>
-                        <span class="text-white">{p.victorias}</span>
-                    </div>
-                    <div class="h-1 bg-zinc-900 rounded-full overflow-hidden">
-                        <div class="h-full bg-red-600" style={`width: ${(p.victorias / Math.max(...ranking.map(x => x.victorias), 1)) * 100}%`}></div>
-                    </div>
+        {ranking.filter(p => p.poles > 0).sort((a, b) => b.poles - a.poles).map(p => (
+            <div class="mb-5 last:mb-0 group/driver">
+                <div class="flex justify-between items-end text-[10px] font-black uppercase mb-1.5">
+                    <span class="text-zinc-300 group-hover/driver:text-white transition-colors">{p.nombre}</span>
+                    <span class="text-white font-mono bg-purple-600/20 px-2 py-0.5 rounded text-[9px]">{p.poles}</span>
                 </div>
-            ))}
-        </div>
+                <div class="h-1.5 bg-zinc-800/50 rounded-full overflow-hidden border border-white/5">
+                    <div 
+                        class="h-full bg-purple-600 shadow-[0_0_10px_rgba(147,51,234,0.4)] transition-all duration-1000 ease-out" 
+                        style={`width: ${(p.poles / Math.max(...ranking.map(x => x.poles), 1)) * 100}%`}
+                    ></div>
+                </div>
+            </div>
+        ))}
+    </div>
 
-        <div class="bg-slate-950 border-t-4 border-yellow-500 p-6 rounded-xl border border-zinc-900">
-            <h3 class="text-xs font-black uppercase text-zinc-500 mb-6 italic tracking-widest flex items-center gap-2">
-                <span class="w-2 h-2 bg-yellow-500 rounded-full"></span> Podios
-            </h3>
-            {ranking.filter(p => p.podios > 0).map(p => (
-                <div class="mb-4">
-                    <div class="flex justify-between text-[11px] font-bold uppercase mb-1">
-                        <span class="text-zinc-300">{p.nombre}</span>
-                        <span class="text-white">{p.podios}</span>
-                    </div>
-                    <div class="h-1 bg-zinc-900 rounded-full overflow-hidden">
-                        <div class="h-full bg-yellow-500" style={`width: ${(p.podios / Math.max(...ranking.map(x => x.podios), 1)) * 100}%`}></div>
-                    </div>
-                </div>
-            ))}
-        </div>
+    <div class="group bg-zinc-900/30 backdrop-blur-md p-6 rounded-xl border border-zinc-800/50 relative overflow-hidden transition-all hover:border-red-600/30">
+        <div class="absolute top-0 left-0 w-full h-[2px] bg-red-600 shadow-[0_0_15px_rgba(220,38,38,0.5)]"></div>
+        
+        <h3 class="text-[10px] font-black uppercase text-zinc-400 mb-8 tracking-[0.3em] flex items-center justify-between italic">
+            <span>Race Wins</span>
+            <span class="text-red-600 font-mono">STAT_02</span>
+        </h3>
 
-        <div class=" border-t-4 border-green-500 p-6 rounded-xl border border-zinc-900">
-            <h3 class="text-xs font-black uppercase text-zinc-500 mb-6 italic tracking-widest flex items-center gap-2">
-                <span class="w-2 h-2 bg-green-500 rounded-full"></span> V. Rapidas
-            </h3>
-            {ranking.filter(p => p.vRapidas > 0).map(p => (
-                <div class="mb-4">
-                    <div class="flex justify-between text-[11px] font-bold uppercase mb-1">
-                        <span class="text-zinc-300">{p.nombre}</span>
-                        <span class="text-white">{p.vRapidas}</span>
-                    </div>
-                    <div class="h-1 bg-zinc-900 rounded-full overflow-hidden">
-                        <div class="h-full bg-green-500" style={`width: ${(p.vRapidas / Math.max(...ranking.map(x => x.vRapidas), 1)) * 100}%`}></div>
-                    </div>
+        {ranking.filter(p => p.victorias > 0).sort((a, b) => b.victorias - a.victorias).map(p => (
+            <div class="mb-5 last:mb-0 group/driver">
+                <div class="flex justify-between items-end text-[10px] font-black uppercase mb-1.5">
+                    <span class="text-zinc-300 group-hover/driver:text-white transition-colors">{p.nombre}</span>
+                    <span class="text-white font-mono bg-red-600/20 px-2 py-0.5 rounded text-[9px]">{p.victorias}</span>
                 </div>
-            ))}
-        </div>
-    </section>
+                <div class="h-1.5 bg-zinc-800/50 rounded-full overflow-hidden border border-white/5">
+                    <div 
+                        class="h-full bg-red-600 shadow-[0_0_10px_rgba(220,38,38,0.4)] transition-all duration-1000 ease-out" 
+                        style={`width: ${(p.victorias / Math.max(...ranking.map(x => x.victorias), 1)) * 100}%`}
+                    ></div>
+                </div>
+            </div>
+        ))}
+    </div>
+
+    <div class="group bg-zinc-900/30 backdrop-blur-md p-6 rounded-xl border border-zinc-800/50 relative overflow-hidden transition-all hover:border-yellow-500/30">
+        <div class="absolute top-0 left-0 w-full h-[2px] bg-yellow-500 shadow-[0_0_15px_rgba(234,179,8,0.5)]"></div>
+        
+        <h3 class="text-[10px] font-black uppercase text-zinc-400 mb-8 tracking-[0.3em] flex items-center justify-between italic">
+            <span>Podiums</span>
+            <span class="text-yellow-500 font-mono">STAT_03</span>
+        </h3>
+
+        {ranking.filter(p => p.podios > 0).sort((a, b) => b.podios - a.podios).map(p => (
+            <div class="mb-5 last:mb-0 group/driver">
+                <div class="flex justify-between items-end text-[10px] font-black uppercase mb-1.5">
+                    <span class="text-zinc-300 group-hover/driver:text-white transition-colors">{p.nombre}</span>
+                    <span class="text-white font-mono bg-yellow-500/20 px-2 py-0.5 rounded text-[9px]">{p.podios}</span>
+                </div>
+                <div class="h-1.5 bg-zinc-800/50 rounded-full overflow-hidden border border-white/5">
+                    <div 
+                        class="h-full bg-yellow-500 shadow-[0_0_10px_rgba(234,179,8,0.4)] transition-all duration-1000 ease-out" 
+                        style={`width: ${(p.podios / Math.max(...ranking.map(x => x.podios), 1)) * 100}%`}
+                    ></div>
+                </div>
+            </div>
+        ))}
+    </div>
+
+    <div class="group bg-zinc-900/30 backdrop-blur-md p-6 rounded-xl border border-zinc-800/50 relative overflow-hidden transition-all hover:border-green-500/30">
+        <div class="absolute top-0 left-0 w-full h-[2px] bg-green-500 shadow-[0_0_15px_rgba(34,197,94,0.5)]"></div>
+        
+        <h3 class="text-[10px] font-black uppercase text-zinc-400 mb-8 tracking-[0.3em] flex items-center justify-between italic">
+            <span>Fastest Laps</span>
+            <span class="text-green-500 font-mono">STAT_04</span>
+        </h3>
+
+        {ranking.filter(p => p.vRapidas > 0).sort((a, b) => b.vRapidas - a.vRapidas).map(p => (
+            <div class="mb-5 last:mb-0 group/driver">
+                <div class="flex justify-between items-end text-[10px] font-black uppercase mb-1.5">
+                    <span class="text-zinc-300 group-hover/driver:text-white transition-colors">{p.nombre}</span>
+                    <span class="text-white font-mono bg-green-600/20 px-2 py-0.5 rounded text-[9px]">{p.vRapidas}</span>
+                </div>
+                <div class="h-1.5 bg-zinc-800/50 rounded-full overflow-hidden border border-white/5">
+                    <div 
+                        class="h-full bg-green-500 shadow-[0_0_10px_rgba(34,197,94,0.4)] transition-all duration-1000 ease-out" 
+                        style={`width: ${(p.vRapidas / Math.max(...ranking.map(x => x.vRapidas), 1)) * 100}%`}
+                    ></div>
+                </div>
+            </div>
+        ))}
+    </div>
+</section>
+
   </main>
 </Layout>
 

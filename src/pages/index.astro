@@ -11,7 +11,9 @@ const logos = {
   "Haas": "/Fotos/logo-haas.png",
   "Racing Bulls": "/Fotos/logo-racingbulls.png",
 };
-
+const totalCarreras = 24;
+const carrerasCorridas = 4;
+const porcentajeTemporada = (carrerasCorridas / totalCarreras) * 100;
 const escuderiasMap = pilotos.reduce((acc, piloto) => {
     if (!acc[piloto.escuderia]) {
         acc[piloto.escuderia] = { nombre: piloto.escuderia, puntos: 0 };
@@ -565,7 +567,7 @@ const proximaCarrera = calendario
     <video 
         src="/Videos/vr_mexico.mp4" 
         autoplay muted loop playsinline
-        class="absolute inset-0 w-full h-full object-cover opacity-20 pointer-events-none mix-blend-screen"
+        class="absolute inset-0 w-full h-full object-cover opacity-50 pointer-events-none mix-blend-screen"
     ></video>
 
     <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.01)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_at_center,black,transparent)] pointer-events-none"></div>
@@ -1266,7 +1268,7 @@ const proximaCarrera = calendario
 
                             <div class="flex items-center gap-5">
                                 <div class="w-14 h-14 flex-shrink-0 bg-black/40 backdrop-blur-md rounded-lg border border-zinc-800 p-2.5 flex items-center justify-center shadow-2xl group-hover:border-zinc-600 transition-colors">
-                                    <img src={logos[piloto.escuderia]} alt={piloto.escuderia} class="w-full h-full object-contain filter grayscale group-hover:grayscale-0 transition-all duration-500" />
+                                    <img src={logos[piloto.escuderia]} alt={piloto.escuderia} class="w-full h-full object-contain filter  group-hover:grayscale-0 transition-all duration-500" />
                                 </div>
 
                                 <div class="flex-1">
@@ -1316,6 +1318,8 @@ const proximaCarrera = calendario
                                         piloto.nombre === "IA-Williams" ? "https://www.instagram.com/carlossainz55/" :
                                         piloto.nombre === "Fede" ? "https://www.instagram.com/fede.villalba/" :
                                         piloto.nombre === "Valen" ? "https://www.instagram.com/valentinorover/" :
+                                        piloto.nombre === "Hugo" ? "https://www.instagram.com/mhv.ok" :
+                                        piloto.nombre === "Matias" ? "https://www.instagram.com" :
                                         "https://www.instagram.com/leo.tapparello/"
                                     } 
                                     target="_blank" 
@@ -1448,11 +1452,85 @@ const proximaCarrera = calendario
 
 
 
+
+
 <section id="Calendario" class="mt-32 py-20 border-t border-zinc-900 px-4 scroll-mt-20 bg-[#020c1b]/30">
+    <div class="max-w-5xl mx-auto px-6 mb-16 group">
+    <div class="flex justify-between items-end mb-4">
+        <div>
+            <div class="flex items-center gap-2 mb-1">
+                <span class="relative flex h-2 w-2">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-red-600"></span>
+                </span>
+                <span class="text-[10px] font-mono font-bold text-red-500 uppercase tracking-[0.4em]">Season_Status // Live</span>
+            </div>
+            <h3 class="text-2xl font-black text-white italic uppercase tracking-tighter">
+                Progreso del <span class="text-red-600">Campeonato</span>
+            </h3>
+        </div>
+        
+        <div class="text-right">
+            <span class="text-4xl font-mono font-black text-white italic leading-none">
+                {carrerasCorridas}<span class="text-zinc-600 text-xl">/{totalCarreras}</span>
+            </span>
+            <p class="text-[9px] font-mono text-zinc-500 uppercase tracking-widest mt-1">GPs Completados</p>
+        </div>
+    </div>
+
+    <div class="relative">
+        {/* Marcadores de fondo (1 por cada carrera para que parezca una regla técnica) */}
+        <div class="absolute inset-0 flex justify-between px-1 pointer-events-none z-20">
+            {[...Array(totalCarreras)].map((_, i) => (
+                <div class={`w-[1px] h-full ${i < carrerasCorridas ? 'bg-white/20' : 'bg-white/5'}`}></div>
+            ))}
+        </div>
+
+        {/* La Barra */}
+        <div class="h-8 bg-zinc-950 rounded-lg border border-zinc-900 overflow-hidden relative shadow-2xl backdrop-blur-sm">
+            <div 
+                id="season-progress-bar"
+                class="h-full bg-gradient-to-r from-red-900 via-red-600 to-red-500 relative transition-all duration-1000 ease-out shadow-[0_0_20px_rgba(220,38,38,0.3)]" 
+                data-progress={porcentajeTemporada}
+                style="width: 0%;"
+            >
+                {/* Cabezal de lectura (La línea blanca que brilla) */}
+                <div class="absolute right-0 top-0 h-full w-1.5 bg-white shadow-[0_0_15px_rgba(255,255,255,0.8)] z-30"></div>
+                
+                {/* Efecto de barrido de luz (Scanline) */}
+                <div class="absolute inset-0 bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.1),transparent)] w-1/2 animate-[scan_4s_linear_infinite]"></div>
+            </div>
+        </div>
+
+        {/* Labels de porcentaje debajo */}
+        <div class="flex justify-between mt-2 px-1">
+            <span class="text-[7px] font-mono text-zinc-600 uppercase tracking-tighter italic">Phase_01 // Start</span>
+            <span class="text-[10px] font-mono font-black text-red-500 uppercase italic">
+                {porcentajeTemporada.toFixed(1)}% Completed
+            </span>
+            <span class="text-[7px] font-mono text-zinc-600 uppercase tracking-tighter italic">End_Of_Season // 2025</span>
+        </div>
+    </div>
+</div>
+
+<script data-astro-rerun>
+    function animarProgresoTemporada() {
+        const progressBar = document.getElementById('season-progress-bar');
+        if (progressBar) {
+            const target = progressBar.getAttribute('data-progress');
+            setTimeout(() => {
+                progressBar.style.width = target + '%';
+            }, 500);
+        }
+    }
+
+    animarProgresoTemporada();
+    document.addEventListener('astro:page-load', animarProgresoTemporada);
+</script>
     <div class="max-w-7xl mx-auto mb-16 text-center md:text-left reveal-on-scroll">
         <div class="flex items-center gap-4 mb-4 justify-center md:justify-start">
-            <span class="w-12 h-[2px] bg-red-600"></span>
-            <span class="text-red-500 font-mono text-xs uppercase tracking-[0.5em]">Official Schedule</span>
+            
+            
         </div>
         <h2 class="text-4xl md:text-6xl font-black uppercase italic tracking-tighter text-white">
             CALENDARIO <span class="text-red-600">2026</span>
@@ -1517,7 +1595,7 @@ const proximaCarrera = calendario
                                                     GP DE {race.gp}
                                                 </p>
                                                 {race.sprint && (
-                                                    <span class="bg-red-600 text-[7px] font-black px-1.5 py-0.5 rounded-sm text-white animate-pulse">SPRINT</span>
+                                                    <span class="bg-red-600 text-[7px] font-black px-1.5 py-0.5 rounded-sm text-white animate-pulse animate-latido-color">SPRINT</span>
                                                 )}
                                             </div>
                                             <p class="text-zinc-500 text-[10px] font-mono uppercase tracking-tighter">{race.circuito}</p>
@@ -1529,7 +1607,7 @@ const proximaCarrera = calendario
                                             <span class="text-[8px] font-black text-zinc-600 border border-zinc-800 px-2 py-1 rounded uppercase tracking-widest">Done</span>
                                         )}
                                         {estadoCalculado === 'next' && (
-                                            <span class="flex items-center gap-2 text-[8px] font-black text-red-500 uppercase tracking-[0.3em]">
+                                            <span class="flex items-center gap-2 text-[8px] font-black text-red-500 uppercase tracking-[0.3em] animate-latido-color ">
                                                 <span class="w-1.5 h-1.5 bg-red-600 rounded-full animate-ping"></span>
                                                 Next
                                             </span>
