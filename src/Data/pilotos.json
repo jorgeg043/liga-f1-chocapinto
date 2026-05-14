@@ -8,7 +8,7 @@
   { "id": 7, "nombre": "Rambo", "escuderia": "Ferrari", "puntos": 29, "victorias": 0, "poles": 0, "vueltasRapidas": 0 },
   { "id": 8, "nombre": "Adrian", "escuderia": "Ferrari", "puntos": 13, "victorias": 0, "poles": 0, "vueltasRapidas": 0 },
   { "id": 9, "nombre": "Seba", "escuderia": "Williams", "puntos": 0, "victorias": 0, "poles": 0, "vueltasRapidas": 0 },
-  { "id": 10, "nombre": "IA-Williams", "escuderia": "Williams", "puntos": 0, "victorias": 0, "poles": 0, "vueltasRapidas": 0 },
+  { "id": 10, "nombre": "Franco G", "escuderia": "Williams", "puntos": 0, "victorias": 0, "poles": 0, "vueltasRapidas": 0 },
   { "id": 11, "nombre": "Fede", "escuderia": "Haas", "puntos": 0, "victorias": 0, "poles": 0, "vueltasRapidas": 0 },
   { "id": 12, "nombre": "Valen", "escuderia": "Haas", "puntos": 0, "victorias": 0, "poles": 0, "vueltasRapidas": 0 },
   { "id": 13, "nombre": "Hugo", "escuderia": "Racing Bulls", "puntos": 0, "victorias": 0, "poles": 0, "vueltasRapidas": 0 },
