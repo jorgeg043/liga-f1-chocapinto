@@ -183,25 +183,84 @@ const proximaCarrera = calendario
 </style>
 <script data-astro-rerun>
     document.addEventListener('astro:page-load', () => {
-        
-        // --- 1. REFERENCIAS ---
+        // --- 1. REFERENCIAS PRINCIPALES ---
         const splash = document.getElementById('splash-screen');
+        const f1Text = [document.getElementById('splash-f'), document.getElementById('splash-1')];
+        const ligaText = document.getElementById('splash-liga');
+        const lines = [
+            document.getElementById('line-t'), document.getElementById('line-r'),
+            document.getElementById('line-b'), document.getElementById('line-l')
+        ];
+        
         const musica = document.getElementById('musica-fondo');
-        const btnMusica = document.getElementById('btn-musica'); // Asegurate que este sea el ID de tu botón
+        const btnMusica = document.getElementById('btn-musica');
         const btnHistorial = document.getElementById('btn-historial');
         const menuHistorial = document.getElementById('menu-historial');
         const flechaHistorial = document.getElementById('flecha-historial');
 
-        // --- 2. LÓGICA DEL BOTÓN DE MÚSICA (PLAY/PAUSE) ---
+        if (!splash) return;
+
+        // --- 2. VERIFICACIÓN DE SESIÓN (EVITA TRABAS) ---
+        const esHome = window.location.pathname === '/' || window.location.pathname === '/index.html';
+        const yaVisto = sessionStorage.getItem('splash-visto');
+
+        if (!esHome || yaVisto) {
+            splash.style.display = 'none';
+            document.body.classList.remove('overflow-hidden');
+        } else {
+            // --- 3. SECUENCIA DE ANIMACIÓN UNIFICADA (PRIMERA VISTA) ---
+            splash.style.display = 'flex';
+            document.body.classList.add('overflow-hidden');
+
+            // Entrada de "F1 2025" (Clases de Tailwind + Estilos Limpios)
+            setTimeout(() => {
+                const f = f1Text[0];
+                const n1 = f1Text[1];
+                if (f && n1) {
+                    f.classList.remove('translate-x-[-100%]', 'opacity-0');
+                    f.classList.add('translate-x-0', 'opacity-100', 'f1-glow');
+                    n1.classList.remove('translate-x-[100%]', 'opacity-0');
+                    n1.classList.add('translate-x-0', 'opacity-100', 'f1-glow');
+                }
+            }, 300);
+
+            // Entrada de "BIENVENIDOS"
+            setTimeout(() => {
+                if (ligaText) {
+                    ligaText.classList.remove('opacity-0', 'translate-y-[20px]');
+                    ligaText.classList.add('opacity-100', 'translate-y-0');
+                }
+            }, 1000);
+
+            // Dibujado de las líneas HUD perimetrales
+            setTimeout(() => {
+                if (lines[0]) lines[0].classList.add('draw-line-h');
+                setTimeout(() => { if (lines[1]) lines[1].classList.add('draw-line-v') }, 100);
+                setTimeout(() => { if (lines[2]) lines[2].classList.add('draw-line-h') }, 200);
+                setTimeout(() => { if (lines[3]) lines[3].classList.add('draw-line-v') }, 300);
+            }, 1600);
+
+            // Cierre definitivo del Splash
+            setTimeout(() => {
+                splash.style.opacity = '0';
+                document.body.classList.remove('overflow-hidden');
+                
+                setTimeout(() => {
+                    splash.style.display = 'none';
+                    sessionStorage.setItem('splash-visto', 'true');
+                }, 1000);
+            }, 3600);
+        }
+
+        // --- 4. LÓGICA DEL BOTÓN DE MÚSICA (PLAY/PAUSE) ---
         if (btnMusica && musica) {
-            // Limpiamos cualquier listener previo para evitar duplicados
             btnMusica.replaceWith(btnMusica.cloneNode(true));
             const nuevoBtnMusica = document.getElementById('btn-musica');
 
             nuevoBtnMusica.addEventListener('click', () => {
                 if (musica.paused) {
                     musica.play();
-                    nuevoBtnMusica.classList.add('playing'); // Opcional: para cambiar el icono
+                    nuevoBtnMusica.classList.add('playing');
                 } else {
                     musica.pause();
                     nuevoBtnMusica.classList.remove('playing');
@@ -209,40 +268,7 @@ const proximaCarrera = calendario
             });
         }
 
-        // --- 3. LÓGICA DEL SPLASH (SIN AUTOPLAY) ---
-        if (splash) {
-            const f1Text = [document.getElementById('splash-f'), document.getElementById('splash-1')];
-            const ligaText = document.getElementById('splash-liga');
-            const lines = [
-                document.getElementById('line-t'), document.getElementById('line-r'),
-                document.getElementById('line-b'), document.getElementById('line-l')
-            ];
-
-            setTimeout(() => {
-                f1Text.forEach(el => { if(el) { el.style.transform = 'translateX(0)'; el.style.opacity = '1'; } });
-            }, 100);
-
-            setTimeout(() => {
-                if(ligaText) { ligaText.style.transform = 'translateY(0)'; ligaText.style.opacity = '1'; }
-            }, 400);
-
-            setTimeout(() => {
-                if(lines[0]) lines[0].classList.add('draw-line-h');
-                setTimeout(() => { if(lines[1]) lines[1].classList.add('draw-line-v') }, 150);
-                setTimeout(() => { if(lines[2]) lines[2].classList.add('draw-line-h') }, 300);
-                setTimeout(() => { if(lines[3]) lines[3].classList.add('draw-line-v') }, 450);
-            }, 800);
-
-            // FINALIZAR SPLASH (Música eliminada de aquí)
-            setTimeout(() => {
-                splash.style.opacity = '0';
-                setTimeout(() => {
-                    splash.style.display = 'none';
-                }, 1000);
-            }, 2500);
-        }
-
-        // --- 4. DROPDOWN HISTORIAL ---
+        // --- 5. DROPDOWN HISTORIAL ---
         if (btnHistorial && menuHistorial && flechaHistorial) {
             btnHistorial.addEventListener('click', (e) => {
                 if (window.innerWidth < 1024) {
@@ -254,7 +280,7 @@ const proximaCarrera = calendario
             });
         }
 
-        // --- 5. REVEAL ON SCROLL ---
+        // --- 6. REVEAL ON SCROLL ---
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -264,68 +290,6 @@ const proximaCarrera = calendario
         }, { threshold: 0.1 });
 
         document.querySelectorAll('.reveal-on-scroll, .reveal-item').forEach(el => observer.observe(el));
-
-    }, { once: false });
-</script>
-<script>
-    const runSplashScreen = () => {
-        const splash = document.getElementById('splash-screen');
-        const f = document.getElementById('splash-f');
-        const n1 = document.getElementById('splash-1');
-        const liga = document.getElementById('splash-liga');
-
-        if (!splash) return;
-
-        // VERIFICACIÓN: ¿Ya vimos el telón en esta sesión?
-        if (sessionStorage.getItem('splash-visto')) {
-            splash.style.display = 'none';
-            document.body.classList.remove('overflow-hidden');
-            return;
-        }
-
-        // Si es la primera vez, ejecutamos la animación
-        splash.style.display = 'flex';
-        document.body.classList.add('overflow-hidden');
-
-        setTimeout(() => {
-            f?.classList.remove('translate-x-[-100%]', 'opacity-0');
-            f?.classList.add('translate-x-0', 'opacity-100');
-            n1?.classList.remove('translate-x-[100%]', 'opacity-0');
-            n1?.classList.add('translate-x-0', 'opacity-100');
-            
-            setTimeout(() => {
-                f?.classList.add('f1-glow');
-                n1?.classList.add('f1-glow');
-            }, 600);
-        }, 500);
-
-        setTimeout(() => {
-            liga?.classList.remove('opacity-0', 'translate-y-[20px]');
-            liga?.classList.add('opacity-100', 'translate-y-0');
-        }, 1400);
-
-        setTimeout(() => {
-            splash.classList.add('opacity-0');
-            document.body.classList.remove('overflow-hidden');
-            
-            setTimeout(() => { 
-                splash.style.display = 'none';
-                // GUARDAMOS EN MEMORIA que ya se vio
-                sessionStorage.setItem('splash-visto', 'true');
-            }, 1000);
-        }, 3000);
-    };
-
-    // Escuchamos el evento de carga de Astro
-    document.addEventListener('astro:page-load', () => {
-        // Solo intentamos ejecutarlo si estamos en el Home
-        if (window.location.pathname === '/' || window.location.pathname === '/index.html') {
-            runSplashScreen();
-        } else {
-            // En cualquier otra página, nos aseguramos de que esté oculto
-            const splash = document.getElementById('splash-screen');
-            if (splash) splash.style.display = 'none';
-        }
     });
 </script>
 
