@@ -10,9 +10,10 @@ const logos = {
   "Williams": "/Fotos/logo-williams.png",
   "Haas": "/Fotos/logo-haas.png",
   "Racing Bulls": "/Fotos/logo-racingbulls.png",
+  "Aston Martin": "/Fotos/logo-astonmartin.png",
 };
 const totalCarreras = 24;
-const carrerasCorridas = 4;
+const carrerasCorridas = 6;
 const porcentajeTemporada = (carrerasCorridas / totalCarreras) * 100;
 const escuderiasMap = pilotos.reduce((acc, piloto) => {
     if (!acc[piloto.escuderia]) {
@@ -565,7 +566,7 @@ const proximaCarrera = calendario
          <div class="reveal-item mb-16 bg-[#020c1b]/60 rounded-xl border border-zinc-900 p-8 shadow-2xl relative overflow-hidden group hover:border-red-600/30 transition-all duration-700 backdrop-blur-xl">
     
     <video 
-        src="/Videos/vr_mexico.mp4" 
+        src="/Videos/vr_zandvoort.mp4" 
         autoplay muted loop playsinline
         class="absolute inset-0 w-full h-full object-cover opacity-40 pointer-events-none mix-blend-screen"
     ></video>
@@ -581,14 +582,14 @@ const proximaCarrera = calendario
             <div class="absolute inset-0 bg-red-600/5 blur-[80px] rounded-full group-hover:bg-red-600/10 transition-all duration-700"></div>
             
             <img 
-                src="/Fotos/foto-fecha5mexico.png" 
+                src="/Fotos/foto-fecha7zandvoort.png" 
                 alt="Circuito México" 
                 class="w-full max-w-[340px] h-auto object-contain filter drop-shadow-[0_0_30px_rgba(255,255,255,0.1)] transition-transform duration-700 group-hover:scale-110 group-hover:-rotate-3 animate-latido-color"
             />
             
             <div class="mt-8 text-center">
                 <p class="text-[10px] text-zinc-500 font-mono tracking-[0.5em] uppercase mb-1">Datos de ubicación</p>
-                <h4 class="text-xs font-black text-white uppercase tracking-widest italic group-hover:text-red-500 transition-colors">Autódromo Hermanos Rodríguez</h4>
+                <h4 class="text-xs font-black text-white uppercase tracking-widest italic group-hover:text-red-500 transition-colors">Circuito Zandvoort</h4>
             </div>
         </div>
 
@@ -608,14 +609,14 @@ const proximaCarrera = calendario
             <h2 class="text-5xl md:text-6xl font-black uppercase tracking-tighter italic text-white leading-tight mb-8">
                 Gran Premio<br/>
                 <span class="text-red-600 drop-shadow-[0_0_15px_rgba(220,38,38,0.4)] transition-all group-hover:drop-shadow-[0_0_30px_rgba(220,38,38,0.6)]">
-                    DE MÉXICO
+                    PAÍSES BAJOS
                 </span>
             </h2>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div class="bg-zinc-950/80 p-5 rounded-lg border-l-4 border-red-600 shadow-2xl group/box transition-all hover:translate-x-1">
                     <p class="text-[9px] text-white uppercase tracking-widest font-black mb-2">Horario carrera (ARG)</p>
-                    <p class="text-lg font-black text-zinc-200 uppercase tracking-tighter mb-1">Viernes 15 de Mayo</p>
+                    <p class="text-lg font-black text-zinc-200 uppercase tracking-tighter mb-1">Viernes 29 de Mayo</p>
                     <div class="flex items-baseline gap-2">
                         <span class="text-4xl font-mono font-black text-white italic">23:00</span>
                         <span class="text-red-600 font-black italic text-lg">HS</span>
@@ -644,15 +645,15 @@ const proximaCarrera = calendario
             <div class="mt-10 flex flex-wrap gap-x-8 gap-y-4 text-[10px] text-zinc-500 font-black uppercase tracking-[0.2em] border-t border-zinc-900 pt-6">
                 <div class="flex items-center gap-2 group/stat">
                     <div class="w-1.5 h-1.5 bg-red-600 rounded-full group-hover/stat:scale-150 transition-transform"></div>
-                    <span>Longitud: <span class="text-zinc-300 font-mono">4.304 KM</span></span>
+                    <span>Longitud: <span class="text-zinc-300 font-mono">4.307 KM</span></span>
                 </div>
                 <div class="flex items-center gap-2 group/stat">
                     <div class="w-1.5 h-1.5 bg-red-600 rounded-full group-hover/stat:scale-150 transition-transform"></div>
-                    <span>Curvas: <span class="text-zinc-300 font-mono">17</span></span>
+                    <span>Curvas: <span class="text-zinc-300 font-mono">14</span></span>
                 </div>
                 <div class="flex items-center gap-2 group/stat">
                     <div class="w-1.5 h-1.5 bg-red-600 rounded-full group-hover/stat:scale-150 transition-transform"></div>
-                    <span>Circuito: <span class="text-zinc-300">Hnos. Rodríguez</span></span>
+                    <span>Circuito: <span class="text-zinc-300">Zandvoort</span></span>
                 </div>
             </div>
         </div>
@@ -662,9 +663,9 @@ const proximaCarrera = calendario
 </div>
 
 
-{/* USAR PARA CUANDO HAYA OTRA PRÓXIMA ESCUDERIA PARA INFORMAR
-*/}
 
+
+{/*USAR PARA CUANDO HAYA OTRA PRÓXIMA ESCUDERIA PARA INFORMAR
 <section class="max-w-7xl mx-auto px-4 py-16 space-y-12">
     
     <div class="relative group inline-block"> 
@@ -743,7 +744,7 @@ const proximaCarrera = calendario
         </div>
 
     </div>
-
+*/}
     
 </section>
 
@@ -773,7 +774,10 @@ const proximaCarrera = calendario
                 </thead>
 
                 <tbody class="divide-y divide-zinc-900">
-                    {pilotos.sort((a, b) => b.puntos - a.puntos).map((piloto, index) => (
+                    {pilotos
+    .filter(p => p.activo !== false) // <--- ESTA ES LA LÍNEA NUEVA
+    .sort((a, b) => b.puntos - a.puntos)
+    .map((piloto, index) => (
                         <tr 
                             class="reveal-item group hover:bg-white/[0.02] transition-all duration-500 relative"
                             style={`transition-delay: ${index * 80}ms;`}
@@ -1226,11 +1230,13 @@ const proximaCarrera = calendario
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {(() => {
-            const ordenDeseado = ["Chor", "Franco", "Simon", "Diego", "Rodri", "Leo", "Rambo", "Adrian", "Seba", "Franco G", "Fede", "Valen", "Hugo", "Matias"];
+            const ordenDeseado = ["Chor", "Franco", "Simon", "Diego", "Rodri", "Leo", "Rambo", "Adrian", "Seba", "Seba W", "Franco G", "Fede", "Valen", "Hugo", "Matias", "Mateo", "Claudio"];
             
-            const pilotosOrdenados = [...pilotos].sort((a, b) => {
-                return ordenDeseado.indexOf(a.nombre) - ordenDeseado.indexOf(b.nombre);
-            });
+            const pilotosOrdenados = [...pilotos]
+    .filter(p => p.activo !== false) // <--- CON ESTO SACÁS A RAMBO
+    .sort((a, b) => {
+        return ordenDeseado.indexOf(a.nombre) - ordenDeseado.indexOf(b.nombre);
+    });
 
             return pilotosOrdenados.map((piloto, index) => {
                 const fondoEscuderia = piloto.escuderia === "Mercedes Benz" ? "escuderia-mercedes.jpg" : 
@@ -1239,6 +1245,7 @@ const proximaCarrera = calendario
                                      piloto.escuderia === "Williams" ? "escuderia-williams.jpg" :
                                      piloto.escuderia === "Haas" ? "escuderia-haas.jpg" :
                                      piloto.escuderia === "Racing Bulls" ? "escuderia-racingbulls.jpg" :
+                                     piloto.escuderia === "Aston Martin" ? "escuderia-astonmartin.jpg" :
                                      "escuderia-redbull.jpg";
                 
                 return (
@@ -1262,7 +1269,7 @@ const proximaCarrera = calendario
                             <div class="absolute -top-1 -right-1 flex flex-col items-end">
                                 <span class="text-[7px] font-black uppercase tracking-[0.2em] text-zinc-500 mb-1">Status</span>
                                 <span class="bg-zinc-900 border border-zinc-800 px-2 py-0.5 rounded text-[9px] font-black uppercase italic text-zinc-300 group-hover:text-red-500 group-hover:border-red-600/30 transition-all">
-                                    {["Chor", "Simon", "Rodri", "Adrian", "Seba", "Fede", "Hugo"].includes(piloto.nombre) ? "Lead Driver" : "Wingman"}
+                                    {["Chor", "Simon", "Rodri", "Adrian", "Seba", "Fede", "Hugo", "Mateo"].includes(piloto.nombre) ? "Lead Driver" : "Wingman"}
                                 </span>
                             </div>
 
@@ -1284,7 +1291,7 @@ const proximaCarrera = calendario
                             <div class="mt-6 flex items-center justify-between bg-zinc-900/40 backdrop-blur-md p-3 rounded-lg border border-zinc-800/50 shadow-inner group-hover:border-zinc-700 transition-colors">
                                 <div class="flex items-center gap-3">
                                     <span class="p-1.5 bg-zinc-950 rounded border border-zinc-800 group-hover:text-white transition-colors">
-                                        {["Chor", "Rambo", "Fede", "Valen"].includes(piloto.nombre) ? (
+                                        {["Chor", "Rambo", "Fede", "Valen", "Mateo", "Claudio"].includes(piloto.nombre) ? (
                                             <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="2" x2="12" y2="12"/><line x1="12" y1="12" x2="4" y2="18"/><line x1="12" y1="12" x2="20" y2="18"/><circle cx="12" cy="12" r="2" fill="currentColor"/></svg>
                                         ) : piloto.nombre === "IA-Williams" ? (
                                             <span class="text-xs">🤖</span>
@@ -1298,7 +1305,7 @@ const proximaCarrera = calendario
                                         <span class="text-[7px] text-zinc-500 font-black uppercase tracking-widest">Input Device</span>
                                         <span class="text-[10px] font-mono text-zinc-300 uppercase font-black">
                                             {piloto.nombre === "Adrian" ? "Joystick" :
-                                             (["Chor", "Rambo", "Fede", "Valen"].includes(piloto.nombre)) ? "Volante" :
+                                             (["Chor", "Rambo", "Fede", "Valen", "Mateo", "Claudio"].includes(piloto.nombre)) ? "Volante" :
                                              piloto.nombre === "IA-Williams" ? "Sistemas IA" : 
                                              piloto.nombre === "Franco" ? "Teclado" : "Joystick"}
                                         </span>
@@ -1320,6 +1327,8 @@ const proximaCarrera = calendario
                                         piloto.nombre === "Valen" ? "https://www.instagram.com/valentinorover/" :
                                         piloto.nombre === "Hugo" ? "https://www.instagram.com/mhv.ok" :
                                         piloto.nombre === "Matias" ? "https://www.instagram.com/mati.lisera" :
+                                        piloto.nombre === "Mateo" ? "https://www.instagram.com/mateoalmaraz6/" :
+                                        piloto.nombre === "Claudio" ? "https://www.facebook.com/claudio.lazzaroni.9" :
                                         "https://www.instagram.com/leo.tapparello/"
                                     } 
                                     target="_blank" 
@@ -1419,7 +1428,7 @@ const proximaCarrera = calendario
                     <span class="text-red-500 font-mono text-[9px] animate-pulse">● SIGNAL_OK</span>
                 </div>
             </div>
-
+ {/*
             <div class="group relative bg-[#020c1b]/80 rounded-xl border border-zinc-800 overflow-hidden hover:border-blue-400/50 transition-all duration-500 shadow-2xl">
                 <div class="absolute top-2 left-2 w-4 h-4 border-t border-l border-zinc-700 z-20 group-hover:border-blue-400"></div>
                 <div class="absolute bottom-2 right-2 w-4 h-4 border-b border-r border-zinc-700 z-20 group-hover:border-blue-400"></div>
@@ -1432,6 +1441,8 @@ const proximaCarrera = calendario
                     <span class="text-blue-400 font-mono text-[9px] animate-pulse">● SIGNAL_OK</span>
                 </div>
             </div>
+            */}
+        {/*
             <div class="group relative bg-[#020c1b]/80 rounded-xl border border-zinc-800 overflow-hidden hover:border-red-600/50 transition-all duration-500 shadow-2xl">
                 <div class="absolute top-2 left-2 w-4 h-4 border-t border-l border-zinc-700 z-20 group-hover:border-red-500"></div>
                 <div class="absolute bottom-2 right-2 w-4 h-4 border-b border-r border-zinc-700 z-20 group-hover:border-red-500"></div>
@@ -1441,6 +1452,19 @@ const proximaCarrera = calendario
                 </div>
                 <div class="p-5 border-t border-zinc-900 bg-zinc-950/80 flex justify-between items-center">
                     <div><p class="text-[9px] font-mono text-zinc-600 uppercase tracking-widest">Active_Session</p><p class="text-white font-black italic uppercase text-lg group-hover:text-red-500 transition-colors">Racing Bulls Visa Cash</p></div>
+                    <span class="text-red-500 font-mono text-[9px] animate-pulse">● SIGNAL_OK</span>
+                </div>
+            </div>
+            */}
+            <div class="group relative bg-[#020c1b]/80 rounded-xl border border-zinc-800 overflow-hidden hover:border-green-600/50 transition-all duration-500 shadow-2xl">
+                <div class="absolute top-2 left-2 w-4 h-4 border-t border-l border-zinc-700 z-20 group-hover:border-green-500"></div>
+                <div class="absolute bottom-2 right-2 w-4 h-4 border-b border-r border-zinc-700 z-20 group-hover:border-green-500"></div>
+                <div class="relative aspect-video">
+                    <video src="/Videos/coche-astonmartin.mp4" autoplay muted loop playsinline class="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-700"></video>
+                    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-red-600/[0.05] to-transparent h-[200%] w-full -translate-y-full group-hover:animate-[scan_4s_linear_infinite] pointer-events-none"></div>
+                </div>
+                <div class="p-5 border-t border-zinc-900 bg-zinc-950/80 flex justify-between items-center">
+                    <div><p class="text-[9px] font-mono text-zinc-600 uppercase tracking-widest">Active_Session</p><p class="text-white font-black italic uppercase text-lg group-hover:text-red-500 transition-colors">Aston Martin</p></div>
                     <span class="text-red-500 font-mono text-[9px] animate-pulse">● SIGNAL_OK</span>
                 </div>
             </div>
@@ -1455,7 +1479,7 @@ const proximaCarrera = calendario
 
 
 <section id="Calendario" class="mt-32 py-20 border-t border-zinc-900 px-4 scroll-mt-20 bg-[#020c1b]/30">
-    <div class="max-w-5xl mx-auto px-6 mb-16 group">
+   <div class="max-w-5xl mx-auto px-6 mb-16 group">
     <div class="flex justify-between items-end mb-4">
         <div>
             <div class="flex items-center gap-2 mb-1">
@@ -1479,10 +1503,10 @@ const proximaCarrera = calendario
     </div>
 
     <div class="relative">
-        {/* Marcadores de fondo (1 por cada carrera para que parezca una regla técnica) */}
+        {/* Marcadores de fondo (Reaccionan de forma real a las carreras completadas) */}
         <div class="absolute inset-0 flex justify-between px-1 pointer-events-none z-20">
             {[...Array(totalCarreras)].map((_, i) => (
-                <div class={`w-[1px] h-full ${i < carrerasCorridas ? 'bg-white/20' : 'bg-white/5'}`}></div>
+                <div class={`w-[1px] h-full transition-colors duration-500 ${i < carrerasCorridas ? 'bg-red-500/40' : 'bg-white/5'}`}></div>
             ))}
         </div>
 
@@ -1490,9 +1514,9 @@ const proximaCarrera = calendario
         <div class="h-8 bg-zinc-950 rounded-lg border border-zinc-900 overflow-hidden relative shadow-2xl backdrop-blur-sm">
             <div 
                 id="season-progress-bar"
-                class="h-full bg-gradient-to-r from-red-900 via-red-600 to-red-500 relative transition-all duration-1000 ease-out shadow-[0_0_20px_rgba(220,38,38,0.3)]" 
+                class="h-full bg-gradient-to-r from-red-900 via-red-600 to-red-500 relative ease-out shadow-[0_0_20px_rgba(220,38,38,0.3)]" 
                 data-progress={porcentajeTemporada}
-                style="width: 0%;"
+                style="width: 0%; transition: width 1.5s cubic-bezier(0.22, 1, 0.36, 1);"
             >
                 {/* Cabezal de lectura (La línea blanca que brilla) */}
                 <div class="absolute right-0 top-0 h-full w-1.5 bg-white shadow-[0_0_15px_rgba(255,255,255,0.8)] z-30"></div>
@@ -1508,7 +1532,7 @@ const proximaCarrera = calendario
             <span class="text-[10px] font-mono font-black text-red-500 uppercase italic">
                 {porcentajeTemporada.toFixed(1)}% Completed
             </span>
-            <span class="text-[7px] font-mono text-zinc-600 uppercase tracking-tighter italic">End_Of_Season // 2025</span>
+            <span class="text-[7px] font-mono text-zinc-600 uppercase tracking-tighter italic">End_Of_Season // 2026</span>
         </div>
     </div>
 </div>
@@ -1518,13 +1542,28 @@ const proximaCarrera = calendario
         const progressBar = document.getElementById('season-progress-bar');
         if (progressBar) {
             const target = progressBar.getAttribute('data-progress');
-            setTimeout(() => {
-                progressBar.style.width = target + '%';
-            }, 500);
+            
+            // Forzamos el estado inicial a cero por seguridad antes del repintado
+            progressBar.style.width = '0%';
+            
+            // Usamos requestAnimationFrame doble para asegurar que el navegador registre el 0% 
+            // antes de disparar la transición al porcentaje objetivo
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    progressBar.style.width = target + '%';
+                });
+            });
         }
     }
 
-    animarProgresoTemporada();
+    // Ejecución inicial segura
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', animarProgresoTemporada);
+    } else {
+        animarProgresoTemporada();
+    }
+
+    // Soporte total para Astro View Transitions
     document.addEventListener('astro:page-load', animarProgresoTemporada);
 </script>
     <div class="max-w-7xl mx-auto mb-16 text-center md:text-left reveal-on-scroll">

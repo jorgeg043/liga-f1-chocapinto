@@ -85,7 +85,54 @@
       { "pos": 3, "piloto": "Rambo", "puntos": 15, "nota": "" },
       { "pos": 8, "piloto": "Adrian", "puntos": 0, "nota": "" },
       { "pos": 6, "piloto": "IA-Williams", "puntos": 0, "nota": "" },
-      { "pos": 7, "piloto": "Seba", "puntos": 0, "nota": "" }
+      { "pos": 7, "piloto": "Seba W", "puntos": 0, "nota": "" }
+    ]
+  },
+  {
+    "id": 5,
+    "gp": "México",
+    "circuito": "Autódromo Hermanos Rodriguez",
+    "fecha": "15 MAY 2026",
+    "imagen": "/Fotos/foto-fecha5mexico.png",
+    "pole": "Rambo",
+    "tiempoPole": "1:17.847",
+    "vueltaRapida": "Rambo",
+    "tiempoVR": "1:21.225",
+    "duracion": "54m 32s",
+    "resultados": [
+      { "pos": 7, "piloto": "Chor", "puntos": 0, "nota": "" },
+      { "pos": 6, "piloto": "Diego", "puntos": 8, "nota": "" },
+      { "pos": 5, "piloto": "Rodri", "puntos": 10, "nota": "" },
+      { "pos": 3, "piloto": "Simon", "puntos": 15, "nota": "" },
+      { "pos": 2, "piloto": "Franco", "puntos": 18, "nota": "" },
+      { "pos": 1, "piloto": "Rambo", "puntos": 25, "nota": "VR" },
+      { "pos": 10, "piloto": "Adrian", "puntos": 0, "nota": "" },
+      { "pos": 4, "piloto": "Seba W", "puntos": 12, "nota": "" },
+      { "pos": 8, "piloto": "Hugo", "puntos": 0, "nota": "" },
+      { "pos": 9, "piloto": "Fede", "puntos": 0, "nota": "" }
+    ]
+  },
+  {
+    "id": 6,
+    "gp": "Hungría",
+    "circuito": "Hungaroring",
+    "fecha": "22 MAY 2026",
+    "imagen": "/Fotos/foto-fecha6hungria.png",
+    "pole": "Rodri",
+    "tiempoPole": "1:18.996",
+    "vueltaRapida": "Rodri",
+    "tiempoVR": "1:22.208",
+    "duracion": "50m 38s",
+    "resultados": [
+      { "pos": 4, "piloto": "Diego", "puntos": 12, "nota": "" },
+      { "pos": 1, "piloto": "Rodri", "puntos": 25, "nota": "VR" },
+      { "pos": 2, "piloto": "Simon", "puntos": 18, "nota": "" },
+      { "pos": 5, "piloto": "Franco", "puntos": 10, "nota": "" },
+      { "pos": 9, "piloto": "Claudio", "puntos": 2, "nota": "" },
+      { "pos": 3, "piloto": "Seba", "puntos": 15, "nota": "" },
+      { "pos": 7, "piloto": "Mateo", "puntos": 6, "nota": "" },
+      { "pos": 8, "piloto": "Fede", "puntos": 4, "nota": "" },
+      { "pos": 6, "piloto": "Leo", "puntos": 8, "nota": "" }
     ]
   }
 ]
