@@ -134,5 +134,30 @@
       { "pos": 8, "piloto": "Fede", "puntos": 4, "nota": "" },
       { "pos": 6, "piloto": "Leo", "puntos": 8, "nota": "" }
     ]
+  },
+  {
+    "id": 7,
+    "gp": "Países Bajos",
+    "circuito": "Zandvoort",
+    "fecha": "29 MAY 2026",
+    "imagen": "/Fotos/foto-fecha7zandvoort.png",
+    "pole": "Chor",
+    "tiempoPole": "1:10.493",
+    "vueltaRapida": "Chor",
+    "tiempoVR": "1:15.851",
+    "duracion": "64m 19s",
+    "resultados": [
+      { "pos": 7, "piloto": "Diego", "puntos": 0, "nota": "" },
+      { "pos": 1, "piloto": "Rodri", "puntos": 25, "nota": "" },
+      { "pos": 8, "piloto": "Simon", "puntos": 0, "nota": "" },
+      { "pos": 3, "piloto": "Franco", "puntos": 0, "nota": "" },
+      { "pos": 5, "piloto": "Claudio", "puntos": 0, "nota": "" },
+      { "pos": 2, "piloto": "Seba", "puntos": 18, "nota": "" },
+      { "pos": 10, "piloto": "Mateo", "puntos": 0, "nota": "" },
+      { "pos": 4, "piloto": "Chor", "puntos": 0, "nota": "VR" },
+      { "pos": 6, "piloto": "Leo", "puntos": 0, "nota": "" },
+      { "pos": 9, "piloto": "Adrian", "puntos": 0, "nota": "" }
+    ]
   }
+
 ]

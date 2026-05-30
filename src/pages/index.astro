@@ -13,7 +13,7 @@ const logos = {
   "Aston Martin": "/Fotos/logo-astonmartin.png",
 };
 const totalCarreras = 24;
-const carrerasCorridas = 6;
+const carrerasCorridas = 7;
 const porcentajeTemporada = (carrerasCorridas / totalCarreras) * 100;
 const escuderiasMap = pilotos.reduce((acc, piloto) => {
     if (!acc[piloto.escuderia]) {
@@ -503,14 +503,14 @@ const proximaCarrera = calendario
 
     <div class="absolute inset-0 z-[2] opacity-[0.03] pointer-events-none bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDQwIDQwIj48ZyBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMSI+PHBhdGggZD0iTTAgMGg0MHY0MEgwVjB6bTIwIDIwaDIwdjIwSDIWMjB6TTAgMjBoMjB2MjBIMFYyMHoyMCAwaDIwdjIwSDIwVjB6Ii8+PC9nPjwvZz48L3N2Zz4=')] bg-center"></div>
 <video 
-    id="video-zandvoort"
+    id="video-intro"
     src="/Videos/opening.mp4" 
-    loop playsinline
+    autoplay muted loop playsinline
     class="absolute inset-0 w-full h-full object-cover opacity-40 pointer-events-none mix-blend-screen"
 ></video>
 <script data-astro-rerun>
   document.addEventListener('astro:page-load', () => {
-    const video = document.getElementById('video-zandvoort');
+    const video = document.getElementById('video-intro');
 
     // Intentar reproducir cuando el usuario interactúe con la página
     const reproducirConAudio = () => {
@@ -553,8 +553,8 @@ const proximaCarrera = calendario
          <div class="reveal-item mb-16 bg-[#020c1b]/60 rounded-xl border border-zinc-900 p-8 shadow-2xl relative overflow-hidden group hover:border-red-600/30 transition-all duration-700 backdrop-blur-xl">
     
     <video 
-    id="video-zandvoort"
-    src="/Videos/vr_zandvoort.mp4" 
+    id="video-brasil"
+    src="/Videos/vr_brasil.mp4" 
     autoplay muted loop playsinline
     class="absolute inset-0 w-full h-full object-cover opacity-40 pointer-events-none mix-blend-screen"
 ></video>
@@ -570,14 +570,14 @@ const proximaCarrera = calendario
             <div class="absolute inset-0 bg-red-600/5 blur-[80px] rounded-full group-hover:bg-red-600/10 transition-all duration-700"></div>
             
             <img 
-                src="/Fotos/foto-fecha7zandvoort.png" 
+                src="/Fotos/foto-fecha8brasil.png" 
                 alt="Circuito México" 
                 class="w-full max-w-[540px] h-auto object-contain filter drop-shadow-[0_0_30px_rgba(255,255,255,0.1)] transition-transform duration-700 group-hover:scale-110 group-hover:-rotate-3 animate-latido-color"
             />
             
             <div class="mt-8 text-center">
                 <p class="text-[10px] text-zinc-500 font-mono tracking-[0.5em] uppercase mb-1">Datos de ubicación</p>
-                <h4 class="text-xs font-black text-white uppercase tracking-widest italic group-hover:text-red-500 transition-colors">Circuito Zandvoort</h4>
+                <h4 class="text-xs font-black text-white uppercase tracking-widest italic group-hover:text-red-500 transition-colors">Circuito Sáo Pablo - Interlagos</h4>
             </div>
         </div>
 
@@ -597,14 +597,14 @@ const proximaCarrera = calendario
             <h2 class="text-5xl md:text-6xl font-black uppercase tracking-tighter italic text-white leading-tight mb-8">
                 Gran Premio<br/>
                 <span class="text-red-600 drop-shadow-[0_0_15px_rgba(220,38,38,0.4)] transition-all group-hover:drop-shadow-[0_0_30px_rgba(220,38,38,0.6)]">
-                    PAÍSES BAJOS
+                    BRASIL
                 </span>
             </h2>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div class="bg-zinc-950/80 p-5 rounded-lg border-l-4 border-red-600 shadow-2xl group/box transition-all hover:translate-x-1">
                     <p class="text-[9px] text-white uppercase tracking-widest font-black mb-2">Horario carrera (ARG)</p>
-                    <p class="text-lg font-black text-zinc-200 uppercase tracking-tighter mb-1">Viernes 29 de Mayo</p>
+                    <p class="text-lg font-black text-zinc-200 uppercase tracking-tighter mb-1">Viernes 05 de Junio</p>
                     <div class="flex items-baseline gap-2">
                         <span class="text-4xl font-mono font-black text-white italic">23:00</span>
                         <span class="text-red-600 font-black italic text-lg">HS</span>
@@ -612,36 +612,54 @@ const proximaCarrera = calendario
                 </div>
 
                 <div class="bg-zinc-950/80 p-5 rounded-lg border-l-4 border-zinc-700 shadow-2xl hover:border-white transition-all hover:translate-x-1">
-                    <p class="text-[9px] text-white  uppercase tracking-widest font-black mb-3">Protocolo de sesión</p>
-                    <div class="space-y-2">
-                        <div class="flex justify-between items-center text-[11px] font-bold uppercase tracking-tighter">
-                            <span class="text-zinc-500">Practica libre</span>
-                            <span class="text-white font-mono">30 MIN</span>
-                        </div>
-                        <div class="flex justify-between items-center text-[11px] font-bold uppercase tracking-tighter border-t border-zinc-900 pt-2">
-                            <span class="text-zinc-500">Clasificación</span>
-                            <span class="text-white font-mono">18 MIN</span>
-                        </div>
-                        <div class="flex justify-between items-center text-[11px] font-black uppercase tracking-tighter border-t border-zinc-900 pt-2 text-red-500">
-                            <span>Main Race</span>
-                            <span class="bg-red-600/10 px-2 py-0.5 rounded">36 VUELTAS (50%)</span>
-                        </div>
-                    </div>
-                </div>
+    <p class="text-[9px] text-white uppercase tracking-widest font-black mb-4">Protocolo de sesión</p>
+    
+    <div class="space-y-2.5">
+        <!-- 1. Práctica Libre -->
+        <div class="flex justify-between items-center text-[11px] font-bold uppercase tracking-tighter">
+            <span class="text-zinc-500">Práctica libre</span>
+            <span class="text-white font-mono">30 MIN</span>
+        </div>
+        
+        <!-- 2. Clasificación Sprint -->
+        <div class="flex justify-between items-center text-[11px] font-bold uppercase tracking-tighter border-t border-zinc-900/50 pt-2.5">
+            <span class="text-zinc-500">Clasificación Sprint</span>
+            <span class="text-white font-mono">12 MIN</span>
+        </div>
+
+        <!-- 3. Sprint Race -->
+        <div class="flex justify-between items-center text-[11px] font-black uppercase tracking-tighter text-red-500">
+            <span>Sprint Race</span>
+            <span class="bg-red-600/10 px-2 py-0.5 rounded text-white font-mono">12 VUELTAS</span>
+        </div>
+
+        <!-- 4. Clasificación Principal -->
+        <div class="flex justify-between items-center text-[11px] font-bold uppercase tracking-tighter border-t border-zinc-900/50 pt-2.5">
+            <span class="text-zinc-500">Clasificación GP</span>
+            <span class="text-white font-mono">18 MIN</span>
+        </div>
+        
+        <!-- 5. Main Race -->
+        <div class="flex justify-between items-center text-[11px] font-black uppercase tracking-tighter text-red-500">
+            <span>Main Race</span>
+            <span class="bg-red-600/10 px-2 py-0.5 rounded text-white font-mono">36 VUELTAS</span>
+        </div>
+    </div>
+</div>
             </div>
 
             <div class="mt-10 flex flex-wrap gap-x-8 gap-y-4 text-[10px] text-zinc-500 font-black uppercase tracking-[0.2em] border-t border-zinc-900 pt-6">
                 <div class="flex items-center gap-2 group/stat">
                     <div class="w-1.5 h-1.5 bg-red-600 rounded-full group-hover/stat:scale-150 transition-transform"></div>
-                    <span>Longitud: <span class="text-zinc-300 font-mono">4.307 KM</span></span>
+                    <span>Longitud: <span class="text-zinc-300 font-mono">4.309 KM</span></span>
                 </div>
                 <div class="flex items-center gap-2 group/stat">
                     <div class="w-1.5 h-1.5 bg-red-600 rounded-full group-hover/stat:scale-150 transition-transform"></div>
-                    <span>Curvas: <span class="text-zinc-300 font-mono">14</span></span>
+                    <span>Curvas: <span class="text-zinc-300 font-mono">15</span></span>
                 </div>
                 <div class="flex items-center gap-2 group/stat">
                     <div class="w-1.5 h-1.5 bg-red-600 rounded-full group-hover/stat:scale-150 transition-transform"></div>
-                    <span>Circuito: <span class="text-zinc-300">Zandvoort</span></span>
+                    <span>Circuito: <span class="text-zinc-300">Sáo Pablo - Interlagos</span></span>
                 </div>
             </div>
         </div>
