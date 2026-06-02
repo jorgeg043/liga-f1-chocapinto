@@ -1131,7 +1131,57 @@ const proximaCarrera = calendario
         </div>
     </div>
 </section>
+<div class="flex flex-col items-center justify-center my-16 w-full">
+    <!-- Indicadores Superiores (Flechas HUD) -->
+    <div class="flex flex-col items-center mb-4 animate-bounce">
+        <span class="text-[10px] font-mono text-red-600 uppercase tracking-[0.3em] mb-1">Access_File</span>
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+        </svg>
+    </div>
 
+    <!-- Contenedor del Botón con Flechas Laterales -->
+    <div class="flex items-center gap-6">
+        <!-- Flecha Izquierda -->
+        <div class="hidden md:block text-zinc-800 animate-pulse">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7" />
+            </svg>
+        </div>
+
+        <!-- El Botón de Descarga -->
+        <a 
+            href="/Documentos/reglamento_2026.pdf" 
+            download="Reglamento_Liga_Chocapinto_2026.pdf"
+            class="relative inline-flex items-center gap-4 bg-zinc-950 hover:bg-red-600/10 text-white px-8 py-4 rounded-xl border border-zinc-800 hover:border-red-600 transition-all group shadow-[0_0_30px_rgba(0,0,0,0.5)] overflow-hidden"
+        >
+            <!-- Efecto de brillo de fondo -->
+            <div class="absolute inset-0 bg-gradient-to-r from-red-600/0 via-red-600/5 to-red-600/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
+
+            <div class="p-2 bg-red-600/10 rounded-lg border border-red-600/20 group-hover:scale-110 transition-transform">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17h6M9 13h6" />
+                </svg>
+            </div>
+            
+            <div class="flex flex-col items-start relative z-10">
+                <span class="text-[10px] font-mono text-zinc-500 uppercase tracking-widest leading-none mb-1">Descarga Oficial</span>
+                <span class="text-base font-black uppercase italic tracking-tighter">Reglamento Temporada 2026</span>
+            </div>
+        </a>
+
+        <!-- Flecha Derecha -->
+        <div class="hidden md:block text-zinc-800 animate-pulse scale-x-[-1]">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7" />
+            </svg>
+        </div>
+    </div>
+
+    <!-- Info Adicional Inferior -->
+    <p class="mt-4 text-[9px] font-mono text-zinc-600 uppercase tracking-[0.2em] italic">Documentación_V.01 // PDF_Format</p>
+</div>
 
 <section id="Configuración" class="scroll-mt-32 mb-20">
     <div class="reveal-on-scroll">
