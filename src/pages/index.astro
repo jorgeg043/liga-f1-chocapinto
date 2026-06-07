@@ -13,7 +13,7 @@ const logos = {
   "Aston Martin": "/Fotos/logo-astonmartin.png",
 };
 const totalCarreras = 24;
-const carrerasCorridas = 7;
+const carrerasCorridas = 8;
 const porcentajeTemporada = (carrerasCorridas / totalCarreras) * 100;
 const escuderiasMap = pilotos.reduce((acc, piloto) => {
     if (!acc[piloto.escuderia]) {
@@ -559,8 +559,8 @@ const proximaCarrera = calendario
          <div class="reveal-item mb-16 bg-[#020c1b]/60 rounded-xl border border-zinc-900 p-8 shadow-2xl relative overflow-hidden group hover:border-red-600/30 transition-all duration-700 backdrop-blur-xl">
     
     <video 
-    id="video-brasil"
-    src="/Videos/vr_brasil.mp4" 
+    id="video-lasvegas"
+    src="/Videos/vr_lasvegas.mp4" 
     autoplay muted loop playsinline
     class="absolute inset-0 w-full h-full object-cover opacity-40 pointer-events-none mix-blend-screen"
 ></video>
@@ -576,14 +576,14 @@ const proximaCarrera = calendario
             <div class="absolute inset-0 bg-red-600/5 blur-[80px] rounded-full group-hover:bg-red-600/10 transition-all duration-700"></div>
             
             <img 
-                src="/Fotos/foto-fecha8brasil.png" 
-                alt="Circuito México" 
+                src="/Fotos/foto-fecha9lasvegas.png" 
+                alt="Circuito Las Vegas" 
                 class="w-full max-w-[540px] h-auto object-contain filter drop-shadow-[0_0_30px_rgba(255,255,255,0.1)] transition-transform duration-700 group-hover:scale-110 group-hover:-rotate-3 animate-latido-color"
             />
             
             <div class="mt-8 text-center">
                 <p class="text-[10px] text-zinc-500 font-mono tracking-[0.5em] uppercase mb-1">Datos de ubicación</p>
-                <h4 class="text-xs font-black text-white uppercase tracking-widest italic group-hover:text-red-500 transition-colors">Circuito São Paulo - Interlagos</h4>
+                <h4 class="text-xs font-black text-white uppercase tracking-widest italic group-hover:text-red-500 transition-colors">Las Vegas Strip Circuit</h4>
             </div>
         </div>
 
@@ -603,14 +603,14 @@ const proximaCarrera = calendario
             <h2 class="text-5xl md:text-6xl font-black uppercase tracking-tighter italic text-white leading-tight mb-8">
                 Gran Premio<br/>
                 <span class="text-red-600 drop-shadow-[0_0_15px_rgba(220,38,38,0.4)] transition-all group-hover:drop-shadow-[0_0_30px_rgba(220,38,38,0.6)]">
-                    BRASIL
+                    LAS VEGAS
                 </span>
             </h2>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div class="bg-zinc-950/80 p-5 rounded-lg border-l-4 border-red-600 shadow-2xl group/box transition-all hover:translate-x-1">
                     <p class="text-[9px] text-white uppercase tracking-widest font-black mb-2">Horario carrera (ARG)</p>
-                    <p class="text-lg font-black text-zinc-200 uppercase tracking-tighter mb-1">Viernes 05 de Junio</p>
+                    <p class="text-lg font-black text-zinc-200 uppercase tracking-tighter mb-1">Viernes 12 de Junio</p>
                     <div class="flex items-baseline gap-2">
                         <span class="text-4xl font-mono font-black text-white italic">23:00</span>
                         <span class="text-red-600 font-black italic text-lg">HS</span>
@@ -626,29 +626,29 @@ const proximaCarrera = calendario
             <span class="text-zinc-500">Práctica libre</span>
             <span class="text-white font-mono">30 MIN</span>
         </div>
-        
+{/*        
         <!-- 2. Clasificación Sprint -->
         <div class="flex justify-between items-center text-[11px] font-bold uppercase tracking-tighter border-t border-zinc-900/50 pt-2.5">
             <span class="text-zinc-500">Clasificación Sprint</span>
             <span class="text-white font-mono">12 MIN</span>
         </div>
 
-        <!-- 3. Sprint Race -->
+      <!-- 3. Sprint Race -->
         <div class="flex justify-between items-center text-[11px] font-black uppercase tracking-tighter text-red-500">
             <span>Sprint Race</span>
             <span class="bg-red-600/10 px-2 py-0.5 rounded text-white font-mono">12 VUELTAS</span>
         </div>
-
+*/}
         <!-- 4. Clasificación Principal -->
         <div class="flex justify-between items-center text-[11px] font-bold uppercase tracking-tighter border-t border-zinc-900/50 pt-2.5">
             <span class="text-zinc-500">Clasificación GP</span>
             <span class="text-white font-mono">18 MIN</span>
         </div>
-        
+       
         <!-- 5. Main Race -->
         <div class="flex justify-between items-center text-[11px] font-black uppercase tracking-tighter text-red-500">
             <span>Main Race</span>
-            <span class="bg-red-600/10 px-2 py-0.5 rounded text-white font-mono">36 VUELTAS</span>
+            <span class="bg-red-600/10 px-2 py-0.5 rounded text-white font-mono">25 VUELTAS</span>
         </div>
     </div>
 </div>
@@ -657,15 +657,15 @@ const proximaCarrera = calendario
             <div class="mt-10 flex flex-wrap gap-x-8 gap-y-4 text-[10px] text-zinc-500 font-black uppercase tracking-[0.2em] border-t border-zinc-900 pt-6">
                 <div class="flex items-center gap-2 group/stat">
                     <div class="w-1.5 h-1.5 bg-red-600 rounded-full group-hover/stat:scale-150 transition-transform"></div>
-                    <span>Longitud: <span class="text-zinc-300 font-mono">4.309 KM</span></span>
+                    <span>Longitud: <span class="text-zinc-300 font-mono">6.201 KM</span></span>
                 </div>
                 <div class="flex items-center gap-2 group/stat">
                     <div class="w-1.5 h-1.5 bg-red-600 rounded-full group-hover/stat:scale-150 transition-transform"></div>
-                    <span>Curvas: <span class="text-zinc-300 font-mono">15</span></span>
+                    <span>Curvas: <span class="text-zinc-300 font-mono">17</span></span>
                 </div>
                 <div class="flex items-center gap-2 group/stat">
                     <div class="w-1.5 h-1.5 bg-red-600 rounded-full group-hover/stat:scale-150 transition-transform"></div>
-                    <span>Circuito: <span class="text-zinc-300">São Paulo - Interlagos</span></span>
+                    <span>Circuito: <span class="text-zinc-300">Las Vegas Strip Circuit</span></span>
                 </div>
             </div>
         </div>
@@ -684,21 +684,21 @@ const proximaCarrera = calendario
                 <div class="flex items-center justify-center w-10 h-10 rounded-full bg-zinc-950 border-[3px] border-red-600 shadow-[0_0_8px_rgba(220,38,38,0.4)] select-none">
                     <span class="text-[15px] font-black text-red-500 italic leading-none">S</span>
                 </div>
-                <span class="text-white font-bold">C4</span>
+                <span class="text-white font-bold">C5</span>
             </div>
 
             <div class="flex items-center gap-1.5 font-mono text-[15px]">
                 <div class="flex items-center justify-center w-10 h-10 rounded-full bg-zinc-950 border-[3px] border-yellow-500 shadow-[0_0_8px_rgba(234,179,8,0.4)] select-none">
                     <span class="text-[15px] font-black text-yellow-500 italic leading-none">M</span>
                 </div>
-                <span class="text-white font-bold">C3</span>
+                <span class="text-white font-bold">C4</span>
             </div>
 
             <div class="flex items-center gap-1.5 font-mono text-[15px]">
                 <div class="flex items-center justify-center w-10 h-10 rounded-full bg-zinc-950 border-[3px] border-zinc-300 shadow-[0_0_8px_rgba(255,255,255,0.2)] select-none">
                     <span class="text-[15px] font-black text-zinc-300 italic leading-none">H</span>
                 </div>
-                <span class="text-white font-bold">C2</span>
+                <span class="text-white font-bold">C3</span>
             </div>
         </div>
 
@@ -1351,7 +1351,7 @@ const proximaCarrera = calendario
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {(() => {
-            const ordenDeseado = ["Chor", "Franco", "Simon", "Diego", "Rodri", "Leo", "Rambo", "Adrian", "Seba", "Seba W", "Franco G", "Fede", "Valen", "Hugo", "Matias", "Mateo", "Claudio"];
+            const ordenDeseado = ["Chor", "Giova", "Simon", "Diego", "Rodri", "Leo", "Rambo", "Adrian", "Seba", "Seba W", "Franco G", "Fede", "Valen", "Hugo", "Matias", "Mateo", "Claudio"];
             
             const pilotosOrdenados = [...pilotos]
     .filter(p => p.activo !== false) // <--- CON ESTO SACÁS A RAMBO
@@ -1412,7 +1412,7 @@ const proximaCarrera = calendario
                             <div class="mt-6 flex items-center justify-between bg-zinc-900/40 backdrop-blur-md p-3 rounded-lg border border-zinc-800/50 shadow-inner group-hover:border-zinc-700 transition-colors">
                                 <div class="flex items-center gap-3">
                                     <span class="p-1.5 bg-zinc-950 rounded border border-zinc-800 group-hover:text-white transition-colors">
-                                        {["Chor", "Rambo", "Fede", "Valen", "Mateo", "Claudio"].includes(piloto.nombre) ? (
+                                        {["Chor", "Rambo", "Fede", "Valen", "Mateo", "Claudio", "Giova"].includes(piloto.nombre) ? (
                                             <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="2" x2="12" y2="12"/><line x1="12" y1="12" x2="4" y2="18"/><line x1="12" y1="12" x2="20" y2="18"/><circle cx="12" cy="12" r="2" fill="currentColor"/></svg>
                                         ) : piloto.nombre === "IA-Williams" ? (
                                             <span class="text-xs">🤖</span>
@@ -1426,7 +1426,7 @@ const proximaCarrera = calendario
                                         <span class="text-[7px] text-zinc-500 font-black uppercase tracking-widest">Input Device</span>
                                         <span class="text-[10px] font-mono text-zinc-300 uppercase font-black">
                                             {piloto.nombre === "Adrian" ? "Joystick" :
-                                             (["Chor", "Rambo", "Fede", "Valen", "Mateo", "Claudio"].includes(piloto.nombre)) ? "Volante" :
+                                             (["Chor", "Rambo", "Fede", "Valen", "Mateo", "Claudio", "Giova"].includes(piloto.nombre)) ? "Volante" :
                                              piloto.nombre === "IA-Williams" ? "Sistemas IA" : 
                                              piloto.nombre === "Franco" ? "Teclado" : "Joystick"}
                                         </span>
@@ -1450,6 +1450,7 @@ const proximaCarrera = calendario
                                         piloto.nombre === "Matias" ? "https://www.instagram.com/mati.lisera" :
                                         piloto.nombre === "Mateo" ? "https://www.instagram.com/mateoalmaraz6/" :
                                         piloto.nombre === "Claudio" ? "https://www.facebook.com/claudio.lazzaroni.9" :
+                                        piloto.nombre === "Giova" ? "https://www.instagram.com/giovacapdevila/" :
                                         "https://www.instagram.com/leo.tapparello/"
                                     } 
                                     target="_blank" 

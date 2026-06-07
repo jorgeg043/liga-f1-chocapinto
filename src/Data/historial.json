@@ -158,6 +158,26 @@
       { "pos": 6, "piloto": "Leo", "puntos": 0, "nota": "" },
       { "pos": 9, "piloto": "Adrian", "puntos": 0, "nota": "" }
     ]
+  },
+  {
+    "id": 8,
+    "gp": "Brasil",
+    "circuito": "Interlagos",
+    "fecha": "05 JUN 2026",
+    "imagen": "/Fotos/foto-fecha8brasil.png",
+    "pole": "Chor",
+    "tiempoPole": "1:19.238",
+    "vueltaRapida": "Diego",
+    "tiempoVR": "1:23.040",
+    "duracion": "54m 01s",
+    "resultados": [
+      { "pos": 1, "piloto": "Chor", "puntos": 25, "nota": "" },
+      { "pos": 2, "piloto": "Rodri", "puntos": 18, "nota": "" },
+      { "pos": 3, "piloto": "Diego", "puntos": 15, "nota": "VR" },
+      { "pos": 4, "piloto": "Seba", "puntos": 12, "nota": "" },
+      { "pos": 5, "piloto": "Simon", "puntos": 10, "nota": "" },
+      { "pos": 6, "piloto": "Mateo", "puntos": 0, "nota": "DNF" }
+    ]
   }
 
 ]
