@@ -154,7 +154,7 @@
       { "pos": 5, "piloto": "Claudio", "puntos": 0, "nota": "" },
       { "pos": 2, "piloto": "Seba", "puntos": 18, "nota": "" },
       { "pos": 10, "piloto": "Mateo", "puntos": 0, "nota": "" },
-      { "pos": 4, "piloto": "Chor", "puntos": 0, "nota": "VR" },
+      { "pos": 4, "piloto": "Chor", "puntos": 1, "nota": "VR" },
       { "pos": 6, "piloto": "Leo", "puntos": 0, "nota": "" },
       { "pos": 9, "piloto": "Adrian", "puntos": 0, "nota": "" }
     ]
@@ -171,13 +171,35 @@
     "tiempoVR": "1:23.040",
     "duracion": "54m 01s",
     "resultados": [
-      { "pos": 1, "piloto": "Chor", "puntos": 25, "nota": "" },
+      { "pos": 1, "piloto": "Chor", "puntos": 26, "nota": "" },
       { "pos": 2, "piloto": "Rodri", "puntos": 18, "nota": "" },
       { "pos": 3, "piloto": "Diego", "puntos": 15, "nota": "VR" },
       { "pos": 4, "piloto": "Seba", "puntos": 12, "nota": "" },
       { "pos": 5, "piloto": "Simon", "puntos": 10, "nota": "" },
       { "pos": 6, "piloto": "Mateo", "puntos": 0, "nota": "DNF" }
     ]
+  },
+{
+    "id": 9,
+    "gp": "Las Vegas - EEUU",
+    "circuito": "Las Vegas",
+    "fecha": "12 JUN 2026",
+    "imagen": "/Fotos/foto-fecha9lasvegas.png",
+    "pole": "Chor",
+    "tiempoPole": "1:33.119",
+    "vueltaRapida": "Chor",
+    "tiempoVR": "1:34.751",
+    "duracion": "42m 58s",
+    "resultados": [
+      { "pos": 1, "piloto": "Chor", "puntos": 27, "nota": "VR" },
+      { "pos": 2, "piloto": "Rodri", "puntos": 18, "nota": "" },
+      { "pos": 3, "piloto": "Diego", "puntos": 15, "nota": "" },
+      { "pos": 4, "piloto": "Seba", "puntos": 12, "nota": "" },
+      { "pos": 5, "piloto": "Ema", "puntos": 10, "nota": "" },
+      { "pos": 6, "piloto": "Simon", "puntos": 8, "nota": "" },
+      { "pos": 7, "piloto": "Mateo", "puntos": 6, "nota": "" },
+      { "pos": 8, "piloto": "Claudio", "puntos": 0, "nota": "DNF" },
+      { "pos": 9, "piloto": "Leo", "puntos": 0, "nota": "DNF" }
+    ]
   }
-
 ]
