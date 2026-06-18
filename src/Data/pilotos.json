@@ -10,6 +10,8 @@
   { "id": 11, "nombre": "Fede", "escuderia": "Haas", "puntos": 4, "victorias": 0, "poles": 0, "vueltasRapidas": 0 },
   { "id": 16, "nombre": "Claudio", "escuderia": "Aston Martin", "puntos": 2, "victorias": 0, "poles": 0, "vueltasRapidas": 0 },
   { "id": 18, "nombre": "Giova", "escuderia": "Alpine", "puntos": 0, "victorias": 0, "poles": 0, "vueltasRapidas": 0 },
+  { "id": 19, "nombre": "Ivan", "escuderia": "Kick Sauber", "puntos": 0, "victorias": 0, "poles": 0, "vueltasRapidas": 0 },
+  { "id": 20, "nombre": "Elias", "escuderia": "Kick Sauber", "puntos": 0, "victorias": 0, "poles": 0, "vueltasRapidas": 0 },
   
 
 { "id": 2, "nombre": "Franco", "escuderia": "Alpine", "puntos": 79, "victorias": 0, "poles": 0, "vueltasRapidas": 0, "activo" : false },

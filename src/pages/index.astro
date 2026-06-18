@@ -11,6 +11,7 @@ const logos = {
   "Haas": "/Fotos/logo-haas.png",
   "Racing Bulls": "/Fotos/logo-racingbulls.png",
   "Aston Martin": "/Fotos/logo-astonmartin.png",
+  "Kick Sauber": "/Fotos/logo-kicksauber.png",
 };
 const totalCarreras = 24;
 const carrerasCorridas = 9;
@@ -1351,7 +1352,7 @@ const proximaCarrera = calendario
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {(() => {
-            const ordenDeseado = ["Chor", "Giova", "Simon", "Diego", "Rodri", "Leo", "Rambo", "Adrian", "Seba", "Ema", "Seba W", "Franco G", "Fede", "Valen", "Hugo", "Matias", "Mateo", "Claudio"];
+            const ordenDeseado = ["Chor", "Giova", "Simon", "Diego", "Rodri", "Leo", "Rambo", "Adrian", "Seba", "Ema", "Seba W", "Franco G", "Fede", "Valen", "Hugo", "Matias", "Mateo", "Claudio", "Ivan", "Elias"];
             
             const pilotosOrdenados = [...pilotos]
     .filter(p => p.activo !== false) // <--- CON ESTO SACÁS A RAMBO
@@ -1367,6 +1368,7 @@ const proximaCarrera = calendario
                                      piloto.escuderia === "Haas" ? "escuderia-haas.jpg" :
                                      piloto.escuderia === "Racing Bulls" ? "escuderia-racingbulls.jpg" :
                                      piloto.escuderia === "Aston Martin" ? "escuderia-astonmartin.jpg" :
+                                     piloto.escuderia === "Kick Sauber" ? "escuderia-kicksauber.jpg" :
                                      "escuderia-redbull.jpg";
                 
                 return (
@@ -1390,7 +1392,7 @@ const proximaCarrera = calendario
                             <div class="absolute -top-1 -right-1 flex flex-col items-end">
                                 <span class="text-[7px] font-black uppercase tracking-[0.2em] text-zinc-500 mb-1">Status</span>
                                 <span class="bg-zinc-900 border border-zinc-800 px-2 py-0.5 rounded text-[9px] font-black uppercase italic text-zinc-300 group-hover:text-red-500 group-hover:border-red-600/30 transition-all">
-                                    {["Chor", "Simon", "Rodri", "Adrian", "Seba", "Fede", "Hugo", "Mateo"].includes(piloto.nombre) ? "Lead Driver" : "Wingman"}
+                                    {["Chor", "Simon", "Rodri", "Adrian", "Seba", "Fede", "Hugo", "Mateo", "Elias"].includes(piloto.nombre) ? "Lead Driver" : "Wingman"}
                                 </span>
                             </div>
 
@@ -1452,6 +1454,8 @@ const proximaCarrera = calendario
                                         piloto.nombre === "Claudio" ? "https://www.facebook.com/claudio.lazzaroni.9" :
                                         piloto.nombre === "Giova" ? "https://www.instagram.com/giovacapdevila/" :
                                         piloto.nombre === "Ema" ? "https://www.instagram.com/mxcixs_20" :
+                                        piloto.nombre === "Elias" ? "https://www.instagram.com/eliasbomrad7/" :
+                                        piloto.nombre === "Ivan" ? "https://www.instagram.com/ivaansolans" :
                                         "https://www.instagram.com/leo.tapparello/"
                                     } 
                                     target="_blank" 
@@ -1588,6 +1592,19 @@ const proximaCarrera = calendario
                 </div>
                 <div class="p-5 border-t border-zinc-900 bg-zinc-950/80 flex justify-between items-center">
                     <div><p class="text-[9px] font-mono text-zinc-600 uppercase tracking-widest">Active_Session</p><p class="text-white font-black italic uppercase text-lg group-hover:text-red-500 transition-colors">Aston Martin</p></div>
+                    <span class="text-red-500 font-mono text-[9px] animate-pulse">● SIGNAL_OK</span>
+                </div>
+            </div>
+
+            <div class="group relative bg-[#020c1b]/80 rounded-xl border border-zinc-800 overflow-hidden hover:border-green-600/50 transition-all duration-500 shadow-2xl">
+                <div class="absolute top-2 left-2 w-4 h-4 border-t border-l border-zinc-700 z-20 group-hover:border-green-500"></div>
+                <div class="absolute bottom-2 right-2 w-4 h-4 border-b border-r border-zinc-700 z-20 group-hover:border-green-500"></div>
+                <div class="relative aspect-video">
+                    <video src="/Videos/coche-kicksauber.mp4" autoplay muted loop playsinline class="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-700"></video>
+                    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-red-600/[0.05] to-transparent h-[200%] w-full -translate-y-full group-hover:animate-[scan_4s_linear_infinite] pointer-events-none"></div>
+                </div>
+                <div class="p-5 border-t border-zinc-900 bg-zinc-950/80 flex justify-between items-center">
+                    <div><p class="text-[9px] font-mono text-zinc-600 uppercase tracking-widest">Active_Session</p><p class="text-white font-black italic uppercase text-lg group-hover:text-red-500 transition-colors">Stake Kick Sauber</p></div>
                     <span class="text-red-500 font-mono text-[9px] animate-pulse">● SIGNAL_OK</span>
                 </div>
             </div>
