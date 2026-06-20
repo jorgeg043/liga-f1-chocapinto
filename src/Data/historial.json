@@ -201,5 +201,28 @@
       { "pos": 8, "piloto": "Claudio", "puntos": 0, "nota": "DNF" },
       { "pos": 9, "piloto": "Leo", "puntos": 0, "nota": "DNF" }
     ]
+  },
+  {
+    "id": 10,
+    "gp": "Canada",
+    "circuito": "Gilles Villeneuve",
+    "fecha": "19 JUN 2026",
+    "imagen": "/Fotos/foto-fecha10canada.png",
+    "pole": "Chor",
+    "tiempoPole": "1:12.368",
+    "vueltaRapida": "Chor",
+    "tiempoVR": "1:14.685",
+    "duracion": "46m 22s",
+    "resultados": [
+      { "pos": 1, "piloto": "Chor", "puntos": 27, "nota": "VR" },
+      { "pos": 2, "piloto": "Seba", "puntos": 18, "nota": "" },
+      { "pos": 3, "piloto": "Giova", "puntos": 15, "nota": "" },
+      { "pos": 4, "piloto": "Diego", "puntos": 12, "nota": "" },
+      { "pos": 5, "piloto": "Ivan", "puntos": 10, "nota": "" },
+      { "pos": 6, "piloto": "Elias", "puntos": 8, "nota": "" },
+      { "pos": 7, "piloto": "Simon", "puntos": 6, "nota": "" },
+      { "pos": 8, "piloto": "Claudio", "puntos": 0, "nota": "DNF" },
+      { "pos": 9, "piloto": "Rodri", "puntos": 0, "nota": "DNF" }
+    ]
   }
 ]
