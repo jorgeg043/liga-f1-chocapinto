@@ -2,6 +2,17 @@
 import pilotos from '../Data/pilotos.json';
 import '../styles/global.css';
 import { ClientRouter } from 'astro:transitions';
+const coloresEscuderia = {
+    "Mercedes Benz": "from-[#00A294] to-black text-[#00A294] border-[#00A294]/30",
+    "Alpine": "from-[#005BA9] via-[#E20613] to-black text-[#005BA9] border-[#005BA9]/30",
+    "Ferrari": "from-[#F10615] to-black text-[#F10615] border-[#F10615]/30",
+    "Williams": "from-[#005AFF] to-black text-[#005AFF] border-[#005AFF]/30",
+    "Haas": "from-[#EF4444] via-[#FFFFFF] to-black text-[#EF4444] border-[#EF4444]/30",
+    "Racing Bulls": "from-[#002F6C] via-[#66CCFF] to-black text-[#66CCFF] border-[#66CCFF]/30",
+    "Aston Martin": "from-[#00594F] to-black text-[#00594F] border-[#00594F]/30",
+    "Kick Sauber": "from-[#52E300] to-black text-[#52E300] border-[#52E300]/30",
+    "Red Bull": "from-[#0A1D2C] via-[#FFCC00] to-[#E20613] text-[#FFCC00] border-[#FFCC00]/30"
+};
 const logos = {
   "Mercedes Benz": "/Fotos/logo-mercedes.png",
   "Alpine": "/Fotos/logo-alpine.png",
@@ -1050,7 +1061,9 @@ const proximaCarrera = calendario
 
 
 
-            <section id="constructores" class="mb-20 scroll-mt-32">
+           {/* 🏎️ CONTENEDOR PRINCIPAL DEL CARRUSEL DE CONSTRUCTORES */}
+<section id="constructores" class="mb-20 scroll-mt-32 max-w-7xl mx-auto px-4 relative overflow-hidden">
+    
     <div class="reveal-on-scroll">
         <h2 class="text-sm font-black mb-12 uppercase tracking-[0.4em] text-white flex items-center gap-4">
             <span class="flex-1 h-[1px] bg-zinc-800"></span> 
@@ -1059,50 +1072,218 @@ const proximaCarrera = calendario
         </h2>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 p-4">
-        {escuderias.map((team, index) => (
-            <div 
-                class="reveal-item group relative bg-zinc-950 p-8 rounded-xl border border-zinc-900 flex flex-col items-center justify-center overflow-hidden transition-all duration-500 hover:border-red-600/40 hover:shadow-[0_0_40px_rgba(220,38,38,0.1)] transform-gpu will-change-transform"
-                style={`transition-delay: ${index * 150}ms;`} 
-            >
-                <div class="absolute top-0 left-0 w-6 h-6 border-t-2 border-l-2 border-red-600 animate-pulse opacity-0 group-hover:opacity-100 transition-all duration-500 z-20"></div>
-                <div class="absolute bottom-0 right-0 w-6 h-6 border-b-2 border-r-2 border-white opacity-0 animate-pulse group-hover:opacity-100 transition-all duration-500 z-20"></div>
+    {/* Botones HUD Flotantes para controlar el Carrusel Manualmente */}
+    <div class="absolute top-[55%] -translate-y-1/2 left-2 z-30 hidden md:block">
+        <button id="prev-constructores-clean-btn" class="bg-zinc-950/90 hover:bg-red-600/20 text-white p-4 rounded-xl border border-zinc-800 hover:border-red-600 transition-all group shadow-2xl">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 group-hover:-translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+        </button>
+    </div>
+    <div class="absolute top-[55%] -translate-y-1/2 right-2 z-30 hidden md:block">
+        <button id="next-constructores-clean-btn" class="bg-zinc-950/90 hover:bg-red-600/20 text-white p-4 rounded-xl border border-zinc-800 hover:border-red-600 transition-all group shadow-2xl">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 group-hover:translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+        </button>
+    </div>
 
-                <div class="absolute top-4 right-4 flex flex-col items-end opacity-40 group-hover:opacity-100 transition-opacity">
-                    <span class="text-[8px] font-black text-zinc-200 uppercase tracking-tighter">Posición</span>
-                    <span class="text-xl font-mono font-black text-white italic">P{index + 1}</span>
-                </div>
+    {/* Riel Deslizable del Carrusel */}
+    <div id="constructores-clean-wrapper" class="flex transition-transform duration-500 ease-out w-full">
+        {escuderias.map((team, index) => {
+            const position = index + 1;
+            const formattedPos = position < 10 ? `0${position}` : position;
 
-                <div class="relative z-10 mb-6 transition-transform duration-500 group-hover:scale-110">
-                    <img 
-                        src={logos[team.nombre]} 
-                        alt={team.nombre} 
-                        class="w-24 h-24 object-contain filter drop-shadow-[0_0_10px_rgba(255,255,255,0.1)] group-hover:drop-shadow-[0_0_20px_rgba(255,255,255,0.2)] animate-latido" 
-                    />
-                </div>
+            return (
+                <div class="w-full sm:w-[50%] lg:w-[33.333%] flex-shrink-0 px-3 constructores-clean-slide">
+                    <div 
+                        class="reveal-item group relative bg-zinc-950 p-8 rounded-xl border border-zinc-900 flex flex-col items-center justify-center overflow-hidden transition-all duration-500 hover:border-red-600/40 hover:shadow-[0_0_40px_rgba(220,38,38,0.1)] transform-gpu will-change-transform h-full"
+                        style={`transition-delay: ${index * 100}ms;`} 
+                    >
+                        <div class="absolute top-0 left-0 w-6 h-6 border-t-2 border-l-2 border-red-600 animate-pulse opacity-0 group-hover:opacity-100 transition-all duration-500 z-20"></div>
+                        <div class="absolute bottom-0 right-0 w-6 h-6 border-b-2 border-r-2 border-white opacity-0 animate-pulse group-hover:opacity-100 transition-all duration-500 z-20"></div>
 
-                <div class="text-center z-10">
-                    <h3 class="text-sm font-black uppercase tracking-[0.2em] text-zinc-500 group-hover:text-white transition-colors duration-300">
-                        {team.nombre}
-                    </h3>
-                    
-                    <div class="relative inline-block mt-2">
-                        <p class="text-6xl font-mono font-black text-white italic tracking-tighter transition-all duration-500 group-hover:text-red-600 group-hover:drop-shadow-[0_0_15px_rgba(220,38,38,0.5)]">
-                            {team.puntos}
-                        </p>
-                        <span class="absolute -top-1 -right-6 text-[10px] font-black text-zinc-600 uppercase italic">PTS</span>
+                        <div class="absolute top-4 right-4 flex flex-col items-end opacity-40 group-hover:opacity-100 transition-opacity">
+                            <span class="text-[7px] font-mono font-black text-red-500 uppercase tracking-widest block mb-0.5">TEAM_RANK</span>
+                            <span class="text-xl font-mono font-black text-white italic leading-none">P{formattedPos}</span>
+                        </div>
+
+                        <div class="relative z-10 mb-6 transition-transform duration-500 group-hover:scale-110">
+                            <img 
+                                src={logos[team.nombre]} 
+                                alt={team.nombre} 
+                                class="w-24 h-24 object-contain filter drop-shadow-[0_0_10px_rgba(255,255,255,0.1)] group-hover:drop-shadow-[0_0_20px_rgba(255,255,255,0.2)] animate-latido" 
+                                loading="lazy"
+                            />
+                        </div>
+
+                        <div class="text-center z-10">
+                            <h3 class="text-sm font-black uppercase tracking-[0.2em] text-zinc-500 group-hover:text-white transition-colors duration-300">
+                                {team.nombre}
+                            </h3>
+                            
+                            <div class="relative inline-block mt-2">
+                                <p class="text-6xl font-mono font-black text-white italic tracking-tighter transition-all duration-500 group-hover:text-red-600 group-hover:drop-shadow-[0_0_15px_rgba(220,38,38,0.5)]">
+                                    {team.puntos}
+                                </p>
+                                <span class="absolute -top-1 -right-6 text-[10px] font-black text-zinc-600 uppercase italic">PTS</span>
+                            </div>
+
+                            <span class="block text-[8px] font-mono text-zinc-700 uppercase tracking-widest mt-2 group-hover:text-zinc-500 transition-colors">
+                                SYS_RECORD // LIVE_DATA
+                            </span>
+                        </div>
+
+                        <div class="absolute -bottom-6 -left-4 text-9xl font-mono font-black text-zinc-900/50 italic pointer-events-none group-hover:text-red-600/5 transition-colors duration-700 leading-none select-none">
+                            {formattedPos}
+                        </div>
+                        
+                        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-white/5 to-transparent h-1/2 w-full -translate-y-full group-hover:animate-[scan_3s_linear_infinite] pointer-events-none opacity-20"></div>
                     </div>
                 </div>
-
-                <div class="absolute -bottom-6 -left-4 text-9xl font-black text-zinc-900/50 italic pointer-events-none group-hover:text-red-600/5 transition-colors duration-700">
-                    0{index + 1}
-                </div>
-                
-                <div class="absolute inset-0 bg-gradient-to-b from-transparent via-white/5 to-transparent h-1/2 w-full -translate-y-full group-hover:animate-[scan_3s_linear_infinite] pointer-events-none opacity-20"></div>
-            </div>
-        ))}
+            );
+        })}
     </div>
+
+    {/* Indicadores inferiores para Celulares */}
+    <div id="constructores-clean-dots" class="flex justify-center gap-2 mt-6 md:hidden"></div>
 </section>
+
+{/* 🏎️ ENGINE ACTUALIZADO: MOVIMIENTO AUTOMÁTICO + CONTROL MANUAL INFINITO */}
+<script data-astro-rerun>
+    document.addEventListener('astro:page-load', () => {
+        const wrapper = document.getElementById('constructores-clean-wrapper');
+        const slides = document.querySelectorAll('.constructores-clean-slide');
+        const prevBtn = document.getElementById('prev-constructores-clean-btn');
+        const nextBtn = document.getElementById('next-constructores-clean-btn');
+        const dotsContainer = document.getElementById('constructores-clean-dots');
+
+        if (!wrapper || slides.length === 0) return;
+
+        let currentIndex = 0;
+        const totalSlides = slides.length;
+        let autoPlayTimer = null;
+        const AUTO_PLAY_SPEED = 2000; // ⏱️ Se desplaza solo cada 4 segundos
+
+        const getSlidesPerView = () => {
+            if (window.innerWidth >= 1024) return 3;
+            if (window.innerWidth >= 640) return 2;
+            return 1;
+        };
+
+        const updateDots = () => {
+            if (!dotsContainer) return;
+            dotsContainer.innerHTML = '';
+            const maxVisibleDots = totalSlides - getSlidesPerView() + 1;
+            
+            for (let i = 0; i < Math.max(maxVisibleDots, 1); i++) {
+                const dot = document.createElement('div');
+                dot.className = `h-1.5 rounded-full transition-all duration-300 cursor-pointer ${i === currentIndex ? 'bg-red-600 w-5' : 'bg-zinc-800 w-1.5'}`;
+                dot.addEventListener('click', () => {
+                    currentIndex = i;
+                    moveCarousel();
+                    resetAutoPlay(); // Si el usuario interactúa, reinicia el reloj
+                });
+                dotsContainer.appendChild(dot);
+            }
+        };
+
+        const moveCarousel = () => {
+            const slidesPerView = getSlidesPerView();
+            const maxIndex = totalSlides - slidesPerView;
+
+            if (currentIndex > maxIndex) currentIndex = maxIndex;
+            if (currentIndex < 0) currentIndex = 0;
+
+            const slideWidth = slides[0].getBoundingClientRect().width;
+            wrapper.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+            updateDots();
+        };
+
+        // Avanzar al siguiente (Lógica unificada para botón y Autoplay)
+        const nextSlide = () => {
+            const maxIndex = totalSlides - getSlidesPerView();
+            if (currentIndex < maxIndex) {
+                currentIndex++;
+            } else {
+                currentIndex = 0; // Regresa al inicio de forma infinita
+            }
+            moveCarousel();
+        };
+
+        const prevSlide = () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+            } else {
+                currentIndex = totalSlides - getSlidesPerView(); // Salta al final de forma infinita
+            }
+            moveCarousel();
+        };
+
+        // 🛠️ MOTOR DE AUTOPLAY
+        const startAutoPlay = () => {
+            if (autoPlayTimer === null) {
+                autoPlayTimer = setInterval(nextSlide, AUTO_PLAY_SPEED);
+            }
+        };
+
+        const stopAutoPlay = () => {
+            if (autoPlayTimer !== null) {
+                clearInterval(autoPlayTimer);
+                autoPlayTimer = null;
+            }
+        };
+
+        const resetAutoPlay = () => {
+            stopAutoPlay();
+            startAutoPlay();
+        };
+
+        // Escuchadores manuales con reseteo de tiempo
+        if (prevBtn && nextBtn) {
+            prevBtn.addEventListener('click', () => {
+                prevSlide();
+                resetAutoPlay();
+            });
+
+            nextBtn.addEventListener('click', () => {
+                nextSlide();
+                resetAutoPlay();
+            });
+        }
+
+        // Gestos táctiles en celulares
+        let startX = 0;
+        wrapper.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+            stopAutoPlay(); // Pausa el autoplay mientras arrastran el dedo
+        }, {passive: true});
+
+        wrapper.addEventListener('touchend', (e) => {
+            const endX = e.changedTouches[0].clientX;
+            const diff = startX - endX;
+            if (Math.abs(diff) > 50) {
+                if (diff > 0) nextSlide();
+                else prevSlide();
+            }
+            startAutoPlay(); // Reanuda el autoplay al soltar
+        }, {passive: true});
+
+        // 🛑 PAUSA INTELIGENTE EN ESCRITORIO
+        // Si el usuario pasa el cursor por encima de la sección, se congela para que pueda mirar tranquilo
+        wrapper.addEventListener('mouseenter', stopAutoPlay);
+        wrapper.addEventListener('mouseleave', startAutoPlay);
+
+        window.addEventListener('resize', () => {
+            moveCarousel();
+            resetAutoPlay();
+        });
+
+        // Disparo Inicial
+        moveCarousel();
+        startAutoPlay();
+    });
+</script>
 
     <section id="puntaje" class="scroll-mt-32 mb-20">
     <div class="reveal-on-scroll">
@@ -1307,18 +1488,22 @@ const proximaCarrera = calendario
     <p class="mt-4 text-[9px] font-mono text-zinc-600 uppercase tracking-[0.2em] italic">Documentación_V.01 // PDF_Format</p>
 </div>
 
-<section id="Configuración" class="scroll-mt-32 mb-20">
+{/* 🏎️ SECCIÓN CONFIGURACIÓN EN PERSPECTIVA 3D INFINITA */}
+<section id="Configuración" class="scroll-mt-32 mb-20 max-w-7xl mx-auto px-4 relative overflow-hidden py-12">
+    
     <div class="reveal-on-scroll">
-        <h2 class="text-sm font-black mb-12 uppercase tracking-[0.4em] text-zinc-400 flex items-center gap-4">
+        <h2 class="text-sm font-black mb-16 uppercase tracking-[0.4em] text-zinc-400 flex items-center gap-4">
             <span class="flex-1 h-[1px] bg-zinc-800"></span> 
             <span class="text-white italic">ENGINEERING</span> CONFIG & DAMAGE
             <span class="flex-1 h-[1px] bg-zinc-800"></span>
         </h2>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    {/* Contenedor del Escenario 3D con Profundidad */}
+    <div class="relative w-full min-h-[500px] md:min-h-[420px] flex items-center justify-center [perspective:1200px] overflow-visible">
         
-        <div class="group relative bg-zinc-950 p-8 rounded-xl border border-zinc-900 transition-all duration-500 hover:border-yellow-600/50 hover:shadow-[0_0_40px_rgba(202,138,4,0.1)] reveal-item">
+        {/* 🎚️ TARJETA 1: SISTEMAS MECÁNICOS */}
+        <div class="config-card absolute w-full max-w-sm bg-zinc-950 p-8 rounded-xl border border-zinc-900 transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] group select-none will-change-transform">
             <div class="absolute top-0 left-0 w-6 h-6 border-t-2 border-l-2 border-yellow-600 animate-pulse opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
             <div class="absolute bottom-0 right-0 w-6 h-6 border-b-2 border-r-2 border-yellow-600 animate-pulse opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
 
@@ -1329,27 +1514,28 @@ const proximaCarrera = calendario
                 <h4 class="font-black uppercase italic text-base tracking-tighter text-white">Sistemas Mecánicos</h4>
             </div>
 
-            <ul class="space-y-4">
+            <ul class="space-y-4 font-mono text-xs">
                 <li class="flex justify-between items-center group/item">
                     <span class="text-zinc-500 text-[11px] font-black uppercase tracking-widest group-hover/item:text-yellow-600 transition-colors">Rendimiento</span>
-                    <span class="text-white font-mono text-sm">PAREJO [EQ]</span>
+                    <span class="text-white text-sm">PAREJO [EQ]</span>
                 </li>
                 <li class="flex justify-between items-center group/item border-t border-zinc-900 pt-4">
                     <span class="text-zinc-500 text-[11px] font-black uppercase tracking-widest group-hover/item:text-red-500 transition-colors">Daños</span>
-                    <span class="text-red-500 font-mono text-sm font-bold">SIMULACIÓN</span>
+                    <span class="text-red-500 text-sm font-bold">SIMULACIÓN</span>
                 </li>
                 <li class="flex justify-between items-center group/item border-t border-zinc-900 pt-4">
                     <span class="text-zinc-500 text-[11px] font-black uppercase tracking-widest group-hover/item:text-yellow-600 transition-colors">Parc Fermé</span>
-                    <span class="text-white font-mono text-sm">ON</span>
+                    <span class="text-white text-sm">ON</span>
                 </li>
                 <li class="flex justify-between items-center group/item border-t border-zinc-900 pt-4">
                     <span class="text-zinc-500 text-[11px] font-black uppercase tracking-widest group-hover/item:text-yellow-600 transition-colors">Severidad</span>
-                    <span class="text-white font-mono text-sm uppercase">Estricto</span>
+                    <span class="text-white text-sm uppercase">Estricto</span>
                 </li>
             </ul>
         </div>
 
-        <div class="group relative bg-zinc-950 p-8 rounded-xl border border-zinc-900 transition-all duration-500 hover:border-blue-500/50 hover:shadow-[0_0_40px_rgba(59,130,246,0.1)] reveal-item delay-100">
+        {/* 🎚️ TARJETA 2: PROTOCOLO DE ASISTENCIAS */}
+        <div class="config-card absolute w-full max-w-sm bg-zinc-950 p-8 rounded-xl border border-zinc-900 transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] group select-none will-change-transform">
             <div class="absolute top-0 left-0 w-6 h-6 border-t-2 border-l-2 border-blue-600 animate-pulse opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
             <div class="absolute bottom-0 right-0 w-6 h-6 border-b-2 border-r-2 border-blue-600 animate-pulse opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
 
@@ -1376,7 +1562,8 @@ const proximaCarrera = calendario
             </div>
         </div>
 
-        <div class="group relative bg-zinc-950 p-8 rounded-xl border border-zinc-900 transition-all duration-500 hover:border-zinc-500/50 hover:shadow-[0_0_40px_rgba(255,255,255,0.05)] reveal-item delay-200">
+        {/* 🎚️ TARJETA 3: DATOS DE COMPETICIÓN */}
+        <div class="config-card absolute w-full max-w-sm bg-zinc-950 p-8 rounded-xl border border-zinc-900 transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] group select-none will-change-transform">
             <div class="absolute top-0 left-0 w-6 h-6 border-t-2 border-l-2 border-white/20 animate-pulse opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
             <div class="absolute bottom-0 right-0 w-6 h-6 border-b-2 border-r-2 border-white/20 animate-pulse opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
 
@@ -1387,24 +1574,26 @@ const proximaCarrera = calendario
                 <h4 class="font-black uppercase italic text-base tracking-tighter text-white">Datos de Competición</h4>
             </div>
 
-            <ul class="space-y-4">
+            <ul class="space-y-4 font-mono text-xs">
                 <li class="flex justify-between items-center group/item">
                     <span class="text-zinc-500 text-[11px] font-black uppercase tracking-widest group-hover/item:text-white transition-colors">Safety Car</span>
-                    <span class="text-white font-mono text-sm">STANDARD</span>
+                    <span class="text-white text-sm">STANDARD</span>
                 </li>
                 <li class="flex justify-between items-center group/item border-t border-zinc-900 pt-4">
                     <span class="text-zinc-500 text-[11px] font-black uppercase tracking-widest group-hover/item:text-white transition-colors">Vuelta Formación</span>
-                    <span class="text-white font-mono text-sm font-bold uppercase">Manual</span>
+                    <span class="text-white text-sm font-bold uppercase">Manual</span>
                 </li>
                 <li class="flex justify-between items-center group/item border-t border-zinc-900 pt-4">
                     <span class="text-zinc-500 text-[11px] font-black uppercase tracking-widest group-hover/item:text-white transition-colors">Cámara</span>
-                    <span class="text-white font-mono text-sm uppercase">Cockpit (Los que uegan con volante) / Libre</span>
+                    <span class="text-white text-sm uppercase">Cockpit / Libre</span>
                 </li>
             </ul>
         </div>
+
     </div>
 
-    <div class="mt-12 flex justify-center reveal-on-scroll">
+    {/* Alerta Inferior Tradicional */}
+    <div class="mt-8 flex justify-center reveal-on-scroll">
         <div class="relative overflow-hidden group">
             <div class="absolute inset-0 bg-yellow-600/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 ease-in-out"></div>
             <p class="inline-flex items-center gap-3 bg-zinc-950 px-8 py-3 rounded-md border-l-4 border-yellow-600 animate-pulse text-[10px] md:text-[12px] text-zinc-300 font-black uppercase tracking-[0.2em] relative z-10 shadow-2xl">
@@ -1414,6 +1603,133 @@ const proximaCarrera = calendario
         </div>
     </div>
 </section>
+
+{/* 🏎️ ENGINE DE ROTACIÓN Y PERSPECTIVA 3D INFINITA */}
+<script data-astro-rerun>
+    document.addEventListener('astro:page-load', () => {
+        const cards = document.querySelectorAll('.config-card');
+        if (cards.length === 0) return;
+
+        let activeIndex = 1; // Arranca por defecto la tarjeta del medio (Asistencias)
+        const totalCards = cards.length;
+        let autoPlayInterval = null;
+        const ROTATION_SPEED = 5000; // Avanza sola cada 5 segundos
+
+        const render3DCarousel = () => {
+            const isMobile = window.innerWidth < 768;
+
+            cards.forEach((card, index) => {
+                // Cálculo de la distancia relativa con aritmética circular infinita
+                let offset = index - activeIndex;
+                if (offset < -1) offset += totalCards;
+                if (offset > 1) offset -= totalCards;
+
+                if (offset === 0) {
+                    // 📌 TARJETA EN EL CENTRO (Enfoque principal)
+                    card.style.transform = `translateX(0px) translateZ(100px) rotateY(0deg) scale(1)`;
+                    card.style.zIndex = '20';
+                    card.style.opacity = '1';
+                    card.style.filter = 'blur(0px) brightness(1)';
+                    card.style.pointerEvents = 'auto';
+                } else if (offset === -1 || (offset === totalCards - 1)) {
+                    // 👈 TARJETA IZQUIERDA (Retrasada y rotada)
+                    const xShift = isMobile ? '-40px' : '-280px';
+                    const zShift = isMobile ? '-120px' : '-180px';
+                    const yRot = isMobile ? '25deg' : '45deg';
+                    
+                    card.style.transform = `translateX(${xShift}) translateZ(${zShift}) rotateY(${yRot}) scale(0.9)`;
+                    card.style.zIndex = '10';
+                    card.style.opacity = isMobile ? '0.3' : '0.6';
+                    card.style.filter = 'blur(2px) brightness(0.5)';
+                    card.style.pointerEvents = 'auto';
+                } else if (offset === 1 || (offset === -totalCards + 1)) {
+                    // 👉 TARJETA DERECHA (Retrasada y rotada invertida)
+                    const xShift = isMobile ? '40px' : '280px';
+                    const zShift = isMobile ? '-120px' : '-180px';
+                    const yRot = isMobile ? '-25deg' : '-45deg';
+
+                    card.style.transform = `translateX(${xShift}) translateZ(${zShift}) rotateY(${yRot}) scale(0.9)`;
+                    card.style.zIndex = '10';
+                    card.style.opacity = isMobile ? '0.3' : '0.6';
+                    card.style.filter = 'blur(2px) brightness(0.5)';
+                    card.style.pointerEvents = 'auto';
+                } else {
+                    // Tarjetas fantasma ocultas por resguardo
+                    card.style.transform = `translateX(0px) translateZ(-300px) rotateY(0deg)`;
+                    card.style.zIndex = '0';
+                    card.style.opacity = '0';
+                    card.style.pointerEvents = 'none';
+                }
+            });
+        };
+
+        const nextCard = () => {
+            activeIndex = (activeIndex + 1) % totalCards;
+            render3DCarousel();
+        };
+
+        // Asignar el click directo sobre las tarjetas laterales para traerlas al frente
+        cards.forEach((card, index) => {
+            card.addEventListener('click', () => {
+                if (activeIndex !== index) {
+                    activeIndex = index;
+                    render3DCarousel();
+                    resetAutoPlay();
+                }
+            });
+        });
+
+        // Controles de temporizador autónomo
+        const startAutoPlay = () => {
+            if (autoPlayInterval === null) {
+                autoPlayInterval = setInterval(nextCard, ROTATION_SPEED);
+            }
+        };
+
+        const stopAutoPlay = () => {
+            if (autoPlayInterval !== null) {
+                clearInterval(autoPlayInterval);
+                autoPlayInterval = null;
+            }
+        };
+
+        const resetAutoPlay = () => {
+            stopAutoPlay();
+            startAutoPlay();
+        };
+
+        // Pausa por hover en monitores para poder auditar los reglamentos
+        const container = document.getElementById('Configuración');
+        if (container) {
+            container.addEventListener('mouseenter', stopAutoPlay);
+            container.addEventListener('mouseleave', startAutoPlay);
+        }
+
+        // Swipe táctil para celulares
+        let startX = 0;
+        container?.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+            stopAutoPlay();
+        }, {passive: true});
+
+        container?.addEventListener('touchend', (e) => {
+            const endX = e.changedTouches[0].clientX;
+            const diff = startX - endX;
+            if (Math.abs(diff) > 50) {
+                if (diff > 0) activeIndex = (activeIndex + 1) % totalCards;
+                else activeIndex = (activeIndex - 1 + totalCards) % totalCards;
+                render3DCarousel();
+            }
+            startAutoPlay();
+        }, {passive: true});
+
+        window.addEventListener('resize', render3DCarousel);
+
+        // Inicialización en pista
+        render3DCarousel();
+        startAutoPlay();
+    });
+</script>
 
 <style>
     /* Efecto de aparición al scrollear */
@@ -1458,94 +1774,131 @@ const proximaCarrera = calendario
 </script>
 
 
-			<section id="integrantes" class="mt-32 pb-20 scroll-mt-32">
-    <div class="reveal-on-scroll">
-        <h2 class="text-sm font-black mb-12 uppercase tracking-[0.4em] text-white flex items-center gap-4">
-            <span class="flex-1 h-[1px] bg-zinc-800"></span> 
-            <span class="text-white italic text-center">INTEGRANTES</span> 2026 SEASON
-            <span class="flex-1 h-[1px] bg-zinc-800"></span>
+			{/* 🏎️ SECCIÓN INTEGRANTES: FORMATO FOTOCARNET & CARRUSEL AUTOMÁTICO */}
+<section id="integrantes" class="mt-32 pb-20 scroll-mt-32 max-w-7xl mx-auto px-4 relative overflow-hidden font-mono">
+    
+    <div class="reveal-on-scroll mb-16">
+        <h2 class="text-xs font-black uppercase tracking-[0.6em] text-zinc-500 flex items-center gap-6">
+            <span class="w-12 h-[2px] bg-red-600"></span> 
+            <span>GRID // CREDENCIALES PILOTOS <span class="text-white italic">2026 SEASON</span></span>
+            <span class="flex-1 h-[1px] bg-zinc-900"></span>
         </h2>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    {/* Botones HUD Flotantes para control Manual */}
+    <div class="absolute top-[55%] -translate-y-1/2 left-2 z-30 hidden md:block">
+        <button id="prev-integrantes-btn" class="bg-zinc-950/90 hover:bg-red-600/20 text-white p-4 rounded-xl border border-zinc-800 hover:border-red-600 transition-all group shadow-2xl">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 group-hover:-translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+        </button>
+    </div>
+    <div class="absolute top-[55%] -translate-y-1/2 right-2 z-30 hidden md:block">
+        <button id="next-integrantes-btn" class="bg-zinc-950/90 hover:bg-red-600/20 text-white p-4 rounded-xl border border-zinc-800 hover:border-red-600 transition-all group shadow-2xl">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 group-hover:translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+        </button>
+    </div>
+
+    {/* Riel del Carrusel */}
+    <div id="integrantes-wrapper" class="flex transition-transform duration-500 ease-out w-full">
         {(() => {
             const ordenDeseado = ["Chor", "Giova", "Simon", "Diego", "Rodri", "Leo", "Rambo", "Adrian", "Seba", "Ema", "Seba W", "Franco G", "Fede", "Valen", "Hugo", "Matias", "Mateo", "Claudio", "Ivan", "Elias"];
             
             const pilotosOrdenados = [...pilotos]
-    .filter(p => p.activo !== false) // <--- CON ESTO SACÁS A RAMBO
-    .sort((a, b) => {
-        return ordenDeseado.indexOf(a.nombre) - ordenDeseado.indexOf(b.nombre);
-    });
+                .filter(p => p.activo !== false)
+                .sort((a, b) => ordenDeseado.indexOf(a.nombre) - ordenDeseado.indexOf(b.nombre));
 
             return pilotosOrdenados.map((piloto, index) => {
                 const fondoEscuderia = piloto.escuderia === "Mercedes Benz" ? "escuderia-mercedes.jpg" : 
-                                     piloto.escuderia === "Alpine" ? "escuderia-alpine.jpg" :
-                                     piloto.escuderia === "Ferrari" ? "escuderia-ferrari.jpg" :
-                                     piloto.escuderia === "Williams" ? "escuderia-williams.jpg" :
-                                     piloto.escuderia === "Haas" ? "escuderia-haas.jpg" :
-                                     piloto.escuderia === "Racing Bulls" ? "escuderia-racingbulls.jpg" :
-                                     piloto.escuderia === "Aston Martin" ? "escuderia-astonmartin.jpg" :
-                                     piloto.escuderia === "Kick Sauber" ? "escuderia-kicksauber.jpg" :
-                                     "escuderia-redbull.jpg";
+                                       piloto.escuderia === "Alpine" ? "escuderia-alpine.jpg" :
+                                       piloto.escuderia === "Ferrari" ? "escuderia-ferrari.jpg" :
+                                       piloto.escuderia === "Williams" ? "escuderia-williams.jpg" :
+                                       piloto.escuderia === "Haas" ? "escuderia-haas.jpg" :
+                                       piloto.escuderia === "Racing Bulls" ? "escuderia-racingbulls.jpg" :
+                                       piloto.escuderia === "Aston Martin" ? "escuderia-astonmartin.jpg" :
+                                       piloto.escuderia === "Kick Sauber" ? "escuderia-kicksauber.jpg" :
+                                       "escuderia-redbull.jpg";
                 
+                const estiloTema = coloresEscuderia[piloto.escuderia] || "from-red-600 to-black text-red-500 border-red-600/30";
+                const esLeadDriver = ["Chor", "Simon", "Rodri", "Adrian", "Seba", "Fede", "Hugo", "Mateo", "Elias"].includes(piloto.nombre);
+
                 return (
-                    <div 
-                        class="reveal-item group relative bg-zinc-950 p-6 rounded-xl border border-zinc-900 overflow-hidden transition-all duration-500 hover:border-red-600/50  transform-gpu will-change-transform"
-                        style={`transition-delay: ${index * 100}ms;`}
-                    >
-                        <div class="absolute inset-0 z-0 pointer-events-none">
-                            <img 
-                                src={`/Fotos/${fondoEscuderia}`} 
-                                alt="" 
-                                class="w-full h-full object-cover opacity-40 "
-                            />
-                            <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/60 to-transparent"></div>
-                        </div>
+                    /* Slide del Carrusel: 1 en Mobile, 2 en Tablet, 3 en Desktop */
+                    <div class="w-full sm:w-[50%] lg:w-[33.333%] flex-shrink-0 px-3 integrantes-slide">
+                        
+                        {/* DISEÑO ESTILO FOTOCARNET OFICIAL FIA */}
+                        <div class="group relative bg-gradient-to-b from-zinc-900 to-zinc-950 p-5 rounded-2xl border-2 border-zinc-800 overflow-hidden transition-all duration-500 hover:border-zinc-600 shadow-2xl h-full flex flex-col justify-between">
+                            
+                            {/* Fondo de escudería translúcido */}
+                            <div class="absolute inset-0 z-0 pointer-events-none opacity-35  group-hover:opacity-25 transition-opacity duration-500">
+                                <img src={`/Fotos/${fondoEscuderia}`} alt="" class="w-full h-full object-cover scale-105 group-hover:scale-110 transition-transform duration-700" />
+                                <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent"></div>
+                            </div>
 
-                        <div class="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-zinc-800 group-hover:border-red-600 animate-pulse transition-colors duration-500 z-20"></div>
-                        <div class="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-zinc-800 group-hover:border-white animate-pulse transition-colors duration-500 z-20"></div>
+                            {/* Esquineros de Credencial */}
+                            <div class="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-zinc-700 group-hover:border-red-600 transition-colors duration-500"></div>
+                            <div class="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-zinc-700 group-hover:border-white transition-colors duration-500"></div>
 
-                        <div class="relative z-10">
-                            <div class="absolute -top-1 -right-1 flex flex-col items-end">
-                                <span class="text-[7px] font-black uppercase tracking-[0.2em] text-zinc-500 mb-1">Status</span>
-                                <span class="bg-zinc-900 border border-zinc-800 px-2 py-0.5 rounded text-[9px] font-black uppercase italic text-zinc-300 group-hover:text-red-500 group-hover:border-red-600/30 transition-all">
-                                    {["Chor", "Simon", "Rodri", "Adrian", "Seba", "Fede", "Hugo", "Mateo", "Elias"].includes(piloto.nombre) ? "Lead Driver" : "Wingman"}
+                            {/* Cabecera del Carnet */}
+                            <div class="relative z-10 flex justify-between items-center border-b border-zinc-800/80 pb-3 mb-4">
+                                <div class="leading-none">
+                                    <span class="text-[7px] font-black text-zinc-500 uppercase tracking-widest block mb-0.5">DRIVE_PASS_2026</span>
+                                    <span class="text-[10px] font-bold text-zinc-400 font-mono">#{(index + 1) < 10 ? `0${index + 1}` : index + 1}</span>
+                                </div>
+                                <span class={`px-2 py-0.5 rounded text-[8px] font-black uppercase italic border ${esLeadDriver ? 'bg-red-950/40 border-red-800/60 text-red-400 shadow-[0_0_10px_rgba(220,38,38,0.1)]' : 'bg-zinc-900 border-zinc-800 text-zinc-400'}`}>
+                                    {esLeadDriver ? "CORE DRIVER" : "WINGMAN"}
                                 </span>
                             </div>
 
-                            <div class="flex items-center gap-5">
-                                <div class="w-14 h-14 flex-shrink-0 bg-black/40 backdrop-blur-md rounded-lg border border-zinc-800 p-2.5 flex items-center justify-center shadow-2xl group-hover:border-zinc-600 transition-colors">
-                                    <img src={logos[piloto.escuderia]} alt={piloto.escuderia} class="w-full h-full object-contain filter  group-hover:grayscale-0 transition-all duration-500" />
+                            {/* FOTO DE PERFIL EN PRIMER PLANO (ESTILO CARNET) */}
+                            <div class="relative z-10 flex justify-center mb-4">
+                                <div class="relative w-32 h-32 rounded-xl overflow-hidden border-2 border-zinc-800 bg-zinc-950 shadow-md group-hover:border-red-600/60 transition-all duration-500">
+                                    <img 
+                                        src={`/Fotos/perfil-${piloto.nombre.toLowerCase()}.jpg`} 
+                                        alt={piloto.nombre} 
+                                        class="w-full h-full object-cover scale-100 group-hover:scale-105 transition-transform duration-500 filter brightness-65" 
+                                        loading="lazy"
+                                    />
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                                 </div>
+                            </div>
 
-                                <div class="flex-1">
-                                    <h3 class="text-2xl font-black uppercase italic tracking-tighter text-white leading-none mb-1 group-hover:text-red-500 transition-colors duration-300">
-                                        {piloto.nombre}
-                                    </h3>
-                                    <p class="text-[9px] text-zinc-500 font-black uppercase tracking-[0.2em] italic">
+                            {/* Bloque de Datos del Piloto */}
+                            <div class="relative z-10 text-center mb-5 flex-1 flex flex-col justify-center">
+                                <h3 class="text-2xl font-black uppercase italic tracking-tighter text-white group-hover:text-red-500 transition-colors duration-300 -skew-x-6">
+                                    {piloto.nombre}
+                                </h3>
+                                <div class="flex items-center justify-center gap-2 mt-2">
+                                    {/* Mini Escudo de Escudería */}
+                                    <img src={logos[piloto.escuderia]} alt="" class="w-4 h-4 object-contain filter brightness-75 group-hover:brightness-100 transition-all" />
+                                    <p class="text-[9px] text-zinc-500 font-black uppercase tracking-widest">
                                         {piloto.escuderia}
                                     </p>
                                 </div>
                             </div>
 
-                            <div class="mt-6 flex items-center justify-between bg-zinc-900/40 backdrop-blur-md p-3 rounded-lg border border-zinc-800/50 shadow-inner group-hover:border-zinc-700 transition-colors">
-                                <div class="flex items-center gap-3">
-                                    <span class="p-1.5 bg-zinc-950 rounded border border-zinc-800 group-hover:text-white transition-colors">
-                                        {["Chor", "Rambo", "Fede", "Valen", "Mateo", "Claudio", "Giova"].includes(piloto.nombre) ? (
-                                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="2" x2="12" y2="12"/><line x1="12" y1="12" x2="4" y2="18"/><line x1="12" y1="12" x2="20" y2="18"/><circle cx="12" cy="12" r="2" fill="currentColor"/></svg>
+                            {/* Consola Técnica Inferior (Hardware & Redes) */}
+                            <div class="relative z-10 flex items-center justify-between bg-zinc-950/90 p-2 rounded-xl border border-zinc-900/80 shadow-inner group-hover:border-zinc-800 transition-colors text-[10px]">
+                                <div class="flex items-center gap-2.5">
+                                    <span class="p-1.5 bg-[#040a14] rounded-lg border border-zinc-900 text-zinc-400 group-hover:text-white transition-colors">
+                                        {["Chor", "Rambo", "Fede", "Valen", "Mateo", "Claudio", "Giova", "Seba", "Leo"].includes(piloto.nombre) ? (
+                                            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="2" x2="12" y2="12"/><line x1="12" y1="12" x2="4" y2="18"/><line x1="12" y1="12" x2="20" y2="18"/><circle cx="12" cy="12" r="2" fill="currentColor"/></svg>
                                         ) : piloto.nombre === "IA-Williams" ? (
-                                            <span class="text-xs">🤖</span>
+                                            <span class="text-[10px] block leading-none">🤖</span>
                                         ) : piloto.nombre === "Franco" ? (
-                                            <span class="text-xs">⌨️</span>
+                                            <span class="text-[10px] block leading-none">⌨️</span>
                                         ) : (
-                                            <span class="text-xs">🎮</span>
+                                            <span class="text-[10px] block leading-none">🎮</span>
                                         )}
                                     </span>
-                                    <div class="flex flex-col">
-                                        <span class="text-[7px] text-zinc-500 font-black uppercase tracking-widest">Input Device</span>
-                                        <span class="text-[10px] font-mono text-zinc-300 uppercase font-black">
+                                    
+                                    <div class="flex flex-col leading-none">
+                                        <span class="text-[6px] text-zinc-600 font-black uppercase tracking-widest mb-0.5">INPUT</span>
+                                        <span class="text-[9px] text-zinc-400 uppercase font-black font-mono">
                                             {piloto.nombre === "Adrian" ? "Joystick" :
-                                             (["Chor", "Rambo", "Fede", "Valen", "Mateo", "Claudio", "Giova"].includes(piloto.nombre)) ? "Volante" :
+                                             (["Chor", "Rambo", "Fede", "Valen", "Mateo", "Claudio", "Giova", "Seba", "Leo"].includes(piloto.nombre)) ? "Volante" :
                                              piloto.nombre === "IA-Williams" ? "Sistemas IA" : 
                                              piloto.nombre === "Franco" ? "Teclado" : "Joystick"}
                                         </span>
@@ -1576,22 +1929,161 @@ const proximaCarrera = calendario
                                         "https://www.instagram.com/leo.tapparello/"
                                     } 
                                     target="_blank" 
-                                    class="p-2 hover:bg-pink-600/20 hover:text-pink-500 rounded-full transition-all duration-300 text-zinc-500"
+                                    class="p-1.5 hover:bg-pink-600/20 text-zinc-600 hover:text-pink-500 rounded-lg border border-transparent hover:border-pink-500/30 transition-all duration-300"
                                     title="Open Social Feed"
                                 >
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
                                 </a>
                             </div>
+
+                            {/* Línea de barrido láser */}
+                            <div class="absolute inset-0 bg-gradient-to-b from-transparent via-white/[0.01] to-transparent h-[200%] w-full -translate-y-full group-hover:animate-[scan_4s_linear_infinite] pointer-events-none"></div>
                         </div>
 
-                        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-white/[0.02] to-transparent h-[200%] w-full -translate-y-full group-hover:animate-[scan_4s_linear_infinite] pointer-events-none"></div>
                     </div>
                 );
             });
         })()}
     </div>
+
+    {/* Puntos de control inferiores para smartphones */}
+    <div id="integrantes-dots" class="flex justify-center gap-2 mt-6 md:hidden"></div>
 </section>
 
+{/* 🏎️ MOTOR DEL CARRUSEL DE MESTREO INTEGRANTES (AUTOPLAY 2,5 SEGUNDOS) */}
+<script data-astro-rerun>
+    document.addEventListener('astro:page-load', () => {
+        const wrapper = document.getElementById('integrantes-wrapper');
+        const slides = document.querySelectorAll('.integrantes-slide');
+        const prevBtn = document.getElementById('prev-integrantes-btn');
+        const nextBtn = document.getElementById('next-integrantes-btn');
+        const dotsContainer = document.getElementById('integrantes-dots');
+
+        if (!wrapper || slides.length === 0) return;
+
+        let currentIndex = 0;
+        const totalSlides = slides.length;
+        let autoPlayTimer = null;
+        const AUTO_PLAY_SPEED = 2500; // ⏱️ Movimiento automático cada 2 segundos exactos
+
+        const getSlidesPerView = () => {
+            if (window.innerWidth >= 1024) return 3;
+            if (window.innerWidth >= 640) return 2;
+            return 1;
+        };
+
+        const updateDots = () => {
+            if (!dotsContainer) return;
+            dotsContainer.innerHTML = '';
+            const maxVisibleDots = totalSlides - getSlidesPerView() + 1;
+            
+            for (let i = 0; i < Math.max(maxVisibleDots, 1); i++) {
+                const dot = document.createElement('div');
+                dot.className = `h-1.5 rounded-full transition-all duration-300 cursor-pointer ${i === currentIndex ? 'bg-red-600 w-5' : 'bg-zinc-800 w-1.5'}`;
+                dot.addEventListener('click', () => {
+                    currentIndex = i;
+                    moveCarousel();
+                    resetAutoPlay();
+                });
+                dotsContainer.appendChild(dot);
+            }
+        };
+
+        const moveCarousel = () => {
+            const slidesPerView = getSlidesPerView();
+            const maxIndex = totalSlides - slidesPerView;
+
+            if (currentIndex > maxIndex) currentIndex = maxIndex;
+            if (currentIndex < 0) currentIndex = 0;
+
+            const slideWidth = slides[0].getBoundingClientRect().width;
+            wrapper.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+            updateDots();
+        };
+
+        const nextSlide = () => {
+            const maxIndex = totalSlides - getSlidesPerView();
+            if (currentIndex < maxIndex) {
+                currentIndex++;
+            } else {
+                currentIndex = 0; // Bucle infinito inicial
+            }
+            moveCarousel();
+        };
+
+        const prevSlide = () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+            } else {
+                currentIndex = totalSlides - getSlidesPerView(); // Bucle infinito final
+            }
+            moveCarousel();
+        };
+
+        // MOTOR DE MOVIMIENTO AUTÓNOMO
+        const startAutoPlay = () => {
+            if (autoPlayTimer === null) {
+                autoPlayTimer = setInterval(nextSlide, AUTO_PLAY_SPEED);
+            }
+        };
+
+        const stopAutoPlay = () => {
+            if (autoPlayTimer !== null) {
+                clearInterval(autoPlayTimer);
+                autoPlayTimer = null;
+            }
+        };
+
+        const resetAutoPlay = () => {
+            stopAutoPlay();
+            startAutoPlay();
+        };
+
+        if (prevBtn && nextBtn) {
+            prevBtn.addEventListener('click', () => {
+                prevSlide();
+                resetAutoPlay();
+            });
+
+            nextBtn.addEventListener('click', () => {
+                nextSlide();
+                resetAutoPlay();
+            });
+        }
+
+        // Swipe táctil en pantallas celulares
+        let startX = 0;
+        wrapper.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+            stopAutoPlay();
+        }, {passive: true});
+
+        wrapper.addEventListener('touchend', (e) => {
+            const endX = e.changedTouches[0].clientX;
+            const diff = startX - endX;
+            if (Math.abs(diff) > 50) {
+                if (diff > 0) nextSlide();
+                else prevSlide();
+            }
+            startAutoPlay();
+        }, {passive: true});
+
+        // Congelar credencial al pasar el cursor encima (Pausa inteligente para leer redes o hardware)
+        wrapper.addEventListener('mouseenter', stopAutoPlay);
+        wrapper.addEventListener('mouseleave', startAutoPlay);
+
+        window.addEventListener('resize', () => {
+            moveCarousel();
+            resetAutoPlay();
+        });
+
+        // Semáforo en verde
+        moveCarousel();
+        startAutoPlay();
+    });
+</script>
+
+{/* 🏎️ SECCIÓN MONOPLAZAS EN PERSPECTIVA 3D INFINITA */}
 <section id="pilotos" class="py-24 bg-[#020c1b]/40 border-t border-zinc-900 overflow-hidden relative">
     <div class="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDQwIDQwIj48ZyBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMSI+PHBhdGggZD0iTTAgMGg0MHY0MEgwVjB6bTIwIDIwaDIwdjIwSDIWMjB6TTAgMjBoMjB2MjBIMFYyMHoyMCAwaDIwdjIwSDIwVjB6Ii8+PC9nPjwvZz48L3N2Zz4=')]"></div>
 
@@ -1602,13 +2094,15 @@ const proximaCarrera = calendario
                 <span class="text-red-500 font-mono text-[10px] uppercase tracking-[0.5em]">Live Feed // Prototype Analysis</span>
             </div>
             <h2 class="text-4xl md:text-6xl font-black uppercase italic text-white tracking-tighter leading-none">
-                LOS <span class="text-red-600 drop-shadow-[0_0_15px_rgba(220,38,38,0.4)]">PROTAGONISTAS</span>
+                MONOPLAZAS <span class="text-red-600 drop-shadow-[0_0_15px_rgba(220,38,38,0.4)]">UTILIZADOS</span>
             </h2>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* Contenedor del Escenario 3D con Profundidad para los Autos */}
+        <div id="monoplazas-3d-container" class="relative w-full min-h-[340px] sm:min-h-[300px] md:min-h-[380px] flex items-center justify-center [perspective:1200px] overflow-visible py-8">
             
-            <div class="group relative bg-[#020c1b]/80 rounded-xl border border-zinc-800 overflow-hidden hover:border-blue-500/50 transition-all duration-500 shadow-2xl">
+            {/* 🏎️ COCHE 1: ALPINE */}
+            <div class="monoplaza-card absolute w-full max-w-md bg-[#020c1b]/80 rounded-xl border border-zinc-800 overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] shadow-2xl group select-none will-change-transform">
                 <div class="absolute top-2 left-2 w-4 h-4 border-t border-l border-zinc-700 z-20 group-hover:border-blue-500"></div>
                 <div class="absolute bottom-2 right-2 w-4 h-4 border-b border-r border-zinc-700 z-20 group-hover:border-blue-500"></div>
                 <div class="relative aspect-video">
@@ -1621,7 +2115,8 @@ const proximaCarrera = calendario
                 </div>
             </div>
 
-            <div class="group relative bg-[#020c1b]/80 rounded-xl border border-zinc-800 overflow-hidden hover:border-red-600/50 transition-all duration-500 shadow-2xl">
+            {/* 🏎️ COCHE 2: RED BULL */}
+            <div class="monoplaza-card absolute w-full max-w-md bg-[#020c1b]/80 rounded-xl border border-zinc-800 overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] shadow-2xl group select-none will-change-transform">
                 <div class="absolute top-2 left-2 w-4 h-4 border-t border-l border-zinc-700 z-20 group-hover:border-red-500"></div>
                 <div class="absolute bottom-2 right-2 w-4 h-4 border-b border-r border-zinc-700 z-20 group-hover:border-red-500"></div>
                 <div class="relative aspect-video">
@@ -1634,7 +2129,8 @@ const proximaCarrera = calendario
                 </div>
             </div>
 
-            <div class="group relative bg-[#020c1b]/80 rounded-xl border border-zinc-800 overflow-hidden hover:border-red-600/50 transition-all duration-500 shadow-2xl">
+            {/* 🏎️ COCHE 3: FERRARI */}
+            <div class="monoplaza-card absolute w-full max-w-md bg-[#020c1b]/80 rounded-xl border border-zinc-800 overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] shadow-2xl group select-none will-change-transform">
                 <div class="absolute top-2 left-2 w-4 h-4 border-t border-l border-zinc-700 z-20 group-hover:border-red-600"></div>
                 <div class="absolute bottom-2 right-2 w-4 h-4 border-b border-r border-zinc-700 z-20 group-hover:border-red-600"></div>
                 <div class="relative aspect-video">
@@ -1647,7 +2143,8 @@ const proximaCarrera = calendario
                 </div>
             </div>
 
-            <div class="group relative bg-[#020c1b]/80 rounded-xl border border-zinc-800 overflow-hidden hover:border-cyan-400/50 transition-all duration-500 shadow-2xl">
+            {/* 🏎️ COCHE 4: MERCEDES */}
+            <div class="monoplaza-card absolute w-full max-w-md bg-[#020c1b]/80 rounded-xl border border-zinc-800 overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] shadow-2xl group select-none will-change-transform">
                 <div class="absolute top-2 left-2 w-4 h-4 border-t border-l border-zinc-700 z-20 group-hover:border-cyan-400"></div>
                 <div class="absolute bottom-2 right-2 w-4 h-4 border-b border-r border-zinc-700 z-20 group-hover:border-cyan-400"></div>
                 <div class="relative aspect-video">
@@ -1660,7 +2157,8 @@ const proximaCarrera = calendario
                 </div>
             </div>
 
-            <div class="group relative bg-[#020c1b]/80 rounded-xl border border-zinc-800 overflow-hidden hover:border-zinc-200/50 transition-all duration-500 shadow-2xl">
+            {/* 🏎️ COCHE 5: HAAS */}
+            <div class="monoplaza-card absolute w-full max-w-md bg-[#020c1b]/80 rounded-xl border border-zinc-800 overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] shadow-2xl group select-none will-change-transform">
                 <div class="absolute top-2 left-2 w-4 h-4 border-t border-l border-zinc-700 z-20 group-hover:border-red-600"></div>
                 <div class="absolute bottom-2 right-2 w-4 h-4 border-b border-r border-zinc-700 z-20 group-hover:border-red-600"></div>
                 <div class="relative aspect-video">
@@ -1672,35 +2170,9 @@ const proximaCarrera = calendario
                     <span class="text-red-500 font-mono text-[9px] animate-pulse">● SIGNAL_OK</span>
                 </div>
             </div>
- {/*
-            <div class="group relative bg-[#020c1b]/80 rounded-xl border border-zinc-800 overflow-hidden hover:border-blue-400/50 transition-all duration-500 shadow-2xl">
-                <div class="absolute top-2 left-2 w-4 h-4 border-t border-l border-zinc-700 z-20 group-hover:border-blue-400"></div>
-                <div class="absolute bottom-2 right-2 w-4 h-4 border-b border-r border-zinc-700 z-20 group-hover:border-blue-400"></div>
-                <div class="relative aspect-video">
-                    <video src="/Videos/coche-williams.mp4" autoplay muted loop playsinline class="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-700"></video>
-                    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-blue-400/[0.05] to-transparent h-[200%] w-full -translate-y-full group-hover:animate-[scan_4s_linear_infinite] pointer-events-none"></div>
-                </div>
-                <div class="p-5 border-t border-zinc-900 bg-zinc-950/80 flex justify-between items-center">
-                    <div><p class="text-[9px] font-mono text-zinc-600 uppercase tracking-widest">Active_Session</p><p class="text-white font-black italic uppercase text-lg group-hover:text-blue-300 transition-colors">Williams Racing</p></div>
-                    <span class="text-blue-400 font-mono text-[9px] animate-pulse">● SIGNAL_OK</span>
-                </div>
-            </div>
-            */}
-        {/*
-            <div class="group relative bg-[#020c1b]/80 rounded-xl border border-zinc-800 overflow-hidden hover:border-red-600/50 transition-all duration-500 shadow-2xl">
-                <div class="absolute top-2 left-2 w-4 h-4 border-t border-l border-zinc-700 z-20 group-hover:border-red-500"></div>
-                <div class="absolute bottom-2 right-2 w-4 h-4 border-b border-r border-zinc-700 z-20 group-hover:border-red-500"></div>
-                <div class="relative aspect-video">
-                    <video src="/Videos/coche-racingbulls.mp4" autoplay muted loop playsinline class="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-700"></video>
-                    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-red-600/[0.05] to-transparent h-[200%] w-full -translate-y-full group-hover:animate-[scan_4s_linear_infinite] pointer-events-none"></div>
-                </div>
-                <div class="p-5 border-t border-zinc-900 bg-zinc-950/80 flex justify-between items-center">
-                    <div><p class="text-[9px] font-mono text-zinc-600 uppercase tracking-widest">Active_Session</p><p class="text-white font-black italic uppercase text-lg group-hover:text-red-500 transition-colors">Racing Bulls Visa Cash</p></div>
-                    <span class="text-red-500 font-mono text-[9px] animate-pulse">● SIGNAL_OK</span>
-                </div>
-            </div>
-            */}
-            <div class="group relative bg-[#020c1b]/80 rounded-xl border border-zinc-800 overflow-hidden hover:border-green-600/50 transition-all duration-500 shadow-2xl">
+
+            {/* 🏎️ COCHE 6: ASTON MARTIN */}
+            <div class="monoplaza-card absolute w-full max-w-md bg-[#020c1b]/80 rounded-xl border border-zinc-800 overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] shadow-2xl group select-none will-change-transform">
                 <div class="absolute top-2 left-2 w-4 h-4 border-t border-l border-zinc-700 z-20 group-hover:border-green-500"></div>
                 <div class="absolute bottom-2 right-2 w-4 h-4 border-b border-r border-zinc-700 z-20 group-hover:border-green-500"></div>
                 <div class="relative aspect-video">
@@ -1713,7 +2185,8 @@ const proximaCarrera = calendario
                 </div>
             </div>
 
-            <div class="group relative bg-[#020c1b]/80 rounded-xl border border-zinc-800 overflow-hidden hover:border-green-600/50 transition-all duration-500 shadow-2xl">
+            {/* 🏎️ COCHE 7: KICK SAUBER */}
+            <div class="monoplaza-card absolute w-full max-w-md bg-[#020c1b]/80 rounded-xl border border-zinc-800 overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] shadow-2xl group select-none will-change-transform">
                 <div class="absolute top-2 left-2 w-4 h-4 border-t border-l border-zinc-700 z-20 group-hover:border-green-500"></div>
                 <div class="absolute bottom-2 right-2 w-4 h-4 border-b border-r border-zinc-700 z-20 group-hover:border-green-500"></div>
                 <div class="relative aspect-video">
@@ -1730,196 +2203,435 @@ const proximaCarrera = calendario
     </div>
 </section>
 
-
-
-
-
-
-<section id="Calendario" class="mt-32 py-20 border-t border-zinc-900 px-4 scroll-mt-20 bg-[#020c1b]/30">
-   <div class="max-w-5xl mx-auto px-6 mb-16 group">
-    <div class="flex justify-between items-end mb-4">
-        <div>
-            <div class="flex items-center gap-2 mb-1">
-                <span class="relative flex h-2 w-2">
-                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                    <span class="relative inline-flex rounded-full h-2 w-2 bg-red-600"></span>
-                </span>
-                <span class="text-[10px] font-mono font-bold text-red-500 uppercase tracking-[0.4em]">Season_Status // Live</span>
-            </div>
-            <h3 class="text-2xl font-black text-white italic uppercase tracking-tighter">
-                Progreso del <span class="text-red-600">Campeonato</span>
-            </h3>
-        </div>
-        
-        <div class="text-right">
-            <span class="text-4xl font-mono font-black text-white italic leading-none">
-                {carrerasCorridas}<span class="text-zinc-600 text-xl">/{totalCarreras}</span>
-            </span>
-            <p class="text-[9px] font-mono text-zinc-500 uppercase tracking-widest mt-1">GPs Completados</p>
-        </div>
-    </div>
-
-    <div class="relative">
-        {/* Marcadores de fondo (Reaccionan de forma real a las carreras completadas) */}
-        <div class="absolute inset-0 flex justify-between px-1 pointer-events-none z-20">
-            {[...Array(totalCarreras)].map((_, i) => (
-                <div class={`w-[1px] h-full transition-colors duration-500 ${i < carrerasCorridas ? 'bg-red-500/40' : 'bg-white/5'}`}></div>
-            ))}
-        </div>
-
-        {/* La Barra */}
-        <div class="h-8 bg-zinc-950 rounded-lg border border-zinc-900 overflow-hidden relative shadow-2xl backdrop-blur-sm">
-            <div 
-                id="season-progress-bar"
-                class="h-full bg-gradient-to-r from-red-900 via-red-600 to-red-500 relative ease-out shadow-[0_0_20px_rgba(220,38,38,0.3)]" 
-                data-progress={porcentajeTemporada}
-                style="width: 0%; transition: width 1.5s cubic-bezier(0.22, 1, 0.36, 1);"
-            >
-                {/* Cabezal de lectura (La línea blanca que brilla) */}
-                <div class="absolute right-0 top-0 h-full w-1.5 bg-white shadow-[0_0_15px_rgba(255,255,255,0.8)] z-30"></div>
-                
-                {/* Efecto de barrido de luz (Scanline) */}
-                <div class="absolute inset-0 bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.1),transparent)] w-1/2 animate-[scan_4s_linear_infinite]"></div>
-            </div>
-        </div>
-
-        {/* Labels de porcentaje debajo */}
-        <div class="flex justify-between mt-2 px-1">
-            <span class="text-[7px] font-mono text-zinc-600 uppercase tracking-tighter italic">Phase_01 // Start</span>
-            <span class="text-[10px] font-mono font-black text-red-500 uppercase italic">
-                {porcentajeTemporada.toFixed(1)}% Completed
-            </span>
-            <span class="text-[7px] font-mono text-zinc-600 uppercase tracking-tighter italic">End_Of_Season // 2026</span>
-        </div>
-    </div>
-</div>
-
+{/* 🏎️ ENGINE DE SELECCIÓN Y PROYECCIÓN 3D PARA MONOPLAZAS */}
 <script data-astro-rerun>
-    function animarProgresoTemporada() {
+    document.addEventListener('astro:page-load', () => {
+        const cards = document.querySelectorAll('.monoplaza-card');
+        if (cards.length === 0) return;
+
+        let activeIndex = 0; // Arranca el primer coche enfocado (Alpine)
+        const totalCards = cards.length;
+        let autoPlayInterval = null;
+        const AUTO_PLAY_SPEED = 6000; // Avanza de coche solo cada 6 segundos
+
+        const render3DMonoplazas = () => {
+            const isMobile = window.innerWidth < 768;
+
+            cards.forEach((card, index) => {
+                // Aritmética modular para calcular la distancia en un bucle infinito real de 7 elementos
+                let offset = index - activeIndex;
+                if (offset < -Math.floor(totalCards / 2)) offset += totalCards;
+                if (offset > Math.floor(totalCards / 2)) offset -= totalCards;
+
+                if (offset === 0) {
+                    // 🎯 MONOPLAZA CENTRAL (Enfoque principal al frente)
+                    card.style.transform = `translateX(0px) translateZ(120px) rotateY(0deg) scale(1)`;
+                    card.style.zIndex = '30';
+                    card.style.opacity = '1';
+                    card.style.filter = 'blur(0px) brightness(1)';
+                    card.style.pointerEvents = 'auto';
+                } else if (offset === -1) {
+                    // 👈 MONOPLAZA IZQUIERDO INMEDIATO
+                    const xShift = isMobile ? '-50px' : '-320px';
+                    const zShift = isMobile ? '-100px' : '-200px';
+                    const yRot = isMobile ? '20deg' : '40deg';
+
+                    card.style.transform = `translateX(${xShift}) translateZ(${zShift}) rotateY(${yRot}) scale(0.85)`;
+                    card.style.zIndex = '20';
+                    card.style.opacity = isMobile ? '0.25' : '0.5';
+                    card.style.filter = 'blur(3px) brightness(0.4)';
+                    card.style.pointerEvents = 'auto';
+                } else if (offset === 1) {
+                    // 👉 MONOPLAZA DERECHO INMEDIATO
+                    const xShift = isMobile ? '50px' : '320px';
+                    const zShift = isMobile ? '-100px' : '-200px';
+                    const yRot = isMobile ? '-20deg' : '-40deg';
+
+                    card.style.transform = `translateX(${xShift}) translateZ(${zShift}) rotateY(${yRot}) scale(0.85)`;
+                    card.style.zIndex = '20';
+                    card.style.opacity = isMobile ? '0.25' : '0.5';
+                    card.style.filter = 'blur(3px) brightness(0.4)';
+                    card.style.pointerEvents = 'auto';
+                } else {
+                    // 🕶️ RESTO DE MONOPLAZAS OCULTOS EN LA PARTE TRASERA DEL BUCLE
+                    // Se desplazan de forma invisible listos para rotar al frente
+                    const direction = offset > 0 ? 1 : -1;
+                    const xShift = isMobile ? `${direction * 100}px` : `${direction * 500}px`;
+                    card.style.transform = `translateX(${xShift}) translateZ(-350px) rotateY(${direction * -60}deg) scale(0.6)`;
+                    card.style.zIndex = '10';
+                    card.style.opacity = '0';
+                    card.style.pointerEvents = 'none';
+                }
+            });
+        };
+
+        const nextCard = () => {
+            activeIndex = (activeIndex + 1) % totalCards;
+            render3DMonoplazas();
+        };
+
+        // Evento de clic directo: si tocás un coche de los costados, vuela al frente al instante
+        cards.forEach((card, index) => {
+            card.addEventListener('click', () => {
+                if (activeIndex !== index) {
+                    activeIndex = index;
+                    render3DMonoplazas();
+                    resetAutoPlay();
+                }
+            });
+        });
+
+        // Controles de Automatización Cíclica
+        const startAutoPlay = () => {
+            if (autoPlayInterval === null) {
+                autoPlayInterval = setInterval(nextCard, AUTO_PLAY_SPEED);
+            }
+        };
+
+        const stopAutoPlay = () => {
+            if (autoPlayInterval !== null) {
+                clearInterval(autoPlayInterval);
+                autoPlayInterval = null;
+            }
+        };
+
+        const resetAutoPlay = () => {
+            stopAutoPlay();
+            startAutoPlay();
+        };
+
+        // Pausa inteligente por hover en toda la sección (para poder ver los videos en detalle)
+        const container = document.getElementById('pilotos');
+        if (container) {
+            container.addEventListener('mouseenter', stopAutoPlay);
+            container.addEventListener('mouseleave', startAutoPlay);
+        }
+
+        // Soporte táctil con deslizamiento para smartphones
+        let startX = 0;
+        container?.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+            stopAutoPlay();
+        }, {passive: true});
+
+        container?.addEventListener('touchend', (e) => {
+            const endX = e.changedTouches[0].clientX;
+            const diff = startX - endX;
+            if (Math.abs(diff) > 50) {
+                if (diff > 0) activeIndex = (activeIndex + 1) % totalCards;
+                else activeIndex = (activeIndex - 1 + totalCards) % totalCards;
+                render3DMonoplazas();
+            }
+            startAutoPlay();
+        }, {passive: true});
+
+        // Recalcular offsets si cambia el tamaño de pantalla (para responsive)
+        window.addEventListener('resize', render3DMonoplazas);
+
+        // Arranque en pista
+        render3DMonoplazas();
+        startAutoPlay();
+    });
+</script>
+
+
+
+
+
+
+{/* 🏎️ SECCIÓN CALENDARIO: CARRUSEL COMPACTO DE MESES "MISSION CONTROL" */}
+<section id="Calendario" class="mt-32 py-20 border-t border-zinc-900 px-4 scroll-mt-20 bg-[#020c1b]/10 relative overflow-hidden">
+    
+    {/* Fondo de Grilla Holográmica */}
+    <div class="absolute inset-0 opacity-[0.02] pointer-events-none bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDQwIDQwIj48ZyBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMSI+PHBhdGggZD0iTTAgMGg0MHY0MEgwVjB6bTIwIDIwaDIwdjIwSDIWMjB6TTAgMjBoMjB2MjBIMFYyMHoyMCAwaDIwdjIwSDIwVjB6Ii8+PC9nPjwvZz48L3N2Zz4=')]"></div>
+
+    {/* PANEL SUPERIOR: SEGUIMIENTO DE PROGRESO GLOBAL */}
+    <div class="max-w-7xl mx-auto px-4 mb-20">
+        <div class="bg-zinc-950/60 p-6 rounded-2xl border border-zinc-900 backdrop-blur-md shadow-2xl relative">
+            <div class="absolute top-0 left-6 w-12 h-[2px] bg-red-600"></div>
+            
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-6">
+                <div>
+                    <div class="flex items-center gap-2 mb-1.5">
+                        <span class="relative flex h-2 w-2">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2 w-2 bg-red-600"></span>
+                        </span>
+                        <span class="text-[9px] font-mono font-black text-red-500 uppercase tracking-[0.4em]">[ SEASON_STATUS // LIVE_FEED ]</span>
+                    </div>
+                    <h3 class="text-3xl font-black text-white italic uppercase tracking-tighter -skew-x-6">
+                        PROGRESO DEL <span class="text-red-600 drop-shadow-[0_0_10px_rgba(220,38,38,0.3)]">CAMPEONATO</span>
+                    </h3>
+                </div>
+                
+                <div class="bg-black/40 border border-zinc-900 rounded-xl px-5 py-2 flex items-center gap-4 font-mono shadow-inner">
+                    <div class="text-right">
+                        <p class="text-[8px] text-zinc-600 font-black uppercase tracking-widest leading-none mb-1">GPs COMPLETED</p>
+                        <span class="text-3xl font-black text-white italic tracking-tighter leading-none">
+                            {carrerasCorridas}<span class="text-zinc-700 text-lg font-normal">/{totalCarreras}</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="relative">
+                <div class="absolute inset-0 flex justify-between px-1 pointer-events-none z-20">
+                    {[...Array(totalCarreras)].map((_, i) => (
+                        <div class={`w-[1px] h-full transition-colors duration-500 ${i < carrerasCorridas ? 'bg-red-500/20' : 'bg-white/5'}`}></div>
+                    ))}
+                </div>
+
+                <div class="h-6 bg-zinc-950 rounded-lg border border-zinc-900/80 overflow-hidden relative shadow-inner">
+                    <div 
+                        id="season-progress-bar"
+                        class="h-full bg-gradient-to-r from-red-950 via-red-600 to-red-500 relative ease-out" 
+                        data-progress={porcentajeTemporada}
+                        style="width: 0%; transition: width 1.5s cubic-bezier(0.22, 1, 0.36, 1);"
+                    >
+                        <div class="absolute right-0 top-0 h-full w-1 bg-white shadow-[0_0_12px_#fff] z-30"></div>
+                        <div class="absolute inset-0 bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.08),transparent)] w-1/2 animate-[scan_4s_linear_infinite]"></div>
+                    </div>
+                </div>
+
+                <div class="flex justify-between mt-2.5 px-1 text-[8px] font-mono text-zinc-600 tracking-wider uppercase font-bold">
+                    <span>Phase_01 // Start</span>
+                    <span class="text-red-500 font-black text-[10px] bg-red-950/20 px-2 py-0.5 rounded border border-red-900/30">
+                        {porcentajeTemporada.toFixed(1)}% Telemetry Loaded
+                    </span>
+                    <span>End_Of_Season // 2026</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {/* TITULO Y LEYENDAS */}
+    <div class="max-w-7xl mx-auto px-4 mb-12 flex flex-col md:flex-row justify-between items-center gap-6 reveal-on-scroll">
+        <div>
+            <h2 class="text-4xl md:text-5xl font-black uppercase italic tracking-tighter text-white -skew-x-6 text-center md:text-left">
+                CALENDARIO <span class="text-red-600 drop-shadow-[0_0_15px_rgba(220,38,38,0.2)]">2026</span>
+            </h2>
+            <div class="mt-3 flex flex-wrap gap-4 justify-center md:justify-start font-mono text-[8px] font-bold uppercase tracking-widest">
+                <p class="text-zinc-500 flex items-center gap-2 bg-zinc-950/40 px-2.5 py-1 rounded border border-zinc-900">
+                    <span class="w-1.5 h-1.5 rounded-full bg-red-600 animate-pulse"></span> Sprint GP
+                </p>
+                <p class="text-zinc-500 flex items-center gap-2 bg-zinc-950/40 px-2.5 py-1 rounded border border-zinc-900">
+                    <span class="w-1.5 h-1.5 rounded-full bg-zinc-700"></span> Archived
+                </p>
+            </div>
+        </div>
+
+        {/* Botonera de control manual HUD */}
+        <div class="flex gap-2">
+            <button id="prev-calendario-btn" class="bg-zinc-950/80 hover:bg-red-600/10 text-white p-3 rounded-xl border border-zinc-900 hover:border-red-600/40 transition-all shadow-xl group">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7" /></svg>
+            </button>
+            <button id="next-calendario-btn" class="bg-zinc-950/80 hover:bg-red-600/10 text-white p-3 rounded-xl border border-zinc-900 hover:border-red-600/40 transition-all shadow-xl group">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 group-hover:translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" /></svg>
+            </button>
+        </div>
+    </div>
+
+    {/* CONTENEDOR MÁSCARA DEL CARRUSEL DE MESES */}
+    <div class="max-w-7xl mx-auto overflow-hidden px-1">
+        <div id="calendario-wrapper" class="flex transition-transform duration-500 ease-out w-full">
+            
+            {calendario.map((mesData) => (
+                /* Cada slide es un mes: 1 en mobile, 2 en tablet, 3 en pantallas grandes */
+                <div class="w-full sm:w-[50%] lg:w-[33.333%] flex-shrink-0 px-3 calendario-slide">
+                    <div class="space-y-4 bg-zinc-950/40 border border-zinc-900/60 p-5 rounded-2xl backdrop-blur-sm shadow-xl h-full flex flex-col justify-start">
+                        
+                        {/* Cabecera del Mes */}
+                        <div class="flex items-center justify-between border-b border-zinc-900 pb-3 mb-2">
+                            <h3 class="text-zinc-400 font-black uppercase italic tracking-widest text-sm">
+                                // {mesData.mes}
+                            </h3>
+                            <span class="text-[7px] font-mono text-zinc-600 tracking-widest">DATA_ARCHIVE</span>
+                        </div>
+
+                        {/* Listado de Carreras Adentro de ese Mes */}
+                        <div class="space-y-3">
+                            {mesData.races.map((race) => {
+                                // --- TU CÁLCULO DINÁMICO DE ESTADO INTACTO ---
+                                const fechaCarrera = new Date(race.fecha_iso);
+                                fechaCarrera.setHours(23, 59, 59);
+                                
+                                let estadoCalculado = "upcoming";
+                                if (hoy > fechaCarrera) {
+                                    estadoCalculado = "finished";
+                                } else if (proximaCarrera && race.gp === proximaCarrera.gp && race.fecha === proximaCarrera.fecha) {
+                                    estadoCalculado = "next";
+                                }
+                                // ---------------------------------------------
+
+                                return (
+                                    <div class={`
+                                        relative overflow-hidden rounded-xl border transition-all duration-500 group flex flex-col justify-between min-h-[95px]
+                                        ${estadoCalculado === 'finished' ? 'bg-zinc-950/50 border-zinc-900/60 opacity-40 grayscale contrast-75 hover:grayscale-0 hover:opacity-100 hover:border-zinc-700' : ''}
+                                        ${estadoCalculado === 'next' ? 'bg-gradient-to-br from-red-950/30 via-[#0a0203]/90 to-black border-red-600 shadow-[0_0_25px_rgba(220,38,38,0.1)] scale-[1.01] z-10' : ''}
+                                        ${estadoCalculado === 'upcoming' ? 'bg-[#030914]/40 border-zinc-900 hover:border-zinc-700' : ''}
+                                    `}>
+                                        <div class="absolute inset-0 z-0 overflow-hidden rounded-xl">
+                                            <img src={race.img} class="w-full h-full object-cover opacity-15 group-hover:opacity-25 transition-all duration-700 group-hover:scale-105" alt={race.gp} loading="lazy" />
+                                            <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
+                                        </div>
+
+                                        {estadoCalculado === 'next' && (
+                                            <>
+                                                <div class="absolute top-0 left-0 w-2.5 h-2.5 border-t-2 border-l-2 border-red-600 animate-pulse"></div>
+                                                <div class="absolute bottom-0 right-0 w-2.5 h-2.5 border-b-2 border-r-2 border-white animate-pulse"></div>
+                                            </>
+                                        )}
+
+                                        <div class="relative z-10 p-3.5 flex items-center justify-between w-full h-full flex-1">
+                                            <div class="flex items-center gap-3">
+                                                <div class="text-center border-r border-zinc-900/80 pr-3 font-mono">
+                                                    <p class="text-[7px] font-black text-zinc-500 uppercase tracking-wider mb-0.5">{race.mes_nombre}</p>
+                                                    <p class={`text-xl font-black italic tracking-tighter leading-none ${estadoCalculado === 'next' ? 'text-red-500' : 'text-zinc-100'}`}>
+                                                        {race.fecha < 10 ? `0${race.fecha}` : race.fecha}
+                                                    </p>
+                                                </div>
+
+                                                <div class="leading-none">
+                                                    <div class="flex items-center gap-1.5 mb-1 flex-wrap">
+                                                        <h4 class="text-xs font-black uppercase italic tracking-tighter text-white group-hover:text-red-500 transition-colors -skew-x-6">
+                                                            GP DE {race.gp}
+                                                        </h4>
+                                                        {race.sprint && (
+                                                            <span class="bg-red-600 text-[5.5px] font-mono font-black px-1.5 py-0.5 rounded-sm text-white tracking-wider">SPRINT</span>
+                                                        )}
+                                                    </div>
+                                                    <p class="text-zinc-500 text-[8.5px] font-mono uppercase tracking-tighter truncate max-w-[120px] sm:max-w-[140px] md:max-w-[160px]">
+                                                        {race.circuito}
+                                                    </p>
+                                                </div>
+                                            </div>
+
+                                            <div class="flex flex-col items-end font-mono text-[9px]">
+                                                {estadoCalculado === 'finished' && <span class="text-[6.5px] font-black text-zinc-600 border border-zinc-900 bg-black/40 px-1.5 py-0.5 rounded uppercase tracking-widest">DONE</span>}
+                                                {estadoCalculado === 'next' && <span class="flex items-center gap-1 text-[7.5px] font-black text-red-500 uppercase tracking-widest bg-red-950/20 border border-red-900/50 px-1.5 py-0.5 rounded animate-pulse">ACTIVE</span>}
+                                                {estadoCalculado === 'upcoming' && <span class="text-[6.5px] font-black text-zinc-500 border border-zinc-900/60 bg-zinc-900/10 px-1.5 py-0.5 rounded uppercase tracking-widest">STDBY</span>}
+                                            </div>
+                                        </div>
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    </div>
+                </div>
+            ))}
+
+        </div>
+    </div>
+</section>
+
+{/* 🏎️ ENGINE INTEGRADO: PROGRESO SEGURO + CARRETE DE MESES (AUTOPLAY 4 SEGUNDOS) */}
+<script data-astro-rerun>
+    document.addEventListener('astro:page-load', () => {
+        // 1. Motor de Animación de la Barra de Progreso
         const progressBar = document.getElementById('season-progress-bar');
         if (progressBar) {
             const target = progressBar.getAttribute('data-progress');
-            
-            // Forzamos el estado inicial a cero por seguridad antes del repintado
             progressBar.style.width = '0%';
-            
-            // Usamos requestAnimationFrame doble para asegurar que el navegador registre el 0% 
-            // antes de disparar la transición al porcentaje objetivo
             requestAnimationFrame(() => {
                 requestAnimationFrame(() => {
                     progressBar.style.width = target + '%';
                 });
             });
         }
-    }
 
-    // Ejecución inicial segura
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', animarProgresoTemporada);
-    } else {
-        animarProgresoTemporada();
-    }
+        // 2. Motor del Carrusel de Meses
+        const wrapper = document.getElementById('calendario-wrapper');
+        const slides = document.querySelectorAll('.calendario-slide');
+        const prevBtn = document.getElementById('prev-calendario-btn');
+        const nextBtn = document.getElementById('next-calendario-btn');
 
-    // Soporte total para Astro View Transitions
-    document.addEventListener('astro:page-load', animarProgresoTemporada);
+        if (!wrapper || slides.length === 0) return;
+
+        let currentIndex = 0;
+        const totalSlides = slides.length;
+        let autoPlayTimer = null;
+        const AUTO_PLAY_SPEED = 2000; // Se mueve solo de mes cada 2 segundos
+
+        const getSlidesPerView = () => {
+            if (window.innerWidth >= 1024) return 3; // 3 meses en monitores
+            if (window.innerWidth >= 640) return 2;  // 2 meses en tablets
+            return 1;                                // 1 mes en celulares
+        };
+
+        const moveCarousel = () => {
+            const slidesPerView = getSlidesPerView();
+            const maxIndex = totalSlides - slidesPerView;
+
+            if (currentIndex > maxIndex) currentIndex = maxIndex;
+            if (currentIndex < 0) currentIndex = 0;
+
+            const slideWidth = slides[0].getBoundingClientRect().width;
+            wrapper.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+        };
+
+        const nextSlide = () => {
+            const maxIndex = totalSlides - getSlidesPerView();
+            if (currentIndex < maxIndex) {
+                currentIndex++;
+            } else {
+                currentIndex = 0; // Bucle infinito al inicio
+            }
+            moveCarousel();
+        };
+
+        const prevSlide = () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+            } else {
+                currentIndex = totalSlides - getSlidesPerView(); // Bucle infinito al final
+            }
+            moveCarousel();
+        };
+
+        const startAutoPlay = () => {
+            if (autoPlayTimer === null) {
+                autoPlayTimer = setInterval(nextSlide, AUTO_PLAY_SPEED);
+            }
+        };
+
+        const stopAutoPlay = () => {
+            if (autoPlayTimer !== null) {
+                clearInterval(autoPlayTimer);
+                autoPlayTimer = null;
+            }
+        };
+
+        const resetAutoPlay = () => {
+            stopAutoPlay();
+            startAutoPlay();
+        };
+
+        if (prevBtn && nextBtn) {
+            prevBtn.addEventListener('click', () => { prevSlide(); resetAutoPlay(); });
+            nextBtn.addEventListener('click', () => { nextSlide(); resetAutoPlay(); });
+        }
+
+        // Gestos touch celulares
+        let startX = 0;
+        wrapper.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; stopAutoPlay(); }, {passive: true});
+        wrapper.addEventListener('touchend', (e) => {
+            const endX = e.changedTouches[0].clientX;
+            if (Math.abs(startX - endX) > 50) {
+                if (startX - endX > 0) nextSlide();
+                else prevSlide();
+            }
+            startAutoPlay();
+        }, {passive: true});
+
+        // Pausa inteligente al pasar el cursor (frena el carrusel para auditar circuitos)
+        wrapper.addEventListener('mouseenter', stopAutoPlay);
+        wrapper.addEventListener('mouseleave', startAutoPlay);
+
+        window.addEventListener('resize', () => { moveCarousel(); resetAutoPlay(); });
+
+        startAutoPlay();
+    });
 </script>
-    <div class="max-w-7xl mx-auto mb-16 text-center md:text-left reveal-on-scroll">
-        <div class="flex items-center gap-4 mb-4 justify-center md:justify-start">
-            
-            
-        </div>
-        <h2 class="text-4xl md:text-6xl font-black uppercase italic tracking-tighter text-white">
-            CALENDARIO <span class="text-red-600">2026</span>
-        </h2>
-        <div class="mt-4 flex flex-wrap gap-6 justify-center md:justify-start">
-            <p class="text-zinc-500 font-mono text-[10px] uppercase tracking-widest flex items-center gap-2">
-                <span class="w-2 h-2 rounded-full bg-red-600 animate-pulse"></span> Circuitos con Sprint
-            </p>
-            <p class="text-zinc-500 font-mono text-[10px] uppercase tracking-widest flex items-center gap-2">
-                <span class="w-2 h-2 rounded-full bg-zinc-700"></span> Eventos Finalizados
-            </p>
-        </div>
-    </div>
-
-    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-        {calendario.map((mesData) => (
-            <div class="space-y-6 reveal-item">
-                <div class="flex items-center justify-between border-b border-zinc-800 pb-2">
-                    <h3 class="text-white font-black uppercase italic tracking-widest text-lg">{mesData.mes}</h3>
-                    <span class="text-[9px] font-mono text-zinc-600">DATA_ARCHIVE</span>
-                </div>
-
-                <div class="space-y-4">
-                    {mesData.races.map((race) => {
-                        // --- CÁLCULO DINÁMICO DE ESTADO ---
-                        const fechaCarrera = new Date(race.fecha_iso);
-                        // Seteamos la comparación al final del día
-                        fechaCarrera.setHours(23, 59, 59);
-                        
-                        let estadoCalculado = "upcoming";
-                        if (hoy > fechaCarrera) {
-                            estadoCalculado = "finished";
-                        } else if (proximaCarrera && race.gp === proximaCarrera.gp && race.fecha === proximaCarrera.fecha) {
-                            estadoCalculado = "next";
-                        }
-                        // ---------------------------------
-
-                        return (
-                            <div class={`
-                                relative overflow-hidden rounded-xl border transition-all duration-500 group
-                                ${estadoCalculado === 'finished' ? 'bg-zinc-950/40 border-zinc-900 opacity-60 grayscale hover:grayscale-0 hover:opacity-100' : ''}
-                                ${estadoCalculado === 'next' ? 'bg-red-600/5 border-red-600 shadow-[0_0_30px_rgba(220,38,38,0.15)] scale-[1.02] z-10' : 'bg-zinc-900/20 border-zinc-800 hover:border-zinc-600'}
-                            `}>
-                                <img 
-                                    src={race.img} 
-                                    class="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-30 transition-all duration-700 group-hover:scale-110" 
-                                    alt={race.gp} 
-                                />
-
-                                <div class="relative z-10 p-5 flex items-center justify-between">
-                                    <div class="flex items-center gap-4">
-                                        <div class="text-center border-r border-zinc-800 pr-4">
-                                            <p class="text-[10px] font-mono text-zinc-500 leading-none mb-1">{race.mes_nombre}</p>
-                                            <p class={`text-2xl font-black italic leading-none ${estadoCalculado === 'next' ? 'text-red-600' : 'text-white'}`}>
-                                                {race.fecha}
-                                            </p>
-                                        </div>
-
-                                        <div>
-                                            <div class="flex items-center gap-2 mb-1">
-                                                <p class="text-white font-black text-sm uppercase italic tracking-tighter group-hover:text-red-500 transition-colors">
-                                                    GP DE {race.gp}
-                                                </p>
-                                                {race.sprint && (
-                                                    <span class="bg-red-600 text-[7px] font-black px-1.5 py-0.5 rounded-sm text-white animate-pulse animate-latido-color">SPRINT</span>
-                                                )}
-                                            </div>
-                                            <p class="text-zinc-500 text-[10px] font-mono uppercase tracking-tighter">{race.circuito}</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="flex flex-col items-end">
-                                        {estadoCalculado === 'finished' && (
-                                            <span class="text-[8px] font-black text-zinc-600 border border-zinc-800 px-2 py-1 rounded uppercase tracking-widest">Done</span>
-                                        )}
-                                        {estadoCalculado === 'next' && (
-                                            <span class="flex items-center gap-2 text-[8px] font-black text-red-500 uppercase tracking-[0.3em] animate-latido-color ">
-                                                <span class="w-1.5 h-1.5 bg-red-600 rounded-full animate-ping"></span>
-                                                Next
-                                            </span>
-                                        )}
-                                    </div>
-                                </div>
-
-                                <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.02] to-transparent w-full h-full -translate-x-full group-hover:animate-[scan_3s_linear_infinite] pointer-events-none"></div>
-                            </div>
-                        );
-                    })}
-                </div>
-            </div>
-        ))}
-    </div>
-</section>
 
 <style>
     /* Estilo para las tarjetas en cascada */
