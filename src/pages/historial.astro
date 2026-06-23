@@ -200,131 +200,232 @@ const obtenerInfoPiloto = (nombre) => {
 
     {/* Aquí sigue el bucle {carreras.map(...) que ya armamos */}
 
-    {carreras.map((carrera) => (
-        <section class="mb-32 animate-fade-in">
-            {/* Cabecera idéntica a tu diseño */}
-            <div class="flex flex-col md:flex-row justify-between items-end border-b border-zinc-800 pb-6 mb-8 gap-4">
-                <div>
-                    <div class="flex items-center gap-3 mb-2">
-                        <span class="bg-red-600 text-[10px] font-black px-2 py-0.5 rounded uppercase italic">GP {carrera.id}</span>
-                        <span class="text-zinc-500 font-mono text-[10px] uppercase tracking-widest">{carrera.fecha}</span>
-                    </div>
-                    <h2 class="text-5xl font-black uppercase italic tracking-tighter">
-                        {carrera.gp} <span class="text-zinc-500 text-2xl block md:inline md:ml-2 not-italic font-light">{carrera.circuito}</span>
-                    </h2>
-                </div>
-                <div class="text-right">
-                    <p class="text-[9px] font-mono text-zinc-500 uppercase tracking-widest mb-1">Duración Total</p>
-                    <p class="font-black italic text-xl text-white">{carrera.duracion}</p>
-                </div>
-            </div>
+    {/* 🛠️ CONTENEDOR PRINCIPAL DEL CARRETE */}
+<div class="relative w-full overflow-hidden py-4" id="carousel-carreras-container">
+    
+    {/* Botones de Navegación HUD en los extremos */}
+    <div class="absolute top-1/2 -translate-y-1/2 left-0 z-30 hidden md:block">
+        <button id="prev-carrera-btn" class="bg-zinc-950/80 hover:bg-red-600/20 text-white p-4 rounded-r-xl border-y border-r border-zinc-800 hover:border-red-600 transition-all group">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 group-hover:-translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+        </button>
+    </div>
+    <div class="absolute top-1/2 -translate-y-1/2 right-0 z-30 hidden md:block">
+        <button id="next-carrera-btn" class="bg-zinc-950/80 hover:bg-red-600/20 text-white p-4 rounded-l-xl border-y border-l border-zinc-800 hover:border-red-600 transition-all group">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 group-hover:translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+        </button>
+    </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
-                {/* Columna de Imagen y Stats */}
-                <div class="space-y-6">
-                    <div class="relative group overflow-hidden rounded-2xl border border-zinc-800">
-    <img 
-        src={carrera.imagen} 
-        alt={carrera.gp} 
-        {/* aspect-video (16:9) en cel asegura que no se estire raro, y lg:h-54 mantiene tu tamaño de PC */}
-        class="w-full aspect-video lg:aspect-none lg:h-54 object-cover transition-transform duration-500 group-hover:scale-110" 
-    />
-    <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
-</div>
-                    
-                    <div class="bg-zinc-900/50 p-6 rounded-2xl border border-zinc-800 space-y-4">
-                        <div class="flex justify-between items-center">
-                            <div>
-                                <p class="text-[9px] font-mono text-zinc-500 uppercase tracking-widest mb-1">Pole Position</p>
-                                <p class="text-xl font-black italic uppercase text-red-500">{carrera.pole}</p>
-                            </div>
-                            <p class="font-mono text-xs text-zinc-400">{carrera.tiempoPole}</p>
-                        </div>
-                        <div class="pt-4 border-t border-zinc-800 flex justify-between items-center">
-                            <div>
-                                <p class="text-[9px] font-mono text-zinc-500 uppercase tracking-widest mb-1">Vuelta Rápida</p>
-                                <p class="text-xl font-black italic uppercase text-blue-500">{carrera.vueltaRapida}</p>
-                            </div>
-                            <p class="font-mono text-xs text-zinc-400">{carrera.tiempoVR}</p>
-                        </div>
-                    </div>
-                </div>
-
-                {/* Tabla de Resultados - Tal cual la tenías en el PDF */}
-                <div class="lg:col-span-2">
-                    <div class="bg-zinc-900/30 rounded-2xl border border-zinc-800 overflow-hidden">
-                    
-                        <table class="w-full text-left border-collapse">
-                    
-                            <thead class="bg-zinc-800/50">
-                                <tr>
-                                    <th class="px-6 py-4 text-[10px] font-mono text-zinc-400 uppercase tracking-widest">Pos</th>
-                                    <th class="px-6 py-4 text-[10px] font-mono text-zinc-400 uppercase tracking-widest">Piloto / Escudería</th>
-                                    <th class="px-6 py-4 text-[10px] font-mono text-zinc-400 uppercase tracking-widest text-center">Info</th>
-                                    <th class="px-6 py-4 text-[10px] font-mono text-zinc-400 uppercase tracking-widest text-right">PTS</th>
-                                </tr>
-                            </thead>
-                    
-                           <tbody class="divide-y divide-zinc-800/50">
-    {/* Aplicamos el sort para ordenar de menor a mayor por el campo 'pos' */}
-    {carrera.resultados.sort((a, b) => a.pos - b.pos).map((res) => {
-        const info = obtenerInfoPiloto(res.piloto);
-        return (
-            <tr class="hover:bg-zinc-800/20 transition-colors group">
-                <td class="px-6 py-5 font-black italic text-2xl text-zinc-500 group-hover:text-red-500">
-                    {res.pos}
-                </td>
-                <td class="px-6 py-5">
-                    <div class="flex items-center gap-4">
-                        <img 
-                                src={`/Fotos/perfil-${res.piloto.toLowerCase()}.jpg`} 
-                                class="w-16 h-16 rounded-full object-cover border-2 border-zinc-800 group-hover:border-red-600 transition-all duration-300 group-hover:scale-110 animate-latido"
-                                alt={res.piloto}
-                            />
-                        <img src={logos[info.escuderia]} class="w-8 opacity-50" />
+    {/* Envoltura Flex de las Carreras */}
+    <div id="carreras-wrapper" class="flex transition-transform duration-500 ease-out w-full">
+        {/* Copiamos e invertimos para que el último GP del JSON empiece en la posición 0 */}
+        {[...carreras].reverse().map((carrera, idx) => (
+            <div class="w-full flex-shrink-0 px-2 md:px-12 carrera-slide">
+                <section class="mb-12 animate-fade-in">
+                    {/* Cabecera idéntica a tu diseño */}
+                    <div class="flex flex-col md:flex-row justify-between items-end border-b border-zinc-800 pb-6 mb-8 gap-4">
                         <div>
-                            <p class="font-black uppercase italic text-lg">{res.piloto}</p>
-                            <p class="text-[10px] text-zinc-500 font-mono uppercase">{info.escuderia}</p>
+                            <div class="flex items-center gap-3 mb-2">
+                                <span class="bg-red-600 text-[10px] font-black px-2 py-0.5 rounded uppercase italic">GP {carrera.id}</span>
+                                <span class="text-zinc-500 font-mono text-[10px] uppercase tracking-widest">{carrera.fecha}</span>
+                            </div>
+                            <h2 class="text-5xl font-black uppercase italic tracking-tighter">
+                                {carrera.gp} <span class="text-zinc-500 text-2xl block md:inline md:ml-2 not-italic font-light">{carrera.circuito}</span>
+                            </h2>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-[9px] font-mono text-zinc-500 uppercase tracking-widest mb-1">Duración Total</p>
+                            <p class="font-black italic text-xl text-white">{carrera.duracion}</p>
                         </div>
                     </div>
-                </td>
-                <td class="px-6 py-5 text-center">
-                    <div class="flex gap-2 justify-center">
-                        {res.piloto === carrera.pole && (
-                            <span class="bg-red-600/20 text-red-500 text-[9px] px-2 py-0.5 rounded font-black border border-red-600/30">P</span>
-                        )}
-                        {res.nota === "VR" && (
-                            <span class="bg-blue-600/20 text-blue-500 text-[9px] px-2 py-0.5 rounded font-black border border-blue-600/30">VR</span>
-                        )}
-                        {res.nota === "DNF" && (
-                            <span class="bg-yellow-600/20 text-yellow-500 text-[9px] px-2 py-0.5 rounded font-black border border-blue-600/30">DNF</span>
-                        )}
-                    </div>
-                </td>
-                <td class="px-6 py-5 text-right font-mono font-black text-2xl italic text-zinc-300">
-                    {res.puntos}
-                </td>
-            </tr>
-        );
-    })}
-</tbody>
-                        </table>
-                        
-                        {/* El pie de tabla que tenías al final de la página 7 */}
-                        <div class="bg-zinc-800/30 py-3 px-6 text-center border-t border-zinc-800/50">
-                            <p class="text-[9px] text-zinc-600 font-mono uppercase tracking-[0.3em]">Puntaje Oficial de la Fecha</p>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
+                        {/* Columna de Imagen y Stats */}
+                        <div class="space-y-6">
+                            <div class="relative group overflow-hidden rounded-2xl border border-zinc-800">
+                                <img 
+                                    src={carrera.imagen} 
+                                    alt={carrera.gp} 
+                                    class="w-full aspect-video lg:aspect-none lg:h-54 object-cover transition-transform duration-500 group-hover:scale-110" 
+                                />
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                            </div>
+                            
+                            <div class="bg-zinc-900/50 p-6 rounded-2xl border border-zinc-800 space-y-4">
+                                <div class="flex justify-between items-center">
+                                    <div>
+                                        <p class="text-[9px] font-mono text-zinc-500 uppercase tracking-widest mb-1">Pole Position</p>
+                                        <p class="text-xl font-black italic uppercase text-red-500">{carrera.pole}</p>
+                                    </div>
+                                    <p class="font-mono text-xs text-zinc-400">{carrera.tiempoPole}</p>
+                                </div>
+                                <div class="pt-4 border-t border-zinc-800 flex justify-between items-center">
+                                    <div>
+                                        <p class="text-[9px] font-mono text-zinc-500 uppercase tracking-widest mb-1">Vuelta Rápida</p>
+                                        <p class="text-xl font-black italic uppercase text-blue-500">{carrera.vueltaRapida}</p>
+                                    </div>
+                                    <p class="font-mono text-xs text-zinc-400">{carrera.tiempoVR}</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Tabla de Resultados - Mantenida al 100% */}
+                        <div class="lg:col-span-2">
+                            <div class="bg-zinc-900/30 rounded-2xl border border-zinc-800 overflow-hidden">
+                                <table class="w-full text-left border-collapse">
+                                    <thead class="bg-zinc-800/50">
+                                        <tr>
+                                            <th class="px-6 py-4 text-[10px] font-mono text-zinc-400 uppercase tracking-widest">Pos</th>
+                                            <th class="px-6 py-4 text-[10px] font-mono text-zinc-400 uppercase tracking-widest">Piloto / Escudería</th>
+                                            <th class="px-6 py-4 text-[10px] font-mono text-zinc-400 uppercase tracking-widest text-center">Info</th>
+                                            <th class="px-6 py-4 text-[10px] font-mono text-zinc-400 uppercase tracking-widest text-right">PTS</th>
+                                        </tr>
+                                    </thead>
+                            
+                                    <tbody class="divide-y divide-zinc-800/50">
+                                        {[...carrera.resultados].sort((a, b) => a.pos - b.pos).map((res) => {
+                                            const info = obtenerInfoPiloto(res.piloto);
+                                            return (
+                                                <tr class="hover:bg-zinc-800/20 transition-colors group">
+                                                    <td class="px-6 py-5 font-black italic text-2xl text-zinc-500 group-hover:text-red-500">
+                                                        {res.pos}
+                                                    </td>
+                                                    <td class="px-6 py-5">
+                                                        <div class="flex items-center gap-4">
+                                                            <img 
+                                                                src={`/Fotos/perfil-${res.piloto.toLowerCase()}.jpg`} 
+                                                                class="w-16 h-16 rounded-full object-cover border-2 border-zinc-800 group-hover:border-red-600 transition-all duration-300 group-hover:scale-110 animate-latido"
+                                                                alt={res.piloto}
+                                                            />
+                                                            <img src={logos[info.escuderia]} class="w-8 opacity-50" />
+                                                            <div>
+                                                                <p class="font-black uppercase italic text-lg">{res.piloto}</p>
+                                                                <p class="text-[10px] text-zinc-500 font-mono uppercase">{info.escuderia}</p>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="px-6 py-5 text-center">
+                                                        <div class="flex gap-2 justify-center">
+                                                            {res.piloto === carrera.pole && (
+                                                                <span class="bg-red-600/20 text-red-500 text-[9px] px-2 py-0.5 rounded font-black border border-red-600/30">P</span>
+                                                            )}
+                                                            {res.nota === "VR" && (
+                                                                <span class="bg-blue-600/20 text-blue-500 text-[9px] px-2 py-0.5 rounded font-black border border-blue-600/30">VR</span>
+                                                            )}
+                                                        </div>
+                                                    </td>
+                                                    <td class="px-6 py-5 text-right font-mono font-black text-2xl italic text-zinc-300">
+                                                        {res.puntos}
+                                                    </td>
+                                                </tr>
+                                            );
+                                        })}
+                                    </tbody>
+                                </table>
+                                
+                                <div class="bg-zinc-800/30 py-3 px-6 text-center border-t border-zinc-800/50">
+                                    <p class="text-[9px] text-zinc-600 font-mono uppercase tracking-[0.3em]">Puntaje Oficial de la Fecha</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </section>
             </div>
-        </section>
-    ))}
+        ))}
+    </div>
+
+    {/* Indicadores de puntos inferiores para Mobile */}
+    <div id="carousel-dots" class="flex justify-center gap-2 mt-4 md:hidden"></div>
+</div>
+
+{/* 🏎️ TELEMETRÍA SCRIPT: Lógica de transición de slides */}
+<script data-astro-rerun>
+    document.addEventListener('astro:page-load', () => {
+        const wrapper = document.getElementById('carreras-wrapper');
+        const slides = document.querySelectorAll('.carrera-slide');
+        const prevBtn = document.getElementById('prev-carrera-btn');
+        const nextBtn = document.getElementById('next-carrera-btn');
+        const dotsContainer = document.getElementById('carousel-dots');
+        
+        if (!wrapper || slides.length === 0) return;
+        
+        let currentIndex = 0;
+        const totalSlides = slides.length;
+
+        // Generar puntitos dinámicos en mobile
+        if(dotsContainer) {
+            dotsContainer.innerHTML = '';
+            slides.forEach((_, i) => {
+                const dot = document.createElement('div');
+                dot.className = `w-2 h-2 rounded-full transition-all duration-300 ${i === 0 ? 'bg-red-600 w-4' : 'bg-zinc-800'}`;
+                dot.setAttribute('data-index', i);
+                dotsContainer.appendChild(dot);
+            });
+        }
+
+        const updateCarousel = () => {
+            // Movemos el flex rail basándonos en el porcentaje del índice actual
+            wrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
+            
+            // Actualizar puntitos en mobile
+            if(dotsContainer) {
+                const dots = dotsContainer.querySelectorAll('div');
+                dots.forEach((dot, i) => {
+                    if(i === currentIndex) {
+                        dot.className = 'w-2 h-2 rounded-full bg-red-600 w-4 transition-all duration-300';
+                    } else {
+                        dot.className = 'w-2 h-2 rounded-full bg-zinc-800 transition-all duration-300';
+                    }
+                });
+            }
+        };
+
+        // Eventos de botones
+        if (prevBtn && nextBtn) {
+            prevBtn.addEventListener('click', () => {
+                if (currentIndex > 0) {
+                    currentIndex--;
+                } else {
+                    currentIndex = totalSlides - 1; // Hace loop al último
+                }
+                updateCarousel();
+            });
+
+            nextBtn.addEventListener('click', () => {
+                if (currentIndex < totalSlides - 1) {
+                    currentIndex++;
+                } else {
+                    currentIndex = 0; // Hace loop al primero
+                }
+                updateCarousel();
+            });
+        }
+
+        // Permitir deslizamiento táctil (Swipe) en celulares
+        let startX = 0;
+        wrapper.addEventListener('touchstart', (e) => startX = e.touches[0].clientX, {passive: true});
+        wrapper.addEventListener('touchend', (e) => {
+            const endX = e.changedTouches[0].clientX;
+            const diff = startX - endX;
+            if (Math.abs(diff) > 50) { // Umbral de 50px
+                if (diff > 0 && currentIndex < totalSlides - 1) currentIndex++;
+                else if (diff < 0 && currentIndex > 0) currentIndex--;
+                updateCarousel();
+            }
+        }, {passive: true});
+    });
+</script>
 
     {/* Tu galería de resultados (página 7 del PDF) va acá abajo fuera del loop */}
 </main>
 
 
-<section id="galeria-historial" class="mt-20 pb-20 px-4 max-w-6xl mx-auto">
+{/* 🏎️ CONTENEDOR PRINCIPAL DEL CARRETE DE RESULTADOS */}
+<section id="galeria-historial" class="mt-20 pb-20 px-4 max-w-6xl mx-auto relative overflow-hidden">
+    
     <div class="reveal-on-scroll text-center mb-16">
         <h2 class="text-sm font-black mb-4 uppercase tracking-[0.4em] text-zinc-400">
             Datos <span class="text-red-600">Carreras</span> Archivos
@@ -334,94 +435,198 @@ const obtenerInfoPiloto = (nombre) => {
         </h3>
     </div>
 
-    <div class="space-y-24">
-        {historial.reverse().map((carrera) => (
-            <div class="reveal-item group relative" style={`transition-delay: 100ms;`}>
-                
-                {/* Indicador de número técnico lateral izquierdo */}
-                <div class="absolute -left-4 md:-left-12 top-0 flex flex-col items-center">
-                    <span class="text-[10px] font-mono font-black text-zinc-600 uppercase tracking-[0.5em] rotate-180" style="writing-mode: vertical-rl;">
-                        SEASON 2026
-                    </span>
-                    <div class="w-[1px] h-20 bg-zinc-800 my-4"></div>
-                    <span class="text-2xl font-mono font-black text-red-600 italic">
-                        {carrera.id < 10 ? `0${carrera.id}` : carrera.id}
-                    </span>
-                </div>
+    {/* Botones de Navegación HUD Flotantes */}
+    <div class="absolute top-[55%] -translate-y-1/2 left-2 z-30 hidden md:block">
+        <button id="prev-historial-btn" class="bg-zinc-950/90 hover:bg-red-600/20 text-white p-4 rounded-xl border border-zinc-800 hover:border-red-600 transition-all group shadow-2xl">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 group-hover:-translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+        </button>
+    </div>
+    <div class="absolute top-[55%] -translate-y-1/2 right-2 z-30 hidden md:block">
+        <button id="next-historial-btn" class="bg-zinc-950/90 hover:bg-red-600/20 text-white p-4 rounded-xl border border-zinc-800 hover:border-red-600 transition-all group shadow-2xl">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 group-hover:translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+        </button>
+    </div>
 
-                {/* Contenedor Principal HUD */}
-                <div class="ml-8 md:ml-0 bg-[#020c1b]/50 border border-zinc-900 rounded-xl overflow-hidden hover:border-red-600/30 transition-all duration-500 shadow-2xl">
+    {/* Riel Horizontal Deslizable */}
+    <div id="historial-wrapper" class="flex transition-transform duration-500 ease-out w-full">
+        {/* Hacemos copia segura e invertimos para que empiece en la última fecha corrida */}
+        {[...historial].sort((a, b) => b.id - a.id).map((carrera, index) => (
+    <div class="w-full flex-shrink-0 px-1 md:px-14 historial-slide">
+                <div class="reveal-item group relative" style={`transition-delay: 100ms;`}>
                     
-                    {/* Header de la Card */}
-                    <div class="bg-zinc-950 px-6 py-4 border-b border-zinc-900 flex justify-between items-center flex-wrap gap-2">
-                        <div class="flex items-center gap-3">
-                            <div class="w-2 h-2 bg-red-600 rounded-full animate-pulse"></div>
-                            <h4 class="text-xs font-black uppercase tracking-widest text-zinc-300">
-                                GP: <span class="text-white">{carrera.gp}</span> // FECHA {carrera.id}
-                            </h4>
-                        </div>
-                        <span class="text-[10px] font-mono font-bold text-zinc-400 bg-zinc-900 px-2 py-0.5 rounded border border-zinc-800">
-                            STATUS: ARCHIVED_CONFIRMED
+                    {/* Indicador de número técnico lateral izquierdo */}
+                    <div class="absolute -left-2 md:-left-12 top-0 flex flex-col items-center z-10">
+                        <span class="text-[10px] font-mono font-black text-zinc-600 uppercase tracking-[0.5em] rotate-180" style="writing-mode: vertical-rl;">
+                            SEASON 2026
+                        </span>
+                        <div class="w-[1px] h-14 md:w-[1px] md:h-20 bg-zinc-800 my-2 md:my-4"></div>
+                        <span class="text-xl md:text-2xl font-mono font-black text-red-600 italic">
+                            {carrera.id < 10 ? `0${carrera.id}` : carrera.id}
                         </span>
                     </div>
 
-                    {/* Área Central (Imagen del Circuito/Resultados) */}
-                    <div class="relative p-4 md:p-6 bg-zinc-900/20">
-                        <div class="absolute top-6 left-6 w-8 h-8 border-t-2 border-l-2 border-red-600/50 z-20"></div>
-                        <div class="absolute bottom-6 right-6 w-8 h-8 border-b-2 border-r-2 border-red-600/50 z-20"></div>
+                    {/* Contenedor Principal HUD */}
+                    <div class="ml-8 md:ml-0 bg-[#020c1b]/50 border border-zinc-900 rounded-xl overflow-hidden hover:border-red-600/30 transition-all duration-500 shadow-2xl">
+                        
+                        {/* Header de la Card */}
+                        <div class="bg-zinc-950 px-6 py-4 border-b border-zinc-900 flex justify-between items-center flex-wrap gap-2">
+                            <div class="flex items-center gap-3">
+                                <div class="w-2 h-2 bg-red-600 rounded-full animate-pulse"></div>
+                                <h4 class="text-xs font-black uppercase tracking-widest text-zinc-300">
+                                    GP: <span class="text-white">{carrera.gp}</span> // FECHA {carrera.id}
+                                </h4>
+                            </div>
+                            <span class="text-[10px] font-mono font-bold text-zinc-400 bg-zinc-900 px-2 py-0.5 rounded border border-zinc-800">
+                                STATUS: ARCHIVED_CONFIRMED
+                            </span>
+                        </div>
 
-                        <div class="relative overflow-hidden rounded-lg bg-zinc-950/60 p-4 border border-zinc-800/30 flex flex-col items-center">
-                            
-                            {/* CORRECCIÓN DE LA RUTA: Carga dinámicamente tus capturas de resultados usando el ID de la carrera */}
-                            <img 
-                                src={`/Fotos/resultados-fecha${carrera.id}.jpg`} 
-                                class="w-full h-auto object-contain max-h-[80vh] mb-6 filter drop-shadow-[0_0_20px_rgba(255,255,255,0.05)] transition-transform duration-700 group-hover:scale-[1.01]" 
-                                alt={`Resultados Oficiales ${carrera.gp}`}
-                                loading="lazy"
-                            />
-                            
-                            {/* EFECTO DE ESCANEO LÁSER */}
-                            <div class="absolute inset-0 bg-gradient-to-b from-transparent via-red-600/[0.02] to-transparent h-[200%] w-full -translate-y-full group-hover:animate-[scan_4s_linear_infinite] pointer-events-none"></div>
+                        {/* Área Central (Imagen del Circuito/Resultados) */}
+                        <div class="relative p-4 md:p-6 bg-zinc-900/20">
+                            <div class="absolute top-6 left-6 w-8 h-8 border-t-2 border-l-2 border-red-600/50 z-20"></div>
+                            <div class="absolute bottom-6 right-6 w-8 h-8 border-b-2 border-r-2 border-red-600/50 z-20"></div>
 
-                            {/* EXTRA TELEMETRÍA: Datos Rápidos en Texto de alta visibilidad */}
-                            <div class="w-full grid grid-cols-2 md:grid-cols-4 gap-4 pt-4 border-t border-zinc-900 font-mono text-[11px]">
-                                <div class="bg-zinc-950/80 p-3 rounded border border-zinc-900">
-                                    <span class="text-zinc-500 block text-[9px] uppercase">Pole Position</span>
-                                    <span class="text-purple-400 font-black">{carrera.pole}</span> 
-                                    <span class="text-zinc-400 text-[10px] ml-1">({carrera.tiempoPole})</span>
-                                </div>
-                                <div class="bg-zinc-950/80 p-3 rounded border border-zinc-900">
-                                    <span class="text-zinc-500 block text-[9px] uppercase">Fastest Lap</span>
-                                    <span class="text-purple-400 font-black">{carrera.vueltaRapida}</span>
-                                    <span class="text-zinc-400 text-[10px] ml-1">({carrera.tiempoVR})</span>
-                                </div>
-                                <div class="bg-zinc-950/80 p-3 rounded border border-zinc-900">
-                                    <span class="text-zinc-500 block text-[9px] uppercase">Race Duration</span>
-                                    <span class="text-white font-black">{carrera.duracion}</span>
-                                </div>
-                                <div class="bg-zinc-950/80 p-3 rounded border border-zinc-900">
-                                    <span class="text-zinc-500 block text-[9px] uppercase">Winner</span>
-                                    <span class="text-red-500 font-black">
-                                        {carrera.resultados.find(r => r.pos === 1)?.piloto || 'N/A'}
-                                    </span>
+                            <div class="relative overflow-hidden rounded-lg bg-zinc-950/60 p-4 border border-zinc-800/30 flex flex-col items-center">
+                                
+                                <img 
+                                    src={`/Fotos/resultados-fecha${carrera.id}.jpg`} 
+                                    class="w-full h-auto object-contain max-h-[75vh] mb-6 filter drop-shadow-[0_0_20px_rgba(255,255,255,0.05)] transition-transform duration-700 group-hover:scale-[1.01]" 
+                                    alt={`Resultados Oficiales ${carrera.gp}`}
+                                    loading="lazy"
+                                />
+                                
+                                {/* EFECTO DE ESCANEO LÁSER */}
+                                <div class="absolute inset-0 bg-gradient-to-b from-transparent via-red-600/[0.02] to-transparent h-[200%] w-full -translate-y-full group-hover:animate-[scan_4s_linear_infinite] pointer-events-none"></div>
+
+                                {/* EXTRA TELEMETRÍA */}
+                                <div class="w-full grid grid-cols-2 md:grid-cols-4 gap-4 pt-4 border-t border-zinc-900 font-mono text-[11px]">
+                                    <div class="bg-zinc-950/80 p-3 rounded border border-zinc-900">
+                                        <span class="text-zinc-500 block text-[9px] uppercase">Pole Position</span>
+                                        <span class="text-purple-400 font-black">{carrera.pole}</span> 
+                                        <span class="text-zinc-400 text-[10px] ml-1">({carrera.tiempoPole})</span>
+                                    </div>
+                                    <div class="bg-zinc-950/80 p-3 rounded border border-zinc-900">
+                                        <span class="text-zinc-500 block text-[9px] uppercase">Fastest Lap</span>
+                                        <span class="text-purple-400 font-black">{carrera.vueltaRapida}</span>
+                                        <span class="text-zinc-400 text-[10px] ml-1">({carrera.tiempoVR})</span>
+                                    </div>
+                                    <div class="bg-zinc-950/80 p-3 rounded border border-zinc-900">
+                                        <span class="text-zinc-500 block text-[9px] uppercase">Race Duration</span>
+                                        <span class="text-white font-black">{carrera.duracion}</span>
+                                    </div>
+                                    <div class="bg-zinc-950/80 p-3 rounded border border-zinc-900">
+                                        <span class="text-zinc-500 block text-[9px] uppercase">Winner</span>
+                                        <span class="text-red-500 font-black">
+                                            {carrera.resultados.find(r => r.pos === 1)?.piloto || 'N/A'}
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    {/* Footer de la Card */}
-                    <div class="px-6 py-3 bg-zinc-950/80 flex justify-between items-center text-[10px] font-mono text-zinc-500">
-                        <span class="uppercase tracking-wider">TRACK: {carrera.circuito}</span>
-                        <span class="uppercase tracking-widest text-zinc-600">
-                            Verified by Race Control // LC-VT-2026-{carrera.id}
-                        </span>
-                    </div>
+                        {/* Footer de la Card */}
+                        <div class="px-6 py-3 bg-zinc-950/80 flex justify-between items-center text-[10px] font-mono text-zinc-500">
+                            <span class="uppercase tracking-wider">TRACK: {carrera.circuito}</span>
+                            <span class="uppercase tracking-widest text-zinc-600 hidden sm:inline">
+                                Verified by Race Control // LC-VT-2026-{carrera.id}
+                            </span>
+                        </div>
 
+                    </div>
                 </div>
             </div>
         ))}
     </div>
+
+    {/* Indicadores de puntos inferiores para Mobile */}
+    <div id="historial-dots" class="flex justify-center gap-2 mt-6 md:hidden"></div>
 </section>
+
+{/* 🏎️ SCRIPTS DE TELEMETRÍA: Control de transiciones del Carrete con Bucle Infinito */}
+<script data-astro-rerun>
+    document.addEventListener('astro:page-load', () => {
+        const wrapper = document.getElementById('historial-wrapper');
+        const slides = document.querySelectorAll('.historial-slide');
+        const prevBtn = document.getElementById('prev-historial-btn');
+        const nextBtn = document.getElementById('next-historial-btn');
+        const dotsContainer = document.getElementById('historial-dots');
+        
+        if (!wrapper || slides.length === 0) return;
+        
+        let currentIndex = 0; // Arranca en 0 (que es la última fecha gracias al .reverse())
+        const totalSlides = slides.length;
+
+        // Inyectar indicadores de puntos para celulares
+        if(dotsContainer) {
+            dotsContainer.innerHTML = '';
+            slides.forEach((_, i) => {
+                const dot = document.createElement('div');
+                dot.className = `w-2 h-2 rounded-full transition-all duration-300 ${i === 0 ? 'bg-red-600 w-4' : 'bg-zinc-800'}`;
+                dotsContainer.appendChild(dot);
+            });
+        }
+
+        const updateHistorialCarousel = () => {
+            wrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
+            
+            if(dotsContainer) {
+                const dots = dotsContainer.querySelectorAll('div');
+                dots.forEach((dot, i) => {
+                    if(i === currentIndex) {
+                        dot.className = 'w-2 h-2 rounded-full bg-red-600 w-4 transition-all duration-300';
+                    } else {
+                        dot.className = 'w-2 h-2 rounded-full bg-zinc-800 transition-all duration-300';
+                    }
+                });
+            }
+        };
+
+        // 🛠️ LÓGICA DE BUCLE EN BOXES: Permite girar a izquierda y derecha sin trabas
+        if (prevBtn && nextBtn) {
+            prevBtn.addEventListener('click', () => {
+                if (currentIndex > 0) {
+                    currentIndex--;
+                } else {
+                    currentIndex = totalSlides - 1; // Si estás en la última (0) y vas a la izquierda, salta a la fecha más vieja (final)
+                }
+                updateHistorialCarousel();
+            });
+
+            nextBtn.addEventListener('click', () => {
+                if (currentIndex < totalSlides - 1) {
+                    currentIndex++;
+                } else {
+                    currentIndex = 0; // Si llegás al final y vas a la derecha, vuelve a la última fecha corrida (inicio)
+                }
+                updateHistorialCarousel();
+            });
+        }
+
+        // Soporte Swipe táctil adaptado para bucle en mobile
+        let startX = 0;
+        wrapper.addEventListener('touchstart', (e) => startX = e.touches[0].clientX, {passive: true});
+        wrapper.addEventListener('touchend', (e) => {
+            const endX = e.changedTouches[0].clientX;
+            const diff = startX - endX;
+            if (Math.abs(diff) > 50) {
+                if (diff > 0) {
+                    // Swipe a la izquierda (siguiente)
+                    if (currentIndex < totalSlides - 1) currentIndex++;
+                    else currentIndex = 0;
+                } else {
+                    // Swipe a la derecha (anterior)
+                    if (currentIndex > 0) currentIndex--;
+                    else currentIndex = totalSlides - 1;
+                }
+                updateHistorialCarousel();
+            }
+        }, {passive: true});
+    });
+</script>
 
 <style>
     .vertical-text {

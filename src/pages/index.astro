@@ -840,92 +840,209 @@ const proximaCarrera = calendario
                     </tr>
                 </thead>
 
-                <tbody class="divide-y divide-zinc-900">
-                    {pilotos
-    .filter(p => p.activo !== false) // <--- ESTA ES LA LÍNEA NUEVA
-    .sort((a, b) => b.puntos - a.puntos)
-    .map((piloto, index) => (
-                       <tr 
-    class={`reveal-item group transition-all duration-500 relative border-l-4
-        ${index === 0 ? 'bg-gradient-to-r from-yellow-600/[0.08] via-transparent to-transparent border-l-yellow-500 hover:bg-yellow-600/[0.12]' : ''}
-        ${index === 1 ? 'bg-gradient-to-r from-zinc-500/[0.08] via-transparent to-transparent border-l-zinc-400 hover:bg-zinc-500/[0.12]' : ''}
-        ${index === 2 ? 'bg-gradient-to-r from-amber-700/[0.08] via-transparent to-transparent border-l-amber-600 hover:bg-amber-700/[0.12]' : ''}
-        ${index > 2 ? 'hover:bg-white/[0.02] border-l-transparent' : ''}
-    `}
-    style={`transition-delay: ${index * 80}ms;`}
->
-                            <td class="px-6 py-6 text-center relative">
-                                <span class="text-3xl font-mono font-black italic text-zinc-800 group-hover:text-red-600 transition-colors duration-500 leading-none">
-                                    {index + 1 < 10 ? `0${index + 1}` : index + 1}
-                                </span>
-                            </td>
+               <tbody class="divide-y divide-zinc-900">
+    {/* 🏎️ Mantenemos tus filtros y ordenamientos deportivos intactos */}
+    {(() => {
+        const pilotosFiltrados = pilotos
+            .filter(p => p.activo !== false)
+            .sort((a, b) => b.puntos - a.puntos);
 
-                            <td class="px-6 py-6">
-                                <div class="flex items-center gap-5">
-                                    {/* Contenedor de Foto con Status Ring */}
-                                    <div class="relative flex-shrink-0">
-                                        <img 
-                                            src={`/Fotos/perfil-${piloto.nombre.toLowerCase()}.jpg`} 
-                                            alt={piloto.nombre} 
-                                            class="w-16 h-16 rounded-full object-cover border-2 border-zinc-800 group-hover:border-red-600 transition-all duration-500 shadow-2xl animate-latido z-10 relative"
-                                        />
-                                        <div class="absolute inset-0 rounded-full bg-red-600/20 blur-md opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                                    </div>
+        return pilotosFiltrados.map((piloto, index) => {
+            // 🛠️ SECCIÓN 1: PODIO PREMIUM CON TELEMETRÍA COMPLETA (Victorias, Poles, V.R.)
+            if (index === 0) {
+                const top3 = pilotosFiltrados.slice(0, 3);
+                
+                const podioOrdenado = [
+                    top3[1], // P2 (Plata) - Izquierda
+                    top3[0], // P1 (Oro) - Centro
+                    top3[2]  // P3 (Bronce) - Derecha
+                ].filter(Boolean);
 
-                                    <div class="flex flex-col">
-                                        <div class="flex items-center gap-3">
-                                            <img src={logos[piloto.escuderia]} alt={piloto.escuderia} class="w-10 h-10 object-contain opacity-50 group-hover:opacity-100 transition-opacity" />
-                                            <h3 class="font-black text-white text-lg uppercase tracking-tighter italic leading-none">
-                                                {piloto.nombre}
-                                            </h3>
+                return (
+                    <tr class="bg-zinc-950/40">
+                        <td colspan="6" class="px-6 py-10">
+                            <!-- Contenedor Grid del Podio HUD -->
+                            <div class="grid grid-cols-3 items-end gap-3 max-w-3xl mx-auto font-mono text-center">
+                                {podioOrdenado.map((p) => {
+                                    const posReal = pilotosFiltrados.findIndex(orig => orig.nombre === p.nombre) + 1;
+                                    
+                                    const esP1 = posReal === 1;
+                                    const esP2 = posReal === 2;
+                                    
+                                    let borderColor = 'border-amber-600';
+                                    let glowColor = 'shadow-[0_0_20px_rgba(180,83,9,0.15)]';
+                                    let metalBg = 'bg-amber-700/10';
+                                    let textMetal = 'text-amber-600';
+                                    let alturaBox = 'h-56'; // Ampliamos la altura para acomodar las estadísticas
+
+                                    if (esP1) {
+                                        borderColor = 'border-yellow-500';
+                                        glowColor = 'shadow-[0_0_35px_rgba(234,179,8,0.25)]';
+                                        metalBg = 'bg-yellow-500/10';
+                                        textMetal = 'text-yellow-500 animate-pulse';
+                                        alturaBox = 'h-68'; 
+                                    } else if (esP2) {
+                                        borderColor = 'border-zinc-400';
+                                        glowColor = 'shadow-[0_0_20px_rgba(161,161,170,0.15)]';
+                                        metalBg = 'bg-zinc-500/10';
+                                        textMetal = 'text-zinc-400';
+                                        alturaBox = 'h-60';
+                                    }
+
+                                    return (
+                                        <div class="flex flex-col items-center group/podio transition-all duration-500 hover:-translate-y-1">
+                                            {/* Avatar Flotante */}
+                                            <div class="relative mb-3">
+                                                <img 
+                                                    src={`/Fotos/perfil-${p.nombre.toLowerCase()}.jpg`} 
+                                                    alt={p.nombre} 
+                                                    class={`rounded-full object-cover border-2 ${borderColor} ${glowColor} transition-all duration-500 z-10 relative ${esP1 ? 'w-20 h-20 md:w-24 md:h-24' : 'w-16 h-16 md:w-20 md:h-20'}`}
+                                                />
+                                                <div class={`absolute inset-0 rounded-full blur-md opacity-0 group-hover/podio:opacity-100 transition-opacity ${esP1 ? 'bg-yellow-500/20' : esP2 ? 'bg-zinc-400/20' : 'bg-amber-600/20'}`}></div>
+                                            </div>
+
+                                            {/* Datos del Piloto */}
+                                            <h4 class="font-black text-white text-xs md:text-sm uppercase tracking-tighter italic leading-none truncate max-w-full px-1">
+                                                {p.nombre}
+                                            </h4>
+                                            <span class="text-[8px] text-zinc-600 uppercase tracking-wider mt-0.5 mb-3 group-hover/podio:text-zinc-400 transition-colors">
+                                                {p.escuderia}
+                                            </span>
+
+                                            {/* Estructura del Cajón del Podio */}
+                                            <div class={`w-full ${alturaBox} ${metalBg} border-t-4 ${borderColor} ${glowColor} rounded-t-lg p-3 flex flex-col justify-between items-center relative overflow-hidden`}>
+                                                
+                                                {/* Posición Grande */}
+                                                <span class={`text-3xl md:text-4xl font-black italic tracking-tighter ${textMetal} select-none leading-none`}>
+                                                    0{posReal}
+                                                </span>
+                                                
+                                                {/* Logo de la Escudería */}
+                                                <div class="py-1">
+                                                    <img 
+                                                        src={logos[p.escuderia]} 
+                                                        alt={p.escuderia} 
+                                                        class="w-9 h-9 md:w-10 h-10 object-contain filter grayscale opacity-40 group-hover/podio:grayscale-0 group-hover/podio:opacity-100 transition-all duration-500" 
+                                                    />
+                                                </div>
+
+                                                {/* 🛠️ RETORNO DE TELEMETRÍA: Victorias, Poles y Vueltas Rápidas */}
+                                                <div class="grid grid-cols-3 gap-2 w-full bg-black/30 border border-zinc-900/60 rounded p-1.5 my-1 relative z-10">
+                                                    <div class="flex flex-col items-center">
+                                                        <span class={`text-xs font-black ${p.victorias > 0 ? 'text-yellow-500' : 'text-zinc-700'}`}>{p.victorias}</span>
+                                                        <span class="text-[6px] text-zinc-500 font-bold uppercase tracking-tighter">VIC</span>
+                                                    </div>
+                                                    <div class="flex flex-col items-center border-x border-zinc-900/60">
+                                                        <span class={`text-xs font-black ${p.poles > 0 ? 'text-red-600' : 'text-zinc-700'}`}>{p.poles}</span>
+                                                        <span class="text-[6px] text-zinc-500 font-bold uppercase tracking-tighter">POL</span>
+                                                    </div>
+                                                    <div class="flex flex-col items-center">
+                                                        <span class={`text-xs font-black ${p.vueltasRapidas > 0 ? 'text-blue-500' : 'text-zinc-700'}`}>{p.vueltasRapidas}</span>
+                                                        <span class="text-[6px] text-zinc-500 font-bold uppercase tracking-tighter">V.R</span>
+                                                    </div>
+                                                </div>
+                                                
+                                                {/* Bloque de Puntos Inferior */}
+                                                <div class="flex flex-col items-center leading-none z-10 mt-1">
+                                                    <span class="text-white text-base md:text-xl font-black italic">{p.puntos}</span>
+                                                    <span class="text-[7px] text-zinc-500 font-bold uppercase tracking-widest mt-0.5">PTS</span>
+                                                </div>
+
+                                                {/* Escaneo Láser de Fondo */}
+                                                <div class="absolute inset-0 bg-gradient-to-b from-transparent via-white/[0.01] to-transparent h-[200%] w-full -translate-y-full group-hover/podio:animate-[scan_4s_linear_infinite] pointer-events-none"></div>
+                                            </div>
                                         </div>
-                                        <span class="text-[9px] text-zinc-600 font-black uppercase tracking-[0.2em] mt-1 group-hover:text-zinc-400 transition-colors">
-                                            {piloto.escuderia}
-                                        </span>
-                                    </div>
-                                </div>
-                            </td>
+                                    );
+                                })}
+                            </div>
+                        </td>
+                    </tr>
+                );
+            }
 
-                            <td class="px-4 py-6 text-center">
-                                <div class="inline-flex flex-col items-center">
-                                    <span class={`font-mono font-black text-lg ${piloto.victorias > 0 ? 'text-yellow-500' : 'text-zinc-800'}`}>
-                                        {piloto.victorias}
-                                    </span>
-                                    <span class="text-[7px] text-zinc-600 font-bold uppercase tracking-tighter">Victories</span>
-                                </div>
-                            </td>
+            if (index === 1 || index === 2) return null;
 
-                            <td class="px-4 py-6 text-center">
-                                <div class="inline-flex flex-col items-center">
-                                    <span class={`font-mono font-black text-lg ${piloto.poles > 0 ? 'text-red-600' : 'text-zinc-800'}`}>
-                                        {piloto.poles}
-                                    </span>
-                                    <span class="text-[7px] text-zinc-600 font-bold uppercase tracking-tighter">Poles</span>
-                                </div>
-                            </td>
+            // ... Sección 2 sigue idéntica abajo ...
 
-                            <td class="px-4 py-6 text-center">
-                                <div class="inline-flex flex-col items-center">
-                                    <span class={`font-mono font-black text-lg ${piloto.vueltasRapidas > 0 ? 'text-blue-500' : 'text-zinc-800'}`}>
-                                        {piloto.vueltasRapidas}
-                                    </span>
-                                    <span class="text-[7px] text-zinc-600 font-bold uppercase tracking-tighter">Fastest</span>
-                                </div>
-                            </td>
+            // 🛠 Honor a tu código: SECCIÓN 2: EL RESTO DE LOS PILOTOS (P4 en adelante) SIGUE CON TU TABLA EXACTA
+            return (
+                <tr 
+                    class={`reveal-item group transition-all duration-500 relative border-l-4 hover:bg-white/[0.02] border-l-transparent`}
+                    style={`transition-delay: ${index * 80}ms;`}
+                >
+                    <td class="px-6 py-6 text-center relative">
+                        <span class="text-3xl font-mono font-black italic text-zinc-800 group-hover:text-red-600 transition-colors duration-500 leading-none">
+                            {index + 1 < 10 ? `0${index + 1}` : index + 1}
+                        </span>
+                    </td>
 
-                            <td class="px-8 py-6 text-right">
-                                <div class="relative inline-block">
-                                    <span class="text-3xl font-mono font-black text-white italic tracking-tighter group-hover:text-red-500 transition-all duration-300">
-                                        {piloto.puntos}
-                                    </span>
-                                    <span class="absolute -top-1 -right-4 text-[8px] font-black text-zinc-600 italic">PTS</span>
-                                </div>
-                            </td>
+                    <td class="px-6 py-6">
+                        <div class="flex items-center gap-5">
+                            <div class="relative flex-shrink-0">
+                                <img 
+                                    src={`/Fotos/perfil-${piloto.nombre.toLowerCase()}.jpg`} 
+                                    alt={piloto.nombre} 
+                                    class="w-16 h-16 rounded-full object-cover border-2 border-zinc-800 group-hover:border-red-600 transition-all duration-500 shadow-2xl animate-latido z-10 relative"
+                                />
+                                <div class="absolute inset-0 rounded-full bg-red-600/20 blur-md opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                            </div>
 
-                            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.02] to-transparent w-full h-full -translate-x-full group-hover:animate-[scan_3s_linear_infinite] pointer-events-none"></div>
-                        </tr>
-                    ))}
-                </tbody>
+                            <div class="flex flex-col">
+                                <div class="flex items-center gap-3">
+                                    <img src={logos[piloto.escuderia]} alt={piloto.escuderia} class="w-10 h-10 object-contain opacity-50 group-hover:opacity-100 transition-opacity" />
+                                    <h3 class="font-black text-white text-lg uppercase tracking-tighter italic leading-none">
+                                        {piloto.nombre}
+                                    </h3>
+                                </div>
+                                <span class="text-[9px] text-zinc-600 font-black uppercase tracking-[0.2em] mt-1 group-hover:text-zinc-400 transition-colors">
+                                    {piloto.escuderia}
+                                </span>
+                            </div>
+                        </div>
+                    </td>
+
+                    <td class="px-4 py-6 text-center">
+                        <div class="inline-flex flex-col items-center">
+                            <span class={`font-mono font-black text-lg ${piloto.victorias > 0 ? 'text-yellow-500' : 'text-zinc-800'}`}>
+                                {piloto.victorias}
+                            </span>
+                            <span class="text-[7px] text-zinc-600 font-bold uppercase tracking-tighter">Victories</span>
+                        </div>
+                    </td>
+
+                    <td class="px-4 py-6 text-center">
+                        <div class="inline-flex flex-col items-center">
+                            <span class={`font-mono font-black text-lg ${piloto.poles > 0 ? 'text-red-600' : 'text-zinc-800'}`}>
+                                {piloto.poles}
+                            </span>
+                            <span class="text-[7px] text-zinc-600 font-bold uppercase tracking-tighter">Poles</span>
+                        </div>
+                    </td>
+
+                    <td class="px-4 py-6 text-center">
+                        <div class="inline-flex flex-col items-center">
+                            <span class={`font-mono font-black text-lg ${piloto.vueltasRapidas > 0 ? 'text-blue-500' : 'text-zinc-800'}`}>
+                                {piloto.vueltasRapidas}
+                            </span>
+                            <span class="text-[7px] text-zinc-600 font-bold uppercase tracking-tighter">Fastest</span>
+                        </div>
+                    </td>
+
+                    <td class="px-8 py-6 text-right">
+                        <div class="relative inline-block">
+                            <span class="text-3xl font-mono font-black text-white italic tracking-tighter group-hover:text-red-500 transition-all duration-300">
+                                {piloto.puntos}
+                            </span>
+                            <span class="absolute -top-1 -right-4 text-[8px] font-black text-zinc-600 italic">PTS</span>
+                        </div>
+                    </td>
+
+                    <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.02] to-transparent w-full h-full -translate-x-full group-hover:animate-[scan_3s_linear_infinite] pointer-events-none"></div>
+                </tr>
+            );
+        });
+    })()}
+</tbody>
             </table>
         </div>
     </div>
