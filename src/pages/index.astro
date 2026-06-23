@@ -1129,9 +1129,7 @@ const proximaCarrera = calendario
                                 <span class="absolute -top-1 -right-6 text-[10px] font-black text-zinc-600 uppercase italic">PTS</span>
                             </div>
 
-                            <span class="block text-[8px] font-mono text-zinc-700 uppercase tracking-widest mt-2 group-hover:text-zinc-500 transition-colors">
-                                SYS_RECORD // LIVE_DATA
-                            </span>
+                            
                         </div>
 
                         <div class="absolute -bottom-6 -left-4 text-9xl font-mono font-black text-zinc-900/50 italic pointer-events-none group-hover:text-red-600/5 transition-colors duration-700 leading-none select-none">
@@ -2681,33 +2679,6 @@ const proximaCarrera = calendario
 
 
         </main>
-<audio id="musica-fondo" src="/cancion-ligaf1.mp3" loop preload="auto"></audio>
-        <div class="fixed bottom-6 right-6 z-50">
-            <button id="musicaBtn" class="bg-blue-100 hover:bg-red-700 text-white w-14 h-14 rounded-full shadow-2xl transition-all hover:scale-110 flex items-center justify-center border-2 border-yellow-500 animate-pulse">
-                <span id="iconoMusica" class="text-xl">▶️</span>
-            </button>
-        </div>
 
-        <audio id="musicaFondo" loop>
-            <source src="/cancion-ligaf1.mp3" type="audio/mpeg">
-        </audio>
-
-        <script>
-            const btn = document.getElementById('musicaBtn');
-            const audio = document.getElementById('musicaFondo');
-            const icono = document.getElementById('iconoMusica');
-
-            btn.addEventListener('click', () => {
-                if (audio.paused) {
-                    audio.play();
-                    icono.innerText = '⏸️'; 
-                    btn.classList.add('animate-pulse');
-                } else {
-                    audio.pause();
-                    icono.innerText = '▶️';
-                    btn.classList.remove('animate-pulse');
-                }
-            });
-        </script>
     </body>
 </html>
