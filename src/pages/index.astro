@@ -1802,7 +1802,7 @@ const proximaCarrera = calendario
     {/* Riel del Carrusel */}
     <div id="integrantes-wrapper" class="flex transition-transform duration-500 ease-out w-full">
         {(() => {
-            const ordenDeseado = ["Chor", "Giova", "Simon", "Diego", "Rodri", "Leo", "Rambo", "Adrian", "Seba", "Ema", "Seba W", "Franco G", "Fede", "Valen", "Hugo", "Matias", "Mateo", "Claudio", "Ivan", "Elias"];
+            const ordenDeseado = ["Chor", "Giova", "Simon", "Diego", "Rodri", "Leo", "Rambo", "Adrian", "Seba", "Ema", "Seba W", "Franco G", "Fede", "Valen", "Hugo", "Matias", "Mateo", "Claudio", "Ivan", "Elias", "Nico"];
             
             const pilotosOrdenados = [...pilotos]
                 .filter(p => p.activo !== false)
@@ -1881,7 +1881,7 @@ const proximaCarrera = calendario
                             <div class="relative z-10 flex items-center justify-between bg-zinc-950/90 p-2 rounded-xl border border-zinc-900/80 shadow-inner group-hover:border-zinc-800 transition-colors text-[10px]">
                                 <div class="flex items-center gap-2.5">
                                     <span class="p-1.5 bg-[#040a14] rounded-lg border border-zinc-900 text-zinc-400 group-hover:text-white transition-colors">
-                                        {["Chor", "Rambo", "Fede", "Valen", "Mateo", "Claudio", "Giova", "Seba", "Leo"].includes(piloto.nombre) ? (
+                                        {["Chor", "Rambo", "Fede", "Valen", "Mateo", "Claudio", "Giova", "Seba", "Leo", "Nico"].includes(piloto.nombre) ? (
                                             <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="2" x2="12" y2="12"/><line x1="12" y1="12" x2="4" y2="18"/><line x1="12" y1="12" x2="20" y2="18"/><circle cx="12" cy="12" r="2" fill="currentColor"/></svg>
                                         ) : piloto.nombre === "IA-Williams" ? (
                                             <span class="text-[10px] block leading-none">🤖</span>
@@ -1896,7 +1896,7 @@ const proximaCarrera = calendario
                                         <span class="text-[6px] text-zinc-600 font-black uppercase tracking-widest mb-0.5">INPUT</span>
                                         <span class="text-[9px] text-zinc-400 uppercase font-black font-mono">
                                             {piloto.nombre === "Adrian" ? "Joystick" :
-                                             (["Chor", "Rambo", "Fede", "Valen", "Mateo", "Claudio", "Giova", "Seba", "Leo"].includes(piloto.nombre)) ? "Volante" :
+                                             (["Chor", "Rambo", "Fede", "Valen", "Mateo", "Claudio", "Giova", "Seba", "Leo", "Nico"].includes(piloto.nombre)) ? "Volante" :
                                              piloto.nombre === "IA-Williams" ? "Sistemas IA" : 
                                              piloto.nombre === "Franco" ? "Teclado" : "Joystick"}
                                         </span>
@@ -1924,6 +1924,7 @@ const proximaCarrera = calendario
                                         piloto.nombre === "Ema" ? "https://www.instagram.com/mxcixs_20" :
                                         piloto.nombre === "Elias" ? "https://www.instagram.com/eliasbomrad7/" :
                                         piloto.nombre === "Ivan" ? "https://www.instagram.com/ivaansolans" :
+                                        piloto.nombre === "Nico" ? "https://www.instagram.com/Nicodiazz07" :
                                         "https://www.instagram.com/leo.tapparello/"
                                     } 
                                     target="_blank" 

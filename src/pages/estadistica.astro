@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import { ClientRouter } from 'astro:transitions';
 import pilotos from '../Data/pilotos.json';
 import Layout from '../layouts/Layout.astro';
 import historial from '../Data/historial.json';
@@ -50,14 +51,18 @@ procesarSesion(sprint);
 // 📊 Generamos la lista base filtrando únicamente los pilotos activos de la grilla
 const pilotosActivos = pilotos.filter(p => p.activo !== false && p.nombre !== "");
 
-// 🏎️ Módulos de Ránkings Ordenados Dinámicamente (Top 5) de mayor a menor
-const rankingVictorias = [...pilotosActivos].sort((a, b) => (b.victorias || 0) - (a.victorias || 0));
-const rankingPoles = [...pilotosActivos].sort((a, b) => (b.poles || 0) - (a.poles || 0));
-const rankingVR = [...pilotosActivos].sort((a, b) => (b.vueltasRapidas || 0) - (a.vueltasRapidas || 0));
-const rankingGPs = [...pilotosActivos].sort((a, b) => (b.carrerasCorridas || 0) - (a.carrerasCorridas || 0));
-const rankingDNF = [...pilotosActivos].sort((a, b) => (b.dnf || 0) - (a.dnf || 0));
-const ranking = Object.values(statsPilotos).sort((a, b) => b.puntos - a.puntos);
-const maxPuntos = ranking.length > 0 ? ranking[0].puntos : 1;
+// --- REEMPLAZÁ TUS VARIABLES DE RANKINGS ARRIBA EN EL FRONTMATTER POR ESTAS ---
+
+// 1. Módulos que se nutren de la telemetría dinámica de las sesiones (Historial + Sprint)
+const rankingVictorias = [...Object.values(statsPilotos)].sort((a, b) => (b.victorias || 0) - (a.victorias || 0));
+const rankingPoles = [...Object.values(statsPilotos)].sort((a, b) => (b.poles || 0) - (a.poles || 0));
+const rankingVR = [...Object.values(statsPilotos)].sort((a, b) => (b.vRapidas || 0) - (a.vRapidas || 0));
+
+// 2. Módulos que se nutren del JSON oficial de pilotos activos (GPs y DNF estáticos)
+const pilotosActivosParaRankings = pilotos.filter(p => p.activo !== false && p.nombre !== "");
+
+const rankingGPs = [...pilotosActivosParaRankings].sort((a, b) => (b.carrerasCorridas || 0) - (a.carrerasCorridas || 0));
+const rankingDNF = [...pilotosActivosParaRankings].sort((a, b) => (b.dnf || 0) - (a.dnf || 0));
 ---
 <body class="bg-slate-950 text-white font-sans">
 
@@ -317,187 +322,231 @@ const maxPuntos = ranking.length > 0 ? ranking[0].puntos : 1;
 </section>
 
 
-   <section id="rankings-especialidad" class="mt-24 max-w-7xl mx-auto px-4 pb-20 font-mono">
+{/* ===================================================================================
+    🏎️ SECCIÓN HALL OF FAME CERRADA Y CONFIGURADA (HTML LIMPIO SIN SCRIPTS INTERNOS)
+    =================================================================================== */}
+<section id="rankings-especialidad" class="mt-24 max-w-xl mx-auto px-4 pb-20 font-mono relative">
     
-    <div class="reveal-on-scroll text-center mb-16">
-        <h2 class="text-sm font-black mb-4 uppercase tracking-[0.4em] text-zinc-500">
-            Hall of fame <span class="text-red-600">Especialidades</span> Torneo
-        </h2>
-        <h3 class="text-4xl font-black uppercase italic text-white tracking-tighter">
-            TOP MEJORES 5 - <span class="text-red-600">LIDERAZGOS</span>
-        </h3>
+    <div class="w-full mb-8 flex flex-col justify-center items-center gap-6">
+        <div class="text-center">
+            <h2 class="text-sm font-black mb-2 uppercase tracking-[0.4em] text-zinc-500">
+                Hall of fame <span class="text-red-600">Especialidades</span> Torneo
+            </h2>
+            <h3 class="text-4xl font-black uppercase italic text-white tracking-tighter">
+                TOP MEJORES 5 - <span class="text-red-600">LIDERAZGOS</span>
+            </h3>
+        </div>
+
+        {/* Selector estilo Consola de Boxes con atributos nativos onclick para asegurar el disparo */}
+        <div class="flex flex-wrap justify-center gap-1.5 bg-zinc-950/60 p-1.5 rounded-xl border border-zinc-900 w-full max-w-md shadow-2xl z-30 relative">
+            <button onclick="window.switchearTablaEspecialidad(0)" class="tab-especialidad bg-red-600 text-white font-black uppercase italic text-[10px] px-3 py-2 rounded-lg border border-red-500/20 transition-all cursor-pointer">VIC</button>
+            <button onclick="window.switchearTablaEspecialidad(1)" class="tab-especialidad bg-zinc-900 hover:bg-zinc-800 text-zinc-400 font-black uppercase italic text-[10px] px-3 py-2 rounded-lg border border-zinc-800 transition-all cursor-pointer">POL</button>
+            <button onclick="window.switchearTablaEspecialidad(2)" class="tab-especialidad bg-zinc-900 hover:bg-zinc-800 text-zinc-400 font-black uppercase italic text-[10px] px-3 py-2 rounded-lg border border-zinc-800 transition-all cursor-pointer">V.R</button>
+            <button onclick="window.switchearTablaEspecialidad(3)" class="tab-especialidad bg-zinc-900 hover:bg-zinc-800 text-zinc-400 font-black uppercase italic text-[10px] px-3 py-2 rounded-lg border border-zinc-800 transition-all cursor-pointer">GPs</button>
+            <button onclick="window.switchearTablaEspecialidad(4)" class="tab-especialidad bg-zinc-900 hover:bg-zinc-800 text-zinc-400 font-black uppercase italic text-[10px] px-3 py-2 rounded-lg border border-zinc-800 transition-all cursor-pointer">DNF</button>
+        </div>
     </div>
 
-    {/* Grid de Ránkings Especiales */}
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-xs">
+   {/* Contenedor Único Estricto */}
+    <div class="w-full relative text-xs z-10">
 
         {/* 🏆 LISTA 1: VICTORIAS */}
-        <div class="bg-zinc-950/40 border border-zinc-900 rounded-xl p-5 shadow-xl backdrop-blur-sm">
-            <div class="flex items-center justify-between border-b border-zinc-900 pb-3 mb-4">
-                <h4 class="font-black italic uppercase text-sm tracking-wider text-yellow-500 flex items-center gap-2">
-                    <span></span> VICTORIAS
-                </h4>
-                <span class="text-[9px] text-zinc-600 uppercase">Módulo: VIC</span>
-            </div>
-            <div class="space-y-2">
-                {rankingVictorias.slice(0, 5).map((p, idx) => (
-                    <div class="flex items-center justify-between bg-zinc-900/30 px-3 py-2.5 rounded border border-zinc-900/40 group hover:border-yellow-500/30 transition-colors">
-                        <div class="flex items-center gap-3">
-                            <span class="font-black text-zinc-600 group-hover:text-yellow-500">0{idx + 1}</span>
-                            <span class="font-black text-white uppercase italic">{p.nombre}</span>
+        <div class="card-ranking-tab block bg-zinc-950/40 border border-zinc-900 rounded-xl p-5 shadow-xl backdrop-blur-sm transition-all duration-300 relative overflow-hidden">
+            
+            {/* Imagen PNG de fondo: Trofeo */}
+            <img 
+                src="/images/trofeo.png" 
+                alt="Fondo Trofeo" 
+                class="absolute inset-0 w-full h-full opacity-[0.2] pointer-events-none "
+            />
+
+            <div class="relative z-10">
+                <div class="flex items-center justify-between border-b border-zinc-900 pb-3 mb-4">
+                    <h4 class="font-black italic uppercase text-sm tracking-wider text-yellow-500 flex items-center gap-2">
+                        VICTORIAS
+                    </h4>
+                    
+                </div>
+                <div class="space-y-2 text-xs">
+                    {rankingVictorias.slice(0, 5).map((p, idx) => (
+                        <div class="flex items-center justify-between bg-zinc-900/30 px-3 py-2.5 rounded border border-zinc-900/40 group hover:border-yellow-500/30 transition-colors">
+                            <div class="flex items-center gap-3">
+                                <span class="font-black text-zinc-600">0{idx + 1}</span>
+                                <span class="font-black text-white uppercase italic">{p.nombre}</span>
+                            </div>
+                            <span class="font-black text-yellow-500 text-sm">{p.victorias || 0}</span>
                         </div>
-                        <span class="font-black text-yellow-500 text-sm">{p.victorias || 0}</span>
-                    </div>
-                ))}
+                    ))}
+                </div>
             </div>
         </div>
 
         {/* ⏱️ LISTA 2: POLE POSITIONS */}
-        <div class="bg-zinc-950/40 border border-zinc-900 rounded-xl p-5 shadow-xl backdrop-blur-sm">
-            <div class="flex items-center justify-between border-b border-zinc-900 pb-3 mb-4">
-                <h4 class="font-black italic uppercase text-sm tracking-wider text-red-500 flex items-center gap-2">
-                    <span></span> POLE POSITIONS
-                </h4>
-                <span class="text-[9px] text-zinc-600 uppercase">Módulo: POL</span>
-            </div>
-            <div class="space-y-2">
-                {rankingPoles.slice(0, 5).map((p, idx) => (
-                    <div class="flex items-center justify-between bg-zinc-900/30 px-3 py-2.5 rounded border border-zinc-900/40 group hover:border-red-500/30 transition-colors">
-                        <div class="flex items-center gap-3">
-                            <span class="font-black text-zinc-600 group-hover:text-red-500">0{idx + 1}</span>
-                            <span class="font-black text-white uppercase italic">{p.nombre}</span>
+        <div class="card-ranking-tab hidden bg-zinc-950/40 border border-zinc-900 rounded-xl p-5 shadow-xl backdrop-blur-sm transition-all duration-300 relative overflow-hidden">
+            
+            {/* Imagen PNG de fondo: Cronómetro */}
+            <img 
+                src="/images/cronometro.jpg" 
+                alt="Fondo Pole" 
+                class="absolute inset-0 w-full h-full  opacity-[0.3] pointer-events-none "
+            />
+
+            <div class="relative z-10">
+                <div class="flex items-center justify-between border-b border-zinc-900 pb-3 mb-4">
+                    <h4 class="font-black italic uppercase text-sm tracking-wider text-red-500 flex items-center gap-2">
+                        POLE POSITIONS
+                    </h4>
+                   
+                </div>
+                <div class="space-y-2 text-xs">
+                    {rankingPoles.slice(0, 5).map((p, idx) => (
+                        <div class="flex items-center justify-between bg-zinc-900/30 px-3 py-2.5 rounded border border-zinc-900/40 group hover:border-red-500/30 transition-colors">
+                            <div class="flex items-center gap-3">
+                                <span class="font-black text-zinc-600">0{idx + 1}</span>
+                                <span class="font-black text-white uppercase italic">{p.nombre}</span>
+                            </div>
+                            <span class="font-black text-red-500 text-sm">{p.poles || 0}</span>
                         </div>
-                        <span class="font-black text-red-500 text-sm">{p.poles || 0}</span>
-                    </div>
-                ))}
+                    ))}
+                </div>
             </div>
         </div>
 
         {/* ⚡ LISTA 3: VUELTAS RÁPIDAS */}
-        <div class="bg-zinc-950/40 border border-zinc-900 rounded-xl p-5 shadow-xl backdrop-blur-sm">
-            <div class="flex items-center justify-between border-b border-zinc-900 pb-3 mb-4">
-                <h4 class="font-black italic uppercase text-sm tracking-wider text-blue-400 flex items-center gap-2">
-                    <span></span> VUELTAS RAPIDAS
-                </h4>
-                <span class="text-[9px] text-zinc-600 uppercase">Módulo: V.R</span>
-            </div>
-            <div class="space-y-2">
-                {rankingVR.slice(0, 5).map((p, idx) => (
-                    <div class="flex items-center justify-between bg-zinc-900/30 px-3 py-2.5 rounded border border-zinc-900/40 group hover:border-blue-400/30 transition-colors">
-                        <div class="flex items-center gap-3">
-                            <span class="font-black text-zinc-600 group-hover:text-blue-400">0{idx + 1}</span>
-                            <span class="font-black text-white uppercase italic">{p.nombre}</span>
+        <div class="card-ranking-tab hidden bg-zinc-950/40 border border-zinc-900 rounded-xl p-5 shadow-xl backdrop-blur-sm transition-all duration-300 relative overflow-hidden">
+            
+            {/* Imagen PNG de fondo: Rayo o Casco */}
+            <img 
+                src="/images/rayo.jpg" 
+                alt="Fondo VR" 
+                class="absolute inset-0 w-full h-full  opacity-[0.3] pointer-events-none "
+            />
+
+            <div class="relative z-10">
+                <div class="flex items-center justify-between border-b border-zinc-900 pb-3 mb-4">
+                    <h4 class="font-black italic uppercase text-sm tracking-wider text-blue-400 flex items-center gap-2">
+                        VUELTAS RAPIDAS
+                    </h4>
+                    
+                </div>
+                <div class="space-y-2 text-xs">
+                    {rankingVR.slice(0, 5).map((p, idx) => (
+                        <div class="flex items-center justify-between bg-zinc-900/30 px-3 py-2.5 rounded border border-zinc-900/40 group hover:border-blue-400/30 transition-colors">
+                            <div class="flex items-center gap-3">
+                                <span class="font-black text-zinc-600">0{idx + 1}</span>
+                                <span class="font-black text-white uppercase italic">{p.nombre}</span>
+                            </div>
+                            <span class="font-black text-blue-400 text-sm">{p.vueltasRapidas || 0}</span>
                         </div>
-                        <span class="font-black text-blue-400 text-sm">{p.vueltasRapidas || 0}</span>
-                    </div>
-                ))}
+                    ))}
+                </div>
             </div>
         </div>
 
-        {/* 🚦 LISTA 4: CARRERAS CORRIDAS */}
-        <div class="bg-zinc-950/40 border border-zinc-900 rounded-xl p-5 shadow-xl backdrop-blur-sm">
-            <div class="flex items-center justify-between border-b border-zinc-900 pb-3 mb-4">
-                <h4 class="font-black italic uppercase text-sm tracking-wider text-zinc-400 flex items-center gap-2">
-                    <span> </span> GPs CORRIDOS
-                </h4>
-                <span class="text-[9px] text-zinc-600 uppercase">Módulo: EXP</span>
-            </div>
-            <div class="space-y-2">
-                {rankingGPs.slice(0, 5).map((p, idx) => (
-                    <div class="flex items-center justify-between bg-zinc-900/30 px-3 py-2.5 rounded border border-zinc-900/40 group hover:border-zinc-400/30 transition-colors">
-                        <div class="flex items-center gap-3">
-                            <span class="font-black text-zinc-600 group-hover:text-zinc-300">0{idx + 1}</span>
-                            <span class="font-black text-white uppercase italic">{p.nombre}</span>
+        {/* 🚦 LISTA 4: GPs CORRIDOS */}
+        <div class="card-ranking-tab hidden bg-zinc-950/40 border border-zinc-900 rounded-xl p-5 shadow-xl backdrop-blur-sm transition-all duration-300 relative overflow-hidden">
+            
+            {/* Imagen PNG de fondo: Neumático o Semáforo */}
+            <img 
+                src="/images/semaforo.jpg" 
+                alt="Fondo GPs" 
+                class="absolute inset-0 w-full h-full opacity-[0.2] pointer-events-none"
+            />
+
+            <div class="relative z-10">
+                <div class="flex items-center justify-between border-b border-zinc-900 pb-3 mb-4">
+                    <h4 class="font-black italic uppercase text-sm tracking-wider text-zinc-400 flex items-center gap-2">
+                        GPs CORRIDOS
+                    </h4>
+                    
+                </div>
+                <div class="space-y-2 text-xs">
+                    {rankingGPs.slice(0, 5).map((p, idx) => (
+                        <div class="flex items-center justify-between bg-zinc-900/30 px-3 py-2.5 rounded border border-zinc-900/40 group hover:border-zinc-400/30 transition-colors">
+                            <div class="flex items-center gap-3">
+                                <span class="font-black text-zinc-600">0{idx + 1}</span>
+                                <span class="font-black text-white uppercase italic">{p.nombre}</span>
+                            </div>
+                            <span class="font-black text-zinc-300 text-sm">{p.carrerasCorridas || 0}</span>
                         </div>
-                        <span class="font-black text-zinc-300 text-sm">{p.carrerasCorridas || 0}</span>
-                    </div>
-                ))}
+                    ))}
+                </div>
             </div>
         </div>
 
         {/* 💥 LISTA 5: ABANDONOS (DNF) */}
-        <div class="bg-zinc-950/40 border border-zinc-900 rounded-xl p-5 shadow-xl backdrop-blur-sm">
-            <div class="flex items-center justify-between border-b border-zinc-900 pb-3 mb-4">
-                <h4 class="font-black italic uppercase text-sm tracking-wider text-orange-500 flex items-center gap-2">
-                    <span></span> ABANDONOS (DNF)
-                </h4>
-                <span class="text-[9px] text-zinc-600 uppercase">Módulo: DNF</span>
-            </div>
-            <div class="space-y-2">
-                {rankingDNF.slice(0, 5).map((p, idx) => (
-                    <div class="flex items-center justify-between bg-zinc-900/30 px-3 py-2.5 rounded border border-zinc-800/40 group hover:border-orange-500/30 transition-colors">
-                        <div class="flex items-center gap-3">
-                            <span class="font-black text-zinc-600 group-hover:text-orange-500">0{idx + 1}</span>
-                            <span class="font-black text-white uppercase italic">{p.nombre}</span>
+        <div class="card-ranking-tab hidden bg-zinc-950/40 border border-zinc-900 rounded-xl p-5 shadow-xl backdrop-blur-sm transition-all duration-300 relative overflow-hidden">
+            
+            {/* Imagen PNG de fondo: Alerta de Choque */}
+            <img 
+                src="/images/alerta.jpg" 
+                alt="Fondo DNF" 
+                class="absolute inset-0 w-full h-full  opacity-[0.3] pointer-events-none "
+            />
+
+            <div class="relative z-10">
+                <div class="flex items-center justify-between border-b border-zinc-900 pb-3 mb-4">
+                    <h4 class="font-black italic uppercase text-sm tracking-wider text-orange-500 flex items-center gap-2">
+                        ABANDONOS (DNF)
+                    </h4>
+                    <span class="text-[9px] text-zinc-600 uppercase">Módulo: DNF</span>
+                </div>
+                <div class="space-y-2 text-xs">
+                    {rankingDNF.slice(0, 5).map((p, idx) => (
+                        <div class="flex items-center justify-between bg-zinc-900/30 px-3 py-2.5 rounded border border-zinc-800/40 group hover:border-orange-500/30 transition-colors">
+                            <div class="flex items-center gap-3">
+                                <span class="font-black text-zinc-600">0{idx + 1}</span>
+                                <span class="font-black text-white uppercase italic">{p.nombre}</span>
+                            </div>
+                            <span class="font-black text-orange-500 text-sm">{p.dnf || 0}</span>
                         </div>
-                        <span class="font-black text-orange-500 text-sm">{p.dnf || 0}</span>
-                    </div>
-                ))}
+                    ))}
+                </div>
             </div>
         </div>
 
     </div>
 </section>
 
+{/* ===================================================================================
+    🛠️ MOTOR GLOBAL UNIFICADO (Pégalo al final de tu archivo, abajo de todo antes de </main>)
+    =================================================================================== */}
 <script data-astro-rerun>
-    // Función centralizada de animación
-    function animarBarras() {
-        // Buscamos todas las barras
-        const bars = document.querySelectorAll('.f1-telemetry-bar');
-        
-        // Pequeño delay para que la transición de página termine y se vea el efecto "filling"
-        setTimeout(() => {
-            bars.forEach(bar => {
-                const targetWidth = bar.getAttribute('data-p');
-                if (targetWidth) {
-                    bar.style.width = targetWidth + '%';
-                }
-            });
-        }, 100); // 100ms es suficiente para que el DOM esté listo
-    }
+    // Inyectamos la función directamente en el objeto Window global del navegador.
+    // Esto asegura que el HTML la pueda ejecutar nativamente sin importar el ciclo de Astro.
+    window.switchearTablaEspecialidad = function(targetIndex) {
+        const section = document.querySelector('#rankings-especialidad');
+        if (!section) return;
 
-    // Se dispara en la carga inicial
-    animarBarras();
+        const tabs = section.querySelectorAll('.tab-especialidad');
+        const cards = section.querySelectorAll('.card-ranking-tab');
 
-    // Se dispara cada vez que Astro cambia de página (View Transitions)
-    document.addEventListener('astro:page-load', animarBarras);
+        if (tabs.length === 0 || cards.length === 0) return;
+
+        // 1. Alternar visualización de las tablas
+        cards.forEach((card, idx) => {
+            if (idx === targetIndex) {
+                card.classList.remove('hidden');
+                card.classList.add('block');
+            } else {
+                card.classList.remove('block');
+                card.classList.add('hidden');
+            }
+        });
+
+        // 2. Alternar estilos activos de la botonera HUD
+        tabs.forEach((tab, idx) => {
+            if (idx === targetIndex) {
+                tab.classList.remove('bg-zinc-900', 'text-zinc-400', 'border-zinc-800');
+                tab.classList.add('bg-red-600', 'text-white', 'border-red-500/20');
+            } else {
+                tab.classList.remove('bg-red-600', 'text-white', 'border-red-500/20');
+                tab.classList.add('bg-zinc-900', 'text-zinc-400', 'border-zinc-800');
+            }
+        });
+    };
 </script>
-    
-
+  
   </main>
 </Layout>
-
-<script data-astro-rerun>
-    document.addEventListener('astro:page-load', () => {
-        // Animación de barras
-        const bars = document.querySelectorAll('.f1-telemetry-bar');
-        setTimeout(() => {
-            bars.forEach(bar => {
-                const val = bar.getAttribute('data-p');
-                bar.style.width = val + '%';
-            });
-        }, 300);
-
-        // Menú Móvil
-        const btn = document.getElementById('mobile-menu-btn');
-        const menu = document.getElementById('mobile-menu-content');
-        if (btn && menu) {
-            btn.addEventListener('click', () => {
-                const isOpen = menu.classList.contains('translate-x-0');
-                menu.classList.toggle('translate-x-0', !isOpen);
-                menu.classList.toggle('translate-x-full', isOpen);
-            });
-        }
-    });
-</script>
-<style>
-    /* Animación extra para el brillo de las barras */
-    @keyframes shimmer {
-        100% { transform: translateX(100%); }
-    }
-    
-    /* Aseguramos que el contenedor de la página tenga el fondo correcto */
-    
-</style>
-
 </body>
