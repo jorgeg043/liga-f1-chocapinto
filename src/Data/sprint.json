@@ -35,5 +35,29 @@
       { "pos": 6, "piloto": "Mateo", "puntos": 0, "nota": "" }
       
     ]
+  },
+  {
+    "id": 3,
+    "gp": "China",
+    "circuito": "Shangai",
+    "imagen": "/Fotos/foto-fecha11china.png",
+    "fecha": "26 JUN 2026",
+    "pole": "Chor", 
+    "vueltaRapida": "1:38:530",
+    "resultados": [
+      { "pos": 1, "piloto": "Chor", "puntos": 8, "nota": "VR" },
+      { "pos": 2, "piloto": "Rodri", "puntos": 7, "nota": "" },
+      { "pos": 3, "piloto": "Ivan", "puntos": 6, "nota": "" },
+      { "pos": 4, "piloto": "Diego", "puntos": 5, "nota": "" },
+      { "pos": 5, "piloto": "Giova", "puntos": 4, "nota": "" },
+      { "pos": 6, "piloto": "Elias", "puntos": 3, "nota": "" },
+      { "pos": 7, "piloto": "Ema", "puntos": 2, "nota": "" },
+      { "pos": 8, "piloto": "Mateo", "puntos": 1, "nota": "" },
+      { "pos": 9, "piloto": "Seba", "puntos": 0, "nota": "" },
+      { "pos": 10, "piloto": "Claudio", "puntos": 0, "nota": "" },
+      { "pos": 11, "piloto": "Simon", "puntos": 0, "nota": "" },
+      { "pos": 12, "piloto": "Nico", "puntos": 0, "nota": "DNF" }
+      
+    ]
   }
 ]
