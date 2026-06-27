@@ -53,14 +53,15 @@ const pilotosActivos = pilotos.filter(p => p.activo !== false && p.nombre !== ""
 
 // --- REEMPLAZÁ TUS VARIABLES DE RANKINGS ARRIBA EN EL FRONTMATTER POR ESTAS ---
 
-// 1. Módulos que se nutren de la telemetría dinámica de las sesiones (Historial + Sprint)
-const rankingVictorias = [...Object.values(statsPilotos)].sort((a, b) => (b.victorias || 0) - (a.victorias || 0));
-const rankingPoles = [...Object.values(statsPilotos)].sort((a, b) => (b.poles || 0) - (a.poles || 0));
-const rankingVR = [...Object.values(statsPilotos)].sort((a, b) => (b.vRapidas || 0) - (a.vRapidas || 0));
+// --- REEMPLAZÁ TUS VARIABLES DE RANKINGS ARRIBA EN EL FRONTMATTER POR ESTAS ---
 
-// 2. Módulos que se nutren del JSON oficial de pilotos activos (GPs y DNF estáticos)
+// Filtramos únicamente los pilotos que están en pista actualmente
 const pilotosActivosParaRankings = pilotos.filter(p => p.activo !== false && p.nombre !== "");
 
+// Ahora todos los ránkings apuntan al JSON consolidado, usando los nombres de propiedades correctos
+const rankingVictorias = [...pilotosActivosParaRankings].sort((a, b) => (b.victorias || 0) - (a.victorias || 0));
+const rankingPoles = [...pilotosActivosParaRankings].sort((a, b) => (b.poles || 0) - (a.poles || 0));
+const rankingVR = [...pilotosActivosParaRankings].sort((a, b) => (b.vueltasRapidas || 0) - (a.vueltasRapidas || 0)); // ⚡ ¡Corregido aquí!
 const rankingGPs = [...pilotosActivosParaRankings].sort((a, b) => (b.carrerasCorridas || 0) - (a.carrerasCorridas || 0));
 const rankingDNF = [...pilotosActivosParaRankings].sort((a, b) => (b.dnf || 0) - (a.dnf || 0));
 ---

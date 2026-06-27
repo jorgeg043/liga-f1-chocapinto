@@ -1802,7 +1802,7 @@ const proximaCarrera = calendario
     {/* Riel del Carrusel */}
     <div id="integrantes-wrapper" class="flex transition-transform duration-500 ease-out w-full">
         {(() => {
-            const ordenDeseado = ["Chor", "Giova", "Simon", "Diego", "Rodri", "Leo", "Rambo", "Adrian", "Seba", "Ema", "Seba W", "Franco G", "Fede", "Valen", "Hugo", "Matias", "Mateo", "Claudio", "Ivan", "Elias", "Nico"];
+            const ordenDeseado = ["Chor", "Giova", "Simon", "Diego", "Rodri", "Nico", "Seba", "Ema", "Fede", "Mateo", "Claudio", "Ivan", "Elias",];
             
             const pilotosOrdenados = [...pilotos]
                 .filter(p => p.activo !== false)
@@ -2665,17 +2665,136 @@ const proximaCarrera = calendario
     .no-scrollbar::-webkit-scrollbar { display: none; }
 </style>
 
+{/* ===================================================================================
+    📺 SECCIÓN: RACE CONTROL & LIVE BROADCAST (COMISARIATO Y TRANSMISIÓN)
+    =================================================================================== */}
+<section id="race-control-broadcast" class="mt-24 max-w-5xl mx-auto px-4 pb-20 font-mono relative">
+    
+    {/* Encabezado de la Sección */}
+    <div class="text-center mb-12 reveal-on-scroll">
+        <h2 class="text-sm font-black mb-2 uppercase tracking-[0.4em] text-zinc-500">
+            Oficial <span class="text-red-600">Liga</span> Transmisión
+        </h2>
+        <h3 class="text-4xl font-black uppercase italic text-white tracking-tighter">
+            RACE CONTROL & <span class="text-red-600">LIVE</span>
+        </h3>
+    </div>
+
+    {/* Grilla Principal Responsiva */}
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-xs">
+        
+        {/* CARD 1: TRANSMISIÓN POR YOUTUBE */}
+        <div class="bg-zinc-950/40 border border-zinc-900 rounded-xl p-6 shadow-xl backdrop-blur-sm relative overflow-hidden group flex flex-col justify-between min-h-[320px]">
+            
+            {/* Imagen PNG o Textura de Fondo (Opcional, ajustable) */}
+            <div class="absolute inset-0 opacity-[0.03] pointer-events-none z-0 mix-blend-luminosity">
+                <div class="w-full h-full bg-[radial-gradient(#e11d48_1px,transparent_1px)] [background-size:16px_16px]"></div>
+            </div>
+
+            <div class="relative z-10 w-full">
+                {/* Badge de Estado del Vivo */}
+                <div class="flex items-center justify-between border-b border-zinc-900 pb-4 mb-6">
+                    <span class="flex items-center gap-2 text-red-500 font-black tracking-widest text-[10px] uppercase">
+                        <span class="w-2 h-2 rounded-full bg-red-600 animate-pulse"></span>
+                        ON AIR BROADCAST
+                    </span>
+                    <span class="text-[9px] text-zinc-600 uppercase">Módulo: LIVE</span>
+                </div>
+
+                <h4 class="text-2xl font-black italic text-white uppercase tracking-tighter mb-3">
+                    SEGUÍ LA CARRERA <br/> EN <span class="text-red-600">VIVO Y EN DIRECTO</span>
+                </h4>
+                <p class="text-zinc-400 text-[11px] leading-relaxed max-w-sm">
+                    No te pierdas ninguna fecha del torneo. Viví la transmisión oficial de la liga con relatos, estadísticas en tiempo real y toda la adrenalina de la pista desde nuestro canal.
+                </p>
+            </div>
+
+            {/* Enlace Oficial a Youtube */}
+            <div class="relative z-10 pt-6">
+                <a 
+                    href="https://www.youtube.com/@francobellisonzi" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center justify-center gap-3 w-full sm:w-auto bg-red-600/10 hover:bg-red-600 text-red-500 hover:text-white font-black uppercase italic tracking-wider text-[11px] px-6 py-3 rounded-xl border border-red-600/30 hover:border-red-600 transition-all duration-300 shadow-lg group-hover:scale-[1.02]"
+                >
+                    {/* Icono de Youtube SVG */}
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 fill-currentColor" viewBox="0 0 24 24">
+                        <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.895.502 5.784a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.895 24 12 24 12s0-3.87.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                    </svg>
+                    ACCEDER AL VIVO EN YOUTUBE
+                </a>
+            </div>
+        </div>
+
+        {/* CARD 2: COMISARIATO DEPORTIVO & TRANSMISOR */}
+        <div class="bg-zinc-950/40 border border-zinc-900 rounded-xl p-6 shadow-xl backdrop-blur-sm relative overflow-hidden group flex flex-col justify-between min-h-[320px]">
+            
+            {/* Fondo de Líneas Técnicas FIA / Race Control */}
+            <div class="absolute inset-0 opacity-[0.02] pointer-events-none z-0">
+                <svg width="100%" h="100%" xmlns="http://www.w3.org/2000/svg">
+                    <defs><pattern id="grid-control" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="currentColor" stroke-width="1"/></pattern></defs>
+                    <rect width="100%" height="100%" fill="url(#grid-control)" />
+                </svg>
+            </div>
+
+            <div class="relative z-10 w-full">
+                {/* Badge de Autoridad */}
+                <div class="flex items-center justify-between border-b border-zinc-900 pb-4 mb-6">
+                    <span class="text-yellow-500 font-black tracking-widest text-[10px] uppercase flex items-center gap-1.5">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.286z" />
+                        </svg>
+                        Comisario deportivo
+                    </span>
+                    <span class="text-[9px] text-zinc-600 uppercase">Módulo: STAFF</span>
+                </div>
+
+                {/* Bloque de Identificación con Foto Desplazada */}
+                <div class="flex items-center gap-5">
+                    
+                    {/* Contenedor de la Foto con marco de competición */}
+                    <div class="relative w-20 h-20 sm:w-24 sm:h-24 rounded-xl border border-zinc-800 bg-zinc-900 overflow-hidden flex-shrink-0 group-hover:border-yellow-500/40 transition-colors shadow-inner">
+                        <img 
+                            src="/images/comisario.png" 
+                            alt="Foto del Comisario Deportivo" 
+                            class="w-full h-full object-cover object-top filter "
+                        />
+                       
+                        {/* Pequeña cuadrícula decorativa en la esquina de la foto */}
+                        <div class="absolute bottom-0 right-0 bg-zinc-950 text-[8px] px-1 font-mono text-zinc-600 border-t border-l border-zinc-800">STAFF</div>
+                    </div>
+
+                    {/* Datos de la Credencial */}
+                    <div class="space-y-1.5">
+                        <div class="text-[9px] uppercase font-black text-zinc-500 tracking-wider">Comisario & Transmisor</div>
+                        <h5 class="text-xl font-black italic uppercase text-white tracking-tighter leading-none">
+                            Franco
+                        </h5>
+                        <div class="inline-block text-[9px] bg-zinc-900 border border-zinc-800 text-zinc-400 font-bold px-2 py-0.5 rounded uppercase">
+                            ID Licencia: #maFIA-9145
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {/* Resumen Técnico de Tareas */}
+            <div class="relative z-10 pt-6 border-t border-zinc-900/60 mt-4 flex items-center justify-between text-[10px] text-zinc-500">
+                <span class="flex items-center gap-1.5">
+                    <span class="w-1.5 h-1.5 rounded-full bg-yellow-500"></span> Revisión de Incidentes
+                </span>
+                <span class="flex items-center gap-1.5">
+                    <span class="w-1.5 h-1.5 rounded-full bg-yellow-500"></span> Relato Oficial
+                </span>
+                <span class="flex items-center gap-1.5">
+                    <span class="w-1.5 h-1.5 rounded-full bg-yellow-500"></span> Sanciones
+                </span>
+            </div>
+        </div>
+
+    </div>
+</section>
 
 
-<div class="w-full flex justify-center mt-01 mb-01">
-    <p class="inline-flex items-center gap-2 px-6 py-2 border border-red-600/20 text-[11px] text-red-500 font-mono font-black uppercase tracking-[0.2em] rounded-full animate-pulse">
-        Noooo, por el fondo plano noooo... <img 
-        src="/Fotos/mafia.png" 
-        alt="maFIA" 
-        class="flex justify-center"
-    /> 
-    </p>
-</div>
 
 
 
