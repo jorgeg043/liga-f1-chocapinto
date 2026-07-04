@@ -250,5 +250,32 @@
       { "pos": 11, "piloto": "Claudio", "puntos": 0, "nota": "" },
       { "pos": 12, "piloto": "Seba", "puntos": 0, "nota": "DNF" }
     ]
+  },
+  {
+    "id": 12,
+    "gp": "Azerbayan",
+    "circuito": "Baku",
+    "fecha": "03 JUL 2026",
+    "imagen": "/Fotos/foto-fecha12baku.png",
+    "pole": "Chor",
+    "tiempoPole": "1:42.641",
+    "vueltaRapida": "Chor",
+    "tiempoVR": "1:46.861",
+    "duracion": "36m 12s",
+    "resultados": [
+      { "pos": 1, "piloto": "Chor", "puntos": 27, "nota": "VR" },
+      { "pos": 2, "piloto": "Rodri", "puntos": 18, "nota": "" },
+      { "pos": 3, "piloto": "Ivan", "puntos": 15, "nota": "" },
+      { "pos": 4, "piloto": "Giova", "puntos": 12, "nota": "" },
+      { "pos": 5, "piloto": "Nico", "puntos": 10, "nota": "" },
+      { "pos": 6, "piloto": "Simon", "puntos": 8, "nota": "" },
+      { "pos": 7, "piloto": "Ema", "puntos": 6, "nota": "" },
+      { "pos": 8, "piloto": "Diego", "puntos": 0, "nota": "DNF" },
+      { "pos": 9, "piloto": "Claudio", "puntos": 0, "nota": "DNF" },
+      { "pos": 10, "piloto": "Mateo", "puntos": 0, "nota": "DNF" },
+      { "pos": 11, "piloto": "Fede", "puntos": 0, "nota": "DNF" },
+      { "pos": 12, "piloto": "Elias", "puntos": 0, "nota": "DNF" },
+      { "pos": 13, "piloto": "Seba", "puntos": 0, "nota": "DNF" }
+    ]
   }
 ]

@@ -25,7 +25,7 @@ const logos = {
   "Kick Sauber": "/Fotos/logo-kicksauber.png",
 };
 const totalCarreras = 24;
-const carrerasCorridas = 11;
+const carrerasCorridas = 12;
 const porcentajeTemporada = (carrerasCorridas / totalCarreras) * 100;
 const escuderiasMap = pilotos.reduce((acc, piloto) => {
     if (!acc[piloto.escuderia]) {
@@ -572,8 +572,8 @@ const proximaCarrera = calendario
          <div class="reveal-item mb-16 bg-[#020c1b]/60 rounded-xl border border-zinc-900 p-8 shadow-2xl relative overflow-hidden group hover:border-red-600/30 transition-all duration-700 backdrop-blur-xl">
     
     <video 
-    id="Baku"
-    data-src="/Videos/vr_baku.mp4" 
+    id="Monaco"
+    data-src="/Videos/vr_monaco.mp4" 
     autoplay muted loop playsinline
     class="lazy-video absolute inset-0 w-full h-full object-cover opacity-40 pointer-events-none mix-blend-screen"
 ></video>
@@ -590,14 +590,14 @@ const proximaCarrera = calendario
             <div class="absolute inset-0 bg-red-600/5 blur-[80px] rounded-full group-hover:bg-red-600/10 transition-all duration-700"></div>
             
             <img 
-                src="/Fotos/foto-fecha12baku.png" 
-                alt="Circuito Baku" 
+                src="/Fotos/foto-fecha13monaco.png" 
+                alt="Circuito Monaco" 
                 class="w-full max-w-[540px] h-auto object-contain filter drop-shadow-[0_0_30px_rgba(255,255,255,0.1)] transition-transform duration-700 group-hover:scale-110 group-hover:-rotate-3 animate-latido-color"
             />
             
             <div class="mt-8 text-center">
                 <p class="text-[10px] text-zinc-500 font-mono tracking-[0.5em] uppercase mb-1">Datos de ubicación</p>
-                <h4 class="text-xs font-black text-white uppercase tracking-widest italic group-hover:text-red-500 transition-colors">Azerbaiyan - Baku</h4>
+                <h4 class="text-xs font-black text-white uppercase tracking-widest italic group-hover:text-red-500 transition-colors">Montecarlo - Mónaco</h4>
             </div>
         </div>
 
@@ -617,14 +617,14 @@ const proximaCarrera = calendario
             <h2 class="text-5xl md:text-6xl font-black uppercase tracking-tighter italic text-white leading-tight mb-8">
                 Gran Premio<br/>
                 <span class="text-red-600 drop-shadow-[0_0_15px_rgba(220,38,38,0.4)] transition-all group-hover:drop-shadow-[0_0_30px_rgba(220,38,38,0.6)]">
-                    Baku
+                    Monaco
                 </span>
             </h2>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div class="bg-zinc-950/80 p-5 rounded-lg border-l-4 border-red-600 shadow-2xl group/box transition-all hover:translate-x-1">
                     <p class="text-[9px] text-white uppercase tracking-widest font-black mb-2">Horario carrera (ARG)</p>
-                    <p class="text-lg font-black text-zinc-200 uppercase tracking-tighter mb-1">Viernes 03 de Julio</p>
+                    <p class="text-lg font-black text-zinc-200 uppercase tracking-tighter mb-1">Viernes 10 de Julio</p>
                     <div class="flex items-baseline gap-2">
                         <span class="text-4xl font-mono font-black text-white italic">23:00</span>
                         <span class="text-red-600 font-black italic text-lg">HS</span>
@@ -662,7 +662,7 @@ const proximaCarrera = calendario
         <!-- 5. Main Race -->
         <div class="flex justify-between items-center text-[11px] font-black uppercase tracking-tighter text-red-500">
             <span>Main Race</span>
-            <span class="bg-red-600/10 px-2 py-0.5 rounded text-white font-mono">26 VUELTAS</span>
+            <span class="bg-red-600/10 px-2 py-0.5 rounded text-white font-mono">39 VUELTAS</span>
         </div>
     </div>
 </div>
@@ -671,15 +671,15 @@ const proximaCarrera = calendario
             <div class="mt-10 flex flex-wrap gap-x-8 gap-y-4 text-[10px] text-zinc-500 font-black uppercase tracking-[0.2em] border-t border-zinc-900 pt-6">
                 <div class="flex items-center gap-2 group/stat">
                     <div class="w-1.5 h-1.5 bg-red-600 rounded-full group-hover/stat:scale-150 transition-transform"></div>
-                    <span>Longitud: <span class="text-zinc-300 font-mono">6.003 KM</span></span>
+                    <span>Longitud: <span class="text-zinc-300 font-mono">3.337 KM</span></span>
                 </div>
                 <div class="flex items-center gap-2 group/stat">
                     <div class="w-1.5 h-1.5 bg-red-600 rounded-full group-hover/stat:scale-150 transition-transform"></div>
-                    <span>Curvas: <span class="text-zinc-300 font-mono">20</span></span>
+                    <span>Curvas: <span class="text-zinc-300 font-mono">19</span></span>
                 </div>
                 <div class="flex items-center gap-2 group/stat">
                     <div class="w-1.5 h-1.5 bg-red-600 rounded-full group-hover/stat:scale-150 transition-transform"></div>
-                    <span>Circuito: <span class="text-zinc-300">Circuito urbano de Baku</span></span>
+                    <span>Circuito: <span class="text-zinc-300">Principado de Monaco</span></span>
                 </div>
             </div>
         </div>
@@ -698,21 +698,21 @@ const proximaCarrera = calendario
                 <div class="flex items-center justify-center w-10 h-10 rounded-full bg-zinc-950 border-[3px] border-red-600 shadow-[0_0_8px_rgba(220,38,38,0.4)] select-none">
                     <span class="text-[15px] font-black text-red-500 italic leading-none">S</span>
                 </div>
-                <span class="text-white font-bold">C6</span>
+                <span class="text-white font-bold">C5</span>
             </div>
 
             <div class="flex items-center gap-1.5 font-mono text-[15px]">
                 <div class="flex items-center justify-center w-10 h-10 rounded-full bg-zinc-950 border-[3px] border-yellow-500 shadow-[0_0_8px_rgba(234,179,8,0.4)] select-none">
                     <span class="text-[15px] font-black text-yellow-500 italic leading-none">M</span>
                 </div>
-                <span class="text-white font-bold">C5</span>
+                <span class="text-white font-bold">C4</span>
             </div>
 
             <div class="flex items-center gap-1.5 font-mono text-[15px]">
                 <div class="flex items-center justify-center w-10 h-10 rounded-full bg-zinc-950 border-[3px] border-zinc-300 shadow-[0_0_8px_rgba(255,255,255,0.2)] select-none">
                     <span class="text-[15px] font-black text-zinc-300 italic leading-none">H</span>
                 </div>
-                <span class="text-white font-bold">C4</span>
+                <span class="text-white font-bold">C3</span>
             </div>
         </div>
 
