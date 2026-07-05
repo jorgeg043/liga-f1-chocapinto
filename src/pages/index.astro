@@ -139,6 +139,9 @@ const proximaCarrera = calendario
     menuHistorial.classList.add('opacity-0', 'invisible', 'translate-y-2');
     flecha.style.transform = 'rotate(0deg)';
   });
+
+
+  
 </script>
     <body class="bg-slate-950 text-white font-sans">
       
@@ -304,7 +307,41 @@ const proximaCarrera = calendario
         document.querySelectorAll('.reveal-on-scroll, .reveal-item').forEach(el => observer.observe(el));
     });
 </script>
+<script>
+  document.addEventListener('astro:page-load', () => {
+    // Esperamos los 100ms a que el carrusel se acomode en el DOM
+    setTimeout(() => {
+      // 1. Buscamos con tu clase exacta: "lazy-video"
+      const lazyVideos = document.querySelectorAll('video.lazy-video');
+      
+      if (lazyVideos.length === 0) return;
 
+      if ('IntersectionObserver' in window) {
+        const videoObserver = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const video = entry.target;
+              if (video.dataset.src) {
+                video.src = video.dataset.src;
+                video.load(); 
+              }
+              // 2. Le removemos tu clase para que no lo vuelva a evaluar
+              video.classList.remove('lazy-video');
+              videoObserver.unobserve(video);
+            }
+          });
+        });
+
+        lazyVideos.forEach((video) => videoObserver.observe(video));
+      } else {
+        // Fallback tradicional
+        lazyVideos.forEach((video) => {
+          if (video.dataset.src) video.src = video.dataset.src;
+        });
+      }
+    }, 100); 
+  });
+</script>
 
 
 
@@ -326,20 +363,20 @@ const proximaCarrera = calendario
         </div>
 
         <div class="hidden lg:flex items-center gap-8 text-[11px] font-black uppercase tracking-[0.2em]">
-            <a href="/#inicio" class="text-zinc-400 hover:text-white transition-all">Inicio</a>
+            <a href="/#inicio" class="text-zinc-400 hover:text-white transition-all data-astro-reload">Inicio</a>
             <a href="/#pilotos" class="text-zinc-400 hover:text-white transition-all">Pilotos</a>
             <a href="/#constructores" class="text-zinc-400 hover:text-white transition-all">Escuderías</a>
             <a href="/#Calendario" class="text-zinc-400 hover:text-white transition-all">Calendario</a>
             <a href="/estadistica" class="text-zinc-400 hover:text-white transition-all">Estadística</a>
             
             <div class="relative group" id="desktop-dropdown">
-                <button class="flex items-center gap-2 text-zinc-400 group-hover:text-red-500 transition-all uppercase font-black outline-none bg-white/5 px-4 py-2 rounded-md border border-white/5">
+                <button class="flex items-center gap-2 text-zinc-400 group-hover:text-red-500 transition-all uppercase font-black outline-none bg-white/5 px-4 py-2 rounded-md border border-white/5 data-astro-reload">
                     Historial
                     <svg class="w-3 h-3 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path></svg>
                 </button>
                 <div class="absolute right-0 mt-3 w-48 bg-[#020c1b] border border-zinc-800 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 translate-y-4 group-hover:translate-y-0 overflow-hidden">
-                    <a href="/historial" class="block px-6 py-3 text-[10px] text-zinc-400 hover:text-white hover:bg-white/5">Carreras</a>
-                    <a href="/sprint" class="block px-6 py-3 text-[10px] text-zinc-400 hover:text-red-500 hover:bg-red-600/10">Sprint</a>
+                    <a href="/historial" class="block px-6 py-3 text-[10px] text-zinc-400 hover:text-white hover:bg-white/5 data-astro-reload">Carreras</a>
+                    <a href="/sprint" class="block px-6 py-3 text-[10px] text-zinc-400 hover:text-red-500 hover:bg-red-600/10 data-astro-reload">Sprint</a>
                 </div>
             </div>
         </div>
