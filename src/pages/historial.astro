@@ -5,6 +5,8 @@ import pilotos from '../Data/pilotos.json';
 import historial from '../Data/historial.json';
 import { ClientRouter } from 'astro:transitions';
 import datosTelemetria from '../Data/telemetria.json';
+import sanciones from '../data/comisario.json';
+
 const carreraActualId = "Baku";
 const ultimaFecha = 4;
 const fechas = Array.from({ length: ultimaFecha }, (_, i) => ultimaFecha - i);
@@ -651,7 +653,7 @@ const obtenerInfoPiloto = (nombre) => {
 
 
     <!-- ENCAPSULADO CON ID EXCLUSIVO PARA EVITAR INTERFERENCIAS -->
-<section id="seccion-estrategia-carrusel" class="mt-20 py-10 border-t border-zinc-800 px-4">
+<section id="seccion-estrategia-carrusel" class="mt-20 pb-20 px-4 max-w-6xl mx-auto relative overflow-hidden ">
     <!-- Encabezado con Controles del Carrusel -->
     <div class="mb-6 flex flex-col md:flex-row items-center justify-between gap-4">
         <div class="text-center md:text-left">
@@ -809,6 +811,124 @@ const obtenerInfoPiloto = (nombre) => {
     document.addEventListener('astro:after-swap', inicializarEstrategiaCarrusel);
 </script>
 
+
+<section class="sanciones-section my-12 px-4 max-w-4xl mx-auto relative group">
+  <h2 class="text-2xl font-bold text-red-500 mb-6 uppercase tracking-wider border-b border-red-900 pb-2">
+    ⚖️ Resoluciones del Comisariato Deportivo
+  </h2>
+
+  <div class="relative px-2 md:px-10">
+    
+    <button 
+      id="prev-sancion" 
+      class="absolute left-0 top-1/2 -translate-y-1/2 bg-zinc-900/80 hover:bg-red-950/80 border border-zinc-800 hover:border-red-500 text-white w-10 h-10 rounded-full z-10 hidden md:flex items-center justify-center transition-all duration-200 shadow-lg cursor-pointer"
+      aria-label="Anterior sanción"
+    >
+      ←
+    </button>
+
+    <div 
+      id="sanciones-slider"
+      class="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-4 scroll-smooth scrollbar-none"
+    >
+      {sanciones.map((reporte, index) => (
+        <div 
+          class="min-w-full snap-center flex flex-col justify-between bg-zinc-900/80 border border-zinc-800 rounded-xl p-6 backdrop-blur-md shadow-2xl relative"
+          data-index={index}
+        >
+          <div class="flex justify-between items-center border-b border-zinc-800 pb-3 mb-4">
+            <span class="text-sm font-mono text-zinc-400 bg-zinc-800 px-3 py-1 rounded-md">
+              {reporte.fecha} - {reporte.circuito}
+            </span>
+            <span class="text-xs uppercase font-bold tracking-widest text-red-400 bg-red-950/50 px-2 py-1 rounded border border-red-900/50">
+              Sanción Oficial
+            </span>
+          </div>
+
+          <div class="space-y-3 flex-grow mb-4">
+            <h3 class="text-xl font-bold text-white">
+              Piloto Infractor: <span class="text-yellow-400">{reporte.piloto}</span>
+            </h3>
+            <p class="text-zinc-300 italic text-base leading-relaxed pl-4 border-l-2 border-red-600">
+              "{reporte.motivo}"
+            </p>
+          </div>
+
+          <div class="bg-red-950/30 border border-red-900/40 rounded-lg p-3">
+            <p class="text-sm font-semibold text-red-300">
+              <span class="text-red-400 font-bold uppercase mr-1">Penalidad:</span> 
+              {reporte.sancion}
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <button 
+      id="next-sancion" 
+      class="absolute right-0 top-1/2 -translate-y-1/2 bg-zinc-900/80 hover:bg-red-950/80 border border-zinc-800 hover:border-red-500 text-white w-10 h-10 rounded-full z-10 hidden md:flex items-center justify-center transition-all duration-200 shadow-lg cursor-pointer"
+      aria-label="Siguiente sanción"
+    >
+      →
+    </button>
+  </div>
+
+  <div class="flex justify-center gap-2 mt-4">
+    {sanciones.map((_, index) => (
+      <span 
+        class={`sancion-dot h-2 w-2 rounded-full transition-all duration-300 bg-zinc-700 ${index === 0 ? '!bg-red-500 w-4' : ''}`}
+        data-dot={index}
+      />
+    ))}
+  </div>
+</section>
+
+<style>
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+</style>
+
+<script>
+  function setupSancionesCarousel() {
+    const slider = document.getElementById('sanciones-slider');
+    const prevBtn = document.getElementById('prev-sancion');
+    const nextBtn = document.getElementById('next-sancion');
+    const dots = document.querySelectorAll('.sancion-dot');
+
+    if (!slider || !prevBtn || !nextBtn) return;
+
+    // Acción de las flechas
+    prevBtn.onclick = () => {
+      slider.scrollLeft -= slider.offsetWidth;
+    };
+
+    nextBtn.onclick = () => {
+      slider.scrollLeft += slider.offsetWidth;
+    };
+
+    // Actualizar los puntitos dinámicamente al scrollear
+    slider.onscroll = () => {
+      const activeIndex = Math.round(slider.scrollLeft / slider.offsetWidth);
+      dots.forEach((dot, idx) => {
+        if (idx === activeIndex) {
+          dot.classList.add('!bg-red-500', 'w-4');
+          dot.classList.remove('bg-zinc-700');
+        } else {
+          dot.classList.remove('!bg-red-500', 'w-4');
+          dot.classList.add('bg-zinc-700');
+        }
+      });
+    };
+  }
+
+  // Corremos la función respetando el ciclo de vida de Astro para que ande al ir y volver
+  document.addEventListener('astro:page-load', setupSancionesCarousel);
+</script>
 
 <style>
     .vertical-text {
