@@ -1,0 +1,20 @@
+[
+  {
+    "carreraId": "Baku",
+    "carreraNombre": "GP de Azerbaiyán (Bakú)",
+    "pilotos": [
+      { "nombre": "Chor", "neumaticos": ["H", "M"], "paradas": 1, "advertencias": "-", "sancion": "-", "reparacion": "-" },
+      { "nombre": "Rodri", "neumaticos": ["H", "M"], "paradas": 1, "advertencias": "-", "sancion": "-", "reparacion": "-" },
+      { "nombre": "Diego", "neumaticos": ["H", "M", "H"], "paradas": 2, "advertencias": "1", "sancion": "Saltarse la curva - DNF V14", "reparacion": "Alerón Delantero" },
+      { "nombre": "Simon", "neumaticos": ["H", "M", "M"], "paradas": 2, "advertencias": "-", "sancion": "-", "reparacion": "2 Alerón Delantero" },
+      { "nombre": "Ivan", "neumaticos": ["M", "H", "H"], "paradas": 2, "advertencias": "1", "sancion": "Exceder límites de pista", "reparacion": "2 Alerón Delantero" },
+      { "nombre": "Giova", "neumaticos": ["H", "H", "M"], "paradas": 2, "advertencias": "5", "sancion": "Colisión con Ema, Claudio y Nico - Cruzar línea de pitlane, exceder límite de pista", "reparacion": "2 Aleron Delantero" },
+      { "nombre": "Ema", "neumaticos": ["M", "H", "S", "H"], "paradas": 5, "advertencias": "1", "sancion": "Acelerar en pitlane +10'", "reparacion": "4 Alerón Delantero" },
+      { "nombre": "Elias", "neumaticos": ["M"], "paradas": "-", "advertencias": "-", "sancion": "DNF V1", "reparacion": "-" },
+      { "nombre": "Mateo", "neumaticos": ["H", "M"], "paradas": 1, "advertencias": "1", "sancion": "Colisión grave c/Ivan +10', DNF V7", "reparacion": "Alerón Delantero" },
+      { "nombre": "Nico", "neumaticos": ["H", "M", "M"], "paradas": 3, "advertencias": "2", "sancion": "Colisión con Giova - Cruzar línea de pitlane", "reparacion": "3 Alerón Delantero" },
+      { "nombre": "Claudio", "neumaticos": ["H", "M"], "paradas": 1, "advertencias": "1", "sancion": "Exceder límites de pista - DNF V7", "reparacion": "Alerón Delantero" },
+      { "nombre": "Fede", "neumaticos": ["H"], "paradas": "-", "advertencias": "-", "sancion": "DNF V1", "reparacion": "-" }
+    ]
+  }
+]

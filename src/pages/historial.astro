@@ -4,9 +4,13 @@ import '../styles/global.css';
 import pilotos from '../Data/pilotos.json';
 import historial from '../Data/historial.json';
 import { ClientRouter } from 'astro:transitions';
+import datosTelemetria from '../Data/telemetria.json';
+const carreraActualId = "Baku";
 const ultimaFecha = 4;
 const fechas = Array.from({ length: ultimaFecha }, (_, i) => ultimaFecha - i);
 const carreras = [...historial].reverse();
+const datosCarrera = datosTelemetria.find(c => c.carreraId === carreraActualId);
+const listaPilotos = datosCarrera ? datosCarrera.pilotos : [];
 const logos = {
   "Mercedes Benz": "/Fotos/logo-mercedes.png",
   "Alpine": "/Fotos/logo-alpine.png",
@@ -316,6 +320,9 @@ const obtenerInfoPiloto = (nombre) => {
                                                             {res.nota === "VR" && (
                                                                 <span class="bg-blue-600/20 text-blue-500 text-[9px] px-2 py-0.5 rounded font-black border border-blue-600/30">VR</span>
                                                             )}
+                                                            {res.nota === "DNF" && (
+                                                                <span class="bg-yellow-600/20 text-yellow-500 text-[9px] px-2 py-0.5 rounded font-black border border-yellow-600/30">DNF</span>
+                                                            )}
                                                         </div>
                                                     </td>
                                                     <td class="px-6 py-5 text-right font-mono font-black text-2xl italic text-zinc-300">
@@ -547,6 +554,10 @@ const obtenerInfoPiloto = (nombre) => {
     <div id="historial-dots" class="flex justify-center gap-2 mt-6 md:hidden"></div>
 </section>
 
+
+
+
+
 {/* 🏎️ SCRIPTS DE TELEMETRÍA: Control de transiciones del Carrete con Bucle Infinito */}
 <script data-astro-rerun>
     document.addEventListener('astro:page-load', () => {
@@ -628,6 +639,168 @@ const obtenerInfoPiloto = (nombre) => {
         }, {passive: true});
     });
 </script>
+
+
+
+    <!-- ENCAPSULADO CON ID EXCLUSIVO PARA EVITAR INTERFERENCIAS -->
+<section id="seccion-estrategia-carrusel" class="mt-20 py-10 border-t border-zinc-800 px-4">
+    <!-- Encabezado con Controles del Carrusel -->
+    <div class="mb-6 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div class="text-center md:text-left">
+            <h2 class="text-2xl font-black uppercase italic tracking-tighter text-white">
+                Estrategia y <span class="text-red-600">Sanciones</span>
+            </h2>
+            <p class="text-zinc-500 font-mono text-[10px] uppercase tracking-[0.3em] mt-1">
+                Historial Técnico por Fecha Disputada
+            </p>
+        </div>
+
+        <!-- Botones de Navegación con Clases de Ámbito Local -->
+        <div class="flex items-center gap-2 bg-zinc-900 border border-zinc-800 p-1.5 rounded-xl shadow-lg">
+            <button class="estrategia-btn-prev px-3 py-1.5 rounded-lg bg-zinc-950 text-zinc-400 hover:text-white border border-zinc-800 hover:border-zinc-700 transition-all text-xs font-bold uppercase italic">
+                ← Anterior
+            </button>
+            <span class="estrategia-indicador px-4 font-mono text-xs font-black text-red-500 uppercase tracking-wider min-w-[140px] text-center">
+                Cargando...
+            </span>
+            <button class="estrategia-btn-next px-3 py-1.5 rounded-lg bg-zinc-950 text-zinc-400 hover:text-white border border-zinc-800 hover:border-zinc-700 transition-all text-xs font-bold uppercase italic">
+                Siguiente →
+            </button>
+        </div>
+    </div>
+
+    <!-- Contenedor del Carrusel de Tablas -->
+    <div class="estrategia-tablas-container">
+        {datosTelemetria.map((carrera, cIndex) => (
+            <div 
+                data-carrera-index={cIndex}
+                data-carrera-nombre={carrera.carreraNombre || carrera.carreraId.toUpperCase()}
+                class="estrategia-slide hidden"
+                data-active={cIndex === datosTelemetria.length - 1 ? "true" : "false"}
+            >
+                <div class="overflow-x-auto rounded-xl border border-zinc-800 bg-zinc-950/50 backdrop-blur-md">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="border-b border-zinc-800 bg-zinc-900/40 text-[11px] font-mono text-zinc-400 uppercase tracking-wider">
+                                <th class="px-6 py-4">Piloto</th>
+                                <th class="px-6 py-4 text-center">Estrategia de Neumáticos</th>
+                                <th class="px-6 py-4 text-center">Paradas (Boxes)</th>
+                                <th class="px-6 py-4 text-center">Reparaciones</th>
+                                <th class="px-6 py-4 text-center">Advertencias</th>
+                                <th class="px-6 py-4 text-center">Sanciones / Penalizaciones</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-zinc-900 text-sm">
+                            {carrera.pilotos.map((p) => (
+                                <tr class="hover:bg-zinc-900/30 transition-colors">
+                                    <td class="px-6 py-4 font-black text-zinc-200 uppercase tracking-tight">
+                                        {p.nombre}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <div class="flex items-center justify-center gap-1.5">
+                                            {p.neumaticos.map((compuesto, index) => (
+                                                <>
+                                                    {index > 0 && <span class="text-zinc-600 text-xs font-mono">→</span>}
+                                                    <span class={`w-6 h-6 rounded-full text-[11px] font-black flex items-center justify-center border shadow-lg
+                                                        ${compuesto === 'S' ? 'bg-red-600 text-white border-red-500 shadow-red-600/20' : ''}
+                                                        ${compuesto === 'M' ? 'bg-yellow-500 text-black border-yellow-400 shadow-yellow-500/20' : ''}
+                                                        ${compuesto === 'H' ? 'bg-white text-black border-zinc-300 shadow-white/20' : ''}
+                                                    `}>
+                                                        {compuesto}
+                                                    </span>
+                                                </>
+                                            ))}
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 text-center font-mono font-bold text-zinc-300">
+                                        {p.paradas}
+                                    </td>
+                                    <td class={`px-6 py-4 text-center font-medium 
+                                        ${p.reparacion === '-' ? 'text-zinc-500' : 'text-orange-400 font-bold'}
+                                    `}>
+                                        {p.reparacion}
+                                    </td>
+                                    <td class={`px-6 py-4 text-center font-mono font-bold 
+                                        ${p.advertencias.startsWith('0') ? 'text-zinc-500' : 'text-yellow-500'}
+                                    `}>
+                                        {p.advertencias}
+                                    </td>
+                                    <td class={`px-6 py-4 text-center font-medium 
+                                        ${p.sancion === '-' ? 'text-zinc-500' : 'text-red-500 font-bold'}
+                                    `}>
+                                        {p.sancion}
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        ))}
+    </div>
+</section>
+
+<!-- SCRIPT COMPLETAMENTE AISLADO -->
+<script>
+    function inicializarEstrategiaCarrusel() {
+        // Buscamos el contenedor raíz de esta sección en particular
+        const root = document.getElementById('seccion-estrategia-carrusel');
+        if (!root) return;
+
+        // Buscamos los elementos del carrusel SOLO dentro de este contenedor raíz
+        const slides = root.querySelectorAll('.estrategia-slide');
+        const btnPrev = root.querySelector('.estrategia-btn-prev');
+        const btnNext = root.querySelector('.estrategia-btn-next');
+        const indicador = root.querySelector('.estrategia-text, .estrategia-indicador');
+        
+        if (slides.length === 0) return;
+
+        let currentIndex = Array.from(slides).findIndex(slide => slide.getAttribute('data-active') === 'true');
+        if (currentIndex === -1) currentIndex = slides.length - 1;
+
+        function updateCarrusel() {
+            slides.forEach((slide, idx) => {
+                if (idx === currentIndex) {
+                    slide.setAttribute('data-active', 'true');
+                    slide.classList.remove('hidden');
+                    slide.classList.add('block');
+                    if (indicador) indicador.textContent = slide.getAttribute('data-carrera-nombre');
+                } else {
+                    slide.setAttribute('data-active', 'false');
+                    slide.classList.remove('block');
+                    slide.classList.add('hidden');
+                }
+            });
+        }
+
+        btnPrev?.addEventListener('click', () => {
+            if (slides.length <= 1) return;
+            if (currentIndex > 0) {
+                currentIndex--;
+            } else {
+                currentIndex = slides.length - 1;
+            }
+            updateCarrusel();
+        });
+
+        btnNext?.addEventListener('click', () => {
+            if (slides.length <= 1) return;
+            if (currentIndex < slides.length - 1) {
+                currentIndex++;
+            } else {
+                currentIndex = 0;
+            }
+            updateCarrusel();
+        });
+
+        updateCarrusel();
+    }
+
+    // Inicialización segura para Astro
+    inicializarEstrategiaCarrusel();
+    document.addEventListener('astro:after-swap', inicializarEstrategiaCarrusel);
+</script>
+
 
 <style>
     .vertical-text {
