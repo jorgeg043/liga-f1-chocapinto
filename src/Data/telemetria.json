@@ -16,5 +16,19 @@
       { "nombre": "Claudio", "neumaticos": ["H", "M"], "paradas": 1, "advertencias": "1", "sancion": "Exceder límites de pista - DNF V7", "reparacion": "Alerón Delantero" },
       { "nombre": "Fede", "neumaticos": ["H"], "paradas": "-", "advertencias": "-", "sancion": "DNF V1", "reparacion": "-" }
     ]
+  },
+    {
+    "carreraId": "Mónaco",
+    "carreraNombre": "GP de Mónaco",
+    "pilotos": [
+      { "nombre": "Chor", "neumaticos": ["H", "M", "M"], "paradas": 2, "advertencias": "-", "sancion": "-", "reparacion": "-" },
+      { "nombre": "Rodri", "neumaticos": ["H", "M", "M"], "paradas": 2, "advertencias": "3", "sancion": "Saltarse la curva, exceder límites de pista, +3' ", "reparacion": "-" },
+      { "nombre": "Seba", "neumaticos": ["H", "M", "H"], "paradas": 2, "advertencias": "7", "sancion": "Exceder límites de pista +6', Saltarse curva +10',", "reparacion": "Alerón deltanero" },
+      { "nombre": "Ivan", "neumaticos": ["H", "M", "M"], "paradas": 2, "advertencias": "5", "sancion": "Exceder límites de pista, saltarse la curva +3'", "reparacion": "Alerón delantero" },
+      { "nombre": "Nico", "neumaticos": ["H", "M", "M"], "paradas": 2, "advertencias": "3", "sancion": "Saltarse la curva +10', exceder límites de pista", "reparacion": "" },
+      { "nombre": "Diego", "neumaticos": ["H", "M", "M", "S", "H"], "paradas": 4, "advertencias": "18", "sancion": "Drive-trough, colisión con Mateo y Simon, exceder límites de pista +12', saltarse la curva +10', ganancia de tiempo ilegal, DNF V33", "reparacion": "4 Alerón delantero" },
+      { "nombre": "Simon", "neumaticos": ["H", "M", "M", "M"], "paradas": 3, "advertencias": "9", "sancion": "Saltarse la curva, exceder límites de pista, +9', DNF V19", "reparacion": "2 Alerón delantero" },
+      { "nombre": "Mateo", "neumaticos": ["H", "M", "M", "S", "S"], "paradas": 4, "advertencias": "7", "sancion": "Colisión con Simon, exceder límites de pista +3' y +10', DNF V15 ", "reparacion": "3 Alerón delantero" }
+    ]
   }
 ]

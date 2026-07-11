@@ -105,7 +105,7 @@
       { "pos": 5, "piloto": "Rodri", "puntos": 10, "nota": "" },
       { "pos": 3, "piloto": "Simon", "puntos": 15, "nota": "" },
       { "pos": 2, "piloto": "Franco", "puntos": 18, "nota": "" },
-      { "pos": 1, "piloto": "Rambo", "puntos": 25, "nota": "VR" },
+      { "pos": 1, "piloto": "Rambo", "puntos": 27, "nota": "VR" },
       { "pos": 10, "piloto": "Adrian", "puntos": 0, "nota": "" },
       { "pos": 4, "piloto": "Seba W", "puntos": 12, "nota": "" },
       { "pos": 8, "piloto": "Hugo", "puntos": 0, "nota": "" },
@@ -276,6 +276,28 @@
       { "pos": 11, "piloto": "Fede", "puntos": 0, "nota": "DNF" },
       { "pos": 12, "piloto": "Elias", "puntos": 0, "nota": "DNF" },
       { "pos": 13, "piloto": "Seba", "puntos": 0, "nota": "DNF" }
+    ]
+  },
+    {
+    "id": 13,
+    "gp": "Monaco",
+    "circuito": "Monaco",
+    "fecha": "10 JUL 2026",
+    "imagen": "/Fotos/foto-fecha13monaco.png",
+    "pole": "Chor",
+    "tiempoPole": "1:29.308",
+    "vueltaRapida": "Chor",
+    "tiempoVR": "1:15.985",
+    "duracion": "52m 00s",
+    "resultados": [
+      { "pos": 1, "piloto": "Chor", "puntos": 27, "nota": "VR" },
+      { "pos": 2, "piloto": "Rodri", "puntos": 18, "nota": "" },
+      { "pos": 3, "piloto": "Seba", "puntos": 15, "nota": "" },
+      { "pos": 4, "piloto": "Ivan", "puntos": 12, "nota": "" },
+      { "pos": 5, "piloto": "Nico", "puntos": 0, "nota": "DNF" },
+      { "pos": 6, "piloto": "Diego", "puntos": 8, "nota": "DNF" },
+      { "pos": 7, "piloto": "Simon", "puntos": 6, "nota": "DNF" },
+      { "pos": 8, "piloto": "Mateo", "puntos": 0, "nota": "DNF" }
     ]
   }
 ]
