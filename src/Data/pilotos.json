@@ -12,6 +12,7 @@
   { "id": 21, "nombre": "Nico", "escuderia": "Red Bull", "puntos": 14, "victorias": 0, "poles": 0, "vueltasRapidas": 0,  "carrerasCorridas": 3, "dnf" : 2  },
   { "id": 16, "nombre": "Claudio", "escuderia": "Aston Martin", "puntos": 2, "victorias": 0, "poles": 0, "vueltasRapidas": 0,  "carrerasCorridas": 6, "dnf" : 4  },
   { "id": 11, "nombre": "Fede", "escuderia": "Haas", "puntos": 4, "victorias": 0, "poles": 0, "vueltasRapidas": 0,  "carrerasCorridas": 3, "dnf" : 2},
+  { "id": 23, "nombre": "Fer", "escuderia": "Williams", "puntos": 0, "victorias": 0, "poles": 0, "vueltasRapidas": 0,  "carrerasCorridas": 0, "dnf" : 0},
   
   
 
