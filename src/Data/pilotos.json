@@ -13,7 +13,9 @@
   { "id": 16, "nombre": "Claudio", "escuderia": "Aston Martin", "puntos": 2, "victorias": 0, "poles": 0, "vueltasRapidas": 0,  "carrerasCorridas": 6, "dnf" : 4  },
   { "id": 11, "nombre": "Fede", "escuderia": "Haas", "puntos": 4, "victorias": 0, "poles": 0, "vueltasRapidas": 0,  "carrerasCorridas": 3, "dnf" : 2},
   { "id": 23, "nombre": "Fer", "escuderia": "Williams", "puntos": 0, "victorias": 0, "poles": 0, "vueltasRapidas": 0,  "carrerasCorridas": 0, "dnf" : 0},
-  
+  { "id": 24, "nombre": "Tomi", "escuderia": "Williams", "puntos": 0, "victorias": 0, "poles": 0, "vueltasRapidas": 0,  "carrerasCorridas": 0, "dnf" : 0},
+  { "id": 25, "nombre": "Milo", "escuderia": "Racing Bulls", "puntos": 0, "victorias": 0, "poles": 0, "vueltasRapidas": 0,  "carrerasCorridas": 0, "dnf" : 0},
+  { "id": 26, "nombre": "Nico H", "escuderia": "Racing Bulls", "puntos": 0, "victorias": 0, "poles": 0, "vueltasRapidas": 0,  "carrerasCorridas": 0, "dnf" : 0},
   
 
   { "id": 22, "nombre": "Leo A.", "escuderia": "Williams", "puntos": 0, "victorias": 0, "poles": 0, "vueltasRapidas": 0,  "carrerasCorridas": 0, "dnf" : 0, "activo" : false  },
