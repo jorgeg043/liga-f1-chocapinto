@@ -942,12 +942,12 @@ const proximaCarrera = calendario
                                     return (
                                         <div class="flex flex-col items-center group/podio transition-all duration-500 hover:-translate-y-1">
                                             {/* Avatar Flotante */}
-                                            <div class="relative mb-3">
+                                            <div class="relative mb-2">
                                                 <img 
-                                                    src={`/Fotos/perfil-${p.nombre.toLowerCase()}.jpg`} 
-                                                    alt={p.nombre} 
-                                                    class={`rounded-full object-cover border-2 ${borderColor} ${glowColor} transition-all duration-500 z-10 relative ${esP1 ? 'w-20 h-20 md:w-24 md:h-24' : 'w-16 h-16 md:w-20 md:h-20'}`}
-                                                />
+    src={`/Fotos/perfil-${p.nombre.toLowerCase()}.jpg`} 
+    alt={p.nombre} 
+    class={`rounded-full object-cover border-2 ${borderColor} ${glowColor} transition-all duration-500 z-10 relative ${esP1 ? 'w-24 h-24 md:w-32 md:h-32' : 'w-20 h-20 md:w-24 md:h-24'}`}
+/>
                                                 <div class={`absolute inset-0 rounded-full blur-md opacity-0 group-hover/podio:opacity-100 transition-opacity ${esP1 ? 'bg-yellow-500/20' : esP2 ? 'bg-zinc-400/20' : 'bg-amber-600/20'}`}></div>
                                             </div>
 
@@ -1132,6 +1132,9 @@ const proximaCarrera = calendario
         {escuderias.map((team, index) => {
             const position = index + 1;
             const formattedPos = position < 10 ? `0${position}` : position;
+            
+            // Lógica para la diferencia de puntos con el equipo superior
+            const diffSuperior = index === 0 ? 0 : escuderias[index - 1].puntos - team.puntos;
 
             return (
                 <div class="w-full sm:w-[50%] lg:w-[33.333%] flex-shrink-0 px-3 constructores-clean-slide">
@@ -1156,7 +1159,7 @@ const proximaCarrera = calendario
                             />
                         </div>
 
-                        <div class="text-center z-10">
+                        <div class="text-center z-10 flex flex-col items-center">
                             <h3 class="text-sm font-black uppercase tracking-[0.2em] text-zinc-500 group-hover:text-white transition-colors duration-300">
                                 {team.nombre}
                             </h3>
@@ -1168,7 +1171,18 @@ const proximaCarrera = calendario
                                 <span class="absolute -top-1 -right-6 text-[10px] font-black text-zinc-600 uppercase italic">PTS</span>
                             </div>
 
-                            
+                            {/* NUEVO: Diferencia de puntos con el superior */}
+                            <div class="mt-3 h-5 overflow-hidden flex items-center justify-center">
+                                {index === 0 ? (
+                                    <span class="text-[10px] font-mono font-black text-yellow-500 uppercase tracking-[0.3em] ">
+                                        Líder actual
+                                    </span>
+                                ) : (
+                                    <span class="text-[16px] font-mono font-bold text-zinc-400 uppercase tracking-widest group-hover:text-red-400 transition-colors duration-300 flex items-center gap-1">
+                                        <span class="" >DIF P{index}:</span> -{diffSuperior}
+                                    </span>
+                                )}
+                            </div>
                         </div>
 
                         <div class="absolute -bottom-6 -left-4 text-9xl font-mono font-black text-zinc-900/50 italic pointer-events-none group-hover:text-red-600/5 transition-colors duration-700 leading-none select-none">
@@ -2751,47 +2765,46 @@ const proximaCarrera = calendario
     =================================================================================== */}
 <section id="race-control-broadcast" class="mt-24 max-w-5xl mx-auto px-4 pb-20 font-mono relative">
     
-    {/* Encabezado de la Sección */}
+    {/* Encabezado de la Sección (Centrado) */}
     <div class="text-center mb-12 reveal-on-scroll">
         <h2 class="text-sm font-black mb-2 uppercase tracking-[0.4em] text-zinc-500">
-            Oficial <span class="text-red-600">Liga</span> Transmisión
+            Transmisión de <span class="text-red-600">Liga</span> Oficial
         </h2>
         <h3 class="text-4xl font-black uppercase italic text-white tracking-tighter">
-            RACE CONTROL & <span class="text-red-600">LIVE</span>
+            CONTROL DE CARRERA Y <span class="text-red-600">STREAM</span>
         </h3>
     </div>
 
-    {/* Grilla Principal Responsiva */}
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-xs">
+    {/* Contenedor Principal en Vertical */}
+    <div class="flex flex-col gap-8 text-xs">
         
-        {/* CARD 1: TRANSMISIÓN POR YOUTUBE */}
-        <div class="bg-zinc-950/40 border border-zinc-900 rounded-xl p-6 shadow-xl backdrop-blur-sm relative overflow-hidden group flex flex-col justify-between min-h-[320px]">
+        {/* PARTE SUPERIOR: TRANSMISIÓN POR YOUTUBE (Centrado y de Ancho Completo) */}
+        <div class="bg-zinc-950/40 border border-zinc-900 rounded-xl p-6 shadow-xl backdrop-blur-sm relative overflow-hidden group flex flex-col justify-between items-center text-center min-h-[260px] w-full">
             
-            {/* Imagen PNG o Textura de Fondo (Opcional, ajustable) */}
+            {/* Imagen PNG o Textura de Fondo */}
             <div class="absolute inset-0 opacity-[0.03] pointer-events-none z-0 mix-blend-luminosity">
                 <div class="w-full h-full bg-[radial-gradient(#e11d48_1px,transparent_1px)] [background-size:16px_16px]"></div>
             </div>
 
-            <div class="relative z-10 w-full">
+            <div class="relative z-10 w-full flex flex-col items-center">
                 {/* Badge de Estado del Vivo */}
-                <div class="flex items-center justify-between border-b border-zinc-900 pb-4 mb-6">
+                <div class="flex items-center justify-center border-b border-zinc-900 pb-4 mb-6 w-full">
                     <span class="flex items-center gap-2 text-red-500 font-black tracking-widest text-[10px] uppercase">
                         <span class="w-2 h-2 rounded-full bg-red-600 animate-pulse"></span>
                         ON AIR BROADCAST
                     </span>
-                    <span class="text-[9px] text-zinc-600 uppercase">Módulo: LIVE</span>
                 </div>
 
                 <h4 class="text-2xl font-black italic text-white uppercase tracking-tighter mb-3">
                     SEGUÍ LA CARRERA <br/> EN <span class="text-red-600">VIVO Y EN DIRECTO</span>
                 </h4>
-                <p class="text-zinc-400 text-[11px] leading-relaxed max-w-sm">
+                <p class="text-zinc-400 text-[11px] leading-relaxed max-w-2xl mx-auto">
                     No te pierdas ninguna fecha del torneo. Viví la transmisión oficial de la liga con relatos, estadísticas en tiempo real y toda la adrenalina de la pista desde nuestro canal.
                 </p>
             </div>
 
-            {/* Enlace Oficial a Youtube */}
-            <div class="relative z-10 pt-6">
+            {/* Enlace Oficial a Youtube (Centrado) */}
+            <div class="relative z-10 pt-6 w-full flex justify-center">
                 <a 
                     href="https://www.youtube.com/@francobellisonzi" 
                     target="_blank" 
@@ -2807,69 +2820,122 @@ const proximaCarrera = calendario
             </div>
         </div>
 
-        {/* CARD 2: COMISARIATO DEPORTIVO & TRANSMISOR */}
-        <div class="bg-zinc-950/40 border border-zinc-900 rounded-xl p-6 shadow-xl backdrop-blur-sm relative overflow-hidden group flex flex-col justify-between min-h-[320px]">
+        {/* PARTE INFERIOR: STAFF (Grilla de 2 Columnas) */}
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
             
-            {/* Fondo de Líneas Técnicas FIA / Race Control */}
-            <div class="absolute inset-0 opacity-[0.02] pointer-events-none z-0">
-                <svg width="100%" h="100%" xmlns="http://www.w3.org/2000/svg">
-                    <defs><pattern id="grid-control" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="currentColor" stroke-width="1"/></pattern></defs>
-                    <rect width="100%" height="100%" fill="url(#grid-control)" />
-                </svg>
-            </div>
-
-            <div class="relative z-10 w-full">
-                {/* Badge de Autoridad */}
-                <div class="flex items-center justify-between border-b border-zinc-900 pb-4 mb-6">
-                    <span class="text-yellow-500 font-black tracking-widest text-[10px] uppercase flex items-center gap-1.5">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.286z" />
-                        </svg>
-                        Comisario deportivo
-                    </span>
-                    <span class="text-[9px] text-zinc-600 uppercase">Módulo: STAFF</span>
+            {/* CARD 2A: COMISARIATO DEPORTIVO & TRANSMISOR (FRANCO) */}
+            <div class="bg-zinc-950/40 border border-zinc-900 rounded-xl p-6 shadow-xl backdrop-blur-sm relative overflow-hidden group flex flex-col justify-between min-h-[340px]">
+                
+                {/* Fondo de Líneas Técnicas FIA / Race Control */}
+                <div class="absolute inset-0 opacity-[0.02] pointer-events-none z-0">
+                    <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+                        <defs><pattern id="grid-control-franco" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="currentColor" stroke-width="1"/></pattern></defs>
+                        <rect width="100%" height="100%" fill="url(#grid-control-franco)" />
+                    </svg>
                 </div>
 
-                {/* Bloque de Identificación con Foto Desplazada */}
-                <div class="flex items-center gap-5">
-                    
-                    {/* Contenedor de la Foto con marco de competición */}
-                    <div class="relative w-20 h-20 sm:w-24 sm:h-24 rounded-xl border border-zinc-800 bg-zinc-900 overflow-hidden flex-shrink-0 group-hover:border-yellow-500/40 transition-colors shadow-inner">
-                        <img 
-                            src="/images/comisario.png" 
-                            alt="Foto del Comisario Deportivo" 
-                            class="w-full h-full object-cover object-top filter "
-                        />
-                       
-                        {/* Pequeña cuadrícula decorativa en la esquina de la foto */}
-                        <div class="absolute bottom-0 right-0 bg-zinc-950 text-[8px] px-1 font-mono text-zinc-600 border-t border-l border-zinc-800">STAFF</div>
+                <div class="relative z-10 w-full">
+                    {/* Badge de Autoridad */}
+                    <div class="flex items-center justify-between border-b border-zinc-900 pb-4 mb-6">
+                        <span class="text-yellow-500 font-black tracking-widest text-[10px] uppercase flex items-center gap-1.5">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.286z" />
+                            </svg>
+                            Comisario deportivo - Comentarista
+                        </span>
                     </div>
 
-                    {/* Datos de la Credencial */}
-                    <div class="space-y-1.5">
-                        <div class="text-[9px] uppercase font-black text-zinc-500 tracking-wider">Comisario & Transmisor</div>
-                        <h5 class="text-xl font-black italic uppercase text-white tracking-tighter leading-none">
-                            Franco
-                        </h5>
-                        <div class="inline-block text-[9px] bg-zinc-900 border border-zinc-800 text-zinc-400 font-bold px-2 py-0.5 rounded uppercase">
-                            ID Licencia: #maFIA-9145
+                    {/* Bloque de Identificación */}
+                    <div class="flex items-center gap-5">
+                        {/* Contenedor de la Foto (Agrandada) */}
+                        <div class="relative w-28 h-28 sm:w-42 sm:h-42 rounded-xl border border-zinc-800 bg-zinc-900 overflow-hidden flex-shrink-0 group-hover:border-yellow-500/40 transition-colors shadow-inner">
+                            <img 
+                                src="/images/comisario.png" 
+                                alt="Foto de Franco" 
+                                class="w-full h-full object-cover object-top"
+                            />
+                            <div class="absolute bottom-0 right-0 bg-zinc-950 text-[8px] px-1.5 py-0.5 font-mono text-white border-t border-l border-zinc-800">maFIA</div>
+                        </div>
+
+                        {/* Datos de la Credencial */}
+                        <div class="space-y-1.5">
+                            <div class="text-[9px] uppercase font-black text-zinc-500 tracking-wider">Comisario & Transmisor Principal</div>
+                            <h5 class="text-xl font-black italic uppercase text-white tracking-tighter leading-none">
+                                Franco
+                            </h5>
                         </div>
                     </div>
                 </div>
+
+                {/* Resumen Técnico de Tareas */}
+                <div class="relative z-10 pt-6 border-t border-zinc-900/60 mt-4 flex items-center justify-between text-[10px] text-zinc-500">
+                    <span class="flex items-center gap-1.5">
+                        <span class="w-1.5 h-1.5 rounded-full bg-yellow-500"></span> Revisión de Incidentes
+                    </span>
+                    <span class="flex items-center gap-1.5">
+                        <span class="w-1.5 h-1.5 rounded-full bg-yellow-500"></span> Sanciones
+                    </span>
+                    <span class="flex items-center gap-1.5">
+                        <span class="w-1.5 h-1.5 rounded-full bg-yellow-500"></span> Comentarista
+                    </span>
+                </div>
             </div>
 
-            {/* Resumen Técnico de Tareas */}
-            <div class="relative z-10 pt-6 border-t border-zinc-900/60 mt-4 flex items-center justify-between text-[10px] text-zinc-500">
-                <span class="flex items-center gap-1.5">
-                    <span class="w-1.5 h-1.5 rounded-full bg-yellow-500"></span> Revisión de Incidentes
-                </span>
-                <span class="flex items-center gap-1.5">
-                    <span class="w-1.5 h-1.5 rounded-full bg-yellow-500"></span> Relato Oficial
-                </span>
-                <span class="flex items-center gap-1.5">
-                    <span class="w-1.5 h-1.5 rounded-full bg-yellow-500"></span> Sanciones
-                </span>
+            {/* CARD 2B: SEGUNDO RELATOR / COMENTARISTA (LEO) */}
+            <div class="bg-zinc-950/40 border border-zinc-900 rounded-xl p-6 shadow-xl backdrop-blur-sm relative overflow-hidden group flex flex-col justify-between min-h-[340px]">
+                
+                {/* Fondo de Líneas Técnicas FIA / Race Control */}
+                <div class="absolute inset-0 opacity-[0.02] pointer-events-none z-0">
+                    <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+                        <defs><pattern id="grid-control-leo" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="currentColor" stroke-width="1"/></pattern></defs>
+                        <rect width="100%" height="100%" fill="url(#grid-control-leo)" />
+                    </svg>
+                </div>
+
+                <div class="relative z-10 w-full">
+                    {/* Badge de Autoridad */}
+                    <div class="flex items-center justify-between border-b border-zinc-900 pb-4 mb-6">
+                        <span class="text-red-500 font-black tracking-widest text-[10px] uppercase flex items-center gap-1.5">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 18.75a6 6 0 0 0 6-6v-1.5m-6 7.5a6 6 0 0 1-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 0 1-3-3V4.5a3 3 0 1 1 6 0v8.25a3 3 0 0 1-3 3Z" />
+                            </svg>
+                            Relator oficial
+                        </span>
+                    </div>
+
+                    {/* Bloque de Identificación */}
+                    <div class="flex items-center gap-5">
+                        {/* Contenedor de la Foto (Agrandada) */}
+                        <div class="relative w-28 h-28 sm:w-42 sm:h-42 rounded-xl border border-zinc-800 bg-zinc-900 overflow-hidden flex-shrink-0 group-hover:border-red-500/40 transition-colors shadow-inner">
+                            <img 
+                                src="/images/leo.jpg" 
+                                alt="Foto de Leo" 
+                                class="w-full h-full object-cover object-top"
+                            />
+                            <div class="absolute bottom-0 right-0 bg-zinc-950 text-[8px] px-1.5 py-0.5 font-mono text-white border-t border-l border-zinc-800">maFIA</div>
+                        </div>
+
+                        {/* Datos de la Credencial */}
+                        <div class="space-y-1.5">
+                            <div class="text-[9px] uppercase font-black text-zinc-500 tracking-wider">Relator & Analista Técnico</div>
+                            <h5 class="text-xl font-black italic uppercase text-white tracking-tighter leading-none">
+                                Leo
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Resumen Técnico de Tareas */}
+                <div class="relative z-10 pt-6 border-t border-zinc-900/60 mt-4 flex items-center justify-between text-[10px] text-zinc-500">
+                    <span class="flex items-center gap-1.5">
+                        <span class="w-1.5 h-1.5 rounded-full bg-red-500"></span> Análisis de Ritmo
+                    </span>
+                    <span class="flex items-center gap-1.5">
+                        <span class="w-1.5 h-1.5 rounded-full bg-red-500"></span> Relator oficial
+                    </span>
+                </div>
             </div>
+
         </div>
 
     </div>
