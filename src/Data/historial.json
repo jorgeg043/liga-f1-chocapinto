@@ -299,5 +299,36 @@
       { "pos": 7, "piloto": "Simon", "puntos": 6, "nota": "DNF" },
       { "pos": 8, "piloto": "Mateo", "puntos": 0, "nota": "DNF" }
     ]
+  },
+    {
+    "id": 14,
+    "gp": "Miami",
+    "circuito": "Miami",
+    "fecha": "17 JUL 2026",
+    "imagen": "/Fotos/foto-fecha14miami.png",
+    "pole": "Chor",
+    "tiempoPole": "1:27.444",
+    "vueltaRapida": "Giova",
+    "tiempoVR": "1:40.310",
+    "duracion": "52m 27s",
+    "resultados": [
+      { "pos": 1, "piloto": "Giova", "puntos": 26, "nota": "VR" },
+      { "pos": 2, "piloto": "Rodri", "puntos": 18, "nota": "" },
+      { "pos": 3, "piloto": "Diego", "puntos": 15, "nota": "" },
+      { "pos": 4, "piloto": "Simon", "puntos": 12, "nota": "" },
+      { "pos": 5, "piloto": "Ivan", "puntos": 10, "nota": "" },
+      { "pos": 6, "piloto": "Nico", "puntos": 8, "nota": "" },
+      { "pos": 7, "piloto": "Tomi", "puntos": 6, "nota": "" },
+      { "pos": 8, "piloto": "Elias", "puntos": 4, "nota": "" },
+      { "pos": 9, "piloto": "Seba", "puntos": 2, "nota": "" },
+      { "pos": 10, "piloto": "Ema", "puntos": 1, "nota": "" },
+      { "pos": 11, "piloto": "Claudio", "puntos": 0, "nota": "" },
+      { "pos": 12, "piloto": "Nico H", "puntos": 0, "nota": "" },
+      { "pos": 13, "piloto": "Mateo", "puntos": 0, "nota": "" },
+      { "pos": 14, "piloto": "Chor", "puntos": 1, "nota": "P", "nota": "DNF" },
+      { "pos": 15, "piloto": "Fer", "puntos": 0, "nota": "DNF" },
+      { "pos": 16, "piloto": "Fede", "puntos": 0, "nota": "DNF" },
+      { "pos": 17, "piloto": "Milo", "puntos": 0, "nota": "DNF" }
+    ]
   }
 ]

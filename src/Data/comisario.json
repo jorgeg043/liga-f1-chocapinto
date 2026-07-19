@@ -14,5 +14,37 @@
     "piloto": "N/A",
     "sancion": "Sin incidentes",
     "motivo": "Sin denuncias"
-  }
+  },
+    {
+    "id": 3,
+    "fecha": "17/07/2026",
+    "circuito": "Miami",
+    "piloto": "Seba",
+    "sancion": "Sanción: +5 segundos en el tiempo final de la carrera de Miami - +20 segundos añadidos al tiempo final de carrera del GP de Miami",
+    "motivo": "Tras una revisión detallada de las pruebas y las cámaras a bordo de ambos monoplazas, el Comité constata que en el ingreso a la variante hacia la izquierda, el piloto Saimon ya tenía el eje delantero de su vehículo completamente emparejado con el pontón de la Ferrari, otorgándole pleno derecho al espacio por el carril interno bajo la normativa de adelantamientos vigente. El piloto Seba realizó un cambio de trayectoria hacia el vértice de la curva ignorando la presencia del auto rival, lo que generó un encerramiento y un contacto inevitable. Si bien se destaca la pericia del piloto afectado para controlar el monoplaza y evitar un trompo mayor, la acción le significó la pérdida injusta de dos posiciones en pista. Se considera que, al tratarse de la primera vuelta, existe un margen de tráfico denso, pero esto no exime la responsabilidad del piloto que va por el exterior de respetar el espacio del auto que ya tiene la posición ganada por dentro. El Comité ha analizado las pruebas del relanzamiento tras la bandera roja y dictamina una maniobra evitable e imprudente por parte del piloto Seba. Cabe aclarar que se considera que no hubo dolo, intención de chocar ni una maniobra antideportiva manifiesta, por eso no se van a tomar medidas rigurosas. Debido al exceso de velocidad en la entrada, el Ferrari sufre un subviraje e impacta directamente contra el monoplaza de Chor, quien venía trazando la curva de forma natural por el exterior. El contacto provocó una pinchadura en la rueda delantera derecha del Alpine, obligándolo a abandonar la carrera de forma inmediata. Intentar un adelantamiento tan agresivo desde atrás en un relanzamiento, sin tener la posición ganada y provocando el retiro de otro competidor, demuestra una falta de previsión en las zonas de frenado con tráfico denso."
+    },
+    {
+    "id": 4,
+    "fecha": "17/07/2026",
+    "circuito": "Miami",
+    "piloto": "Simon",
+    "sancion": "Penalización de +15 segundos añadidos al tiempo final de carrera del GP de Miami (+5s por el primer toque, +10s por la reincidencia inmediata)(Se restaron 17,2 segundos por falla del juego (DT)",
+    "motivo": "El Comité ha analizado las pruebas de la Vuelta 3 y dictamina un comportamiento altamente imprudente por parte del piloto Simón. En la Curva 11: El piloto de Mercedes estira la frenada de manera desmedida (u olvida el punto de frenado), impactando por detrás al piloto Ema (Ferrari). En la Curva 14: Tan solo tres curvas después, repite exactamente la misma acción en la chicana, golpeando por detrás al piloto Tomi (Williams). Golpear a dos autos distintos por detrás en un lapso de medio circuito demuestra una falta total de control del vehículo y de noción de las distancias de frenado con tráfico."
+    },
+    {
+    "id": 5,
+    "fecha": "17/07/2026",
+    "circuito": "Miami",
+    "piloto": "Nico H",
+    "sancion": "Sanción: +30 seg añadidos al tiempo final de carrera del GP de Miami.",
+    "motivo": "Tras una revisión detallada de las pruebas y cámaras a bordo, se constata que a la salida de la curva 16 se encontraba un vehículo ya accidentado y cruzado en la pista. El piloto Nico DLH, lejos de levantar el acelerador o tomar medidas de precaución ante la situación de peligro, mantuvo el ritmo de carrera (o aceleró), impactando de lleno contra el vehículo detenido y generando una colisión múltiple con los autos que intentaban esquivar el accidente. Acto seguido, aprovechó el impacto y el caos para adelantar tres (3) posiciones. No respetar un auto detenido en pista y usar el choque como -paragolpes- para ganar posiciones es una infracción gravísima contra el 'Fair Play' de la liga."
+  },
+  {
+    "id": 6,
+    "fecha": "17/07/2026",
+    "circuito": "Miami",
+    "piloto": "Elias, Tomi y Ema",
+    "sancion": "Piloto Elias: +10 segundos en el tiempo final de la carrera de Miami. Piloto Tomi: +5 segundos en el tiempo final de la carrera de Miami. Piloto Ema: Sin sanción.",
+    "motivo": "Tras una revisión detallada de las pruebas y capturas de la variante, el Comité constata que se trató de un incidente provocado por dos acciones erróneas concurrentes en condiciones de pista crítica (lluvia), dejando al piloto Ema como víctima inocente en el centro de la maniobra. Por un lado, el piloto Turco intentó un adelantamiento por el carril interno de la curva perdiendo el control en la frenada y sufriendo un fuerte subviraje debido al exceso de velocidad, lo que provocó que impactara directamente contra el lateral de la Ferrari que venía trazando de forma natural. Por el otro, el piloto Tomi realizó una aproximación excesivamente cerrada desde el exterior buscando el vértice con tráfico denso, bloqueando por completo la vía de escape y el espacio del piloto afectado. Se considera que, al tratarse de un relanzamiento bajo lluvia con gomas frías, el riesgo es elevado, pero esto no exime la responsabilidad del piloto del interior de controlar su frenada ni al del exterior de cerrar la trayectoria de forma imprudente en un pelotón denso."
+  } 
 ]

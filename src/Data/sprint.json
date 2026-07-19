@@ -51,15 +51,41 @@
       { "pos": 4, "piloto": "Diego", "puntos": 5, "nota": "" },
       { "pos": 5, "piloto": "Giova", "puntos": 4, "nota": "" },
       { "pos": 6, "piloto": "Elias", "puntos": 3, "nota": "" },
-      
       { "pos": 7, "piloto": "Mateo", "puntos": 2, "nota": "" },
       { "pos": 8, "piloto": "Seba", "puntos": 1, "nota": "" },
-      
       { "pos": 9, "piloto": "Claudio", "puntos": 0, "nota": "" },
       { "pos": 10, "piloto": "Ema", "puntos": 0, "nota": "" },
       { "pos": 11, "piloto": "Simon", "puntos": 0, "nota": "" },
       { "pos": 12, "piloto": "Nico", "puntos": 0, "nota": "DNF" }
       
+    ]
+  },
+    {
+    "id": 4,
+    "gp": "Miami",
+    "circuito": "Miami",
+    "imagen": "/Fotos/foto-fecha14miami.png",
+    "fecha": "17 JUL 2026",
+    "pole": "Chor", 
+    "vueltaRapida": "1:27:902",
+    "resultados": [
+      { "pos": 1, "piloto": "Chor", "puntos": 8, "nota": "" },
+      { "pos": 2, "piloto": "Ema", "puntos": 7, "nota": "VR" },
+      { "pos": 3, "piloto": "Ivan", "puntos": 6, "nota": "" },
+      { "pos": 4, "piloto": "Nico", "puntos": 5, "nota": "" },
+      { "pos": 5, "piloto": "Claudio", "puntos": 4, "nota": "" },
+      { "pos": 6, "piloto": "Rodri", "puntos": 3, "nota": "" },
+      { "pos": 7, "piloto": "Tomi", "puntos": 2, "nota": "" },
+      { "pos": 8, "piloto": "Giova", "puntos": 1, "nota": "" },
+      { "pos": 9, "piloto": "Nico H", "puntos": 0, "nota": "" },
+      { "pos": 10, "piloto": "Mateo", "puntos": 0, "nota": "" },
+      { "pos": 11, "piloto": "Simon", "puntos": 0, "nota": "" },
+      { "pos": 12, "piloto": "Fer", "puntos": 0, "nota": "" },
+      { "pos": 13, "piloto": "Diego", "puntos": 0, "nota": "" },
+      { "pos": 14, "piloto": "Fede", "puntos": 0, "nota": "" },
+      { "pos": 15, "piloto": "Elias", "puntos": 0, "nota": "DNF" },
+      { "pos": 16, "piloto": "Seba", "puntos": 0, "nota": "DNF" },
+      { "pos": 17, "piloto": "Milo", "puntos": 0, "nota": "DNF" }
     ]
   }
 ]
