@@ -30,5 +30,25 @@
       { "nombre": "Simon", "neumaticos": ["H", "M", "M", "M"], "paradas": 3, "advertencias": "9", "sancion": "Saltarse la curva, exceder límites de pista, +9', DNF V19", "reparacion": "2 Alerón delantero" },
       { "nombre": "Mateo", "neumaticos": ["H", "M", "M", "S", "S"], "paradas": 4, "advertencias": "7", "sancion": "Colisión con Simon, exceder límites de pista +3' y +10', DNF V15 ", "reparacion": "3 Alerón delantero" }
     ]
+  },
+      {
+    "carreraId": "Arabia Saudita",
+    "carreraNombre": "Jeddah",
+    "pilotos": [
+      { "nombre": "Chor", "neumaticos": ["M", "H"], "paradas": 1, "advertencias": "1", "sancion": "Exceder límite de pista", "reparacion": "-" },
+      { "nombre": "Giova", "neumaticos": ["M", "H"], "paradas": 1, "advertencias": "2", "sancion": "Exceder límite de pista", "reparacion": "-" },
+      { "nombre": "Elias", "neumaticos": ["M", "H", "H"], "paradas": 2, "advertencias": "4", "sancion": "Colisión con Simon, saltarse la curva, exceder límite de pista +3' ", "reparacion": "1 Alerón deltanero" },
+      { "nombre": "Ivan", "neumaticos": ["H", "H", "M", "S"], "paradas": 3, "advertencias": "4", "sancion": "Exceder límite de pista, saltarse la curva +3' ", "reparacion": "Alerón delantero" },
+      { "nombre": "Ema", "neumaticos": ["H", "M", "S"], "paradas": 2, "advertencias": "12", "sancion": "Saltarse la curva, colisión con Tomi, exceder límite de pista +9', colisión con Rodri, saltar curva y adelantar posición +10' ", "reparacion": "Alerón delantero" },
+      { "nombre": "Rodri", "neumaticos": ["M", "H", "S"], "paradas": 2, "advertencias": "7", "sancion": "2 colisiones con Claudio, exceder límite de pista +3' , saltarse la curva +3', colisión con Nico ", "reparacion": "2 Alerón delantero" },
+      { "nombre": "Claudio", "neumaticos": ["M", "H", "H"], "paradas": 2, "advertencias": "11", "sancion": "Saltarse la curva, exceder límite de pista +9' , colisión con Nico H, DNF V24", "reparacion": "Alerón delantero" },
+      { "nombre": "Tomi", "neumaticos": ["M", "M", "H" ], "paradas": 2, "advertencias": "1", "sancion": "Exceder límite de pista, DNF V23", "reparacion": "Alerón delantero" },
+      { "nombre": "Nico H", "neumaticos": ["H", "M", "S", "M"], "paradas": 3, "advertencias": "15", "sancion": "Colisión con Fer, exceso de velocidad durante CSV (Drive Trough), saltarse la curva, exceder límite de pista +12', colisión con Chor, DNF V18 ", "reparacion": "2 Alerón delantero" },
+      { "nombre": "Simon", "neumaticos": ["M", "H", "M"], "paradas": 2, "advertencias": "4", "sancion": "Colisión con Elias, exceder límite de pista, colisión grave con Nico H +10', DNF V15", "reparacion": "2 Alerón delantero" },
+      { "nombre": "Nico", "neumaticos": ["M"], "paradas": "-", "advertencias": "1", "sancion": "Exceder límite de pista, DNF V9 ", "reparacion": "" },
+      { "nombre": "Diego", "neumaticos": ["H", "S"], "paradas": 1, "advertencias": "2", "sancion": "Colisión con Nico, saltarse la curva, DNF V6 ", "reparacion": "Alerón delantero" },
+      { "nombre": "Fer", "neumaticos": ["H"], "paradas": "-", "advertencias": "6", "sancion": "Saltarse la curva +3' , colisión con Claudio, 2 excesos de velocidad durante CSV (2 Drive Trough), DNF V3 ", "reparacion": "" },
+      { "nombre": "Mateo", "neumaticos": ["M"], "paradas": "-", "advertencias": "1", "sancion": "Saltarse la curva, DNF V2", "reparacion": "" }
+    ]
   }
 ]

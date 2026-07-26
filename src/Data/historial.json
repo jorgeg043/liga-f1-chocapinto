@@ -330,5 +330,33 @@
       { "pos": 16, "piloto": "Fede", "puntos": 0, "nota": "DNF" },
       { "pos": 17, "piloto": "Milo", "puntos": 0, "nota": "DNF" }
     ]
+  },
+      {
+    "id": 15,
+    "gp": "Arabia Saudita",
+    "circuito": "Jeddah",
+    "fecha": "24 JUL 2026",
+    "imagen": "/Fotos/foto-fecha15jeddah.png",
+    "pole": "Chor",
+    "tiempoPole": "1:29.298",
+    "vueltaRapida": "Giova",
+    "tiempoVR": "1:33.796",
+    "duracion": "44m 38s",
+    "resultados": [
+      { "pos": 1, "piloto": "Chor", "puntos": 26, "nota": "P" },
+      { "pos": 2, "piloto": "Giova", "puntos": 19, "nota": "VR" },
+      { "pos": 3, "piloto": "Elias", "puntos": 15, "nota": "" },
+      { "pos": 4, "piloto": "Ivan", "puntos": 12, "nota": "" },
+      { "pos": 5, "piloto": "Ema", "puntos": 10, "nota": "" },
+      { "pos": 6, "piloto": "Rodri", "puntos": 8, "nota": "" },
+      { "pos": 7, "piloto": "Claudio", "puntos": 0, "nota": "DNF" },
+      { "pos": 8, "piloto": "Tomi", "puntos": 0, "nota": "DNF" },
+      { "pos": 9, "piloto": "Nico H", "puntos": 0, "nota": "DNF" },
+      { "pos": 10, "piloto": "Simon", "puntos": 0, "nota": "DNF" },
+      { "pos": 11, "piloto": "Nico", "puntos": 0, "nota": "DNF" },
+      { "pos": 12, "piloto": "Diego", "puntos": 0, "nota": "DNF" },
+      { "pos": 13, "piloto": "Fer", "puntos": 0, "nota": "DNF" },
+      { "pos": 14, "piloto": "Mateo", "puntos": 0, "nota": "DNF" }
+    ]
   }
 ]
