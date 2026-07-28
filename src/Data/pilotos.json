@@ -16,7 +16,8 @@
   { "id": 26, "nombre": "Nico H", "escuderia": "Racing Bulls", "puntos": 0, "victorias": 0, "poles": 0, "vueltasRapidas": 0,  "carrerasCorridas": 2, "dnf" : 1},
   { "id": 23, "nombre": "Fer", "escuderia": "Williams", "puntos": 0, "victorias": 0, "poles": 0, "vueltasRapidas": 0,  "carrerasCorridas": 2, "dnf" : 2},
   { "id": 25, "nombre": "Milo", "escuderia": "Racing Bulls", "puntos": 0, "victorias": 0, "poles": 0, "vueltasRapidas": 0,  "carrerasCorridas": 1, "dnf" : 2},
-  
+  { "id": 26, "nombre": "Nacho", "escuderia": "Mclaren", "puntos": 0, "victorias": 0, "poles": 0, "vueltasRapidas": 0,  "carrerasCorridas": 0, "dnf" : 0},
+  { "id": 27, "nombre": "Marcos", "escuderia": "Mclaren", "puntos": 0, "victorias": 0, "poles": 0, "vueltasRapidas": 0,  "carrerasCorridas": 0, "dnf" : 0},
   
 
   { "id": 22, "nombre": "Leo A.", "escuderia": "Williams", "puntos": 0, "victorias": 0, "poles": 0, "vueltasRapidas": 0,  "carrerasCorridas": 0, "dnf" : 0, "activo" : false  },
