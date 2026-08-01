@@ -50,5 +50,25 @@
       { "nombre": "Fer", "neumaticos": ["H"], "paradas": "-", "advertencias": "6", "sancion": "Saltarse la curva +3' , colisión con Claudio, 2 excesos de velocidad durante CSV (2 Drive Trough), DNF V3 ", "reparacion": "" },
       { "nombre": "Mateo", "neumaticos": ["M"], "paradas": "-", "advertencias": "1", "sancion": "Saltarse la curva, DNF V2", "reparacion": "" }
     ]
-  }
+  },
+      {
+    "carreraId": "Singapur",
+    "carreraNombre": "Singapur",
+    "pilotos": [
+      { "nombre": "Chor", "neumaticos": ["M", "H"], "paradas": 1, "advertencias": "1", "sancion": "Colisión con Tomi", "reparacion": "-" },
+      { "nombre": "Elias", "neumaticos": ["S", "M","H"], "paradas": 2, "advertencias": "1", "sancion": "Exceder límite de pista", "reparacion": "Alerón delantero" },
+      { "nombre": "Giova", "neumaticos": ["M", "H", "M"], "paradas": 1, "advertencias": "3", "sancion": "Exceder límite de pista, colisión grave con Nico +10', penalización no cumplida +10'", "reparacion": "-" },
+      { "nombre": "Ivan", "neumaticos": ["H", "H", "S"], "paradas": 2, "advertencias": "7", "sancion": "Exceder límite de pista +6'", "reparacion": "Alerón delantero" },
+      { "nombre": "Nico", "neumaticos": ["M", "H"], "paradas": 1, "advertencias": "2", "sancion": "Exceder límite de pista, colisión con Giova", "reparacion": "" },
+      { "nombre": "Diego", "neumaticos": ["M", "H", "M"], "paradas": 2, "advertencias": "4", "sancion": "Colisión con Tomi, exceder límite de pista +3'", "reparacion": "2 Alerón delantero" },
+      { "nombre": "Tomi", "neumaticos": ["S", "H", "M", "H", "M"], "paradas": 4, "advertencias": "2", "sancion": "Colisión con Chor, colisión con Giova, DNF V26", "reparacion": "2 Alerón delantero" },
+      { "nombre": "Rodri", "neumaticos": ["M", "H"], "paradas": 1, "advertencias": "2", "sancion": "Drive-trough, vuelta anulada, DNF V18", "reparacion": "Alerón delantero" },
+      { "nombre": "Fede", "neumaticos": ["M", "H", "M"], "paradas": 2, "advertencias": "3", "sancion": "2 Exceso de velocidad durante CSV (Drive Trough), exceder límite de pista, DNF V13", "reparacion": "2 Alerón delantero" },
+      { "nombre": "Simon", "neumaticos": ["M", "M"], "paradas": 1, "advertencias": "1", "sancion": "Colisión con Seba, DNF V7", "reparacion": "Alerón delantero" },
+      { "nombre": "Claudio", "neumaticos": ["M", "M"], "paradas": "1", "advertencias": "-", "sancion": "DNF V7 ", "reparacion": "Alerón delantero" },
+      { "nombre": "Fer", "neumaticos": ["M"], "paradas": "-", "advertencias": "1", "sancion": "Colisión con Nico H, DNF V5 ", "reparacion": "Alerón delantero" },
+      { "nombre": "Nico H", "neumaticos": ["H"], "paradas": "-", "advertencias": "6", "sancion": "Drive-trough, vuelta anulada, DNF V5", "reparacion": "" },
+      { "nombre": "Seba", "neumaticos": ["M"], "paradas": "1", "advertencias": "2", "sancion": "Colisión con Simon, exceder límite de pista +10', DNF V2", "reparacion": "Alerón delantero" }
+    ]
+  }  
 ]

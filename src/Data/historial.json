@@ -358,5 +358,33 @@
       { "pos": 13, "piloto": "Fer", "puntos": 0, "nota": "DNF" },
       { "pos": 14, "piloto": "Mateo", "puntos": 0, "nota": "DNF" }
     ]
+  },
+        {
+    "id": 16,
+    "gp": "Singapur",
+    "circuito": "Marina Bay",
+    "fecha": "31 JUL 2026",
+    "imagen": "/Fotos/foto-fecha16singapur.png",
+    "pole": "Chor",
+    "tiempoPole": "1:31:697",
+    "vueltaRapida": "Ivan",
+    "tiempoVR": "1:37.285",
+    "duracion": "62m 32s",
+    "resultados": [
+      { "pos": 1, "piloto": "Chor", "puntos": 26, "nota": "P" },
+      { "pos": 2, "piloto": "Elias", "puntos": 18, "nota": "" },
+      { "pos": 3, "piloto": "Giova", "puntos": 15, "nota": "" },
+      { "pos": 4, "piloto": "Ivan", "puntos": 13, "nota": "VR" },
+      { "pos": 5, "piloto": "Nico", "puntos": 10, "nota": "" },
+      { "pos": 6, "piloto": "Diego", "puntos": 8, "nota": "" },
+      { "pos": 7, "piloto": "Tomi", "puntos": 0, "nota": "DNF" },
+      { "pos": 8, "piloto": "Rodri", "puntos": 0, "nota": "DNF" },
+      { "pos": 9, "piloto": "Fede", "puntos": 0, "nota": "DNF" },
+      { "pos": 10, "piloto": "Simon", "puntos": 0, "nota": "DNF" },
+      { "pos": 11, "piloto": "Claudio", "puntos": 0, "nota": "DNF" },
+      { "pos": 12, "piloto": "Fer", "puntos": 0, "nota": "DNF" },
+      { "pos": 13, "piloto": "Nico H", "puntos": 0, "nota": "DNF" },
+      { "pos": 14, "piloto": "Seba", "puntos": 0, "nota": "DNF" }
+    ]
   }
 ]
