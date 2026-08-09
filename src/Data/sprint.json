@@ -87,5 +87,31 @@
       { "pos": 16, "piloto": "Seba", "puntos": 0, "nota": "DNF" },
       { "pos": 17, "piloto": "Milo", "puntos": 0, "nota": "DNF" }
     ]
+  },
+      {
+    "id": 5,
+    "gp": "Cota",
+    "circuito": "Texas",
+    "imagen": "/Fotos/foto-fecha17texas.png",
+    "fecha": "07 AGO 2026",
+    "pole": "Elias", 
+    "vueltaRapida": "1:36:706",
+    "resultados": [
+      { "pos": 1, "piloto": "Elias", "puntos": 8, "nota": "" },
+      { "pos": 2, "piloto": "Giova", "puntos": 7, "nota": "" },
+      { "pos": 3, "piloto": "Mateo", "puntos": 6, "nota": "" },
+      { "pos": 4, "piloto": "Rodri", "puntos": 5, "nota": "" },
+      { "pos": 5, "piloto": "Ema", "puntos": 4, "nota": "" },
+      { "pos": 6, "piloto": "Ivan", "puntos": 3, "nota": "" },
+      { "pos": 7, "piloto": "Seba", "puntos": 2, "nota": "" },
+      { "pos": 8, "piloto": "Simon", "puntos": 1, "nota": "" },
+      { "pos": 9, "piloto": "Claudio", "puntos": 0, "nota": "" },
+      { "pos": 10, "piloto": "Fer", "puntos": 0, "nota": "" },
+      { "pos": 11, "piloto": "Fede", "puntos": 0, "nota": "" },
+      { "pos": 12, "piloto": "Diego", "puntos": 0, "nota": "VR" },
+      { "pos": 13, "piloto": "German", "puntos": 0, "nota": "" },
+      { "pos": 14, "piloto": "Tomi", "puntos": 0, "nota": "DNF" },
+      { "pos": 15, "piloto": "Nico H", "puntos": 0, "nota": "DNF" }
+    ]
   }
 ]

@@ -70,5 +70,26 @@
       { "nombre": "Nico H", "neumaticos": ["H"], "paradas": "-", "advertencias": "6", "sancion": "Drive-trough, vuelta anulada, DNF V5", "reparacion": "" },
       { "nombre": "Seba", "neumaticos": ["M"], "paradas": "1", "advertencias": "2", "sancion": "Colisión con Simon, exceder límite de pista +10', DNF V2", "reparacion": "Alerón delantero" }
     ]
-  }  
+  },
+      {
+    "carreraId": "Texas",
+    "carreraNombre": "Cota",
+    "pilotos": [
+      { "nombre": "Ema", "neumaticos": ["M", "H"], "paradas": 1, "advertencias": "3", "sancion": "Límtes de pista +3'", "reparacion": "-" },
+      { "nombre": "Giova", "neumaticos": ["M", "H"], "paradas": 1, "advertencias": "9", "sancion": "Límtes de pista +9'", "reparacion": "-" },
+      { "nombre": "Mateo", "neumaticos": ["M", "H"], "paradas": 1, "advertencias": "6", "sancion": "Límtes de pista +6'", "reparacion": "" },
+      { "nombre": "Elias", "neumaticos": ["M", "H", "S"], "paradas": 2, "advertencias": "9", "sancion": "Límtes de pista +9'", "reparacion": "-" },
+      { "nombre": "Nico H", "neumaticos": ["S", "H", "M"], "paradas": 2, "advertencias": "9", "sancion": "Límtes de pista +9'", "reparacion": "-" },
+      { "nombre": "Rodri", "neumaticos": ["M", "H"], "paradas": 1, "advertencias": "6", "sancion": "Límtes de pista +6'", "reparacion": "-" },
+      { "nombre": "Simon", "neumaticos": ["H", "S", "M"], "paradas": 2, "advertencias": "3", "sancion": "Límtes de pista +3'", "reparacion": "-" },
+      { "nombre": "Ivan", "neumaticos": ["H", "M"], "paradas": 1, "advertencias": "9", "sancion": "Límtes de pista +9'", "reparacion": "-" },
+      { "nombre": "Diego", "neumaticos": ["M", "S", "H"], "paradas": 2, "advertencias": "12", "sancion": "Límtes de pista +12'", "reparacion": "Alerón delantero" },
+      { "nombre": "Claudio", "neumaticos": ["M", "H", "M"], "paradas": 2, "advertencias": "12", "sancion": "Límtes de pista +12'", "reparacion": "Alerón delantero" },
+      { "nombre": "Fede", "neumaticos": ["M", "H", "S"], "paradas": 2, "advertencias": "18", "sancion": "Límtes de pista +18'", "reparacion": "Alerón delantero" },
+      { "nombre": "Seba", "neumaticos": ["M", "H"], "paradas": 1, "advertencias": "", "sancion": "", "reparacion": "-" },
+      { "nombre": "German", "neumaticos": ["M", "H"], "paradas": 1, "advertencias": "", "sancion": "", "reparacion": "-" },
+      { "nombre": "Fer", "neumaticos": ["M", "H", "M", "H"], "paradas": 3, "advertencias": "27", "sancion": "Límtes de pista +27', Descalificado por exceso de advertencias (30) V26", "reparacion": "-" },
+      { "nombre": "Tomi", "neumaticos": ["S"], "paradas": 0, "advertencias": "3", "sancion": "Límtes de pista +3', Descalificado V4", "reparacion": "-" }     
+    ]
+  }    
 ]

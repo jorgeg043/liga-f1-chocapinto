@@ -386,5 +386,34 @@
       { "pos": 13, "piloto": "Nico H", "puntos": 0, "nota": "DNF" },
       { "pos": 14, "piloto": "Seba", "puntos": 0, "nota": "DNF" }
     ]
+  },
+          {
+    "id": 17,
+    "gp": "COTA",
+    "circuito": "Texas",
+    "fecha": "07 AGO 2026",
+    "imagen": "/Fotos/foto-fecha17texas.png",
+    "pole": "Ema",
+    "tiempoPole": "1:34:561",
+    "vueltaRapida": "Ema",
+    "tiempoVR": "1:38.410",
+    "duracion": "47m 18s",
+    "resultados": [
+      { "pos": 1, "piloto": "Ema", "puntos": 27, "nota": "P, VR" },
+      { "pos": 2, "piloto": "Giova", "puntos": 18, "nota": "" },
+      { "pos": 3, "piloto": "Mateo", "puntos": 15, "nota": "" },
+      { "pos": 4, "piloto": "Elias", "puntos": 12, "nota": "" },
+      { "pos": 5, "piloto": "Nico H", "puntos": 10, "nota": "" },
+      { "pos": 6, "piloto": "Rodri", "puntos": 8, "nota": "" },
+      { "pos": 7, "piloto": "Simon", "puntos": 6, "nota": "" },
+      { "pos": 8, "piloto": "Ivan", "puntos": 4, "nota": "" },
+      { "pos": 9, "piloto": "Diego", "puntos": 2, "nota": "" },
+      { "pos": 10, "piloto": "Claudio", "puntos": 1, "nota": "" },
+      { "pos": 11, "piloto": "Fede", "puntos": 0, "nota": "" },
+      { "pos": 12, "piloto": "Seba", "puntos": 0, "nota": "" },
+      { "pos": 13, "piloto": "German", "puntos": 0, "nota": "" },
+      { "pos": 14, "piloto": "Fer", "puntos": 0, "nota": "DNF" },
+      { "pos": 15, "piloto": "Tomi", "puntos": 0, "nota": "DNF" }
+    ]
   }
 ]
