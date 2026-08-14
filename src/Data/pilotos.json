@@ -15,13 +15,12 @@
   { "id": 16, "nombre": "Claudio", "escuderia": "Aston Martin", "puntos": 7, "victorias": 0, "poles": 0, "vueltasRapidas": 0,  "carrerasCorridas": 10, "dnf" : 6  },
   { "id": 11, "nombre": "Fede", "escuderia": "Haas", "puntos": 4, "victorias": 0, "poles": 0, "vueltasRapidas": 0,  "carrerasCorridas": 6, "dnf" : 4},
   { "id": 23, "nombre": "Fer", "escuderia": "Williams", "puntos": 0, "victorias": 0, "poles": 0, "vueltasRapidas": 0,  "carrerasCorridas": 4, "dnf" : 4},
-  { "id": 23, "nombre": "Fede T", "escuderia": "Haas", "puntos": 0, "victorias": 0, "poles": 0, "vueltasRapidas": 0,  "carrerasCorridas": 0, "dnf" : 0},
-  { "id": 28, "nombre": "German", "escuderia": "Racing Bulls", "puntos": 0, "victorias": 0, "poles": 0, "vueltasRapidas": 0,  "carrerasCorridas": 0, "dnf" : 0},
-  { "id": 26, "nombre": "Nacho", "escuderia": "Mclaren", "puntos": 0, "victorias": 0, "poles": 0, "vueltasRapidas": 0,  "carrerasCorridas": 0, "dnf" : 0},
-  { "id": 27, "nombre": "Marcos", "escuderia": "Mclaren", "puntos": 0, "victorias": 0, "poles": 0, "vueltasRapidas": 0,  "carrerasCorridas": 0, "dnf" : 0},
-  
-  
 
+
+  { "id": 23, "nombre": "Fede T", "escuderia": "Haas", "puntos": 0, "victorias": 0, "poles": 0, "vueltasRapidas": 0,  "carrerasCorridas": 0, "dnf" : 0, "activo" : false},
+  { "id": 28, "nombre": "German", "escuderia": "Racing Bulls", "puntos": 0, "victorias": 0, "poles": 0, "vueltasRapidas": 0,  "carrerasCorridas": 0, "dnf" : 0, "activo" : false},
+  { "id": 26, "nombre": "Nacho", "escuderia": "Mclaren", "puntos": 0, "victorias": 0, "poles": 0, "vueltasRapidas": 0,  "carrerasCorridas": 0, "dnf" : 0, "activo" : false},
+  { "id": 27, "nombre": "Marcos", "escuderia": "Mclaren", "puntos": 0, "victorias": 0, "poles": 0, "vueltasRapidas": 0,  "carrerasCorridas": 0, "dnf" : 0, "activo" : false},
   { "id": 25, "nombre": "Milo", "escuderia": "Racing Bulls", "puntos": 0, "victorias": 0, "poles": 0, "vueltasRapidas": 0,  "carrerasCorridas": 1, "dnf" : 1, "activo" : false},
   { "id": 22, "nombre": "Leo A.", "escuderia": "Williams", "puntos": 0, "victorias": 0, "poles": 0, "vueltasRapidas": 0,  "carrerasCorridas": 0, "dnf" : 0, "activo" : false  },
 { "id": 6, "nombre": "Leo", "escuderia": "Red Bull", "puntos": 27, "victorias": 0, "poles": 0, "vueltasRapidas": 0,  "carrerasCorridas": 6, "dnf" : 3, "activo" : false  },
