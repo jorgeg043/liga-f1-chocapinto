@@ -415,5 +415,33 @@
       { "pos": 14, "piloto": "Fer", "puntos": 0, "nota": "DNF" },
       { "pos": 15, "piloto": "Tomi", "puntos": 0, "nota": "DNF" }
     ]
+  },
+            {
+    "id": 18,
+    "gp": "IMOLA",
+    "circuito": "IMOLA",
+    "fecha": "14 AGO 2026",
+    "imagen": "/Fotos/foto-fecha18imola.png",
+    "pole": "Ema",
+    "tiempoPole": "1:25:460",
+    "vueltaRapida": "Diego",
+    "tiempoVR": "1:20.268",
+    "duracion": "50m 24s",
+    "resultados": [
+      { "pos": 1, "piloto": "Ema", "puntos": 26, "nota": "P" },
+      { "pos": 2, "piloto": "Tomi", "puntos": 18, "nota": "" },
+      { "pos": 3, "piloto": "Chor", "puntos": 15, "nota": "" },
+      { "pos": 4, "piloto": "Nico H", "puntos": 12, "nota": "" },
+      { "pos": 5, "piloto": "Ivan", "puntos": 10, "nota": "" },
+      { "pos": 6, "piloto": "Giova", "puntos": 8, "nota": "" },
+      { "pos": 7, "piloto": "Elias", "puntos": 6, "nota": "" },
+      { "pos": 8, "piloto": "Fer", "puntos": 4, "nota": "" },
+      { "pos": 9, "piloto": "Mateo", "puntos": 2, "nota": "" },
+      { "pos": 10, "piloto": "Diego", "puntos": 2, "nota": "VR" },
+      { "pos": 11, "piloto": "Nico", "puntos": 0, "nota": "" },
+      { "pos": 12, "piloto": "Claudio", "puntos": 0, "nota": "" },
+      { "pos": 13, "piloto": "Fede", "puntos": 0, "nota": "DNF" },
+      { "pos": 14, "piloto": "Simon", "puntos": 0, "nota": "DNF" }
+      ]
   }
 ]
