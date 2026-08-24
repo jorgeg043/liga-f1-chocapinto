@@ -443,5 +443,30 @@
       { "pos": 13, "piloto": "Fede", "puntos": 0, "nota": "DNF" },
       { "pos": 14, "piloto": "Simon", "puntos": 0, "nota": "DNF" }
       ]
+  },
+              {
+    "id": 19,
+    "gp": "MONZA",
+    "circuito": "MONZA",
+    "fecha": "21 AGO 2026",
+    "imagen": "/Fotos/foto-fecha19monza.png",
+    "pole": "Chor",
+    "tiempoPole": "1:19:996",
+    "vueltaRapida": "Tomi",
+    "tiempoVR": "1:23.164",
+    "duracion": "39m 01s",
+    "resultados": [
+      { "pos": 1, "piloto": "Hernan", "puntos": 26, "nota": "" },
+      { "pos": 2, "piloto": "Claudio", "puntos": 18, "nota": "" },
+      { "pos": 3, "piloto": "Tomi", "puntos": 16, "nota": "VR" },
+      { "pos": 4, "piloto": "Giova", "puntos": 12, "nota": "" },
+      { "pos": 5, "piloto": "Panchito", "puntos": 10, "nota": "" },
+      { "pos": 6, "piloto": "Ivan", "puntos": 8, "nota": "" },
+      { "pos": 7, "piloto": "Simon", "puntos": 6, "nota": "" },
+      { "pos": 8, "piloto": "Diego", "puntos": 4, "nota": "" },
+      { "pos": 9, "piloto": "Rodri", "puntos": 2, "nota": "" },
+      { "pos": 10, "piloto": "Nico", "puntos": 1, "nota": "" },
+      { "pos": 11, "piloto": "Chor", "puntos": 1, "nota": "P, DSC" }
+    ]
   }
 ]

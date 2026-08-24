@@ -26,7 +26,7 @@ const logos = {
   "Mclaren": "/Fotos/logo-mclaren.png",
 };
 const totalCarreras = 24;
-const carrerasCorridas = 18;
+const carrerasCorridas = 19;
 const porcentajeTemporada = (carrerasCorridas / totalCarreras) * 100;
 const escuderiasMap = pilotos.reduce((acc, piloto) => {
     if (!acc[piloto.escuderia]) {
@@ -610,8 +610,8 @@ const proximaCarrera = calendario
          <div class="reveal-item mb-16 bg-[#020c1b]/60 rounded-xl border border-zinc-900 p-8 shadow-2xl relative overflow-hidden group hover:border-red-600/30 transition-all duration-700 backdrop-blur-xl">
     
     <video 
-    id="Monza"
-    data-src="/Videos/vr_monza.mp4" 
+    id="Bahrein"
+    data-src="/Videos/vr_bahrein.mp4" 
     autoplay muted loop playsinline
     class="lazy-video absolute inset-0 w-full h-full object-cover opacity-40 pointer-events-none mix-blend-screen"
 ></video>
@@ -628,14 +628,14 @@ const proximaCarrera = calendario
             <div class="absolute inset-0 bg-red-600/5 blur-[80px] rounded-full group-hover:bg-red-600/10 transition-all duration-700"></div>
             
             <img 
-                src="/Fotos/foto-fecha19monza.png" 
-                alt="Imola" 
+                src="/Fotos/foto-fecha20bahrein.png" 
+                alt="Bahrein" 
                 class="w-full max-w-[540px] h-auto object-contain filter drop-shadow-[0_0_30px_rgba(255,255,255,0.1)] transition-transform duration-700 group-hover:scale-110 group-hover:-rotate-3 animate-latido-color"
             />
             
             <div class="mt-8 text-center">
                 <p class="text-[10px] text-zinc-500 font-mono tracking-[0.5em] uppercase mb-1">Datos de ubicación</p>
-                <h4 class="text-xs font-black text-white uppercase tracking-widest italic group-hover:text-red-500 transition-colors">Italia - Monza </h4>
+                <h4 class="text-xs font-black text-white uppercase tracking-widest italic group-hover:text-red-500 transition-colors">Desierto de Sakhir - Bahrein </h4>
             </div>
         </div>
 
@@ -655,14 +655,14 @@ const proximaCarrera = calendario
             <h2 class="text-5xl md:text-6xl font-black uppercase tracking-tighter italic text-white leading-tight mb-8">
                 Gran Premio<br/>
                 <span class="text-red-600 drop-shadow-[0_0_15px_rgba(220,38,38,0.4)] transition-all group-hover:drop-shadow-[0_0_30px_rgba(220,38,38,0.6)]">
-                    MONZA
+                    BAHREIN
                 </span>
             </h2>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div class="bg-zinc-950/80 p-5 rounded-lg border-l-4 border-red-600 shadow-2xl group/box transition-all hover:translate-x-1">
                     <p class="text-[9px] text-white uppercase tracking-widest font-black mb-2">Horario carrera (ARG)</p>
-                    <p class="text-lg font-black text-zinc-200 uppercase tracking-tighter mb-1">Viernes 21 de Agosto</p>
+                    <p class="text-lg font-black text-zinc-200 uppercase tracking-tighter mb-1">Viernes 28 de Agosto</p>
                     <div class="flex items-baseline gap-2">
                         <span class="text-4xl font-mono font-black text-white italic">22:30</span>
                         <span class="text-red-600 font-black italic text-lg">HS</span>
@@ -700,7 +700,7 @@ const proximaCarrera = calendario
         <!-- 5. Main Race -->
         <div class="flex justify-between items-center text-[11px] font-black uppercase tracking-tighter text-red-500">
             <span>Main Race</span>
-            <span class="bg-red-600/10 px-2 py-0.5 rounded text-white font-mono">27 VUELTAS</span>
+            <span class="bg-red-600/10 px-2 py-0.5 rounded text-white font-mono">29 VUELTAS</span>
         </div>
     </div>
 </div>
@@ -709,15 +709,15 @@ const proximaCarrera = calendario
             <div class="mt-10 flex flex-wrap gap-x-8 gap-y-4 text-[10px] text-zinc-500 font-black uppercase tracking-[0.2em] border-t border-zinc-900 pt-6">
                 <div class="flex items-center gap-2 group/stat">
                     <div class="w-1.5 h-1.5 bg-red-600 rounded-full group-hover/stat:scale-150 transition-transform"></div>
-                    <span>Longitud: <span class="text-zinc-300 font-mono">5.739 KM</span></span>
+                    <span>Longitud: <span class="text-zinc-300 font-mono">5.412 KM</span></span>
                 </div>
                 <div class="flex items-center gap-2 group/stat">
                     <div class="w-1.5 h-1.5 bg-red-600 rounded-full group-hover/stat:scale-150 transition-transform"></div>
-                    <span>Curvas: <span class="text-zinc-300 font-mono">11</span></span>
+                    <span>Curvas: <span class="text-zinc-300 font-mono">15</span></span>
                 </div>
                 <div class="flex items-center gap-2 group/stat">
                     <div class="w-1.5 h-1.5 bg-red-600 rounded-full group-hover/stat:scale-150 transition-transform"></div>
-                    <span>Circuito: <span class="text-zinc-300">Autódromo Monza - Templo de la velocidad</span></span>
+                    <span>Circuito: <span class="text-zinc-300">Circuito Internacional de Bahrein</span></span>
                 </div>
             </div>
         </div>
@@ -736,21 +736,21 @@ const proximaCarrera = calendario
                 <div class="flex items-center justify-center w-10 h-10 rounded-full bg-zinc-950 border-[3px] border-red-600 shadow-[0_0_8px_rgba(220,38,38,0.4)] select-none">
                     <span class="text-[15px] font-black text-red-500 italic leading-none">S</span>
                 </div>
-                <span class="text-white font-bold">C5</span>
+                <span class="text-white font-bold">C3</span>
             </div>
 
             <div class="flex items-center gap-1.5 font-mono text-[15px]">
                 <div class="flex items-center justify-center w-10 h-10 rounded-full bg-zinc-950 border-[3px] border-yellow-500 shadow-[0_0_8px_rgba(234,179,8,0.4)] select-none">
                     <span class="text-[15px] font-black text-yellow-500 italic leading-none">M</span>
                 </div>
-                <span class="text-white font-bold">C4</span>
+                <span class="text-white font-bold">C2</span>
             </div>
 
             <div class="flex items-center gap-1.5 font-mono text-[15px]">
                 <div class="flex items-center justify-center w-10 h-10 rounded-full bg-zinc-950 border-[3px] border-zinc-300 shadow-[0_0_8px_rgba(255,255,255,0.2)] select-none">
                     <span class="text-[15px] font-black text-zinc-300 italic leading-none">H</span>
                 </div>
-                <span class="text-white font-bold">C3</span>
+                <span class="text-white font-bold">C1</span>
             </div>
         </div>
 
@@ -1856,7 +1856,7 @@ const proximaCarrera = calendario
     {/* Riel del Carrusel */}
     <div id="integrantes-wrapper" class="flex transition-transform duration-500 ease-out w-full">
         {(() => {
-            const ordenDeseado = ["Chor", "Giova", "Simon", "Diego", "Rodri", "Nico", "Seba", "Ema", "Fede", "Fede T", "Mateo", "Claudio", "Ivan", "Elias", "Leo A.", "Fer", "Tomi", "German", "Nico H", "Nacho", "Marcos"];
+            const ordenDeseado = ["Chor", "Giova", "Simon", "Diego", "Rodri", "Nico", "Seba", "Ema", "Hernan", "Fede", "Fede T", "Mateo", "Claudio", "Ivan", "Elias", "Leo A.", "Fer", "Tomi", "German", "Nico H", "Nacho", "Marcos", "Panchito"];
             
             const pilotosOrdenados = [...pilotos]
                 .filter(p => p.activo !== false)
@@ -1875,7 +1875,7 @@ const proximaCarrera = calendario
                                        "escuderia-redbull.jpg";
                 
                 const estiloTema = coloresEscuderia[piloto.escuderia] || "from-red-600 to-black text-red-500 border-red-600/30";
-                const esLeadDriver = ["Chor", "Diego", "Rodri", "Adrian", "Seba", "Fede", "Hugo", "Mateo", "Ivan", "Fer", "Milo", "Nacho"].includes(piloto.nombre);
+                const esLeadDriver = ["Chor", "Diego", "Rodri", "Adrian", "Hernan", "Fede", "Hugo", "Mateo", "Ivan", "Fer", "Milo", "Nacho", "Panchito"].includes(piloto.nombre);
 
                 return (
                     /* Slide del Carrusel: 1 en Mobile, 2 en Tablet, 3 en Desktop */
@@ -1936,7 +1936,7 @@ const proximaCarrera = calendario
                             <div class="relative z-10 flex items-center justify-between bg-zinc-950/90 p-2 rounded-xl border border-zinc-900/80 shadow-inner group-hover:border-zinc-800 transition-colors text-[10px]">
                                 <div class="flex items-center gap-2.5">
                                     <span class="p-1.5 bg-[#040a14] rounded-lg border border-zinc-900 text-zinc-400 group-hover:text-white transition-colors">
-                                        {["Chor", "Rambo", "Leo A.", "Mateo", "Claudio", "Giova", "Seba", "Leo", "Nico", "Simon", "Diego", "Ema", "Fer", "Tomi", "Milo", "Fede T"].includes(piloto.nombre) ? (
+                                        {["Chor", "Rambo", "Leo A.", "Mateo", "Claudio", "Giova", "Seba", "Leo", "Nico", "Simon", "Diego", "Ema", "Fer", "Tomi", "Milo", "Fede T", "Hernan", "Panchito"].includes(piloto.nombre) ? (
                                             <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="2" x2="12" y2="12"/><line x1="12" y1="12" x2="4" y2="18"/><line x1="12" y1="12" x2="20" y2="18"/><circle cx="12" cy="12" r="2" fill="currentColor"/></svg>
                                         ) : piloto.nombre === "IA-Williams" ? (
                                             <span class="text-[10px] block leading-none">🤖</span>
@@ -1951,7 +1951,7 @@ const proximaCarrera = calendario
                                         <span class="text-[6px] text-zinc-600 font-black uppercase tracking-widest mb-0.5">INPUT</span>
                                         <span class="text-[9px] text-zinc-400 uppercase font-black font-mono">
                                             {piloto.nombre === "Adrian" ? "Joystick" :
-                                             (["Chor", "Rambo", "Leo A.", "Valen", "Mateo", "Claudio", "Giova", "Seba", "Leo", "Ema", "Nico", "Simon", "Diego", "Fer", "Tomi", "Milo", "Fede T"].includes(piloto.nombre)) ? "Volante" :
+                                             (["Chor", "Rambo", "Leo A.", "Valen", "Mateo", "Claudio", "Giova", "Seba", "Leo", "Ema", "Nico", "Simon", "Diego", "Fer", "Tomi", "Milo", "Fede T", "Hernan"].includes(piloto.nombre)) ? "Volante" :
                                              piloto.nombre === "IA-Williams" ? "Sistemas IA" : 
                                              piloto.nombre === "Franco" ? "Teclado" : "Joystick"}
                                         </span>
@@ -1989,6 +1989,8 @@ const proximaCarrera = calendario
                                         piloto.nombre === "Marcos" ? "https://www.instagram.com/mtarpin_/" :
                                         piloto.nombre === "German" ? "https://www.instagram.com/german_saya/" :
                                         piloto.nombre === "Fede T" ? "https://www.instagram.com/fedetarpin/" :
+                                        piloto.nombre === "Hernan" ? "https://www.instagram.com/hernan_romero18/" :
+                                        piloto.nombre === "Panchito" ? "https://www.instagram.com/francisco_defilippi/" :
                                         "https://www.instagram.com/leo.tapparello/"
                                     } 
                                     target="_blank" 
