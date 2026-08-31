@@ -468,5 +468,33 @@
       { "pos": 10, "piloto": "Nico", "puntos": 1, "nota": "" },
       { "pos": 11, "piloto": "Chor", "puntos": 1, "nota": "P, DSC" }
     ]
+  },
+                {
+    "id": 20,
+    "gp": "BAHREIN",
+    "circuito": "BAHREIN",
+    "fecha": "28 AGO 2026",
+    "imagen": "/Fotos/foto-fecha20bahrein.png",
+    "pole": "Hernan",
+    "tiempoPole": "1:30:180",
+    "vueltaRapida": "Ema",
+    "tiempoVR": "1:32.362",
+    "duracion": "67m 50s",
+    "resultados": [
+      { "pos": 1, "piloto": "Ema", "puntos": 26, "nota": "VR" },
+      { "pos": 2, "piloto": "Rodri", "puntos": 18, "nota": "" },
+      { "pos": 3, "piloto": "Simon", "puntos": 16, "nota": "" },
+      { "pos": 4, "piloto": "Panchito", "puntos": 12, "nota": "" },
+      { "pos": 5, "piloto": "Nico", "puntos": 10, "nota": "" },
+      { "pos": 6, "piloto": "Mateo", "puntos": 8, "nota": "" },
+      { "pos": 7, "piloto": "Leo Andra", "puntos": 6, "nota": "" },
+      { "pos": 8, "piloto": "Giova", "puntos": 4, "nota": "" },
+      { "pos": 9, "piloto": "Claudio", "puntos": 0, "nota": "DNF" },
+      { "pos": 10, "piloto": "Fer", "puntos": 0, "nota": "DNF" },
+      { "pos": 11, "piloto": "Nico H", "puntos": 0, "nota": "DNF" },
+      { "pos": 12, "piloto": "Fede", "puntos": 0, "nota": "DNF" },
+      { "pos": 13, "piloto": "Hernan", "puntos": 1, "nota": "DNF" },
+      { "pos": 14, "piloto": "Diego", "puntos": 0, "nota": "DNF" }
+    ]
   }
 ]

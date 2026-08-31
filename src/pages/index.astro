@@ -26,7 +26,7 @@ const logos = {
   "Mclaren": "/Fotos/logo-mclaren.png",
 };
 const totalCarreras = 24;
-const carrerasCorridas = 19;
+const carrerasCorridas = 20;
 const porcentajeTemporada = (carrerasCorridas / totalCarreras) * 100;
 const escuderiasMap = pilotos.reduce((acc, piloto) => {
     if (!acc[piloto.escuderia]) {
@@ -610,8 +610,8 @@ const proximaCarrera = calendario
          <div class="reveal-item mb-16 bg-[#020c1b]/60 rounded-xl border border-zinc-900 p-8 shadow-2xl relative overflow-hidden group hover:border-red-600/30 transition-all duration-700 backdrop-blur-xl">
     
     <video 
-    id="Bahrein"
-    data-src="/Videos/vr_bahrein.mp4" 
+    id="Silverstone"
+    data-src="/Videos/vr_silverstone.mp4" 
     autoplay muted loop playsinline
     class="lazy-video absolute inset-0 w-full h-full object-cover opacity-40 pointer-events-none mix-blend-screen"
 ></video>
@@ -628,8 +628,8 @@ const proximaCarrera = calendario
             <div class="absolute inset-0 bg-red-600/5 blur-[80px] rounded-full group-hover:bg-red-600/10 transition-all duration-700"></div>
             
             <img 
-                src="/Fotos/foto-fecha20bahrein.png" 
-                alt="Bahrein" 
+                src="/Fotos/foto-fecha21silverstone.png" 
+                alt="Silverstone" 
                 class="w-full max-w-[540px] h-auto object-contain filter drop-shadow-[0_0_30px_rgba(255,255,255,0.1)] transition-transform duration-700 group-hover:scale-110 group-hover:-rotate-3 animate-latido-color"
             />
             
@@ -655,14 +655,14 @@ const proximaCarrera = calendario
             <h2 class="text-5xl md:text-6xl font-black uppercase tracking-tighter italic text-white leading-tight mb-8">
                 Gran Premio<br/>
                 <span class="text-red-600 drop-shadow-[0_0_15px_rgba(220,38,38,0.4)] transition-all group-hover:drop-shadow-[0_0_30px_rgba(220,38,38,0.6)]">
-                    BAHREIN
+                    GRAN BRETAÑA
                 </span>
             </h2>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div class="bg-zinc-950/80 p-5 rounded-lg border-l-4 border-red-600 shadow-2xl group/box transition-all hover:translate-x-1">
                     <p class="text-[9px] text-white uppercase tracking-widest font-black mb-2">Horario carrera (ARG)</p>
-                    <p class="text-lg font-black text-zinc-200 uppercase tracking-tighter mb-1">Viernes 28 de Agosto</p>
+                    <p class="text-lg font-black text-zinc-200 uppercase tracking-tighter mb-1">Viernes 04 de Septiembre</p>
                     <div class="flex items-baseline gap-2">
                         <span class="text-4xl font-mono font-black text-white italic">22:30</span>
                         <span class="text-red-600 font-black italic text-lg">HS</span>
@@ -700,7 +700,7 @@ const proximaCarrera = calendario
         <!-- 5. Main Race -->
         <div class="flex justify-between items-center text-[11px] font-black uppercase tracking-tighter text-red-500">
             <span>Main Race</span>
-            <span class="bg-red-600/10 px-2 py-0.5 rounded text-white font-mono">29 VUELTAS</span>
+            <span class="bg-red-600/10 px-2 py-0.5 rounded text-white font-mono">26 VUELTAS</span>
         </div>
     </div>
 </div>
@@ -709,15 +709,15 @@ const proximaCarrera = calendario
             <div class="mt-10 flex flex-wrap gap-x-8 gap-y-4 text-[10px] text-zinc-500 font-black uppercase tracking-[0.2em] border-t border-zinc-900 pt-6">
                 <div class="flex items-center gap-2 group/stat">
                     <div class="w-1.5 h-1.5 bg-red-600 rounded-full group-hover/stat:scale-150 transition-transform"></div>
-                    <span>Longitud: <span class="text-zinc-300 font-mono">5.412 KM</span></span>
+                    <span>Longitud: <span class="text-zinc-300 font-mono">5.891 KM</span></span>
                 </div>
                 <div class="flex items-center gap-2 group/stat">
                     <div class="w-1.5 h-1.5 bg-red-600 rounded-full group-hover/stat:scale-150 transition-transform"></div>
-                    <span>Curvas: <span class="text-zinc-300 font-mono">15</span></span>
+                    <span>Curvas: <span class="text-zinc-300 font-mono">18</span></span>
                 </div>
                 <div class="flex items-center gap-2 group/stat">
                     <div class="w-1.5 h-1.5 bg-red-600 rounded-full group-hover/stat:scale-150 transition-transform"></div>
-                    <span>Circuito: <span class="text-zinc-300">Circuito Internacional de Bahrein</span></span>
+                    <span>Circuito: <span class="text-zinc-300">Circuito de Silverstone</span></span>
                 </div>
             </div>
         </div>
@@ -1856,7 +1856,7 @@ const proximaCarrera = calendario
     {/* Riel del Carrusel */}
     <div id="integrantes-wrapper" class="flex transition-transform duration-500 ease-out w-full">
         {(() => {
-            const ordenDeseado = ["Chor", "Giova", "Simon", "Diego", "Rodri", "Nico", "Seba", "Ema", "Hernan", "Fede", "Fede T", "Mateo", "Claudio", "Ivan", "Elias", "Leo A.", "Fer", "Tomi", "German", "Nico H", "Nacho", "Marcos", "Panchito"];
+            const ordenDeseado = ["Chor", "Giova", "Simon", "Diego", "Rodri", "Nico", "Seba", "Ema", "Hernan", "Fede", "Fede T", "Mateo", "Claudio", "Ivan", "Elias", "Leo A.", "Fer", "Tomi", "German", "Nico H","Leo Andra", "Nacho", "Marcos", "Panchito"];
             
             const pilotosOrdenados = [...pilotos]
                 .filter(p => p.activo !== false)
@@ -1991,6 +1991,7 @@ const proximaCarrera = calendario
                                         piloto.nombre === "Fede T" ? "https://www.instagram.com/fedetarpin/" :
                                         piloto.nombre === "Hernan" ? "https://www.instagram.com/hernan_romero18/" :
                                         piloto.nombre === "Panchito" ? "https://www.instagram.com/francisco_defilippi/" :
+                                        piloto.nombre === "Leo Andra" ? " " :
                                         "https://www.instagram.com/leo.tapparello/"
                                     } 
                                     target="_blank" 
