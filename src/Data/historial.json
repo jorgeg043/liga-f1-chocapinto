@@ -496,5 +496,28 @@
       { "pos": 13, "piloto": "Hernan", "puntos": 1, "nota": "DNF" },
       { "pos": 14, "piloto": "Diego", "puntos": 0, "nota": "DNF" }
     ]
+  },
+                  {
+    "id": 21,
+    "gp": "SILVERSTONE",
+    "circuito": "SILVERSTONE",
+    "fecha": "04 SEPT 2026",
+    "imagen": "/Fotos/foto-fecha21silverstone.png",
+    "pole": "Chor",
+    "tiempoPole": "1:27:460",
+    "vueltaRapida": "Chor",
+    "tiempoVR": "1:30.025",
+    "duracion": "41m 02s",
+    "resultados": [
+      { "pos": 1, "piloto": "Chor", "puntos": 27, "nota": "P, VR", "nota": "VR" },
+      { "pos": 2, "piloto": "Ema", "puntos": 18, "nota": "" },
+      { "pos": 3, "piloto": "Panchito", "puntos": 15, "nota": "" },
+      { "pos": 4, "piloto": "hernan", "puntos": 12, "nota": "" },
+      { "pos": 5, "piloto": "Nico", "puntos": 10, "nota": "" },
+      { "pos": 6, "piloto": "Nico H", "puntos": 8, "nota": "" },
+      { "pos": 7, "piloto": "Rodri", "puntos": 6, "nota": "" },
+      { "pos": 8, "piloto": "Fer", "puntos": 4, "nota": "" },
+      { "pos": 9, "piloto": "Claudio", "puntos": 2, "nota": "" }
+    ]
   }
 ]
