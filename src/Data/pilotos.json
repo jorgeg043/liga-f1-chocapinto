@@ -16,7 +16,9 @@
   { "id": 23, "nombre": "Fer", "escuderia": "Williams", "puntos": 8, "victorias": 0, "poles": 0, "vueltasRapidas": 0,  "carrerasCorridas": 7, "dnf" : 5},
   { "id": 29, "nombre": "Hernan", "escuderia": "Ferrari", "puntos": 38, "victorias": 1, "poles": 1, "vueltasRapidas": 0,  "carrerasCorridas": 3, "dnf" : 1},
   { "id": 30, "nombre": "Panchito", "escuderia": "Mclaren", "puntos": 37, "victorias": 0, "poles": 0, "vueltasRapidas": 0,  "carrerasCorridas": 3, "dnf" : 0},
-  { "id": 31, "nombre": "Leo Andra", "escuderia": "Racing Bulls", "puntos": 6, "victorias": 0, "poles": 0, "vueltasRapidas": 0,  "carrerasCorridas": 1, "dnf" : 0},
+
+  
+  { "id": 31, "nombre": "Leo Andra", "escuderia": "Racing Bulls", "puntos": 6, "victorias": 0, "poles": 0, "vueltasRapidas": 0,  "carrerasCorridas": 1, "dnf" : 0,  "activo" : false  },
 
 
   { "id": 9, "nombre": "Seba", "escuderia": "Ferrari", "puntos": 112, "victorias": 0, "poles": 0, "vueltasRapidas": 0,  "carrerasCorridas": 13, "dnf" : 5, "activo" : false  },
