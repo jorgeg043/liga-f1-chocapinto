@@ -113,5 +113,29 @@
       { "pos": 14, "piloto": "Tomi", "puntos": 0, "nota": "DNF" },
       { "pos": 15, "piloto": "Nico H", "puntos": 0, "nota": "DNF" }
     ]
+  },
+        {
+    "id": 6,
+    "gp": "SPA",
+    "circuito": "SPA",
+    "imagen": "/Fotos/foto-fecha22spa.png",
+    "fecha": "11 SEPT 2026",
+    "pole": "Chor", 
+    "vueltaRapida": "1:35:340",
+    "resultados": [
+      { "pos": 1, "piloto": "Chor", "puntos": 8, "nota": "VR" },
+      { "pos": 2, "piloto": "Hernan", "puntos": 7, "nota": "" },
+      { "pos": 3, "piloto": "Panchito", "puntos": 6, "nota": "" },
+      { "pos": 4, "piloto": "Giova", "puntos": 5, "nota": "" },
+      { "pos": 5, "piloto": "Tomi", "puntos": 4, "nota": "" },
+      { "pos": 6, "piloto": "Simon", "puntos": 3, "nota": "" },
+      { "pos": 7, "piloto": "Claudio", "puntos": 2, "nota": "" },
+      { "pos": 8, "piloto": "Fer", "puntos": 1, "nota": "" },
+      { "pos": 9, "piloto": "Nico", "puntos": 0, "nota": "" },
+      { "pos": 10, "piloto": "Mati", "puntos": 0, "nota": "" },
+      { "pos": 11, "piloto": "Fede", "puntos": 0, "nota": "" },
+      { "pos": 12, "piloto": "Rodri", "puntos": 0, "nota": "DNF" },
+      { "pos": 13, "piloto": "Diego", "puntos": 0, "nota": "DNF" }
+    ]
   }
 ]

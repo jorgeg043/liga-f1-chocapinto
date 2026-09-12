@@ -519,5 +519,31 @@
       { "pos": 8, "piloto": "Fer", "puntos": 4, "nota": "" },
       { "pos": 9, "piloto": "Claudio", "puntos": 2, "nota": "" }
     ]
+  },
+  {
+    "id": 22,
+    "gp": "SPA",
+    "circuito": "SPA",
+    "fecha": "11 SEPT 2026",
+    "imagen": "/Fotos/foto-fecha22spa.png",
+    "pole": "Claudio",
+    "tiempoPole": "1:46:627",
+    "vueltaRapida": "Hernan",
+    "tiempoVR": "1:49.373",
+    "duracion": "45m 13s",
+    "resultados": [
+      { "pos": 1, "piloto": "Panchito", "puntos": 25, "nota": "" },
+      { "pos": 2, "piloto": "Rodri", "puntos": 18, "nota": "" },
+      { "pos": 3, "piloto": "Hernan", "puntos": 16, "nota": "VR" },
+      { "pos": 4, "piloto": "Giova", "puntos": 12, "nota": "" },
+      { "pos": 5, "piloto": "Diego", "puntos": 10, "nota": "" },
+      { "pos": 6, "piloto": "Fede", "puntos": 8, "nota": "" },
+      { "pos": 7, "piloto": "Mati", "puntos": 6, "nota": "" },
+      { "pos": 8, "piloto": "Tomi", "puntos": 4, "nota": "" },
+      { "pos": 9, "piloto": "Simon", "puntos": 2, "nota": "" },
+      { "pos": 10, "piloto": "Fer", "puntos": 2, "nota": "DNF" },
+      { "pos": 11, "piloto": "Claudio", "puntos": 2, "nota": "DNF" },
+      { "pos": 12, "piloto": "Nico", "puntos": 2, "nota": "DNF" }
+    ]
   }
 ]
