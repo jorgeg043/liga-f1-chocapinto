@@ -541,9 +541,35 @@
       { "pos": 7, "piloto": "Mati", "puntos": 6, "nota": "" },
       { "pos": 8, "piloto": "Tomi", "puntos": 4, "nota": "" },
       { "pos": 9, "piloto": "Simon", "puntos": 2, "nota": "" },
-      { "pos": 10, "piloto": "Fer", "puntos": 2, "nota": "DNF" },
-      { "pos": 11, "piloto": "Claudio", "puntos": 2, "nota": "DNF" },
-      { "pos": 12, "piloto": "Nico", "puntos": 2, "nota": "DNF" }
+      { "pos": 10, "piloto": "Fer", "puntos": 0, "nota": "DNF" },
+      { "pos": 11, "piloto": "Claudio", "puntos": 0, "nota": "DNF" },
+      { "pos": 12, "piloto": "Nico", "puntos": 0, "nota": "DNF" }
+    ]
+  },
+    {
+    "id": 23,
+    "gp": "Suzuka",
+    "circuito": "Suzuka",
+    "fecha": "18 SEPT 2026",
+    "imagen": "/Fotos/foto-fecha23suzuka.png",
+    "pole": "Facu",
+    "tiempoPole": "1:29:681",
+    "vueltaRapida": "Facu",
+    "tiempoVR": "1:32.138",
+    "duracion": "45m 20s",
+    "resultados": [
+      { "pos": 1, "piloto": "Facu", "puntos": 27, "nota": "VR", "nota": "P" },
+      { "pos": 2, "piloto": "Hernan", "puntos": 18, "nota": "" },
+      { "pos": 3, "piloto": "Ivan", "puntos": 16, "nota": "VR" },
+      { "pos": 4, "piloto": "Diego", "puntos": 12, "nota": "" },
+      { "pos": 5, "piloto": "Mati", "puntos": 10, "nota": "" },
+      { "pos": 6, "piloto": "Claudio", "puntos": 8, "nota": "" },
+      { "pos": 7, "piloto": "Rodri", "puntos": 6, "nota": "" },
+      { "pos": 8, "piloto": "Nico", "puntos": 4, "nota": "" },
+      { "pos": 9, "piloto": "Simon", "puntos": 2, "nota": "" },
+      { "pos": 10, "piloto": "Fer", "puntos": 0, "nota": "DNF" },
+      { "pos": 11, "piloto": "Nico H", "puntos": 0, "nota": "DNF" },
+      { "pos": 12, "piloto": "Ema", "puntos": 0, "nota": "DNF" }
     ]
   }
 ]
