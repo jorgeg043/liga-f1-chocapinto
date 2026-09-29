@@ -571,5 +571,30 @@
       { "pos": 11, "piloto": "Nico H", "puntos": 0, "nota": "DNF" },
       { "pos": 12, "piloto": "Ema", "puntos": 0, "nota": "DNF" }
     ]
+  },
+      {
+    "id": 24,
+    "gp": "Abu Dabi",
+    "circuito": "Yas Marina",
+    "fecha": "25 SEPT 2026",
+    "imagen": "/Fotos/foto-fecha24yasmarina.png",
+    "pole": "Hernan",
+    "tiempoPole": "1:24:792",
+    "vueltaRapida": "Facu",
+    "tiempoVR": "1:28.168",
+    "duracion": "45m 03s",
+    "resultados": [
+      { "pos": 1, "piloto": "Facu", "puntos": 26, "nota": "VR"},
+      { "pos": 2, "piloto": "Mati", "puntos": 18, "nota": "" },
+      { "pos": 3, "piloto": "Rodri", "puntos": 16, "nota": "" },
+      { "pos": 4, "piloto": "Nico H", "puntos": 12, "nota": "" },
+      { "pos": 5, "piloto": "Ema", "puntos": 10, "nota": "" },
+      { "pos": 6, "piloto": "Panchito", "puntos": 8, "nota": "" },
+      { "pos": 7, "piloto": "Diego", "puntos": 6, "nota": "" },
+      { "pos": 8, "piloto": "Simon", "puntos": 4, "nota": "" },
+      { "pos": 9, "piloto": "Hernan", "puntos": 2, "nota": "P" },
+      { "pos": 10, "piloto": "Fede", "puntos": 1, "nota": "" },
+      { "pos": 11, "piloto": "Fer", "puntos": 0, "nota": "" }
+     ]
   }
 ]
